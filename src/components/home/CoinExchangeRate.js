@@ -1,0 +1,58 @@
+import { StyleSheet, Text, View } from 'react-native';
+import { CurrencyDollarIcon } from 'react-native-heroicons/solid';
+
+export const CoinExchangeRate = ({ nameShort, nameLong, currentRate, percentChange, bgColor }) => {
+
+    return (
+        <View style={[styles.coinLayout, { backgroundColor: `${bgColor}` },
+        nameShort === 'USD' && styles.usdStyling]}>
+            <View style={styles.topLevel}>
+                <View>
+                    <Text style={styles.coinInsides}>{nameShort}</Text>
+                    <Text style={styles.coinInsides}>{currentRate}</Text>
+                </View>
+                <Text style={[styles.coinInsides, styles.percentChangeText]}>{percentChange}</Text>
+            </View>
+            <View style={styles.bottomLevel}>
+                <CurrencyDollarIcon style={{ color: 'white', backgroundColor: '#293462' }} />
+                <View style={{ width: 20 }} />
+                <Text style={[styles.coinInsides,]}>{nameLong}</Text>
+            </View>
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    coinLayout: {
+        width: 175,
+        height: 175,
+        borderRadius: 10,
+        justifyContent: 'center',
+        padding: 20,
+        margin: 5
+    },
+    coinInsides: {
+        fontWeight: 'bold',
+        color: '#293462',
+        fontSize: 14
+    },
+    usdStyling: {
+        borderColor: 'gray', 
+        borderWidth: 2, 
+        borderStyle: 'dashed'
+    },
+    topLevel: {
+        flex: 1, 
+        flexDirection: 'row', 
+        justifyContent: 'space-between'
+    },
+    percentChangeText: {
+        color: 'gray', 
+        fontWeight: 'normal'
+    },
+    bottomLevel: {
+        flex: 1, 
+        flexDirection: 'row', 
+        marginTop: 50
+    }
+});
