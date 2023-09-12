@@ -8,7 +8,7 @@ export const TransactionDetail = ({ parameter, value, icon }) => {
                 <Text style={styles.detailsTitle}>{parameter}</Text>
                 <Text style={styles.detailsData}>{value}</Text>
             </View>
-            <View style={{flex: 0.2 }} />
+            <View style={{ flex: 0.2 }} />
             <TouchableOpacity onPress={() => {alert(`Pressed on ${parameter}!`)}}>
                 {icon}
             </TouchableOpacity>

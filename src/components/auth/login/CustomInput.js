@@ -7,7 +7,8 @@ export const CustomInput = ({ icon, secureTextEntry, placeholder, onChangeText})
                        secureTextEntry={secureTextEntry}
                        placeholder={placeholder}
                        autoCapitalize='none'
-                       onChangeText={onChangeText} />
+                       onChangeText={onChangeText}
+                       selectTextOnFocus />
             <View style={{ flex: 0.05 }}/>
             <View style={{ alignSelf: 'center', paddingRight: 10 }}>{icon && icon}</View>
         </View>

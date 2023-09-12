@@ -207,7 +207,7 @@ export const NotificationScreen = () => {
 
     const notifications = 
         data.sort((a,b) => a.timestamp < b.timestamp)
-            .map(element => <Notification  key={self.timestamp} notification={element}/>);
+            .map(element => <Notification key={element.timestamp} notification={element}/>);
 
     return (
         <View style={styles.container}>

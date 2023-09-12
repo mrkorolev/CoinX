@@ -1,23 +1,21 @@
 import React from 'react';
 import { View, Text, TextInput, Dimensions, StyleSheet } from 'react-native';
+import { TransactionCurrencyPicker } from './TransactionCurrencyPicker';
 
-export const ExchangeAmountInput = ({message, isEditable}) => {
+export const ExchangeAmountInput = ({icon, currency, message, isEditable}) => {
     return (
         <View style={styles.layout}>
             <Text style={styles.headerText}>{message}</Text>
-
             <View style={styles.groupContainer}>
-                <TextInput
-                    style={styles.inputField}
-                // onChangeText={(text) => setUsername(text)} 
-                />
+                <TransactionCurrencyPicker currency={currency} icon={icon} iconSize={15} boxSize={33} />
                 <View style={{ flex: 0.1 }} />
                 <TextInput
                     style={[styles.inputField, { flex: 3 }]}
                     placeholder="Enter your payment amount"
-                    inputMode='numeric'
-                    keyboardType='number-pad'
+                    inputMode='decimal'
                     editable={isEditable}
+                    maxLength={7}
+                    selectTextOnFocus
                 // onChangeText={(text) => setUsername(text)} 
                 />
             </View>
@@ -27,7 +25,6 @@ export const ExchangeAmountInput = ({message, isEditable}) => {
 
 const styles = StyleSheet.create({
     layout: {
-        width: Dimensions.get('window').width, 
         padding: 10
     },
     groupContainer: {
@@ -54,7 +51,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderColor: 'black',
         borderWidth: 1,
-        height: 60,
+        height: 55,
         paddingRight: 10,
         borderRadius: 10
     }

@@ -12,7 +12,6 @@ export const ExchangeRate = ({ from, to, rate }) => {
 
 const styles = StyleSheet.create({
     rateContainer: {
-        width: Dimensions.get('window').width,  
         justifyContent: 'space-between', 
         flexDirection: 'row',
         padding: 10

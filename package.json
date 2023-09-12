@@ -9,14 +9,24 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@binance/connector": "^3.0.0-rc.2",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-native-fontawesome": "^0.3.0",
+    "@react-native-clipboard/clipboard": "^1.11.2",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
+    "@react-navigation/stack": "^6.3.17",
+    "axios": "^1.5.0",
     "expo": "~49.0.7",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
     "react-native": "0.72.3",
+    "react-native-element-dropdown": "^2.10.0",
     "react-native-heroicons": "^3.2.0",
-    "react-native-svg": "^13.11.0"
+    "react-native-svg": "^13.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

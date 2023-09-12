@@ -1,7 +1,8 @@
 import React from 'react';
-import { AppNavigation } from './src/navigation/AppNavigation';
+import { AppNavigator } from './src/navigation/MainNavigator';
+import { StartupNavigator } from './src/navigation/StartupNavigator';
 
 const App = () => {
-  return <AppNavigation />
+  return <StartupNavigator />
 }
 export default App;

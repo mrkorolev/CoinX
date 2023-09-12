@@ -8,7 +8,7 @@ const profileCategories = [['Phone number', '+1 (603) 555-0123'], ['Email', 'nam
 
 export const ProfileScreen = () => {
     const profileFields = profileCategories.map(category => {
-        return <SecondaryDetails data={category} />
+        return <SecondaryDetails key={category} data={category} />
     });
 
     return (
@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
     layout: {
         flex: 1,
         backgroundColor: '#fff',
+        padding: 10
     }
 });

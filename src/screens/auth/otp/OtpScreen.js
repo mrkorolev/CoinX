@@ -2,8 +2,10 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { Resend } from '../../../components/auth/otp/Resend';
 import { CustomButton } from '../../../components/general/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 
 export const OtpScreen = () => {
+    const nav = useNavigation();
     return (
         <View style={styles.container}>
             <View style={{ flex: 1 }} />
@@ -13,7 +15,10 @@ export const OtpScreen = () => {
             {/* OTP Verification component comes in here! */}
             <CustomButton 
                 text='Verify'
-                onPress={() => {alert('Verification process initiated!')}} />
+                onPress={() => {
+                    // alert('Verification process initiated!')
+                    nav.navigate('MAIN');
+                }} />
 
             <View style={{ flex: 1 }} />
             <Resend issueMessage="Didn't receive code?" issueAction="Resend"/>
@@ -25,7 +30,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        padding: 8
     },
     primary: {
         fontWeight: 'bold',

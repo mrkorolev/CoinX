@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { EyeIcon, EyeSlashIcon} from 'react-native-heroicons/solid';
-
+import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../../components/auth/login/CustomInput';
 import { CustomButton } from '../../../components/general/CustomButton';
 
@@ -12,6 +12,7 @@ export const LoginScreen = () => {
     let [password, setPassword] = useState('');
     let [protection, setProtection] = useState(true);
     let [icon, setIcon] = useState(<EyeIcon color='#293462'/>);
+    const nav = useNavigation();
 
     return (
         <View style={styles.container}>
@@ -36,7 +37,12 @@ export const LoginScreen = () => {
 
             <CustomButton 
                 text='Login' 
-                onPress={() => alert(`Login attempt for user \"${username}\": ${password === correctPassword ? 'successful' : 'unsuccessful'}`)} />
+                onPress={() => {
+                    // alert(`Login attempt for user \"${username}\": ${password === correctPassword ? 'successful' : 'unsuccessful'}`)
+                    if(password === correctPassword){
+                        nav.navigate('OTP');
+                    }
+                }} />
         </View>
     );
 }
@@ -45,7 +51,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        padding: 8
     },
     primary: {
         fontWeight: 'bold',
