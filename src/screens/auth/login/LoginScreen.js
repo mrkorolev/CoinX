@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../../components/auth/login/CustomInput';
 import { CustomButton } from '../../../components/general/CustomButton';
 
-const correctPassword = 'Welcome1';
+const validCredentials = ['arekan-user', 'ArekanSoft123'];
 
 export const LoginScreen = () => {
     let [username, setUsername] = useState('');
@@ -39,8 +39,10 @@ export const LoginScreen = () => {
                 text='Login' 
                 onPress={() => {
                     // alert(`Login attempt for user \"${username}\": ${password === correctPassword ? 'successful' : 'unsuccessful'}`)
-                    if(password === correctPassword){
+                    if(username === validCredentials[0] && password === validCredentials[1]){
                         nav.navigate('OTP');
+                    }else{
+                        alert('Invalid credentials! Try again');
                     }
                 }} />
         </View>

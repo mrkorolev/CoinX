@@ -17,7 +17,7 @@ export const OtpScreen = () => {
                 text='Verify'
                 onPress={() => {
                     // alert('Verification process initiated!')
-                    nav.navigate('MAIN');
+                    nav.navigate('SUCCESS');
                 }} />
 
             <View style={{ flex: 1 }} />

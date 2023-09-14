@@ -5,6 +5,7 @@ import { OtpScreen } from '../screens/auth/otp/OtpScreen';
 import {  MainNavigator } from './MainNavigator';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ChevronLeftIcon } from 'react-native-heroicons/outline';
+import {SuccessScreen} from "../screens/success/SuccessScreen";
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,7 @@ export const StartupNavigator = () => (
         <Stack.Navigator headerMode='none' > 
             <Stack.Screen name='LOGIN' component={LoginScreen} />
             <Stack.Screen name='OTP' component={OtpScreen} />
+            <Stack.Screen name='SUCCESS' component={SuccessScreen} />
             <Stack.Screen name='MAIN' component={MainNavigator} />
         </Stack.Navigator>  
     </NavigationContainer>

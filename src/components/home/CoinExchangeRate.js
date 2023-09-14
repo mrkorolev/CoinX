@@ -2,17 +2,16 @@ import { StyleSheet, Text, View } from 'react-native';
 import { CurrencyDollarIcon } from 'react-native-heroicons/solid';
 import { CustomIcon } from '../general/CustomIcon';
 
-export const CoinExchangeRate = ({ nameShort, nameLong, currentRate, percentChange, bgColor, coinIcon }) => {
-
+export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePercent, bgColor, coinIcon }) => {
     return (
         <View style={[styles.coinLayout, { backgroundColor: `${bgColor}` },
-        nameShort === 'USD' && styles.usdStyling]}>
+        nameShort === 'USDT' && styles.usdStyling]}>
             <View style={styles.topLevel}>
-                <View>
+                <View style={{ gap: '3%' }}>
                     <Text style={styles.coinInsides}>{nameShort}</Text>
-                    <Text style={styles.coinInsides}>{currentRate}</Text>
+                    <Text style={styles.coinInsides}>{lastPrice}</Text>
                 </View>
-                <Text style={[styles.coinInsides, styles.percentChangeText]}>{percentChange}</Text>
+                <Text style={[styles.coinInsides, styles.percentChangeText]}>{priceChangePercent}%</Text>
             </View>
             <View style={styles.bottomLevel}>
                 <CustomIcon icon={coinIcon} iconSize={17} boxSize={30} />
@@ -29,7 +28,8 @@ const styles = StyleSheet.create({
         height: 175,
         borderRadius: 10,
         justifyContent: 'center',
-        padding: 20,
+        paddingHorizontal: 15,
+        paddingVertical: 20,
         margin: 5
     },
     coinInsides: {

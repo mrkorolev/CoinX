@@ -5,35 +5,35 @@ import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 
 export const coins = [
     {
-        nameShort: "ETH",
-        nameLong: "Ethereum",
-        currentRate: "0.578600",
-        percentChange: "+4%",
-        bgColor: "#E8DCF8",
+        nameShort: 'ETH',
+        nameLong: 'Ethereum',
+        lastPrice: '---',
+        priceChangePercent: '---',
+        bgColor: '#E8DCF8',
         icon: faEthereum
     },
     {
-        nameShort: "BTC",
-        nameLong: "Bitcoin",
-        currentRate: "0.578600",
-        percentChange: "+47%",
-        bgColor: "#FFFBE6",
+        nameShort: 'BTC',
+        nameLong: 'Bitcoin',
+        lastPrice:'---',
+        priceChangePercent: '---',
+        bgColor: '#FFFBE6',
         icon: faBitcoinSign
     },
     {
-        nameShort: "LTC",
-        nameLong: "Litecoin",
-        currentRate: "0.578600",
-        percentChange: "+57%",
-        bgColor: "#F0F4FF",
+        nameShort: 'LTC',
+        nameLong: 'Litecoin',
+        lastPrice:'---',
+        priceChangePercent: '---',
+        bgColor: '#F0F4FF',
         icon: faLitecoinSign
     },
     {
-        nameShort: "USD",
-        nameLong: "Dollars",
-        currentRate: "0.578600",
-        percentChange: "+13%",
-        bgColor: "#fff",
+        nameShort: 'USDT',
+        nameLong: 'Dollars',
+        lastPrice:'---',
+        priceChangePercent: '---',
+        bgColor: '#fff',
         icon: faDollarSign
     }
 ]
