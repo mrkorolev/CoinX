@@ -16,12 +16,15 @@ export const QrScreen = () => {
             <TransactionDetail
                 parameter={'Wallet Address'} 
                 value={'0x012f3b33633289607040x012f3b336332896070415d17bb30b0b0b896070415d1a15d17bb3'}
-                icon={<ClipboardDocumentCheckIcon color='#293462' />} />
+                icon={<ClipboardDocumentCheckIcon color='#293462' />}
+                onPressHandler={() => alert('Requesting Clipboard copy!')}
+                disabled={false} />
 
             <TransactionDetail
                 parameter={'Network'} 
                 value={'Tron (TRC20)'} 
-                icon={<ArrowsRightLeftIcon color='#293462'/>} />
+                icon={<ArrowsRightLeftIcon color='#293462'/>}
+                disabled={true} />
         </View>
     );
 }

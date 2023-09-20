@@ -1,6 +1,6 @@
 import {TextInput, View, StyleSheet } from "react-native";
 
-export const CustomInput = ({ icon, secureTextEntry, placeholder, onChangeText}) => {
+export const CustomInput = ({ icon, secureTextEntry, placeholder, onChangeText, onSubmitEditing, blurOnSubmit, enterKey}) => {
     return (
         <View style={[styles.inputField, { flexDirection: 'row', justifyContent: 'space-between' }]}>
             <TextInput style={{ flex: 1 }}
@@ -8,7 +8,8 @@ export const CustomInput = ({ icon, secureTextEntry, placeholder, onChangeText})
                        placeholder={placeholder}
                        autoCapitalize='none'
                        onChangeText={onChangeText}
-                       selectTextOnFocus />
+                       selectTextOnFocus
+                       enterKeyHint={enterKey} />
             <View style={{ flex: 0.05 }}/>
             <View style={{ alignSelf: 'center', paddingRight: 10 }}>{icon && icon}</View>
         </View>

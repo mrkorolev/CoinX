@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, Dimensions, StyleSheet } from 'react-native';
 import { TransactionCurrencyPicker } from './TransactionCurrencyPicker';
+import { Dropdown } from 'react-native-element-dropdown';
+import {CustomDropdown} from "../../general/CustomDropdown";
 
-export const ExchangeAmountInput = ({icon, currency, message, isEditable}) => {
+export const ExchangeAmountInput = ({operation, icon, options, chosenValue, handler, onChangeAmount, placeholder, isEditable, value, textColor }) => {
+
     return (
         <View style={styles.layout}>
-            <Text style={styles.headerText}>{message}</Text>
+            <Text style={styles.headerText}>{operation}</Text>
             <View style={styles.groupContainer}>
-                <TransactionCurrencyPicker currency={currency} icon={icon} iconSize={15} boxSize={33} />
+                {/* <TransactionCurrencyPicker currency={currency} icon={icon} iconSize={15} boxSize={33} /> */}
+                <CustomDropdown
+                    data={options}
+                    value={chosenValue}
+                    onChangeHandler={handler}
+                    borderWidth={1}/>
+
                 <View style={{ flex: 0.1 }} />
                 <TextInput
-                    style={[styles.inputField, { flex: 3 }]}
-                    placeholder="Enter your payment amount"
+                    style={[styles.inputField, {color: textColor}]}
+                    placeholder={placeholder ? placeholder : ''}
                     inputMode='decimal'
+                    onChangeText={onChangeAmount}
+                    value={value}
                     editable={isEditable}
                     maxLength={7}
                     selectTextOnFocus
-                // onChangeText={(text) => setUsername(text)} 
+                    enterKeyHint='next'
                 />
             </View>
         </View>
@@ -31,7 +42,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row', 
         alignItems: 'center' 
     },
-    
     rowContainer: {
         flex: 1,
         height: 100,
@@ -46,13 +56,14 @@ const styles = StyleSheet.create({
         color: 'gray'
     },
     inputField: {
-        flex: 1,
+        flex: 3,
         textAlign: 'right',
+        fontWeight: 'bold',
         backgroundColor: '#fff',
         borderColor: 'black',
         borderWidth: 1,
         height: 55,
-        paddingRight: 10,
+        paddingRight: 15,
         borderRadius: 10
     }
 });

@@ -11,7 +11,7 @@ export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePe
                     <Text style={styles.coinInsides}>{nameShort}</Text>
                     <Text style={styles.coinInsides}>{lastPrice}</Text>
                 </View>
-                <Text style={[styles.coinInsides, styles.percentChangeText]}>{priceChangePercent}%</Text>
+                <Text style={[styles.coinInsides, styles.percentChangeText]}>{priceChangePercent} %</Text>
             </View>
             <View style={styles.bottomLevel}>
                 <CustomIcon icon={coinIcon} iconSize={17} boxSize={30} />

@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import {StyleSheet, View, Text, Dimensions, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { Calculator } from '../../components/home/Calculator';
 import { ExchangeRatesData } from '../../components/home/ExchangeRatesData';
 
@@ -17,6 +17,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         alignItems: 'center',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-around',
     }
 });

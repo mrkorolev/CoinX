@@ -5,7 +5,7 @@ export const ExchangeRate = ({ from, to, rate }) => {
     return (
         <View style={styles.rateContainer}>
             <Text style={[styles.headerText, { fontWeight: 'normal' }]}>Exchange rate</Text>
-            <Text style={[styles.headerText, { fontWeight: 'normal' }]}>1 {from} = {rate} {to}</Text>
+            <Text style={[styles.headerText, { fontWeight: 'normal' }]}>1 {to} = {rate} {from}</Text>
         </View>
     );
 }
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     rateContainer: {
         justifyContent: 'space-between', 
         flexDirection: 'row',
-        padding: 10
+        padding: 10,
     }, 
     headerText: {
         fontWeight: 'bold',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-export const TransactionDetail = ({ parameter, value, icon }) => {
+export const TransactionDetail = ({ parameter, value, icon, disabled, onPresshandler }) => {
     return (
         <View style={styles.detailsContainer}>
             <View style={styles.detailsLayout}>
@@ -9,7 +9,9 @@ export const TransactionDetail = ({ parameter, value, icon }) => {
                 <Text style={styles.detailsData}>{value}</Text>
             </View>
             <View style={{ flex: 0.2 }} />
-            <TouchableOpacity onPress={() => {alert(`Pressed on ${parameter}!`)}}>
+            <TouchableOpacity
+                onPress={onPresshandler}
+                disabled={disabled}>
                 {icon}
             </TouchableOpacity>
         </View>
@@ -28,11 +30,11 @@ const styles = StyleSheet.create({
     detailsTitle: {
         color: '#293462', 
         fontWeight: 'bold', 
-        fontSize: 13
+        fontSize: 15
     },
     detailsData: {
         color: 'gray', 
         fontWeight: 'bold', 
-        fontSize: 8
+        fontSize: 10
     }
 });

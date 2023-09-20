@@ -3,7 +3,21 @@ import { faEthereum } from '@fortawesome/free-brands-svg-icons';
 import { faLitecoinSign } from '@fortawesome/free-solid-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 
-export const coins = [
+// Binance API Key
+export const apiKey = 'hm2y1s1ZpmSmD6zi7nitfQxSIaq5TTkHcj1vfoCqHOBJx4cUHQHIVChQNgqu2lxG';
+
+export const baseCurrencies = [
+    {
+        nameShort: 'TRY',
+        nameLong: 'Turkish Lira'
+    },
+    {
+        nameShort: 'USD',
+        nameLong: 'United States Dollar'
+    }
+];
+
+export const cryptoCurrencies = [
     {
         nameShort: 'ETH',
         nameLong: 'Ethereum',

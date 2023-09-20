@@ -20,7 +20,8 @@ export const LoginScreen = () => {
 
             <CustomInput
                 placeholder='Enter your username'
-                onChangeText={(text) => setUsername(text)}/>
+                onChangeText={(text) => setUsername(text)}
+                enterKey='next'/>
 
             <CustomInput
                 icon={
@@ -33,7 +34,8 @@ export const LoginScreen = () => {
                 }
                 secureTextEntry={protection}
                 placeholder='Enter your password'
-                onChangeText={(text) => setPassword(text)}/>
+                onChangeText={(text) => setPassword(text)}
+                enterKey='done' />
 
             <CustomButton 
                 text='Login' 

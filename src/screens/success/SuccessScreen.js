@@ -8,7 +8,7 @@ export const SuccessScreen = () => {
 
     setTimeout(() => {
         nav.navigate('MAIN');
-    }, 3000);
+    }, 1000);
 
     return (
         <SuccessfulOperation icon={<CheckBadgeIcon color='#293462' size={140}/>} mainText='Login Successful' otherText='You have been logged in successfully' />
