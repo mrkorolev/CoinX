@@ -4,15 +4,21 @@ import { EyeIcon, EyeSlashIcon} from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../../components/auth/login/CustomInput';
 import { CustomButton } from '../../../components/general/CustomButton';
-
-const validCredentials = ['arekan-user', 'ArekanSoft123'];
+import {authenticateUser} from "../../../services/authentication";
 
 export const LoginScreen = () => {
     let [username, setUsername] = useState('');
     let [password, setPassword] = useState('');
     let [protection, setProtection] = useState(true);
-    let [icon, setIcon] = useState(<EyeIcon color='#293462'/>);
+    let [icon, setIcon] = useState(<EyeIcon color='#6A707C'/>);
     const nav = useNavigation();
+
+    const validateInput = (username, password) => {
+        if(!username || !password){
+            return false;
+        }
+        return true;
+    }
 
     return (
         <View style={styles.container}>
@@ -28,7 +34,7 @@ export const LoginScreen = () => {
                     <TouchableOpacity
                         onPress={() => {
                         setProtection(!protection);
-                        setIcon(!protection ? <EyeIcon color='#293462'/> : <EyeSlashIcon color='#293462'/>);}}>
+                        setIcon(!protection ? <EyeIcon color='#6A707C'/> : <EyeSlashIcon color='#6A707C'/>);}}>
                         {icon}
                     </TouchableOpacity>
                 }
@@ -39,14 +45,20 @@ export const LoginScreen = () => {
 
             <CustomButton 
                 text='Login' 
-                onPress={() => {
-                    // alert(`Login attempt for user \"${username}\": ${password === correctPassword ? 'successful' : 'unsuccessful'}`)
-                    if(username === validCredentials[0] && password === validCredentials[1]){
-                        nav.navigate('OTP');
-                    }else{
-                        alert('Invalid credentials! Try again');
+                onPress={async () => {
+
+                    if(!validateInput(username, password)){
+                        alert('Invalid credentials format! Try again!');
+                        return;
                     }
-                }} />
+
+                    const response = await authenticateUser(username, password);
+                    if(response && response.status === 200){
+                        console.log('LOGIN SUCCESSFUL! Proceed to OTP!');
+                        nav.navigate('OTP');
+                    }
+                }}
+            />
         </View>
     );
 }

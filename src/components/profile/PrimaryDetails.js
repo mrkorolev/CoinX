@@ -2,13 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { EditButton } from './EditButton';
 
-export const PrimaryDetails = ({ name, surname }) => {
+export const PrimaryDetails = ({ name }) => {
     return (
         <View style={styles.primaryDetails}>
             <View style={styles.profileImagePlaceholder}>
                 <EditButton />
             </View>
-            <Text style={styles.primaryTitle}>{name} {surname}</Text>
+            <Text style={styles.primaryTitle}>{name}</Text>
         </View>
     );
 }

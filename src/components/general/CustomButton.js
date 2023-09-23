@@ -1,11 +1,12 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-export const CustomButton = ({ text, onPress }) => {
+export const CustomButton = ({ text, isDisabled, onPress }) => {
     return (
         <TouchableOpacity
             style={styles.appButtonContainer}
-            onPress={onPress}>
+            onPress={onPress}
+            disabled={isDisabled} >
             <Text style={styles.appButton}>{text}</Text>
         </TouchableOpacity>
     );

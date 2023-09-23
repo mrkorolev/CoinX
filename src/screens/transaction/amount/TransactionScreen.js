@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import { ExchangeAmountInput } from '../../../components/transaction/amount/ExchangeAmountInput';
 import { ExchangeRate } from '../../../components/transaction/amount/ExchangeRate';
 import { CustomButton } from '../../../components/general/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import { faBitcoinSign } from '@fortawesome/free-solid-svg-icons';
 import { faTurkishLiraSign } from '@fortawesome/free-solid-svg-icons';
-import { baseCurrencies, cryptoCurrencies } from "../../../constants/index";
+import {accessToken, baseCurrencies, cryptoCurrencies} from "../../../constants/index";
 import { endpointPriceData } from "../../../services/binanceApiCalls";
+import {commissionDataRequest, walletDataRequest} from "../../../services/authentication";
 
 export const TransactionScreen = () => {
 
@@ -16,15 +17,24 @@ export const TransactionScreen = () => {
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
     const [receiveAmount, setReceiveAmount] = useState(null);
     const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
-
     const [rate, setRate] = useState('');
+    const [commission, setCommission] = useState('');
     const [readyToProceed, setReadyToProceed] = useState(false);
+
+    const transactionDebug = (spendingAmount, spendingCurrency, receivingAmount, receivingCurrency, rate, commission) => {
+        console.log('DEBUG');
+        console.log(`\n
+            Spending (with commission ${commission} %): ${spendingAmount} ${spendingCurrency}
+            Receiving crypto currency: ${receivingAmount} ${receivingCurrency}
+            Rate: 1 ${receivingCurrency} === ${rate} ${spendingCurrency}
+        `);
+        console.log('============');
+    }
 
     return (
         <View style={styles.container}>
             <ExchangeAmountInput
                 operation='You Pay'
-                // icon={faTurkishLiraSign}
                 options={baseCurrencies}
                 chosenValue={spendCurrency}
                 handler={item => {
@@ -44,7 +54,6 @@ export const TransactionScreen = () => {
 
             <ExchangeAmountInput
                 operation='You Receive'
-                // icon={faBitcoinSign}
                 options={cryptoCurrencies}
                 chosenValue={receiveCurrency}
                 handler={item => {
@@ -61,30 +70,50 @@ export const TransactionScreen = () => {
                 <Text style={{ fontSize: 15, paddingTop: 10, paddingBottom: 20, fontWeight: 'bold' }}>{' '}</Text>}
             
             <CustomButton
-                text='Continue'
+                text={readyToProceed ? 'Generate QR Code' : 'Calculate'}
                 onPress={ async () => {
+
                     if(!spendAmount){
                         alert('Incorrect Input! Try again!');
                         return;
                     }
 
                     if(readyToProceed){
-                        nav.navigate('QR CODE');
+                        Alert.alert('QR Approval', 'Do you wish to proceed to QR Generation?', [
+                            {
+                                text: 'Cancel',
+                                style: 'destructive',
+                                onPress: () => {
+                                    console.log('Transaction Cancelled!');
+                                }
+                            },
+                            {
+                                text: 'Approve',
+                                style: 'default',
+                                onPress: async () => {
+                                    transactionDebug(spendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
+                                    const walletData = await walletDataRequest(accessToken, spendAmount * (1 + parseFloat(commission)/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
+
+                                    if(walletData){
+                                        nav.navigate('QR CODE', {
+                                            walletData: walletData.data.address,
+                                            networkData: 'Tron (TRC20)'
+                                        });
+                                    }else{
+                                        alert('Something wrong with the request!');
+                                    }
+                                }
+                            }]);
                     } else {
                         const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
-                        const providedAmount = parseFloat(spendAmount).toFixed(4);
-                        const amountToReceive = (providedAmount / pricePerUnit).toFixed(4);
+                        const commissionRate = parseFloat(await commissionDataRequest(accessToken));
+                        const providedAmount = parseFloat(`${spendAmount}`).toFixed(4);
+                        const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
 
+                        setCommission(`${commissionRate}`);
                         setReceiveAmount(amountToReceive);
                         setRate(pricePerUnit);
                         setReadyToProceed(true);
-
-                        // const data = `Review requested operation\n
-                        // Purchase: ${receiveAmount} ${receiveCurrency.nameShort}
-                        // Spending: ${spendAmount} ${spendCurrency.nameShort}
-                        // Commission: ---\n
-                        // Press 'Continue' again if you wish to proceed`;
-                        // alert(data);
                     }
                 }} />
         </View>

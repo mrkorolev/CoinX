@@ -18,16 +18,18 @@ export const ExchangeAmountInput = ({operation, icon, options, chosenValue, hand
                     borderWidth={1}/>
 
                 <View style={{ flex: 0.1 }} />
+
                 <TextInput
                     style={[styles.inputField, {color: textColor}]}
                     placeholder={placeholder ? placeholder : ''}
-                    inputMode='decimal'
+                    keyboardType='decimal-pad'
+                    returnKeyType='done'
                     onChangeText={onChangeAmount}
                     value={value}
                     editable={isEditable}
                     maxLength={7}
                     selectTextOnFocus
-                    enterKeyHint='next'
+
                 />
             </View>
         </View>

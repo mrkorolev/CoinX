@@ -1,21 +1,44 @@
-import React from 'react';
-import { View, StyleSheet} from 'react-native';
+import React, { useState , useEffect } from 'react';
+import {View, StyleSheet, Text} from 'react-native';
 
 import { PrimaryDetails } from '../../components/profile/PrimaryDetails';
 import { SecondaryDetails } from '../../components/profile/SecondaryDetails';
-
-const profileCategories = [['Phone number', '+1 (603) 555-0123'], ['Email', 'name@gmail.com'], ['Address', '911 wano island. 1075']]
+import { userProfileVerification } from "../../services/authentication";
+import { accessToken } from "../../constants";
 
 export const ProfileScreen = () => {
-    const profileFields = profileCategories.map(category => {
-        return <SecondaryDetails key={category} data={category} />
-    });
+
+    const [name, setName] = useState('---');
+    const [phone, setPhone] = useState('---');
+    const [address, setAddress] = useState('---');
+    const [email, setEmail] = useState('---');
+
+    useEffect(async () => {
+        console.log('Re-render initiated!');
+        const userData = await userProfileVerification(accessToken);
+
+        await setName(userData.name);
+        await setPhone(userData.phone);
+        await setEmail(userData.email);
+        await setAddress(userData.address);
+    }, []);
 
     return (
         <View style={styles.layout}>
-            <PrimaryDetails name='Name' surname='Surname'/>
+            <PrimaryDetails name={name} />
             <View style={{ flex: 1, padding: 50 }}>
-                {profileFields}
+                <View style={styles.group}>
+                    <Text style={styles.key}>Mobile Phone:</Text>
+                    <Text style={styles.value}>{phone}</Text>
+                </View>
+                <View style={styles.group}>
+                    <Text style={styles.key}>Email:</Text>
+                    <Text style={styles.value}>{email}</Text>
+                </View>
+                <View style={styles.group}>
+                    <Text style={styles.key}>Address:</Text>
+                    <Text style={styles.value}>{address}</Text>
+                </View>
             </View>
         </View>
     );
@@ -26,5 +49,19 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         padding: 10
+    },
+    group: {
+        marginBottom: 20,
+        backgroundColor: 'white',
+        gap: 5
+    },
+    key: {
+        fontSize: 19,
+        fontWeight: 'bold',
+        color: '#293462'
+    },
+    value: {
+        fontSize: 15,
+        color: 'gray'
     }
 });

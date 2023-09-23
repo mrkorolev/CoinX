@@ -21,7 +21,7 @@ export const prepareParamsForUrl = (cryptoSymbols, baseSymbol) => {
 
 export const endpoint24hrData = async (cryptoCoins) => {
     const symbols = cryptoCoins.map(coin => coin.nameShort);
-    const completeUrl = `${baseUrl}${apiVersion}${ticker}24hr?symbols=[${prepareParamsForUrl(symbols, baseCurrencies[1].nameShort)}]`;
+    const completeUrl = `${baseUrl}${apiVersion}${ticker}24hr?symbols=[${prepareParamsForUrl(symbols, baseCurrencies[0].nameShort)}]`;
 
     try{
         const response = await axios({

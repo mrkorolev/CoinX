@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-export const TransactionDetail = ({ parameter, value, icon, disabled, onPresshandler }) => {
+export const TransactionDetail = ({ parameter, value, icon, disabled, onPressHandler }) => {
     return (
         <View style={styles.detailsContainer}>
             <View style={styles.detailsLayout}>
@@ -10,7 +10,7 @@ export const TransactionDetail = ({ parameter, value, icon, disabled, onPresshan
             </View>
             <View style={{ flex: 0.2 }} />
             <TouchableOpacity
-                onPress={onPresshandler}
+                onPress={onPressHandler}
                 disabled={disabled}>
                 {icon}
             </TouchableOpacity>

@@ -1,28 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import {ClipboardDocumentCheckIcon, ArrowsRightLeftIcon} from 'react-native-heroicons/solid';
-
+import { ClipboardDocumentCheckIcon, ArrowsRightLeftIcon } from 'react-native-heroicons/solid';
+import * as Clipboard from 'expo-clipboard';
 import { QrCode } from '../../../components/transaction/qr/QrCode';
 import { TransactionDetail } from '../../../components/transaction/qr/TransactionDetail';
 
-export const QrScreen = () => {
 
+export const QrScreen = ({ route }) => {
+    const [wallet, setWallet] = useState('');
+    const [network, setNetwork] = useState('');
+    const { walletData, networkData } = route.params;
+
+    useEffect(() => {
+        setWallet(walletData);
+        setNetwork(networkData);
+    }, []);
     return (
         <View style={styles.layout}>
-            <QrCode warning='Send only BTC to this deposit address. This address does not support deposit of non-fungible token, please go to NFT page to deposit NFT.' />
+            <QrCode
+                wallet={wallet}
+                warning='Send only BTC to this deposit address. This address does not support deposit of non-fungible token, please go to NFT page to deposit NFT.' />
             
-            <View style={{ width: Dimensions.get('window').width, height: 2, backgroundColor: 'lightgray' }} />
-            
+            <View style={{ width: Dimensions.get('window').width, height: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: ''  }} />
             <TransactionDetail
                 parameter={'Wallet Address'} 
-                value={'0x012f3b33633289607040x012f3b336332896070415d17bb30b0b0b896070415d1a15d17bb3'}
+                value={wallet}
                 icon={<ClipboardDocumentCheckIcon color='#293462' />}
-                onPressHandler={() => alert('Requesting Clipboard copy!')}
+                onPressHandler={async () => {
+                    await Clipboard.setStringAsync(wallet);
+                    console.log('Clipboard set to: ' + wallet);
+                }}
                 disabled={false} />
 
             <TransactionDetail
                 parameter={'Network'} 
-                value={'Tron (TRC20)'} 
+                value={network}
                 icon={<ArrowsRightLeftIcon color='#293462'/>}
                 disabled={true} />
         </View>
