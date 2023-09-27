@@ -6,7 +6,7 @@ export const PrimaryDetails = ({ name }) => {
     return (
         <View style={styles.primaryDetails}>
             <View style={styles.profileImagePlaceholder}>
-                <EditButton />
+                {/*<EditButton />*/}
             </View>
             <Text style={styles.primaryTitle}>{name}</Text>
         </View>

@@ -7,7 +7,7 @@ export const SuccessScreen = () => {
     const nav = useNavigation();
 
     setTimeout(() => {
-        nav.navigate('MAIN');
+        nav.navigate('Main');
     }, 1000);
 
     return (

@@ -6,7 +6,7 @@ import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 // Binance API Key
 export const apiKey = 'hm2y1s1ZpmSmD6zi7nitfQxSIaq5TTkHcj1vfoCqHOBJx4cUHQHIVChQNgqu2lxG';
 
-export const accessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk1NDcwMDM4LCJpYXQiOjE2OTU0NjY0MzgsImp0aSI6IjkwZDNlMjFhYzVhYTRlMGY4MTAxOGQ4NjZhY2FhZGVhIiwidXNlcl9pZCI6MjMsIjM2MDAiOjE2OTU0NzAwMzh9._8Gl7QX85pctCZuTU3Ju5uG8FNnP6R9Q_RlfESuwhdw';
+export const accessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk1NDcxNDA5LCJpYXQiOjE2OTU0Njc4MDksImp0aSI6IjBhMTliYTEzNjZjNzQxYWE4NjhmZDgzNzU5MTI1Y2U1IiwidXNlcl9pZCI6MjMsIjM2MDAiOjE2OTU0NzE0MDl9.yhiNr3QG1qpyIoSe-DB8h5Xyb3YG_i-PqDorM0lz3ys';
 
 const  user1 = {
     username: 'Nael.alyousefi@final.edu.tr',

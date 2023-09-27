@@ -13,15 +13,15 @@ export const ProfileScreen = () => {
     const [address, setAddress] = useState('---');
     const [email, setEmail] = useState('---');
 
-    useEffect(async () => {
-        console.log('Re-render initiated!');
-        const userData = await userProfileVerification(accessToken);
-
-        await setName(userData.name);
-        await setPhone(userData.phone);
-        await setEmail(userData.email);
-        await setAddress(userData.address);
-    }, []);
+    // useEffect(async () => {
+    //     console.log('Re-render initiated!');
+    //     const userData = await userProfileVerification(accessToken);
+    //
+    //     await setName(userData.name);
+    //     await setPhone(userData.phone);
+    //     await setEmail(userData.email);
+    //     await setAddress(userData.address);
+    // }, []);
 
     return (
         <View style={styles.layout}>

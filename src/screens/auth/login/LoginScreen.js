@@ -6,12 +6,22 @@ import { CustomInput } from '../../../components/auth/login/CustomInput';
 import { CustomButton } from '../../../components/general/CustomButton';
 import {authenticateUser} from "../../../services/authentication";
 
+// import { tr, en, ru } from '../../../local/localizations';
+// import * as Localization from 'expo-localization';
+// import { i18n } from 'i18n-js';
+
 export const LoginScreen = () => {
     let [username, setUsername] = useState('');
     let [password, setPassword] = useState('');
     let [protection, setProtection] = useState(true);
     let [icon, setIcon] = useState(<EyeIcon color='#6A707C'/>);
     const nav = useNavigation();
+
+    // Localization setup
+    // const [locale, setLocale] = useState(Localization.locale);
+    // i18n.fallbacks = true;
+    // i18n.translations = { en, ru }
+    // i18n.locale = locale;
 
     const validateInput = (username, password) => {
         if(!username || !password){
@@ -25,7 +35,7 @@ export const LoginScreen = () => {
             <Text style={styles.primary}>Welcome! Are you ready for your next adventure?</Text>
 
             <CustomInput
-                placeholder='Enter your username'
+                placeholder='Enter your email'
                 onChangeText={(text) => setUsername(text)}
                 enterKey='next'/>
 
@@ -44,19 +54,20 @@ export const LoginScreen = () => {
                 enterKey='done' />
 
             <CustomButton 
-                text='Login' 
+                text='Login'
                 onPress={async () => {
 
-                    if(!validateInput(username, password)){
-                        alert('Invalid credentials format! Try again!');
-                        return;
-                    }
-
-                    const response = await authenticateUser(username, password);
-                    if(response && response.status === 200){
-                        console.log('LOGIN SUCCESSFUL! Proceed to OTP!');
-                        nav.navigate('OTP');
-                    }
+                    // if(!validateInput(username, password)){
+                    //     alert('Invalid credentials format! Try again!');
+                    //     return;
+                    // }
+                    //
+                    // const response = await authenticateUser(username, password);
+                    // if(response && response.status === 200){
+                    //     console.log('LOGIN SUCCESSFUL! Proceed to OTP!');
+                    //     nav.navigate('OTP');
+                    // }
+                    nav.navigate('OTP');
                 }}
             />
         </View>

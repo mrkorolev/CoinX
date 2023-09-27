@@ -95,7 +95,7 @@ export const TransactionScreen = () => {
                                     const walletData = await walletDataRequest(accessToken, spendAmount * (1 + parseFloat(commission)/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
 
                                     if(walletData){
-                                        nav.navigate('QR CODE', {
+                                        nav.navigate('QR Code', {
                                             walletData: walletData.data.address,
                                             networkData: 'Tron (TRC20)'
                                         });
@@ -105,15 +105,20 @@ export const TransactionScreen = () => {
                                 }
                             }]);
                     } else {
-                        const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
-                        const commissionRate = parseFloat(await commissionDataRequest(accessToken));
-                        const providedAmount = parseFloat(`${spendAmount}`).toFixed(4);
-                        const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
+                        // const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
+                        // const commissionRate = parseFloat(await commissionDataRequest(accessToken));
+                        // const providedAmount = parseFloat(`${spendAmount}`).toFixed(4);
+                        // const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
+                        //
+                        // setCommission(`${commissionRate}`);
+                        // setReceiveAmount(amountToReceive);
+                        // setRate(pricePerUnit);
+                        // setReadyToProceed(true);
 
-                        setCommission(`${commissionRate}`);
-                        setReceiveAmount(amountToReceive);
-                        setRate(pricePerUnit);
-                        setReadyToProceed(true);
+                        nav.navigate('QR Code', {
+                            walletData: 'wefkeroiweroweutweotuwtowet889wetu934jw4j5ikwer',
+                            networkData: 'Tron (TRC20)'
+                        });
                     }
                 }} />
         </View>

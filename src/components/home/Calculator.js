@@ -63,7 +63,8 @@ export const Calculator = () => {
                     <Text style={styles.operation}>Receive</Text>
                     <TextInput style={styles.operationAmount}
                                maxLength={7}
-                               inputMode='decimal'
+                               keyboardType='decimal-pad'
+                               keyboardKeyType='done'
                                editable={false}
                                value={receiveAmount} />
                 </View>

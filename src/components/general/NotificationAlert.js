@@ -10,7 +10,7 @@ export const NotificationAlert = ({ hasUnread }) => {
     return (
         <View>
             <TouchableOpacity style={{ paddingRight: 20 }}
-                onPress={() => { nav.navigate('NOTIFICATIONS') }}>
+                onPress={() => { nav.navigate('Notifications') }}>
                 <BellIcon color='#293462' width={iconDimensions} height={iconDimensions} />
                 <View style={{ position: 'absolute', alignItems: 'flex-end', width: notWidth, height: 25 }}>
                     {hasUnread ? <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: '#293462' }}/> : null}
