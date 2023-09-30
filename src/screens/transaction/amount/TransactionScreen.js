@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { ExchangeAmountInput } from '../../../components/transaction/amount/ExchangeAmountInput';
 import { ExchangeRate } from '../../../components/transaction/amount/ExchangeRate';
@@ -6,9 +6,10 @@ import { CustomButton } from '../../../components/general/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import { faBitcoinSign } from '@fortawesome/free-solid-svg-icons';
 import { faTurkishLiraSign } from '@fortawesome/free-solid-svg-icons';
-import {accessToken, baseCurrencies, cryptoCurrencies} from "../../../constants/index";
+import { accessToken, baseCurrencies, cryptoCurrencies } from "../../../constants/index";
 import { endpointPriceData } from "../../../services/binanceApiCalls";
-import {commissionDataRequest, walletDataRequest} from "../../../services/authentication";
+import { commissionDataRequest, walletDataRequest } from "../../../services/authentication";
+import { i18n } from "../../../localization/i18n";
 
 export const TransactionScreen = () => {
 
@@ -20,6 +21,11 @@ export const TransactionScreen = () => {
     const [rate, setRate] = useState('');
     const [commission, setCommission] = useState('');
     const [readyToProceed, setReadyToProceed] = useState(false);
+    const screen = 'transaction';
+
+    useEffect(() => {
+        return () => setReadyToProceed(false);
+    }, []);
 
     const transactionDebug = (spendingAmount, spendingCurrency, receivingAmount, receivingCurrency, rate, commission) => {
         console.log('DEBUG');
@@ -34,7 +40,7 @@ export const TransactionScreen = () => {
     return (
         <View style={styles.container}>
             <ExchangeAmountInput
-                operation='You Pay'
+                operation={i18n.t(`${screen}.pay`)}
                 options={baseCurrencies}
                 chosenValue={spendCurrency}
                 handler={item => {
@@ -43,7 +49,7 @@ export const TransactionScreen = () => {
                     setReadyToProceed(false);
                 }}
                 value={spendAmount}
-                placeholder={'Enter the amount you wish to spend'}
+                placeholder={i18n.t(`${screen}.placeholder`)}
                 onChangeAmount={(amount) => {
                     setSpendAmount(amount);
                     setReceiveAmount('');
@@ -53,7 +59,7 @@ export const TransactionScreen = () => {
                 isEditable={true} />
 
             <ExchangeAmountInput
-                operation='You Receive'
+                operation={i18n.t(`${screen}.receive`)}
                 options={cryptoCurrencies}
                 chosenValue={receiveCurrency}
                 handler={item => {
@@ -68,40 +74,45 @@ export const TransactionScreen = () => {
             { rate ?
                 <ExchangeRate from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(4) : '...'} /> :
                 <Text style={{ fontSize: 15, paddingTop: 10, paddingBottom: 20, fontWeight: 'bold' }}>{' '}</Text>}
-            
+
             <CustomButton
-                text={readyToProceed ? 'Generate QR Code' : 'Calculate'}
+                text={readyToProceed ? i18n.t(`${screen}.generate_qr_text`) : i18n.t(`${screen}.calculate_text`)}
                 onPress={ async () => {
 
                     if(!spendAmount){
-                        alert('Incorrect Input! Try again!');
+                        Alert.alert(i18n.t(`${screen}.error_title`), i18n.t(`${screen}.error_message`));
                         return;
                     }
 
                     if(readyToProceed){
-                        Alert.alert('QR Approval', 'Do you wish to proceed to QR Generation?', [
+                        Alert.alert(i18n.t(`${screen}.qr_approval_title`), i18n.t(`${screen}.qr_approval_message`), [
                             {
-                                text: 'Cancel',
+                                text: i18n.t(`${screen}.qr_approval_cancel`),
                                 style: 'destructive',
                                 onPress: () => {
                                     console.log('Transaction Cancelled!');
                                 }
                             },
                             {
-                                text: 'Approve',
+                                text: i18n.t(`${screen}.qr_approval_proceed`),
                                 style: 'default',
                                 onPress: async () => {
-                                    transactionDebug(spendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
-                                    const walletData = await walletDataRequest(accessToken, spendAmount * (1 + parseFloat(commission)/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
+                                    // transactionDebug(spendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
+                                    // const walletData = await walletDataRequest(accessToken, spendAmount * (1 + parseFloat(commission)/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
 
-                                    if(walletData){
-                                        nav.navigate('QR Code', {
-                                            walletData: walletData.data.address,
-                                            networkData: 'Tron (TRC20)'
-                                        });
-                                    }else{
-                                        alert('Something wrong with the request!');
-                                    }
+                                    nav.navigate(i18n.t('qr_code.screen_name'), {
+                                        walletData: 'wefkeroiweroweutweotuwtowet889wetu934jw4j5ikwer',
+                                        networkData: 'Tron (TRC20)'
+                                    });
+
+                                    // if(walletData){
+                                    //     nav.navigate(i18n.t('qr_code.screen_name'), {
+                                    //         walletData: walletData.data.address,
+                                    //         networkData: 'Tron (TRC20)'
+                                    //     });
+                                    // }else{
+                                    //     Alert.alert('Something wrong with the request!');
+                                    // }
                                 }
                             }]);
                     } else {
@@ -113,12 +124,12 @@ export const TransactionScreen = () => {
                         // setCommission(`${commissionRate}`);
                         // setReceiveAmount(amountToReceive);
                         // setRate(pricePerUnit);
-                        // setReadyToProceed(true);
+                        setReadyToProceed(true);
 
-                        nav.navigate('QR Code', {
-                            walletData: 'wefkeroiweroweutweotuwtowet889wetu934jw4j5ikwer',
-                            networkData: 'Tron (TRC20)'
-                        });
+                        // nav.navigate(i18n.t('qr_code.screen_name'), {
+                        //     walletData: 'wefkeroiweroweutweotuwtowet889wetu934jw4j5ikwer',
+                        //     networkData: 'Tron (TRC20)'
+                        // });
                     }
                 }} />
         </View>

@@ -1,27 +1,20 @@
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { EyeIcon, EyeSlashIcon} from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../../components/auth/login/CustomInput';
 import { CustomButton } from '../../../components/general/CustomButton';
 import {authenticateUser} from "../../../services/authentication";
-
-// import { tr, en, ru } from '../../../local/localizations';
-// import * as Localization from 'expo-localization';
-// import { i18n } from 'i18n-js';
+import {i18n} from '../../../localization/i18n.js';
 
 export const LoginScreen = () => {
-    let [username, setUsername] = useState('');
-    let [password, setPassword] = useState('');
-    let [protection, setProtection] = useState(true);
-    let [icon, setIcon] = useState(<EyeIcon color='#6A707C'/>);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [protection, setProtection] = useState(true);
+    const [icon, setIcon] = useState(<EyeIcon color='#6A707C'/>);
     const nav = useNavigation();
 
-    // Localization setup
-    // const [locale, setLocale] = useState(Localization.locale);
-    // i18n.fallbacks = true;
-    // i18n.translations = { en, ru }
-    // i18n.locale = locale;
+    const screen = 'login';
 
     const validateInput = (username, password) => {
         if(!username || !password){
@@ -32,10 +25,10 @@ export const LoginScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.primary}>Welcome! Are you ready for your next adventure?</Text>
+            <Text style={styles.primary}>{i18n.t(`${screen}.title`)}</Text>
 
             <CustomInput
-                placeholder='Enter your email'
+                placeholder={i18n.t(`${screen}.email_placeholder`)}
                 onChangeText={(text) => setUsername(text)}
                 enterKey='next'/>
 
@@ -49,25 +42,25 @@ export const LoginScreen = () => {
                     </TouchableOpacity>
                 }
                 secureTextEntry={protection}
-                placeholder='Enter your password'
+                placeholder={i18n.t(`${screen}.password_placeholder`)}
                 onChangeText={(text) => setPassword(text)}
                 enterKey='done' />
 
-            <CustomButton 
-                text='Login'
+            <CustomButton
+                text={i18n.t(`${screen}.button_text`)}
                 onPress={async () => {
 
                     // if(!validateInput(username, password)){
-                    //     alert('Invalid credentials format! Try again!');
+                    //     alert(i18n.t(`${screen}.invalid_credentials`));
                     //     return;
                     // }
                     //
                     // const response = await authenticateUser(username, password);
                     // if(response && response.status === 200){
                     //     console.log('LOGIN SUCCESSFUL! Proceed to OTP!');
-                    //     nav.navigate('OTP');
+                    //     nav.navigate('Otp');
                     // }
-                    nav.navigate('OTP');
+                    nav.navigate('Otp');
                 }}
             />
         </View>

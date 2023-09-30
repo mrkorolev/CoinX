@@ -2,6 +2,8 @@
 ## Payone mobile
 
 A repository for the Payone mobile crypto application, built with React Native and Expo.
+<br><br>
+<img src="./media/payone_workflow.gif" width="450" height="850"/>
 
 ## Current work stages
 
@@ -9,7 +11,8 @@ A repository for the Payone mobile crypto application, built with React Native a
 - [x] Binance API calls for exchange rates
 - [ ] Vendor API calls for QR generation and user info
 - [ ] UI completion
-- [ ] App Navigation
+- [x] App Navigation
+- [x] Introduced localization (tr, en, ru)
 - [ ] App Responsiveness
 - [ ] Application security
 
@@ -21,7 +24,7 @@ Use ```git clone``` and ```git pull``` downloading the project and latest change
 
 ```
 cd <project_folder>/ && npm install
-npm start
+npx expo start
 ```
 
 Valid testing credentials: \

@@ -20,21 +20,22 @@ export const TransactionDetail = ({ parameter, value, icon, disabled, onPressHan
 
 const styles = StyleSheet.create({
     detailsContainer: {
-        flexDirection: 'row', 
-        padding:  20 
+        flexDirection: 'row',
+        padding:  20
     },
     detailsLayout: {
-        flex: 1, 
-        justifyContent: 'center'
+        flex: 1,
+        justifyContent: 'center',
+        gap: 2
     },
     detailsTitle: {
-        color: '#293462', 
-        fontWeight: 'bold', 
+        color: '#293462',
+        fontWeight: 'bold',
         fontSize: 15
     },
     detailsData: {
-        color: 'gray', 
-        fontWeight: 'bold', 
+        color: 'gray',
+        fontWeight: 'bold',
         fontSize: 10
     }
 });

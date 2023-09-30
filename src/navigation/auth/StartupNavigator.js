@@ -5,38 +5,47 @@ import { OtpScreen } from '../../screens/auth/otp/OtpScreen';
 import {  MainNavigator } from '../tab/MainNavigator';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ChevronLeftIcon } from 'react-native-heroicons/outline';
-import {SuccessScreen} from "../../screens/success/SuccessScreen";
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import { SuccessScreen } from "../../screens/success/SuccessScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {CustomBackButton} from "../../components/general/CustomBackButton";
 
 const Stack = createNativeStackNavigator();
 // const Stack = createStackNavigator();
 
-const createScreenOptions = (headerLeft) => {
-    return {
-        gestureEnabled: false,
-        headerLeft: headerLeft ? headerLeft : () => {}
-    }
-}
-
 export const StartupNavigator = () => (
     <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator >
             <Stack.Screen
                 name='Login'
                 component={LoginScreen}
-                options={createScreenOptions()}/>
+                options={() => ({
+                    gestureEnabled: false,
+                    headerTitle: '',
+                    headerTransparent: true
+            })}/>
             <Stack.Screen
-                name='OTP'
+                name='Otp'
                 component={OtpScreen}
-                options={createScreenOptions()} />
+                options={({navigation}) => ({
+                    gestureEnabled: false,
+                    headerTitle: '',
+                    headerTransparent: true,
+                    headerLeft: () => <CustomBackButton onPressHandler={() => navigation.goBack()} icon={<ChevronLeftIcon color='#293462' />} />,
+                })}/>
             <Stack.Screen
                 name='Success'
                 component={SuccessScreen}
-                options={createScreenOptions()} />
+                options={() => ({
+                    gestureEnabled: false,
+                    headerShown: false
+            })}/>
             <Stack.Screen
                 name='Main'
                 component={MainNavigator}
-                options={createScreenOptions()} />
-        </Stack.Navigator>  
+                options={() => ({
+                    gestureEnabled: false,
+                    headerShown: false
+            })}/>
+        </Stack.Navigator>
     </NavigationContainer>
 );

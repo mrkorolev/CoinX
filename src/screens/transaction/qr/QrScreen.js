@@ -4,26 +4,29 @@ import { ClipboardDocumentCheckIcon, ArrowsRightLeftIcon } from 'react-native-he
 import * as Clipboard from 'expo-clipboard';
 import { QrCode } from '../../../components/transaction/qr/QrCode';
 import { TransactionDetail } from '../../../components/transaction/qr/TransactionDetail';
-
+import { i18n } from "../../../localization/i18n";
 
 export const QrScreen = ({ route }) => {
     const [wallet, setWallet] = useState('');
     const [network, setNetwork] = useState('');
     const { walletData, networkData } = route.params;
+    const screen = 'qr_code';
 
     useEffect(() => {
         setWallet(walletData);
         setNetwork(networkData);
     }, []);
+
     return (
         <View style={styles.layout}>
             <QrCode
                 wallet={wallet}
-                warning='Send only BTC to this deposit address. This address does not support deposit of non-fungible token, please go to NFT page to deposit NFT.' />
-            
+                warning={i18n.t(`${screen}.warning`)} />
+
             <View style={{ width: Dimensions.get('window').width, height: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: ''  }} />
+
             <TransactionDetail
-                parameter={'Wallet Address'} 
+                parameter={i18n.t(`${screen}.wallet_address`)}
                 value={wallet}
                 icon={<ClipboardDocumentCheckIcon color='#293462' />}
                 onPressHandler={async () => {
@@ -33,7 +36,7 @@ export const QrScreen = ({ route }) => {
                 disabled={false} />
 
             <TransactionDetail
-                parameter={'Network'} 
+                parameter={i18n.t(`${screen}.network`)}
                 value={network}
                 icon={<ArrowsRightLeftIcon color='#293462'/>}
                 disabled={true} />

@@ -2,15 +2,38 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../../screens/home/HomeScreen';
 import { NotificationScreen } from '../../screens/notifications/NotificationScreen';
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import {showNotifications} from "../../services/navigation";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { showNotifications } from "../../services/navigation";
+import { i18n } from "../../localization/i18n";
+import { Text, TouchableOpacity } from 'react-native';
+import { ChevronLeftIcon } from "react-native-heroicons/solid";
+import {CustomHeader} from "../../components/general/CustomHeader";
+import {NotificationAlert} from "../../components/general/NotificationAlert";
+import {CustomBackButton} from "../../components/general/CustomBackButton";
 
 const Stack = createNativeStackNavigator();
 // const Stack = createStackNavigator();
 
 export const HomeNavigator = () => (
-    <Stack.Navigator screenOptions={{ gestureEnabled: false, headerLeft: () => {} }}>
-        <Stack.Screen name='Home' component={HomeScreen} options={{ headerRight: () => showNotifications() }}/>
-        <Stack.Screen name='Notifications' component={NotificationScreen} />
+    <Stack.Navigator screenOptions={{
+        gestureEnabled: false,
+    }}>
+        <Stack.Screen
+            name={`${i18n.t('home.screen_name')}`}
+            component={ HomeScreen }
+            options={({navigation}) => ({
+                headerStyle: {
+                    borderBottomWidth: 0
+                },
+                headerTitle: () => <CustomHeader title={i18n.t('home.screen_name')} />,
+                headerRight: () => <NotificationAlert onPressHandler={() => navigation.navigate(i18n.t('notifications.screen_name'))} hasUnread={true}  />
+            })}/>
+        <Stack.Screen
+            name={`${i18n.t('notifications.screen_name')}`}
+            component={ NotificationScreen }
+            options={({navigation}) => ({
+                headerTitle: () => <CustomHeader title={i18n.t('notifications.screen_name')} />,
+                headerLeft: () => <CustomBackButton onPressHandler={() => navigation.goBack()} icon={<ChevronLeftIcon color='#293462' />} />
+            })}/>
     </Stack.Navigator>
 );

@@ -5,18 +5,20 @@ import { useNavigation } from '@react-navigation/native';
 import {OtpInputField} from "../../../components/auth/otp/OtpInputField";
 import {otpVerification} from "../../../services/authentication";
 import {accessToken} from "../../../constants";
+import { i18n } from "../../../localization/i18n";
 
 export const OtpScreen = () => {
     const [code, setCode] = useState("");
     const [pinReady, setPinReady] = useState(false);
     const MAX_CODE_LENGTH = 6;
-
     const nav = useNavigation();
+    const screen = 'otp';
+
     return (
         <View style={styles.container}>
             <View style={{ flex: 1 }} />
-            <Text style={styles.primary}>OTP Verification</Text>
-            <Text style={styles.secondary}>Enter the verification code we just sent on your email address.</Text>
+            <Text style={styles.primary}>{i18n.t(`${screen}.title`)}</Text>
+            <Text style={styles.secondary}>{i18n.t(`${screen}.secondary_text`)}</Text>
 
             <OtpInputField
                 code={code}
@@ -24,8 +26,8 @@ export const OtpScreen = () => {
                 setPinReady={setPinReady}
                 maxLength={MAX_CODE_LENGTH} />
 
-            <CustomButton 
-                text='Verify'
+            <CustomButton
+                text={i18n.t(`${screen}.button_text`)}
                 isDisabled={!pinReady}
                 onPress={async () => {
                     console.log(code);
@@ -33,7 +35,7 @@ export const OtpScreen = () => {
                     //
                     // if(response && response.status === 200){
                     //     console.log('Verification process passed! Proceed to main navigator!');
-                    //     nav.navigate('SUCCESS');
+                    //     nav.navigate('Success');
                     // }
                     nav.navigate('Success');
                 }} />

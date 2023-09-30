@@ -5,6 +5,7 @@ import { PrimaryDetails } from '../../components/profile/PrimaryDetails';
 import { SecondaryDetails } from '../../components/profile/SecondaryDetails';
 import { userProfileVerification } from "../../services/authentication";
 import { accessToken } from "../../constants";
+import { i18n } from "../../localization/i18n";
 
 export const ProfileScreen = () => {
 
@@ -12,6 +13,8 @@ export const ProfileScreen = () => {
     const [phone, setPhone] = useState('---');
     const [address, setAddress] = useState('---');
     const [email, setEmail] = useState('---');
+    const [commission, setCommission] = useState('---');
+    const screen = 'profile';
 
     // useEffect(async () => {
     //     console.log('Re-render initiated!');
@@ -21,6 +24,7 @@ export const ProfileScreen = () => {
     //     await setPhone(userData.phone);
     //     await setEmail(userData.email);
     //     await setAddress(userData.address);
+    //     await setCommission(commission);
     // }, []);
 
     return (
@@ -28,16 +32,20 @@ export const ProfileScreen = () => {
             <PrimaryDetails name={name} />
             <View style={{ flex: 1, padding: 50 }}>
                 <View style={styles.group}>
-                    <Text style={styles.key}>Mobile Phone:</Text>
+                    <Text style={styles.key}>{i18n.t(`${screen}.phone_number`)}:</Text>
                     <Text style={styles.value}>{phone}</Text>
                 </View>
                 <View style={styles.group}>
-                    <Text style={styles.key}>Email:</Text>
+                    <Text style={styles.key}>{i18n.t(`${screen}.email`)}:</Text>
                     <Text style={styles.value}>{email}</Text>
                 </View>
                 <View style={styles.group}>
-                    <Text style={styles.key}>Address:</Text>
+                    <Text style={styles.key}>{i18n.t(`${screen}.address`)}:</Text>
                     <Text style={styles.value}>{address}</Text>
+                </View>
+                <View style={styles.group}>
+                    <Text style={styles.key}>{i18n.t(`${screen}.commission_rate`)}:</Text>
+                    <Text style={styles.value}>{commission}</Text>
                 </View>
             </View>
         </View>

@@ -1,12 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { EditButton } from './EditButton';
 
 export const PrimaryDetails = ({ name }) => {
     return (
         <View style={styles.primaryDetails}>
             <View style={styles.profileImagePlaceholder}>
-                {/*<EditButton />*/}
+                {/* Profile icon will come in here */}
             </View>
             <Text style={styles.primaryTitle}>{name}</Text>
         </View>

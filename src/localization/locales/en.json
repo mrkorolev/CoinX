@@ -1,0 +1,54 @@
+{
+  "login": {
+    "title": "Welcome! Ready for your next adventure?",
+    "email_placeholder": "Enter your email",
+    "password_placeholder": "Enter your password",
+    "button_text": "Login",
+    "invalid_credentials": "Invalid credentials format! Try again!"
+  },
+  "otp": {
+    "title": "OTP Verification",
+    "secondary_text": "Enter the verification code we just sent on your email address.",
+    "button_text": "Verify"
+  },
+  "success": {
+    "title": "Login Successful",
+    "secondary_text": "You have been logged in successfully."
+  },
+  "home": {
+    "screen_name": "Home",
+    "error_title": "Input Error",
+    "error_message": "Invalid or empty input! Try again!"
+  },
+  "notifications": {
+    "screen_name": "Notifications"
+  },
+  "transaction": {
+    "screen_name": "New Transaction",
+    "pay": "You pay",
+    "receive": "You receive",
+    "placeholder": "Enter the amount",
+    "exchange_rate": "Exchange rate",
+    "calculate_text": "Calculate",
+    "generate_qr_text": "Generate QR Code",
+    "error_title": "Input error",
+    "error_message": "Invalid or empty input! Try again!",
+    "qr_approval_title": "Transaction QR",
+    "qr_approval_message": "Proceed to transaction QR generation?",
+    "qr_approval_cancel": "Cancel",
+    "qr_approval_proceed": "Proceed"
+  },
+  "qr_code": {
+    "screen_name": "QR Code",
+    "warning": "Send only BTC to this deposit address. This address does not support deposit of non-fungible token, please go to NFT page to deposit NFT.",
+    "wallet_address": "Wallet Address",
+    "network": "Network"
+  },
+  "profile": {
+    "screen_name": "Profile",
+    "phone_number": "Phone number",
+    "email": "Email",
+    "address": "Address",
+    "commission_rate": "Commission rate"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "login": {
+    "title": "Hoş geldiniz! Bir sonraki maceraya hazır mısınız?",
+    "email_placeholder": "E-postanızı girin",
+    "password_placeholder": "Şifrenizi girin",
+    "button_text": "Giriş yap",
+    "invalid_credentials": "Geçersiz kullanıcı adı veya şifre kombinasyonu! Lütfen tekrar deneyin."
+  },
+  "otp": {
+    "title": "Tek Kullanımlık Doğrulama",
+    "secondary_text": "E-posta adresinize gönderdiğimiz kodu girin",
+    "button_text": "Doğrula"
+  },
+  "success": {
+    "title": "Giriş Başarılı",
+    "secondary_text": "Giriş öncesinde tüm kontrolleri başarıyla geçtiniz."
+  },
+  "home": {
+    "screen_name": "Ana Sayfa",
+    "error_title": "Giriş Hatası",
+    "error_message": "Geçersiz veya boş giriş! Lütfen tekrar deneyin."
+  },
+  "notifications": {
+    "screen_name": "Bildirimleri"
+  },
+  "transaction": {
+    "screen_name": "Yeni Depozit",
+    "pay": "Ödeme yapılıyor",
+    "receive": "Alınıyor",
+    "placeholder": "Ödeme tutarını girin",
+    "exchange_rate": "Döviz Kuru",
+    "calculate_text": "Hesapla",
+    "generate_qr_text": "QR Kodu Oluştur",
+    "error_title": "Giriş Hatası",
+    "error_message": "Geçersiz veya boş giriş! Lütfen tekrar deneyin!",
+    "qr_approval_title": "QR Kodu Onayı",
+    "qr_approval_message": "Depozit QR kodu oluşturmaya devam etmek istiyor musunuz?",
+    "qr_approval_cancel": "İptal",
+    "qr_approval_proceed": "Devam Et"
+  },
+  "qr_code": {
+    "screen_name": "QR Kod Depoziti",
+    "warning": "Sadece BTC adresine gönderim yapın. Bu adres NFT depozitlerini desteklememektedir. NFT depoziti yapmak isterseniz NFT sayfasını kullanın.",
+    "wallet_address": "Cüzdan Adresi",
+    "network": "Ağ"
+  },
+  "profile": {
+    "screen_name": "Profil",
+    "phone_number": "Telefon Numarası",
+    "email": "E-posta",
+    "address": "Adres",
+    "commission_rate": "Komisyon Oranı"
+  }
+}

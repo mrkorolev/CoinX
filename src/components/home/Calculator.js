@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import {View, TouchableOpacity, StyleSheet, Dimensions, Text, TextInput, Keyboard} from 'react-native';
+import {View, TouchableOpacity, StyleSheet, Dimensions, Text, TextInput, Keyboard, Alert} from 'react-native';
 import { faRightLeft } from '@fortawesome/free-solid-svg-icons';
 import {Line} from "./Line";
 import {CustomIcon} from "../general/CustomIcon";
 import {baseCurrencies, cryptoCurrencies} from "../../constants/index";
 import {CustomDropdown} from "../general/CustomDropdown";
 import { endpointPriceData } from "../../services/binanceApiCalls";
+import {i18n} from "../../localization/i18n";
 
 export const Calculator = () => {
 
     // State for the chosen currency and amount, ready to send the request and setReceiveCurrency as a result (editable={false})
-    const [spendAmount, setSpendAmount] = useState();
+    const [spendAmount, setSpendAmount] = useState(null);
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
     const [receiveAmount, setReceiveAmount] = useState('---');
     const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
+    const screen = 'home';
 
     return (
         <View style={styles.container}>
@@ -41,9 +43,9 @@ export const Calculator = () => {
             <View style={styles.separator}>
                 <Line backgroundColor='lightgray' />
                 <TouchableOpacity
-                    onPress={ async () => {
+                    onPress={async () => {
                         if(!spendAmount){
-                            alert('Incorrect Input! Try again!');
+                            Alert.alert(i18n.t(`${screen}.error_title`),i18n.t(`${screen}.error_message`));
                         }else{
                             const response = await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort);
                             const required = parseFloat(response).toFixed(4);
@@ -83,7 +85,7 @@ export const Calculator = () => {
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center', 
+        justifyContent: 'center',
         alignItems: 'center',
         gap: 10,
         marginBottom: 30

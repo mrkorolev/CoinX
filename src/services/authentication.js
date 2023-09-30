@@ -1,6 +1,7 @@
 import axios from "axios";
+import Alert from 'react-native';
 
-const baseUrl = 'https://payone.com.tr/';
+// const baseTestUrl = 'https://payone.com.tr/';
 const baseTestUrl = 'http://192.168.5.5:25000/';
 
 const apiVersion = 'api/v1/';
