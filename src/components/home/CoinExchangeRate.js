@@ -7,7 +7,7 @@ export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePe
         <View style={[styles.coinLayout, { backgroundColor: `${bgColor}` },
         nameShort === 'USDT' && styles.usdStyling]}>
             <View style={styles.topLevel}>
-                <View style={{ gap: '3%' }}>
+                <View style={{ gap: 2 }}>
                     <Text style={styles.coinInsides}>{nameShort}</Text>
                     <Text style={styles.coinInsides}>{lastPrice}</Text>
                 </View>
@@ -38,22 +38,22 @@ const styles = StyleSheet.create({
         fontSize: 14
     },
     usdStyling: {
-        borderColor: 'gray', 
-        borderWidth: 2, 
+        borderColor: 'gray',
+        borderWidth: 2,
         borderStyle: 'dashed'
     },
     topLevel: {
-        flex: 1, 
-        flexDirection: 'row', 
+        flex: 1,
+        flexDirection: 'row',
         justifyContent: 'space-between'
     },
     percentChangeText: {
-        color: 'gray', 
+        color: 'gray',
         fontWeight: 'normal'
     },
     bottomLevel: {
-        flex: 1, 
-        flexDirection: 'row', 
+        flex: 1,
+        flexDirection: 'row',
         alignItems: 'center',
         marginTop: 50
     }

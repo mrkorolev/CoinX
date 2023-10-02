@@ -7,6 +7,7 @@ import {i18n} from "../../localization/i18n";
 import {CustomHeader} from "../../components/general/CustomHeader";
 import {CustomBackButton} from "../../components/general/CustomBackButton";
 import {ChevronLeftIcon} from "react-native-heroicons/solid";
+import { Platform } from "react-native";
 
 const Stack = createNativeStackNavigator();
 // const Stack = createStackNavigator();
@@ -17,14 +18,16 @@ export const TransactionNavigator = () => (
             name={`${i18n.t('transaction.screen_name')}`}
             component={TransactionScreen}
             options={{
-                headerTitle: () => <CustomHeader title={i18n.t('transaction.screen_name')} />
+                headerTitle: () => <CustomHeader title={i18n.t('transaction.screen_name')} />,
+                headerTitleAlign: 'center'
             }}/>
         <Stack.Screen
             name={`${i18n.t('qr_code.screen_name')}`}
             component={QrScreen}
             options={({navigation}) => ({
                 headerTitle: () => <CustomHeader title={i18n.t('qr_code.screen_name')} />,
-                headerLeft: () => <CustomBackButton onPressHandler={() => navigation.goBack()} icon={<ChevronLeftIcon color='#293462' />} />
+                headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} icon={<ChevronLeftIcon color='#293462' />} /> : undefined,
+                headerTitleAlign: 'center'
             })}/>
     </Stack.Navigator>
 );

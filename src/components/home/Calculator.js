@@ -11,9 +11,9 @@ import {i18n} from "../../localization/i18n";
 export const Calculator = () => {
 
     // State for the chosen currency and amount, ready to send the request and setReceiveCurrency as a result (editable={false})
-    const [spendAmount, setSpendAmount] = useState(null);
+    const [spendAmount, setSpendAmount] = useState('');
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
-    const [receiveAmount, setReceiveAmount] = useState('---');
+    const [receiveAmount, setReceiveAmount] = useState('');
     const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
     const screen = 'home';
 
@@ -27,7 +27,9 @@ export const Calculator = () => {
                                inputMode='decimal'
                                onChangeText={(text) => setSpendAmount(text)}
                                value={spendAmount}
-                               placeholder={'...'} />
+                               placeholder={'...'}
+                               enterKeyHint='done'
+                    />
                 </View>
 
                 <CustomDropdown
@@ -35,7 +37,6 @@ export const Calculator = () => {
                     value={spendCurrency}
                     onChangeHandler={item => {
                         setSpendCurrency(item);
-                        // setIsFocus(false);
                     }}/>
 
             </View>

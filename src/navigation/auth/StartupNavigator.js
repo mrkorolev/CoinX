@@ -8,6 +8,7 @@ import { ChevronLeftIcon } from 'react-native-heroicons/outline';
 import { SuccessScreen } from "../../screens/success/SuccessScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {CustomBackButton} from "../../components/general/CustomBackButton";
+import {Platform} from "react-native";
 
 const Stack = createNativeStackNavigator();
 // const Stack = createStackNavigator();
@@ -30,7 +31,7 @@ export const StartupNavigator = () => (
                     gestureEnabled: false,
                     headerTitle: '',
                     headerTransparent: true,
-                    headerLeft: () => <CustomBackButton onPressHandler={() => navigation.goBack()} icon={<ChevronLeftIcon color='#293462' />} />,
+                    headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} icon={<ChevronLeftIcon color='#293462' />} /> : undefined,
                 })}/>
             <Stack.Screen
                 name='Success'

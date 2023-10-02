@@ -15,7 +15,8 @@ export const ProfileNavigator = () => (
             name={`${i18n.t('profile.screen_name')}`}
             component={ProfileScreen}
             options={{
-                headerTitle: () => <CustomHeader title={i18n.t('profile.screen_name')} />
+                headerTitle: () => <CustomHeader title={i18n.t('profile.screen_name')} />,
+                headerTitleAlign: 'center'
             }}/>
     </Stack.Navigator>
 );
