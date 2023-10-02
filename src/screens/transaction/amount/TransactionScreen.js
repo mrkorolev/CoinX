@@ -14,14 +14,14 @@ import { i18n } from "../../../localization/i18n";
 export const TransactionScreen = () => {
 
     const nav = useNavigation();
-    const [spendAmount, setSpendAmount] = useState(null);
+    const [spendAmount, setSpendAmount] = useState('');
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
-    const [receiveAmount, setReceiveAmount] = useState(null);
+    const [receiveAmount, setReceiveAmount] = useState('');
     const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
-    const [rate, setRate] = useState('');
+    const [rate, setRate] = useState(null);
     const [commission, setCommission] = useState('');
     const [readyToProceed, setReadyToProceed] = useState(false);
-    const screen = 'transaction';
+    const screen = 'screens.transaction';
 
     useEffect(() => {
         return () => setReadyToProceed(false);
@@ -51,8 +51,12 @@ export const TransactionScreen = () => {
                 value={spendAmount}
                 placeholder={i18n.t(`${screen}.placeholder`)}
                 onChangeAmount={(amount) => {
-                    setSpendAmount(amount);
-                    setReceiveAmount('');
+                    let inputValue = amount;
+                    inputValue = inputValue.replace(/[,\.]/g, '');
+                    inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                    setSpendAmount(inputValue);
+                    setReceiveAmount(null);
                     setReadyToProceed(false);
                 }}
                 textColor='gray'
@@ -72,7 +76,7 @@ export const TransactionScreen = () => {
                 isEditable={false} />
 
             { rate ?
-                <ExchangeRate from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(4) : '...'} /> :
+                <ExchangeRate from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :
                 <Text style={{ fontSize: 15, paddingTop: 10, paddingBottom: 20, fontWeight: 'bold' }}>{' '}</Text>}
 
             <CustomButton
@@ -97,39 +101,35 @@ export const TransactionScreen = () => {
                                 text: i18n.t(`${screen}.qr_approval_proceed`),
                                 style: 'default',
                                 onPress: async () => {
-                                    // transactionDebug(spendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
-                                    // const walletData = await walletDataRequest(accessToken, spendAmount * (1 + parseFloat(commission)/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
+                                    const finalSpendAmount = parseFloat(spendAmount.replaceAll(',', ''));
+                                    transactionDebug(finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
+                                    const walletData = await walletDataRequest(accessToken, `${finalSpendAmount * (1 + parseFloat(commission)/100)}`, spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
 
-                                    nav.navigate(i18n.t('qr_code.screen_name'), {
-                                        walletData: 'wefkeroiweroweutweotuwtowet889wetu934jw4j5ikwer',
-                                        networkData: 'Tron (TRC20)'
-                                    });
+                                    // DEBUG:
+                                    // nav.navigate(i18n.t('qr_code.screen_name'), {
+                                    //     walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfoqwehf',
+                                    //     networkData: 'Tron (TRC20)'
+                                    // });
 
-                                    // if(walletData){
-                                    //     nav.navigate(i18n.t('qr_code.screen_name'), {
-                                    //         walletData: walletData.data.address,
-                                    //         networkData: 'Tron (TRC20)'
-                                    //     });
-                                    // }else{
-                                    //     Alert.alert('Something wrong with the request!');
-                                    // }
+                                    if(walletData){
+                                        nav.navigate(i18n.t('screens.qr_code.screen_name'), {
+                                            // walletData: walletData.data.address,
+                                            walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfoqwehf',
+                                            networkData: 'Tron (TRC20)'
+                                        });
+                                    }
                                 }
                             }]);
                     } else {
-                        // const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
-                        // const commissionRate = parseFloat(await commissionDataRequest(accessToken));
-                        // const providedAmount = parseFloat(`${spendAmount}`).toFixed(4);
-                        // const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
-                        //
-                        // setCommission(`${commissionRate}`);
-                        // setReceiveAmount(amountToReceive);
-                        // setRate(pricePerUnit);
-                        setReadyToProceed(true);
+                        const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
+                        const commissionRate = parseFloat(await commissionDataRequest(accessToken));
+                        const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
+                        const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
 
-                        // nav.navigate(i18n.t('qr_code.screen_name'), {
-                        //     walletData: 'wefkeroiweroweutweotuwtowet889wetu934jw4j5ikwer',
-                        //     networkData: 'Tron (TRC20)'
-                        // });
+                        setCommission(`${commissionRate}`);
+                        setReceiveAmount(amountToReceive);
+                        setRate(pricePerUnit);
+                        setReadyToProceed(true);
                     }
                 }} />
         </View>

@@ -14,7 +14,7 @@ export const LoginScreen = () => {
     const [icon, setIcon] = useState(<EyeIcon color='#6A707C'/>);
     const nav = useNavigation();
 
-    const screen = 'login';
+    const screen = 'screens.login';
 
     const validateInput = (username, password) => {
         if(!username || !password){
@@ -50,17 +50,17 @@ export const LoginScreen = () => {
                 text={i18n.t(`${screen}.button_text`)}
                 onPress={async () => {
 
-                    // if(!validateInput(username, password)){
-                    //     alert(i18n.t(`${screen}.invalid_credentials`));
-                    //     return;
-                    // }
-                    //
-                    // const response = await authenticateUser(username, password);
-                    // if(response && response.status === 200){
-                    //     console.log('LOGIN SUCCESSFUL! Proceed to OTP!');
-                    //     nav.navigate('Otp');
-                    // }
-                    nav.navigate('Otp');
+                    if(!validateInput(username, password)){
+                        Alert.alert(i18n.t(`${screen}.invalid_credentials_title`), i18n.t(`${screen}.invalid_credentials_message`));
+                        return;
+                    }
+
+                    const response = await authenticateUser(username, password);
+                    if(response && response.status === 200){
+                        console.log('LOGIN SUCCESSFUL! Proceed to OTP!');
+                        nav.navigate('Otp');
+                    }
+                    // nav.navigate('Otp');
                 }}
             />
         </View>

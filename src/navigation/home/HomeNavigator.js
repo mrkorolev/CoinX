@@ -19,19 +19,19 @@ export const HomeNavigator = () => (
         gestureEnabled: false
     }}>
         <Stack.Screen
-            name={`${i18n.t('home.screen_name')}`}
+            name={`${i18n.t('screens.home.screen_name')}`}
             component={ HomeScreen }
             options={({navigation}) => ({
-                headerTitle: () => <CustomHeader title={i18n.t('home.screen_name')} />,
-                headerRight: () => <NotificationAlert onPressHandler={() => navigation.navigate(i18n.t('notifications.screen_name'))} hasUnread={true}  />,
+                headerTitle: () => <CustomHeader title={i18n.t('screens.home.screen_name')} />,
+                headerRight: () => <NotificationAlert onPressHandler={() => navigation.navigate(i18n.t('screens.notifications.screen_name'))} hasUnread={true}  />,
                 headerLeft: () => {},
                 headerTitleAlign: 'center'
             })}/>
         <Stack.Screen
-            name={`${i18n.t('notifications.screen_name')}`}
+            name={`${i18n.t('screens.notifications.screen_name')}`}
             component={ NotificationScreen }
             options={({navigation}) => ({
-                headerTitle: () => <CustomHeader title={i18n.t('notifications.screen_name')} />,
+                headerTitle: () => <CustomHeader title={i18n.t('screens.notifications.screen_name')} />,
                 headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} icon={<ChevronLeftIcon color='#293462' />} /> : undefined,
                 headerTitleAlign: 'center'
             })}/>

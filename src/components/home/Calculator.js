@@ -15,24 +15,31 @@ export const Calculator = () => {
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
     const [receiveAmount, setReceiveAmount] = useState('');
     const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
-    const screen = 'home';
+    const screen = 'screens.home';
 
     return (
         <View style={styles.container}>
             <View style={styles.pickerLayout}>
                 <View style={styles.operationContainer}>
-                    <Text style={styles.operation}>Spend</Text>
                     <TextInput style={styles.operationAmount}
-                               maxLength={7}
-                               inputMode='decimal'
-                               onChangeText={(text) => setSpendAmount(text)}
-                               value={spendAmount}
-                               placeholder={'...'}
+                               maxLength={10}
+                               keyboardType='number-pad'
                                enterKeyHint='done'
+                               onChangeText={(text) => {
+                                   let inputValue = text;
+                                   inputValue = inputValue.replace(/[,\.]/g, '');
+                                   inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                   setSpendAmount(inputValue)
+                               }}
+                               value={spendAmount}
+                               placeholder='...'
+                               selectTextOnFocus
+
                     />
                 </View>
 
                 <CustomDropdown
+                    borderWidth={1}
                     data={baseCurrencies}
                     value={spendCurrency}
                     onChangeHandler={item => {
@@ -50,8 +57,8 @@ export const Calculator = () => {
                         }else{
                             const response = await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort);
                             const required = parseFloat(response).toFixed(4);
-                            const toSpend = parseFloat(spendAmount).toFixed(4);
-                            setReceiveAmount(`${(toSpend / required).toFixed(2)}`);
+                            const toSpend = parseFloat(spendAmount.replaceAll(',', ''));
+                            setReceiveAmount(`${(toSpend / required).toFixed(4)}`);
                         }
                     }}>
                     <View style={styles.separatorIcon}>
@@ -63,9 +70,8 @@ export const Calculator = () => {
 
             <View style={styles.pickerLayout}>
                 <View style={styles.operationContainer}>
-                    <Text style={styles.operation}>Receive</Text>
                     <TextInput style={styles.operationAmount}
-                               maxLength={7}
+                               maxLength={10}
                                keyboardType='decimal-pad'
                                keyboardKeyType='done'
                                editable={false}
@@ -73,6 +79,7 @@ export const Calculator = () => {
                 </View>
 
                 <CustomDropdown
+                    borderWidth={1}
                     data={cryptoCurrencies}
                     value={receiveCurrency}
                     onChangeHandler={ item => {
@@ -115,11 +122,8 @@ const styles = StyleSheet.create({
         columnGap: 50
     },
     operationContainer: {
-        alignItems: 'flex-start',
-        gap: 8,
-        height: 55,
         width: '25%',
-        // borderWidth: 1,
+        borderWidth: 1,
         paddingHorizontal: '2%',
         // borderRadius: 10
     },
@@ -129,7 +133,7 @@ const styles = StyleSheet.create({
         color: 'gray'
     },
     operationAmount: {
-        width: 80,
+        width: 160,
         height: 30,
         fontSize: 17,
         color: '#293462',

@@ -6,7 +6,7 @@ import { i18n } from "../../localization/i18n";
 
 export const SuccessScreen = () => {
     const nav = useNavigation();
-    const screen = 'success';
+    const screen = 'screens.success';
 
     setTimeout(() => {
         nav.navigate('Main');

@@ -1,54 +1,83 @@
 {
-  "login": {
-    "title": "Welcome! Ready for your next adventure?",
-    "email_placeholder": "Enter your email",
-    "password_placeholder": "Enter your password",
-    "button_text": "Login",
-    "invalid_credentials": "Invalid credentials format! Try again!"
+  "screens": {
+    "login": {
+      "title": "Welcome! Ready for your next adventure?",
+      "email_placeholder": "Enter your email",
+      "password_placeholder": "Enter your password",
+      "button_text": "Login",
+      "invalid_credentials_title": "Login Error",
+      "invalid_credentials_message": "Invalid credentials format! Try again!"
+    },
+    "otp": {
+      "title": "OTP Verification",
+      "secondary_text": "Enter the verification code we just sent on your email address.",
+      "button_text": "Verify"
+    },
+    "success": {
+      "title": "Login Successful",
+      "secondary_text": "You have been logged in successfully."
+    },
+    "home": {
+      "screen_name": "Home",
+      "error_title": "Input Error",
+      "error_message": "Invalid or empty input! Try again!"
+    },
+    "notifications": {
+      "screen_name": "Notifications"
+    },
+    "transaction": {
+      "screen_name": "New Transaction",
+      "pay": "Base Currency",
+      "receive": "Crypto Currency",
+      "placeholder": "Enter the amount",
+      "exchange_rate": "Exchange rate",
+      "calculate_text": "Calculate",
+      "generate_qr_text": "Generate QR Code",
+      "error_title": "Input error",
+      "error_message": "Invalid or empty input! Try again!",
+      "qr_approval_title": "Transaction QR",
+      "qr_approval_message": "Proceed to transaction QR generation?",
+      "qr_approval_cancel": "Cancel",
+      "qr_approval_proceed": "Proceed"
+    },
+    "qr_code": {
+      "screen_name": "QR Code",
+      "warning": "Send only BTC to this deposit address. This address does not support deposit of non-fungible token, please go to NFT page to deposit NFT.",
+      "wallet_address": "Wallet Address",
+      "network": "Network"
+    },
+    "profile": {
+      "screen_name": "Profile",
+      "phone_number": "Phone number",
+      "email": "Email",
+      "address": "Address",
+      "commission_rate": "Commission rate"
+    }
   },
-  "otp": {
-    "title": "OTP Verification",
-    "secondary_text": "Enter the verification code we just sent on your email address.",
-    "button_text": "Verify"
-  },
-  "success": {
-    "title": "Login Successful",
-    "secondary_text": "You have been logged in successfully."
-  },
-  "home": {
-    "screen_name": "Home",
-    "error_title": "Input Error",
-    "error_message": "Invalid or empty input! Try again!"
-  },
-  "notifications": {
-    "screen_name": "Notifications"
-  },
-  "transaction": {
-    "screen_name": "New Transaction",
-    "pay": "You pay",
-    "receive": "You receive",
-    "placeholder": "Enter the amount",
-    "exchange_rate": "Exchange rate",
-    "calculate_text": "Calculate",
-    "generate_qr_text": "Generate QR Code",
-    "error_title": "Input error",
-    "error_message": "Invalid or empty input! Try again!",
-    "qr_approval_title": "Transaction QR",
-    "qr_approval_message": "Proceed to transaction QR generation?",
-    "qr_approval_cancel": "Cancel",
-    "qr_approval_proceed": "Proceed"
-  },
-  "qr_code": {
-    "screen_name": "QR Code",
-    "warning": "Send only BTC to this deposit address. This address does not support deposit of non-fungible token, please go to NFT page to deposit NFT.",
-    "wallet_address": "Wallet Address",
-    "network": "Network"
-  },
-  "profile": {
-    "screen_name": "Profile",
-    "phone_number": "Phone number",
-    "email": "Email",
-    "address": "Address",
-    "commission_rate": "Commission rate"
+  "request_errors": {
+    "login_request": {
+      "reason": "Login",
+      "message": "\nAn error occurred while trying to execute login operation! Make sure you are a registered user in order to use the application "
+    },
+    "otp_request": {
+      "reason": "OTP Verification",
+      "message": "\nAn error occurred while trying to perform your OTP verification! Check your OTP validity and try again "
+    },
+    "wallet_request": {
+      "reason": "Wallet Information",
+      "message": "\nAn error occurred while trying to request the transaction information! Try to log out and log in again "
+    },
+    "commission_request": {
+      "reason": "Commission Information",
+      "message": "\nAn error occurred while trying to request the user commission information! Try to log out and log in again "
+    },
+    "profile_request": {
+      "reason": "User Profile",
+      "message": "\nAn error occurred while trying to request your personal information! Try to log out and log in again "
+    },
+    "binance_request": {
+      "reason": "Exchange Rates Request",
+      "message": "\nAn error occurred while trying to request exchange rates information! Check the validity of your Binance API key and try again "
+    }
   }
 }

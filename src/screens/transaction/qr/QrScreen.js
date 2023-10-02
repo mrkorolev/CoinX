@@ -10,7 +10,7 @@ export const QrScreen = ({ route }) => {
     const [wallet, setWallet] = useState('');
     const [network, setNetwork] = useState('');
     const { walletData, networkData } = route.params;
-    const screen = 'qr_code';
+    const screen = 'screens.qr_code';
 
     useEffect(() => {
         setWallet(walletData);
@@ -23,7 +23,7 @@ export const QrScreen = ({ route }) => {
                 wallet={wallet}
                 warning={i18n.t(`${screen}.warning`)} />
 
-            <View style={{ width: Dimensions.get('window').width, height: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: ''  }} />
+            <View style={styles.separator} />
 
             <TransactionDetail
                 parameter={i18n.t(`${screen}.wallet_address`)}
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         backgroundColor: 'white',
-        padding: 10
+
     },
     qr: {
         width: 300,
@@ -72,5 +72,12 @@ const styles = StyleSheet.create({
         margin: 10,
         paddingVertical: 20,
         paddingHorizontal: 30
+    },
+    separator: {
+        width: Dimensions.get('window').width,
+        height: 1.5,
+        backgroundColor: 'lightgray',
+        alignItems: 'center',
+        marginVertical: 20
     }
 });

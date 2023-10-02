@@ -7,13 +7,17 @@ import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 export const apiKey = 'hm2y1s1ZpmSmD6zi7nitfQxSIaq5TTkHcj1vfoCqHOBJx4cUHQHIVChQNgqu2lxG';
 
 // System data:
-export const accessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk2MDg2MTA1LCJpYXQiOjE2OTYwODI1MDUsImp0aSI6Ijk4MDgyOGQ1ZTRkNjQxNDliMjk3OWJmNTNjNzc3MDNhIiwidXNlcl9pZCI6MjMsIjM2MDAiOjE2OTYwODYxMDV9.DlIVM6-XlSUwtH5CE6gukbrw7WyGACJR-k7lz5hFUMA';
+export const accessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk2MjYxOTgyLCJpYXQiOjE2OTYyNTgzODIsImp0aSI6IjE3ODFiZDRhM2I2MzRiNmE4ZDE0ZDM4MGJhY2RjODRmIiwidXNlcl9pZCI6MjMsIjM2MDAiOjE2OTYyNjE5ODJ9.aB0oyJzg-duNAi9uiaiukbVyzDUHbsmNvagSUZw7bWc';
 const  user1 = {
     username: 'Nael.alyousefi@final.edu.tr',
     password: 'admin@1234'
-};
+}
 const user2 = {
     username: 'arekanediz@gmail.com',
+    password: 'admin@1234'
+}
+const user3 = {
+    username: 'benoyt_smth@gmail.com',
     password: 'admin@1234'
 }
 

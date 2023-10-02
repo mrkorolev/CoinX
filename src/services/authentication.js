@@ -1,8 +1,9 @@
 import axios from "axios";
-import Alert from 'react-native';
+import { Alert } from 'react-native';
+import { i18n } from "../localization/i18n";
 
-// const baseTestUrl = 'https://payone.com.tr/';
-const baseTestUrl = 'http://192.168.5.5:25000/';
+const baseTestUrl = 'https://payone.com.tr/';
+// const baseTestUrl = 'http://192.168.5.5:25000/';
 
 const apiVersion = 'api/v1/';
 const authentication = 'auth/check/';
@@ -12,12 +13,13 @@ const commissionEndpoint = 'user/info/user-commission';
 const userProfileEndpoint = 'user/info/user-profile';
 
 
-const generateErrorDescription = (reason, error) => {
+const generateErrorDescription = (reason, message, error) => {
     console.log("Error info: " + JSON.stringify(error.toJSON(), undefined, 4));
-    alert(`Request failed with status code: ${error.response.status}`);
+    Alert.alert(reason, ` ${message} (${error.response.status})`);
 }
 
 export const authenticateUser = async (username, password) => {
+    const request_error = 'request_errors.login_request'
     try{
         const authenticationResponse = await axios({
             method: 'post',
@@ -35,12 +37,13 @@ export const authenticateUser = async (username, password) => {
         console.log(JSON.stringify(authenticationResponse.data, undefined, 4));
         return authenticationResponse;
     }catch(error){
-        generateErrorDescription('USER LOGIN', error);
+        generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }
     return null;
 }
 
 export const otpVerification = async (accessToken, providedCode) => {
+    const request_error = 'request_errors.otp_request'
     try{
         const otpResponse = await axios({
             method: 'post',
@@ -57,12 +60,13 @@ export const otpVerification = async (accessToken, providedCode) => {
         console.log(JSON.stringify(otpResponse.data, undefined, 4));
         return otpResponse;
     }catch(error){
-        generateErrorDescription('OTP VERIFICATION', error);
+        generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }
     return null;
 }
 
 export const walletDataRequest = async (accessToken, spendAmount, spendCurrency, receiveAmount, receiveCurrency, exchangeRate, commission) => {
+    const request_error = 'request_errors.wallet_request';
     try{
         // Wallet request for QR generation:
         const walletResponse = await axios({
@@ -77,21 +81,21 @@ export const walletDataRequest = async (accessToken, spendAmount, spendCurrency,
                 coin: receiveCurrency
             },
             headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${accessToken}`
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
             }
         });
         console.log(JSON.stringify(walletResponse.data, undefined, 4));
 
         return walletResponse;
     }catch(error){
-        generateErrorDescription('WALLET REQUEST', error);
+        generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }
     return null;
 }
 
 export const commissionDataRequest = async (accessToken) => {
-    // Request for commission:
+    const request_error = 'request_errors.commission_request';
     try{
         const commissionResponse = await axios({
             method: 'get',
@@ -103,15 +107,15 @@ export const commissionDataRequest = async (accessToken) => {
         });
         console.log(commissionResponse);
         console.log(JSON.stringify(commissionResponse.data, undefined, 4));
-
         return commissionResponse.data.commission;
     }catch(error){
-        generateErrorDescription('COMMISSION REQUEST');
+        generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }
     return null;
 }
 
 export const userProfileVerification = async (accessToken) => {
+    const request_error = 'request_errors.profile_request';
     try{
         const userProfileResponse = await axios({
             method: 'get',
@@ -124,7 +128,7 @@ export const userProfileVerification = async (accessToken) => {
         console.log(JSON.stringify(userProfileResponse.data, undefined, 4));
         return userProfileResponse.data;
     }catch(error){
-        generateErrorDescription(error);
+        generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }
     return null;
 }

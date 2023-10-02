@@ -12,10 +12,10 @@ const Stack = createNativeStackNavigator();
 export const ProfileNavigator = () => (
     <Stack.Navigator screenOptions={{ gestureEnabled: false, headerLeft: () => {} }}>
         <Stack.Screen
-            name={`${i18n.t('profile.screen_name')}`}
+            name={`${i18n.t('screens.profile.screen_name')}`}
             component={ProfileScreen}
             options={{
-                headerTitle: () => <CustomHeader title={i18n.t('profile.screen_name')} />,
+                headerTitle: () => <CustomHeader title={i18n.t('screens.profile.screen_name')} />,
                 headerTitleAlign: 'center'
             }}/>
     </Stack.Navigator>

@@ -3,7 +3,7 @@ import {View, StyleSheet, Text} from 'react-native';
 
 import { PrimaryDetails } from '../../components/profile/PrimaryDetails';
 import { SecondaryDetails } from '../../components/profile/SecondaryDetails';
-import { userProfileVerification } from "../../services/authentication";
+import {commissionDataRequest, userProfileVerification} from "../../services/authentication";
 import { accessToken } from "../../constants";
 import { i18n } from "../../localization/i18n";
 
@@ -14,18 +14,19 @@ export const ProfileScreen = () => {
     const [address, setAddress] = useState('---');
     const [email, setEmail] = useState('---');
     const [commission, setCommission] = useState('---');
-    const screen = 'profile';
+    const screen = 'screens.profile';
 
-    // useEffect(async () => {
-    //     console.log('Re-render initiated!');
-    //     const userData = await userProfileVerification(accessToken);
-    //
-    //     await setName(userData.name);
-    //     await setPhone(userData.phone);
-    //     await setEmail(userData.email);
-    //     await setAddress(userData.address);
-    //     await setCommission(commission);
-    // }, []);
+    useEffect(async () => {
+        console.log('Re-render initiated!');
+        const userData = await userProfileVerification(accessToken);
+        const commissionData = await commissionDataRequest(accessToken);
+
+        setName(userData.name);
+        setPhone(userData.phone);
+        setEmail(userData.email);
+        setAddress(userData.address);
+        setCommission(commissionData);
+    }, []);
 
     return (
         <View style={styles.layout}>
@@ -45,7 +46,7 @@ export const ProfileScreen = () => {
                 </View>
                 <View style={styles.group}>
                     <Text style={styles.key}>{i18n.t(`${screen}.commission_rate`)}:</Text>
-                    <Text style={styles.value}>{commission}</Text>
+                    <Text style={styles.value}>{commission }%</Text>
                 </View>
             </View>
         </View>

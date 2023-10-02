@@ -12,7 +12,7 @@ export const OtpScreen = () => {
     const [pinReady, setPinReady] = useState(false);
     const MAX_CODE_LENGTH = 6;
     const nav = useNavigation();
-    const screen = 'otp';
+    const screen = 'screens.otp';
 
     return (
         <View style={styles.container}>
@@ -31,13 +31,13 @@ export const OtpScreen = () => {
                 isDisabled={!pinReady}
                 onPress={async () => {
                     console.log(code);
-                    // const response = await otpVerification(accessToken, code);
-                    //
-                    // if(response && response.status === 200){
-                    //     console.log('Verification process passed! Proceed to main navigator!');
-                    //     nav.navigate('Success');
-                    // }
-                    nav.navigate('Success');
+                    const response = await otpVerification(accessToken, code);
+
+                    if(response && response.status === 200){
+                        console.log('Verification process passed! Proceed to main navigator!');
+                        nav.navigate('Success');
+                    }
+                    // nav.navigate('Success');
                 }} />
 
             <View style={{ flex: 1 }} />

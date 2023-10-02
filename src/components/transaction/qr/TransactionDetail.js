@@ -31,11 +31,11 @@ const styles = StyleSheet.create({
     detailsTitle: {
         color: '#293462',
         fontWeight: 'bold',
-        fontSize: 15
+        fontSize: 16
     },
     detailsData: {
         color: 'gray',
         fontWeight: 'bold',
-        fontSize: 10
+        fontSize: 12
     }
 });

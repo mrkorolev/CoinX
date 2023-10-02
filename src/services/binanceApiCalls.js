@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {apiKey} from "../constants";
 import {baseCurrencies} from "../constants";
+import { i18n } from "../localization/i18n";
 
 const baseUrl = 'https://api.binance.com/';
 const apiVersion = 'api/v3/';

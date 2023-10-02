@@ -22,14 +22,13 @@ export const ExchangeAmountInput = ({operation, icon, options, chosenValue, hand
                 <TextInput
                     style={[styles.inputField, {color: textColor}]}
                     placeholder={placeholder ? placeholder : ''}
-                    keyboardType='decimal-pad'
+                    keyboardType='number-pad'
                     returnKeyType='done'
                     onChangeText={onChangeAmount}
                     value={value}
                     editable={isEditable}
-                    maxLength={7}
+                    maxLength={10}
                     selectTextOnFocus
-
                 />
             </View>
         </View>
@@ -41,8 +40,8 @@ const styles = StyleSheet.create({
         padding: 10
     },
     groupContainer: {
-        flexDirection: 'row', 
-        alignItems: 'center' 
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     rowContainer: {
         flex: 1,
