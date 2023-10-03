@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export const TransactionDetail = ({ parameter, value, icon, disabled, onPressHandler }) => {
     return (
         <View style={styles.detailsContainer}>
@@ -8,7 +10,7 @@ export const TransactionDetail = ({ parameter, value, icon, disabled, onPressHan
                 <Text style={styles.detailsTitle}>{parameter}</Text>
                 <Text style={styles.detailsData}>{value}</Text>
             </View>
-            <View style={{ flex: 0.2 }} />
+            <View style={{ flex: 0.15 }} />
             <TouchableOpacity
                 onPress={onPressHandler}
                 disabled={disabled}>
@@ -21,12 +23,13 @@ export const TransactionDetail = ({ parameter, value, icon, disabled, onPressHan
 const styles = StyleSheet.create({
     detailsContainer: {
         flexDirection: 'row',
-        padding:  20
+        paddingVertical: hp('2%'),
+        paddingHorizontal: wp('5%')
     },
     detailsLayout: {
         flex: 1,
         justifyContent: 'center',
-        gap: 2
+        gap: hp('0.25%')
     },
     detailsTitle: {
         color: '#293462',
@@ -35,7 +38,6 @@ const styles = StyleSheet.create({
     },
     detailsData: {
         color: 'gray',
-        fontWeight: 'bold',
         fontSize: 12
     }
 });

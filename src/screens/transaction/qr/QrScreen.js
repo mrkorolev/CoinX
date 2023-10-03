@@ -41,7 +41,7 @@ export const QrScreen = ({ route }) => {
             <TransactionDetail
                 parameter={i18n.t(`${screen}.network`)}
                 value={network}
-                icon={<ArrowsRightLeftIcon color='#293462'/>}
+                icon={<ArrowsRightLeftIcon color='#293462' />}
                 disabled={true} />
         </View>
     );
@@ -52,35 +52,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         backgroundColor: 'white',
-
-    },
-    qr: {
-        width: 300,
-        height: 300,
-        borderColor: '#293462',
-        borderWidth: 3,
-        borderRadius: 20,
-        margin: 20,
-        alignSelf: 'center'
-    },
-    qrButton: {
-        color: 'white',
-        fontWeight: 'bold',
-        alignSelf: 'center'
-    },
-    qrButtonContainer: {
-        backgroundColor: '#293462',
-        borderRadius: 10,
-        flex: 1,
-        margin: 10,
-        paddingVertical: 20,
-        paddingHorizontal: 30
+        // padding: wp('3%')
     },
     separator: {
         width: Dimensions.get('window').width,
-        height: 1.5,
+        height: wp('0.5%'),
         backgroundColor: 'lightgray',
         alignItems: 'center',
-        marginVertical: 20
+        marginVertical: hp('2%')
     }
 });

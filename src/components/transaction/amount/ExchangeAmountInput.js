@@ -4,20 +4,21 @@ import { TransactionCurrencyPicker } from './TransactionCurrencyPicker';
 import { Dropdown } from 'react-native-element-dropdown';
 import {CustomDropdown} from "../../general/CustomDropdown";
 
+// Responsiveness:
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
+// height: hp('7%'),
 export const ExchangeAmountInput = ({operation, icon, options, chosenValue, handler, onChangeAmount, placeholder, isEditable, value, textColor }) => {
 
     return (
-        <View style={styles.layout}>
+        <View style={styles.colContainer}>
             <Text style={styles.headerText}>{operation}</Text>
-            <View style={styles.groupContainer}>
-                {/* <TransactionCurrencyPicker currency={currency} icon={icon} iconSize={15} boxSize={33} /> */}
+            <View style={styles.rowContainer}>
                 <CustomDropdown
                     data={options}
                     value={chosenValue}
                     onChangeHandler={handler}
                     borderWidth={1}/>
-
-                <View style={{ flex: 0.1 }} />
 
                 <TextInput
                     style={[styles.inputField, {color: textColor}]}
@@ -36,35 +37,29 @@ export const ExchangeAmountInput = ({operation, icon, options, chosenValue, hand
 }
 
 const styles = StyleSheet.create({
-    layout: {
-        padding: 10
-    },
-    groupContainer: {
-        flexDirection: 'row',
-        alignItems: 'center'
+    colContainer: {
+
     },
     rowContainer: {
-        flex: 1,
-        height: 100,
-        width: 100,
-        borderColor: 'black',
-        borderRadius: 10
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: wp('1%')
     },
     headerText: {
         fontWeight: 'bold',
+        color: 'gray',
         fontSize: 15,
-        paddingBottom: 10,
-        color: 'gray'
+        paddingBottom: hp('1.5%')
     },
     inputField: {
-        flex: 3,
         textAlign: 'right',
         fontWeight: 'bold',
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         borderColor: 'black',
         borderWidth: 1,
         height: 55,
+        width: wp('72%'),
         paddingRight: 15,
-        borderRadius: 10
+        borderRadius: 5
     }
 });

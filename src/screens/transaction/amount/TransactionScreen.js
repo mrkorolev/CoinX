@@ -41,7 +41,7 @@ export const TransactionScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.layout}>
             <ExchangeAmountInput
                 operation={i18n.t(`${screen}.pay`)}
                 options={baseCurrencies}
@@ -79,8 +79,8 @@ export const TransactionScreen = () => {
                 isEditable={false} />
 
             { rate ?
-                <ExchangeRate from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :
-                <Text style={{ fontSize: 15, paddingTop: 10, paddingBottom: 20, fontWeight: 'bold' }}>{' '}</Text>}
+                <ExchangeRate style={styles.exchangeRateText} from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :
+                <Text style={styles.exchangeRateText}>{' '}</Text>}
 
             <CustomButton
                 text={readyToProceed ? i18n.t(`${screen}.generate_qr_text`) : i18n.t(`${screen}.calculate_text`)}
@@ -109,46 +109,55 @@ export const TransactionScreen = () => {
                                     const walletData = await walletDataRequest(accessToken, `${finalSpendAmount * (1 + parseFloat(commission)/100)}`, spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
 
                                     // DEBUG:
-                                    // nav.navigate(i18n.t('qr_code.screen_name'), {
-                                    //     walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfoqwehf',
-                                    //     networkData: 'Tron (TRC20)'
-                                    // });
+                                    nav.navigate(i18n.t('screens.qr_code.screen_name'), {
+                                        walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfo',
+                                        networkData: 'Tron (TRC20)'
+                                    });
 
-                                    if(walletData){
-                                        nav.navigate(i18n.t('screens.qr_code.screen_name'), {
-                                            // walletData: walletData.data.address,
-                                            walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfoqwehf',
-                                            networkData: 'Tron (TRC20)'
-                                        });
-                                    }
+                                    // if(walletData){
+                                    //     nav.navigate(i18n.t('screens.qr_code.screen_name'), {
+                                    //         // walletData: walletData.data.address,
+                                    //         walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfoqwehf',
+                                    //         networkData: 'Tron (TRC20)'
+                                    //     });
+                                    // }
                                 }
                             }]);
                     } else {
-                        // const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
-                        // const commissionRate = parseFloat(await commissionDataRequest(accessToken));
-                        // const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
-                        // const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
-                        //
-                        // setCommission(`${commissionRate}`);
-                        // setReceiveAmount(amountToReceive);
-                        // setRate(pricePerUnit);
-                        // setReadyToProceed(true);
+                        const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
+                        const commissionRate = parseFloat(await commissionDataRequest(accessToken));
+                        const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
+                        const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
+
+                        setCommission(`${commissionRate}`);
+                        setReceiveAmount(amountToReceive);
+                        setRate(pricePerUnit);
+                        setReadyToProceed(true);
 
                         // DEBUG:
-                        nav.navigate(i18n.t('screens.qr_code.screen_name'), {
-                            walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfoqwehf',
-                            networkData: 'Tron (TRC20)'
-                        });
+                        // nav.navigate(i18n.t('screens.qr_code.screen_name'), {
+                        //     walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfo',
+                        //     networkData: 'Tron (TRC20)'
+                        // });
                     }
                 }} />
+            <View style={{ flex: 0.25 }}/>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    layout: {
         flex: 1,
         backgroundColor: 'white',
         justifyContent: 'center',
+        padding: wp('2%'),
+        gap: hp('2%')
+    },
+    exchangeRateText: {
+        fontSize: 15,
+        color: 'gray',
+        paddingTop: hp('0.5%'),
+        paddingBottom: hp('4%')
     }
 });

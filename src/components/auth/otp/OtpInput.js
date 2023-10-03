@@ -3,9 +3,11 @@ import { View, Text, StyleSheet } from 'react-native'
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
+// Color from design: '#35C2C1'
+
 export const OtpInput = ({ value, focused }) => {
     return (
-        <View style={[styles.container, focused && {borderColor: '#22DCE0', backgroundColor: 'white'}]}>
+        <View style={[styles.container, focused && { backgroundColor: '#E8ECF4' }, value && { borderColor: 'black', backgroundColor: 'white' }]}>
             <Text style={styles.value}>
                 {value}
             </Text>
@@ -21,7 +23,7 @@ const styles = StyleSheet.create({
         minHeight: hp('8%'),
         borderWidth: 2,
         borderRadius: 5,
-        padding: 10,
+        padding: wp('3%'),
         justifyContent: 'center',
     },
     value: {

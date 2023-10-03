@@ -20,7 +20,6 @@ export const OtpScreen = () => {
 
     return (
         <View style={styles.layout}>
-            {/*<View style={{ flex: 1 }} />*/}
             <Text style={styles.title}>{i18n.t(`${screen}.title`)}</Text>
             <Text style={styles.message}>{i18n.t(`${screen}.secondary_text`)}</Text>
 
@@ -44,7 +43,7 @@ export const OtpScreen = () => {
                     nav.navigate('Success');
                 }} />
 
-            <View style={{ flex: 0.35 }}/>
+            <View style={{ flex: 0.25 }}/>
         </View>
     );
 }

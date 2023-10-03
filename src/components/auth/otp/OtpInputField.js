@@ -24,10 +24,11 @@ export const OtpInputField = ({ code, setCode, setPinReady, maxLength }) => {
 
     const handleOnBlur = () => {
         setInputContainerFocused(false);
+        // set Input BorderColor and backgroundColor to white and blue
     }
 
     const toCodeDigitInput = (_value, index) => {
-        const emptyInputCharacter = ' ';
+        const emptyInputCharacter = '';
         const digit = code[index] || emptyInputCharacter;
 
         const isCurrentDigit = index === code.length;

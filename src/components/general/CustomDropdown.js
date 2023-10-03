@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput} from "react-native";
 import {Dropdown} from "react-native-element-dropdown";
 
+// Responsiveness:
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export const CustomDropdown = ({ data, value, onChangeHandler, borderWidth }) => {
     const [isFocus, setIsFocus] = useState(false);
 
@@ -27,9 +30,9 @@ const styles = StyleSheet.create({
     dropdownContainer: {
         height: 55,
         borderColor: 'black',
-        borderRadius: 10,
+        borderRadius: 5,
         paddingHorizontal: '2%',
-        width: '25%'
+        width: wp('23%')
     },
     selectedTextStyle: {
         fontSize: 16,

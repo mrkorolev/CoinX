@@ -67,7 +67,7 @@ export const LoginScreen = () => {
                     nav.navigate('Otp');
                 }}
             />
-            <View style={{ flex: 0.35 }}/>
+            <View style={{ flex: 0.25 }}/>
         </View>
     );
 }
