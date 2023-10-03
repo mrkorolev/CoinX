@@ -60,7 +60,7 @@ export const LoginScreen = () => {
                         console.log('LOGIN SUCCESSFUL! Proceed to OTP!');
                         nav.navigate('Otp');
                     }
-                    // nav.navigate('Otp');
+                    nav.navigate('Otp');
                 }}
             />
         </View>

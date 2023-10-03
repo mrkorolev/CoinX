@@ -1,54 +1,79 @@
 {
-  "login": {
-    "title": "Hoş geldiniz! Bir sonraki maceraya hazır mısınız?",
-    "email_placeholder": "E-postanızı girin",
-    "password_placeholder": "Şifrenizi girin",
-    "button_text": "Giriş yap",
-    "invalid_credentials": "Geçersiz kullanıcı adı veya şifre kombinasyonu! Lütfen tekrar deneyin."
+  "screens": {
+    "login": {
+      "title": "Hoş geldiniz! Bir sonraki yaşayacağınız tecrübeye hazır mısınız?",
+      "email_placeholder": "E-postanızı girin",
+      "password_placeholder": "Şifrenizi girin",
+      "button_text": "Giriş Yap",
+      "invalid_credentials_title": "Giriş Hatası",
+      "invalid_credentials_message": "Geçersiz kimlik bilgileri! Tekrar deneyin!"
+    },
+    "otp": {
+      "title": "OTP Doğrulama",
+      "secondary_text": "E-posta adresinize gönderdiğimiz doğrulama kodunu girin.",
+      "button_text": "Doğrula"
+    },
+    "success": {
+      "title": "Giriş Başarılı",
+      "secondary_text": "Başarılı bir şekilde giriş yaptınız."
+    },
+    "home": {
+      "screen_name": "Ana Sayfa",
+      "error_title": "Giriş Hatası",
+      "error_message": "Geçersiz veya boş giriş! Tekrar deneyin!"
+    },
+    "notifications": {
+      "screen_name": "Bildirimler"
+    },
+    "transaction": {
+      "screen_name": "Yeni İşlem",
+      "pay": "Para Birimi",
+      "receive": "Kripto Para Birimi",
+      "placeholder": "Miktarı girin",
+      "exchange_rate": "Döviz Kuru",
+      "calculate_text": "Hesapla",
+      "generate_qr_text": "QR Kod Oluştur",
+      "error_title": "Giriş Hatası",
+      "error_message": "Geçersiz veya yanlış giriş! Tekrar deneyin!",
+      "qr_approval_title": "İşlem QR Kodu",
+      "qr_approval_message": "İşlem QR kodu oluşturmaya devam edilsin mi?",
+      "qr_approval_cancel": "İptal",
+      "qr_approval_proceed": "Devam"
+    },
+    "qr_code": {
+      "screen_name": "QR Kodu",
+      "warning": "Sadece BTC'yi bu yatırma adresine gönderin. Bu adres, non-fungible token yatırımını desteklememektedir. Lütfen NFT sayfasına giderek NFT yatırımı yapın.",
+      "wallet_address": "Cüzdan Adresi",
+      "network": "Ağ"
+    },
+    "profile": {
+      "screen_name": "Profil",
+      "phone_number": "Telefon numarası",
+      "email": "E-posta",
+      "address": "Adres",
+      "commission_rate": "Komisyon oranı"
+    }
   },
-  "otp": {
-    "title": "Tek Kullanımlık Doğrulama",
-    "secondary_text": "E-posta adresinize gönderdiğimiz kodu girin",
-    "button_text": "Doğrula"
-  },
-  "success": {
-    "title": "Giriş Başarılı",
-    "secondary_text": "Giriş öncesinde tüm kontrolleri başarıyla geçtiniz."
-  },
-  "home": {
-    "screen_name": "Ana Sayfa",
-    "error_title": "Giriş Hatası",
-    "error_message": "Geçersiz veya boş giriş! Lütfen tekrar deneyin."
-  },
-  "notifications": {
-    "screen_name": "Bildirimleri"
-  },
-  "transaction": {
-    "screen_name": "Yeni Depozit",
-    "pay": "Ödeme yapılıyor",
-    "receive": "Alınıyor",
-    "placeholder": "Ödeme tutarını girin",
-    "exchange_rate": "Döviz Kuru",
-    "calculate_text": "Hesapla",
-    "generate_qr_text": "QR Kodu Oluştur",
-    "error_title": "Giriş Hatası",
-    "error_message": "Geçersiz veya boş giriş! Lütfen tekrar deneyin!",
-    "qr_approval_title": "QR Kodu Onayı",
-    "qr_approval_message": "Depozit QR kodu oluşturmaya devam etmek istiyor musunuz?",
-    "qr_approval_cancel": "İptal",
-    "qr_approval_proceed": "Devam Et"
-  },
-  "qr_code": {
-    "screen_name": "QR Kod Depoziti",
-    "warning": "Sadece BTC adresine gönderim yapın. Bu adres NFT depozitlerini desteklememektedir. NFT depoziti yapmak isterseniz NFT sayfasını kullanın.",
-    "wallet_address": "Cüzdan Adresi",
-    "network": "Ağ"
-  },
-  "profile": {
-    "screen_name": "Profil",
-    "phone_number": "Telefon Numarası",
-    "email": "E-posta",
-    "address": "Adres",
-    "commission_rate": "Komisyon Oranı"
+  "request_errors": {
+    "login_request": {
+      "reason": "Giriş İsteği",
+      "message": "Giriş işlemi gerçekleştirilirken bir hata oluştu! Uygulamayı kullanmak için kayıtlı bir kullanıcı olduğunuzdan emin olun."
+    },
+    "otp_request": {
+      "reason": "OTP Doğrulama İsteği",
+      "message": "OTP doğrulama işleminizi gerçekleştirirken bir hata oluştu! OTP'nizin geçerliliğini kontrol edin ve tekrar deneyin."
+    },
+    "wallet_request": {
+      "reason": "Cüzdan Bilgisi İsteği",
+      "message": "İşlem bilgisi istenirken bir hata oluştu! Çıkış yapmayı deneyin ve tekrar giriş yapmayı deneyin."
+    },
+    "profile_request": {
+      "reason": "Kullanıcı Profili Bilgileri",
+      "message": "Kişisel bilgilerinizi istenirken bir hata oluştu! Çıkış yapmayı deneyin ve tekrar giriş yapmayı deneyin."
+    },
+    "binance_request": {
+      "reason": "Döviz Kuru Talebi",
+      "message": "Döviz kuru bilgilerini istenirken bir hata oluştu! API anahtarınızın geçerliliğini kontrol edin ve tekrar deneyin."
+    }
   }
 }

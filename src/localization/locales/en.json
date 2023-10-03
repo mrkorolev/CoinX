@@ -77,7 +77,7 @@
     },
     "binance_request": {
       "reason": "Exchange Rates Request",
-      "message": "\nAn error occurred while trying to request exchange rates information! Check the validity of your Binance API key and try again "
+      "message": "\nAn error occurred while trying to request exchange rates information! Check the validity of your exchange rates API key and try again "
     }
   }
 }

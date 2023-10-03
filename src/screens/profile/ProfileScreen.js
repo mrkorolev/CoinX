@@ -1,5 +1,6 @@
 import React, { useState , useEffect } from 'react';
 import {View, StyleSheet, Text} from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import { PrimaryDetails } from '../../components/profile/PrimaryDetails';
 import { SecondaryDetails } from '../../components/profile/SecondaryDetails';

@@ -31,13 +31,13 @@ export const OtpScreen = () => {
                 isDisabled={!pinReady}
                 onPress={async () => {
                     console.log(code);
-                    const response = await otpVerification(accessToken, code);
-
-                    if(response && response.status === 200){
-                        console.log('Verification process passed! Proceed to main navigator!');
-                        nav.navigate('Success');
-                    }
-                    // nav.navigate('Success');
+                    // const response = await otpVerification(accessToken, code);
+                    //
+                    // if(response && response.status === 200){
+                    //     console.log('Verification process passed! Proceed to main navigator!');
+                    //     nav.navigate('Success');
+                    // }
+                    nav.navigate('Success');
                 }} />
 
             <View style={{ flex: 1 }} />
