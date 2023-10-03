@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import {View, TouchableOpacity, StyleSheet, Dimensions, Text, TextInput, Keyboard, Alert} from 'react-native';
-import { faRightLeft } from '@fortawesome/free-solid-svg-icons';
+import {faRightLeft, faTurkishLiraSign} from '@fortawesome/free-solid-svg-icons';
 import {Line} from "./Line";
 import {CustomIcon} from "../general/CustomIcon";
 import {baseCurrencies, cryptoCurrencies} from "../../constants/index";
-import {CustomDropdown} from "../general/CustomDropdown";
 import { endpointPriceData } from "../../services/binanceApiCalls";
-import {i18n} from "../../localization/i18n";
+import { i18n } from "../../localization/i18n";
+import {TransactionCurrencyPicker} from "../general/TransactionCurrencyPicker";
+
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export const Calculator = () => {
 
@@ -34,17 +36,17 @@ export const Calculator = () => {
                                value={spendAmount}
                                placeholder='...'
                                selectTextOnFocus
-
                     />
                 </View>
 
-                <CustomDropdown
-                    borderWidth={1}
-                    data={baseCurrencies}
-                    value={spendCurrency}
-                    onChangeHandler={item => {
-                        setSpendCurrency(item);
-                    }}/>
+                <TransactionCurrencyPicker
+                    currencyName={spendCurrency.nameShort}
+                    currencyIcon={spendCurrency.icon}
+                    onPressHandler={() => {
+                        setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
+                        setReceiveAmount('---');
+                    }}
+                />
 
             </View>
 
@@ -78,14 +80,15 @@ export const Calculator = () => {
                                value={receiveAmount} />
                 </View>
 
-                <CustomDropdown
-                    borderWidth={1}
-                    data={cryptoCurrencies}
-                    value={receiveCurrency}
-                    onChangeHandler={ item => {
-                        setReceiveCurrency(item);
-                        // setIsFocus(false);
-                    }}/>
+
+                <TransactionCurrencyPicker
+                    currencyName={receiveCurrency.nameShort}
+                    currencyIcon={receiveCurrency.icon}
+                    onPressHandler={() => {
+                        setReceiveCurrency(cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length]);
+                        setReceiveAmount('---');
+                    }}
+                />
             </View>
         </View>
     );
@@ -118,36 +121,20 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        // borderWidth: 1,
         columnGap: 50
     },
     operationContainer: {
-        width: '25%',
+        height: hp('7%'),
+        width: wp('30%'),
         borderWidth: 1,
         paddingHorizontal: '2%',
-        // borderRadius: 10
-    },
-    operation: {
-        fontSize: 17,
-        fontWeight: 'bold',
-        color: 'gray'
+        borderRadius: 5,
+        justifyContent: 'center'
     },
     operationAmount: {
-        width: 160,
-        height: 30,
+
         fontSize: 17,
         color: '#293462',
         fontWeight: 'bold'
-    },
-    dropdownContainer: {
-        height: 35,
-        borderColor: 'black',
-        paddingHorizontal: '2%',
-        width: '23%'
-    },
-    selectedTextStyle: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: '#293462'
     }
 });

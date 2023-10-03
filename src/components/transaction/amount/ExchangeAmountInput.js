@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Dimensions, StyleSheet } from 'react-native';
-import { TransactionCurrencyPicker } from './TransactionCurrencyPicker';
-import { Dropdown } from 'react-native-element-dropdown';
-import {CustomDropdown} from "../../general/CustomDropdown";
+import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { TransactionCurrencyPicker } from '../../general/TransactionCurrencyPicker';
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-// height: hp('7%'),
-export const ExchangeAmountInput = ({operation, icon, options, chosenValue, handler, onChangeAmount, placeholder, isEditable, value, textColor }) => {
+export const ExchangeAmountInput = ({ operation, chosenCurrencyName, chosenCurrencyIcon, onPressHandler, onChangeAmount, placeholder, isEditable, value, textColor }) => {
 
     return (
         <View style={styles.colContainer}>
             <Text style={styles.headerText}>{operation}</Text>
             <View style={styles.rowContainer}>
-                <CustomDropdown
-                    data={options}
-                    value={chosenValue}
-                    onChangeHandler={handler}
-                    borderWidth={1}/>
+
+                <TransactionCurrencyPicker
+                    currencyName={chosenCurrencyName}
+                    currencyIcon={chosenCurrencyIcon}
+                    onPressHandler={onPressHandler}
+                />
 
                 <TextInput
                     style={[styles.inputField, {color: textColor}]}
@@ -57,8 +55,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderColor: 'black',
         borderWidth: 1,
-        height: 55,
-        width: wp('72%'),
+        height: hp('7%'),
+        width: wp('70%'),
         paddingRight: 15,
         borderRadius: 5
     }

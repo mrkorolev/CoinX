@@ -1,4 +1,4 @@
-import { faBitcoinSign } from '@fortawesome/free-solid-svg-icons';
+import {faBitcoinSign, faTurkishLiraSign} from '@fortawesome/free-solid-svg-icons';
 import { faEthereum } from '@fortawesome/free-brands-svg-icons';
 import { faLitecoinSign } from '@fortawesome/free-solid-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
@@ -25,11 +25,13 @@ const user3 = {
 export const baseCurrencies = [
     {
         nameShort: 'TRY',
-        nameLong: 'Turkish Lira'
+        nameLong: 'Turkish Lira',
+        icon: faTurkishLiraSign
     },
     {
         nameShort: 'USD',
-        nameLong: 'United States Dollar'
+        nameLong: 'United States Dollar',
+        icon: faDollarSign
     }
 ];
 

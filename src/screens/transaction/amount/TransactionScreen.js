@@ -4,8 +4,6 @@ import { ExchangeAmountInput } from '../../../components/transaction/amount/Exch
 import { ExchangeRate } from '../../../components/transaction/amount/ExchangeRate';
 import { CustomButton } from '../../../components/general/CustomButton';
 import { useNavigation } from '@react-navigation/native';
-import { faBitcoinSign } from '@fortawesome/free-solid-svg-icons';
-import { faTurkishLiraSign } from '@fortawesome/free-solid-svg-icons';
 import { accessToken, baseCurrencies, cryptoCurrencies } from "../../../constants/index";
 import { endpointPriceData } from "../../../services/binanceApiCalls";
 import { commissionDataRequest, walletDataRequest } from "../../../services/authentication";
@@ -27,6 +25,7 @@ export const TransactionScreen = () => {
     const screen = 'screens.transaction';
 
     useEffect(() => {
+        console.log(spendCurrency.nameShort);
         return () => setReadyToProceed(false);
     }, []);
 
@@ -44,11 +43,11 @@ export const TransactionScreen = () => {
         <View style={styles.layout}>
             <ExchangeAmountInput
                 operation={i18n.t(`${screen}.pay`)}
-                options={baseCurrencies}
-                chosenValue={spendCurrency}
-                handler={item => {
-                    setSpendCurrency(item);
-                    setReceiveAmount('');
+                chosenCurrencyName={spendCurrency.nameShort}
+                chosenCurrencyIcon={spendCurrency.icon}
+                onPressHandler={() => {
+                    setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
+                    setReceiveAmount(null);
                     setReadyToProceed(false);
                 }}
                 value={spendAmount}
@@ -67,11 +66,11 @@ export const TransactionScreen = () => {
 
             <ExchangeAmountInput
                 operation={i18n.t(`${screen}.receive`)}
-                options={cryptoCurrencies}
-                chosenValue={receiveCurrency}
-                handler={item => {
-                    setReceiveCurrency(item);
-                    setReceiveAmount('');
+                chosenCurrencyName={receiveCurrency.nameShort}
+                chosenCurrencyIcon={receiveCurrency.icon}
+                onPressHandler={() => {
+                    setReceiveCurrency(cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length]);
+                    setReceiveAmount(null);
                     setReadyToProceed(false);
                 }}
                 value={receiveAmount}
