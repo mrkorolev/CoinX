@@ -6,6 +6,9 @@ import { QrCode } from '../../../components/transaction/qr/QrCode';
 import { TransactionDetail } from '../../../components/transaction/qr/TransactionDetail';
 import { i18n } from "../../../localization/i18n";
 
+// Responsiveness:
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export const QrScreen = ({ route }) => {
     const [wallet, setWallet] = useState('');
     const [network, setNetwork] = useState('');

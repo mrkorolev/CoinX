@@ -2,6 +2,9 @@ import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Notification } from '../../components/notifications/Notification';
 
+// Responsiveness:
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export const NotificationScreen = () => {
 
     const data = [

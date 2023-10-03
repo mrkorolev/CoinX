@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { CoinExchangeRate } from './CoinExchangeRate';
 import { cryptoCurrencies } from '../../constants/index';
 import { endpoint24hrData } from "../../services/binanceApiCalls";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 function modifyCurrentState(arr1, arr2){
     for(let key in arr1){

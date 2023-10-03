@@ -1,12 +1,16 @@
 import React, { useState , useEffect } from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import { PrimaryDetails } from '../../components/profile/PrimaryDetails';
 import { SecondaryDetails } from '../../components/profile/SecondaryDetails';
 import {commissionDataRequest, userProfileVerification} from "../../services/authentication";
 import { accessToken } from "../../constants";
+
+// Localization:
 import { i18n } from "../../localization/i18n";
+
+// Responsiveness:
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export const ProfileScreen = () => {
 
@@ -17,22 +21,22 @@ export const ProfileScreen = () => {
     const [commission, setCommission] = useState('---');
     const screen = 'screens.profile';
 
-    useEffect(async () => {
-        console.log('Re-render initiated!');
-        const userData = await userProfileVerification(accessToken);
-        const commissionData = await commissionDataRequest(accessToken);
-
-        setName(userData.name);
-        setPhone(userData.phone);
-        setEmail(userData.email);
-        setAddress(userData.address);
-        setCommission(commissionData);
-    }, []);
+    // useEffect(async () => {
+    //     console.log('Re-render initiated!');
+    //     const userData = await userProfileVerification(accessToken);
+    //     const commissionData = await commissionDataRequest(accessToken);
+    //
+    //     setName(userData.name);
+    //     setPhone(userData.phone);
+    //     setEmail(userData.email);
+    //     setAddress(userData.address);
+    //     setCommission(`${commissionData} %`);
+    // }, []);
 
     return (
         <View style={styles.layout}>
             <PrimaryDetails name={name} />
-            <View style={{ flex: 1, padding: 50 }}>
+            <View style={styles.container}>
                 <View style={styles.group}>
                     <Text style={styles.key}>{i18n.t(`${screen}.phone_number`)}:</Text>
                     <Text style={styles.value}>{phone}</Text>
@@ -47,7 +51,7 @@ export const ProfileScreen = () => {
                 </View>
                 <View style={styles.group}>
                     <Text style={styles.key}>{i18n.t(`${screen}.commission_rate`)}:</Text>
-                    <Text style={styles.value}>{commission }%</Text>
+                    <Text style={styles.value}>{commission}</Text>
                 </View>
             </View>
         </View>
@@ -58,20 +62,26 @@ const styles = StyleSheet.create({
     layout: {
         flex: 1,
         backgroundColor: '#fff',
-        padding: 10
+        padding: wp('2%')
+    },
+    container: {
+        flex: 1,
+        paddingHorizontal: wp('13%'),
+        paddingVertical: hp('2%'),
+        marginBottom: hp('5%')
     },
     group: {
-        marginBottom: 20,
+        paddingBottom: hp('2.5%'),
         backgroundColor: 'white',
-        gap: 5
+        gap: hp('1%')
     },
     key: {
-        fontSize: 19,
+        fontSize: 21,
         fontWeight: 'bold',
         color: '#293462'
     },
     value: {
-        fontSize: 15,
+        fontSize: 17,
         color: 'gray'
     }
 });

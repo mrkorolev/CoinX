@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { EyeIcon, EyeSlashIcon} from 'react-native-heroicons/solid';
+import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../../components/auth/login/CustomInput';
 import { CustomButton } from '../../../components/general/CustomButton';
-import {authenticateUser} from "../../../services/authentication";
-import {i18n} from '../../../localization/i18n.js';
+import { authenticateUser } from "../../../services/authentication";
+
+// Localization:
+import { i18n } from '../../../localization/i18n.js';
+
+// Responsiveness:
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export const LoginScreen = () => {
     const [username, setUsername] = useState('');
@@ -24,9 +29,8 @@ export const LoginScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.primary}>{i18n.t(`${screen}.title`)}</Text>
-
+        <View style={styles.layout}>
+            <Text style={styles.title}>{i18n.t(`${screen}.title`)}</Text>
             <CustomInput
                 placeholder={i18n.t(`${screen}.email_placeholder`)}
                 onChangeText={(text) => setUsername(text)}
@@ -63,22 +67,22 @@ export const LoginScreen = () => {
                     nav.navigate('Otp');
                 }}
             />
+            <View style={{ flex: 0.35 }}/>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    layout: {
         flex: 1,
         justifyContent: 'center',
         backgroundColor: 'white',
-        padding: 8
+        padding: wp('5%')
     },
-    primary: {
+    title: {
         fontWeight: 'bold',
         color: '#293462',
-        paddingBottom: 20,
-        fontSize: 30,
-        padding: 10
+        marginVertical: hp('3%'),
+        fontSize: 35
     }
 });

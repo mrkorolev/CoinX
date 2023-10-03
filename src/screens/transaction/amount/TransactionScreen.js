@@ -11,6 +11,9 @@ import { endpointPriceData } from "../../../services/binanceApiCalls";
 import { commissionDataRequest, walletDataRequest } from "../../../services/authentication";
 import { i18n } from "../../../localization/i18n";
 
+// Responsiveness:
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export const TransactionScreen = () => {
 
     const nav = useNavigation();
@@ -121,15 +124,21 @@ export const TransactionScreen = () => {
                                 }
                             }]);
                     } else {
-                        const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
-                        const commissionRate = parseFloat(await commissionDataRequest(accessToken));
-                        const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
-                        const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
+                        // const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
+                        // const commissionRate = parseFloat(await commissionDataRequest(accessToken));
+                        // const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
+                        // const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
+                        //
+                        // setCommission(`${commissionRate}`);
+                        // setReceiveAmount(amountToReceive);
+                        // setRate(pricePerUnit);
+                        // setReadyToProceed(true);
 
-                        setCommission(`${commissionRate}`);
-                        setReceiveAmount(amountToReceive);
-                        setRate(pricePerUnit);
-                        setReadyToProceed(true);
+                        // DEBUG:
+                        nav.navigate(i18n.t('screens.qr_code.screen_name'), {
+                            walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfoqwehf',
+                            networkData: 'Tron (TRC20)'
+                        });
                     }
                 }} />
         </View>

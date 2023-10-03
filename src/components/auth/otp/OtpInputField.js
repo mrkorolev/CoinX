@@ -2,6 +2,8 @@ import { View, StyleSheet, Text, Pressable, TextInput } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { OtpInput } from './OtpInput';
 
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export const OtpInputField = ({ code, setCode, setPinReady, maxLength }) => {
 
     useEffect(() => {
@@ -64,7 +66,8 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 30
+        paddingTop: hp('7%'),
+        paddingBottom: hp('2%')
     },
     inputField: {
         position: 'absolute',
@@ -73,9 +76,8 @@ const styles = StyleSheet.create({
         opacity: 0
     },
     pressContainer: {
-        width: '85%',
+        width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        paddingTop: 40
     }
 });

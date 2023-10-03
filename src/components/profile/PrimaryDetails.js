@@ -1,36 +1,41 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { UserIcon } from "react-native-heroicons/solid";
+
+// Responsiveness:
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export const PrimaryDetails = ({ name }) => {
     return (
-        <View style={styles.primaryDetails}>
-            <View style={styles.profileImagePlaceholder}>
+        <View style={styles.layout}>
+            <View style={styles.iconPlaceholder}>
                 {/* Profile icon will come in here */}
+                <UserIcon color='white' size={wp('30%')} />
             </View>
-            <Text style={styles.primaryTitle}>{name}</Text>
+            <Text style={styles.title}>{name}</Text>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    primaryTitle: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        color: '#293462'
-    },
-    primaryDetails: {
+    layout: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
-    profileImagePlaceholder: {
-        width: 200,
-        height: 200,
-        borderRadius: 200 / 2,
+    title: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#293462'
+    },
+    iconPlaceholder: {
+        width: wp('45%'),
+        height: wp('45%'),
+        borderRadius: wp('45%') * 50,
         backgroundColor: 'slategray',
-        marginBottom: 10,
-        marginTop: 40,
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end'
+        marginBottom: hp('2%'),
+        marginTop: hp('4%'),
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });

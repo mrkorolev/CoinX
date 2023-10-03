@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { CurrencyDollarIcon } from 'react-native-heroicons/solid';
 import { CustomIcon } from '../general/CustomIcon';
+
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePercent, bgColor, coinIcon }) => {
     return (
@@ -16,7 +17,7 @@ export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePe
             <View style={styles.bottomLevel}>
                 <CustomIcon icon={coinIcon} iconSize={17} boxSize={30} />
                 <View style={{ width: 20 }} />
-                <Text style={[styles.coinInsides,]}>{nameLong}</Text>
+                <Text style={styles.coinInsides}>{nameLong}</Text>
             </View>
         </View>
     );
@@ -24,13 +25,14 @@ export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePe
 
 const styles = StyleSheet.create({
     coinLayout: {
-        width: 175,
-        height: 175,
+        width: wp('42%'),
+        height: wp('42%'),
         borderRadius: 10,
         justifyContent: 'center',
-        paddingHorizontal: 15,
-        paddingVertical: 20,
-        margin: 5
+        // paddingHorizontal: 10,
+        paddingHorizontal: wp('3%'),
+        paddingVertical: wp('4%'),
+        margin: wp('1.5%')
     },
     coinInsides: {
         fontWeight: 'bold',

@@ -1,6 +1,9 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
+// Responsiveness:
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export const CustomButton = ({ text, isDisabled, onPress }) => {
     return (
         <TouchableOpacity
@@ -15,14 +18,16 @@ export const CustomButton = ({ text, isDisabled, onPress }) => {
 const styles = StyleSheet.create({
     appButtonContainer: {
         backgroundColor: '#293462',
-        borderRadius: 10,
-        paddingVertical: 20,
-        margin: 10,
-        marginTop: 70
+        borderRadius: 5,
+        justifyContent: 'center',
+        // margin: '2%',
+        marginTop: hp('5%'),
+        height: hp('7%')
     },
     appButton: {
         color: 'white',
         fontWeight: 'bold',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        fontSize: 15
     }
 });

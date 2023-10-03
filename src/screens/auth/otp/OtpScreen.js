@@ -3,9 +3,13 @@ import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { CustomButton } from '../../../components/general/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import {OtpInputField} from "../../../components/auth/otp/OtpInputField";
-import {otpVerification} from "../../../services/authentication";
-import {accessToken} from "../../../constants";
+import { otpVerification } from "../../../services/authentication";
+import { accessToken } from "../../../constants";
+// Localization:
 import { i18n } from "../../../localization/i18n";
+
+// Responsiveness:
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export const OtpScreen = () => {
     const [code, setCode] = useState("");
@@ -15,10 +19,10 @@ export const OtpScreen = () => {
     const screen = 'screens.otp';
 
     return (
-        <View style={styles.container}>
-            <View style={{ flex: 1 }} />
-            <Text style={styles.primary}>{i18n.t(`${screen}.title`)}</Text>
-            <Text style={styles.secondary}>{i18n.t(`${screen}.secondary_text`)}</Text>
+        <View style={styles.layout}>
+            {/*<View style={{ flex: 1 }} />*/}
+            <Text style={styles.title}>{i18n.t(`${screen}.title`)}</Text>
+            <Text style={styles.message}>{i18n.t(`${screen}.secondary_text`)}</Text>
 
             <OtpInputField
                 code={code}
@@ -40,27 +44,27 @@ export const OtpScreen = () => {
                     nav.navigate('Success');
                 }} />
 
-            <View style={{ flex: 1 }} />
+            <View style={{ flex: 0.35 }}/>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    layout: {
         flex: 1,
         justifyContent: 'center',
         backgroundColor: 'white',
-        padding: 8
+        padding: wp('5%')
     },
-    primary: {
+    title: {
         fontWeight: 'bold',
         color: '#293462',
         fontSize: 35,
-        padding: 10
+        marginTop: hp('3%'),
+        marginBottom: hp('2%')
     },
-    secondary: {
+    message: {
         color: 'gray',
-        padding: 10,
-        fontSize: 18
+        fontSize: 20
     }
 });
