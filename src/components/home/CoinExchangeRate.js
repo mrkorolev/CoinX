@@ -1,22 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { CustomIcon } from '../general/CustomIcon';
-
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePercent, bgColor, coinIcon }) => {
     return (
-        <View style={[styles.coinLayout, { backgroundColor: `${bgColor}` },
-        nameShort === 'USDT' && styles.usdStyling]}>
+        <View style={[styles.coinLayout, { backgroundColor: `${bgColor}` }, nameShort === 'USDT' && styles.usdStyling]}>
             <View style={styles.topLevel}>
-                <View style={{ gap: 2 }}>
+                <View style={{ gap: hp('0.25%') }}>
                     <Text style={styles.coinInsides}>{nameShort}</Text>
                     <Text style={styles.coinInsides}>{lastPrice}</Text>
                 </View>
                 <Text style={[styles.coinInsides, styles.percentChangeText]}>{priceChangePercent} %</Text>
             </View>
             <View style={styles.bottomLevel}>
-                <CustomIcon icon={coinIcon} iconSize={17} boxSize={30} />
-                <View style={{ width: 20 }} />
+                <CustomIcon icon={coinIcon} iconSize={wp('5%')} boxSize={wp('7%')} />
                 <Text style={styles.coinInsides}>{nameLong}</Text>
             </View>
         </View>
@@ -26,18 +23,17 @@ export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePe
 const styles = StyleSheet.create({
     coinLayout: {
         width: wp('42%'),
-        height: wp('42%'),
+        height: hp('20%'),
         borderRadius: 10,
-        justifyContent: 'center',
-        // paddingHorizontal: 10,
-        paddingHorizontal: wp('3%'),
-        paddingVertical: wp('4%'),
+        justifyContent: 'space-between',
+        paddingHorizontal: wp('4%'),
+        paddingVertical: wp('6%'),
         margin: wp('1.5%')
     },
     coinInsides: {
         fontWeight: 'bold',
         color: '#293462',
-        fontSize: 14
+        fontSize: wp('3%')
     },
     usdStyling: {
         borderColor: 'gray',
@@ -45,7 +41,6 @@ const styles = StyleSheet.create({
         borderStyle: 'dashed'
     },
     topLevel: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
@@ -54,9 +49,8 @@ const styles = StyleSheet.create({
         fontWeight: 'normal'
     },
     bottomLevel: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 50
+        gap: wp('4%')
     }
 });

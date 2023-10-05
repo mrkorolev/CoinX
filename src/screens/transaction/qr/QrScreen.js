@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         backgroundColor: 'white',
-        // padding: wp('3%')
+        // padding: wp('5%')
     },
     separator: {
         width: Dimensions.get('window').width,
-        height: wp('0.5%'),
+        height: hp('0.25%'),
         backgroundColor: 'lightgray',
         alignItems: 'center',
         marginVertical: hp('2%')

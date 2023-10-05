@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#293462',
         borderRadius: 5,
         justifyContent: 'center',
-        // margin: '2%',
         marginTop: hp('5%'),
         height: hp('7%')
     },
@@ -28,6 +27,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         alignSelf: 'center',
-        fontSize: 15
+        fontSize: wp('4%')
     }
 });

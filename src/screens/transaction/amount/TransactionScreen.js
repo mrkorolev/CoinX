@@ -45,11 +45,11 @@ export const TransactionScreen = () => {
                 operation={i18n.t(`${screen}.pay`)}
                 chosenCurrencyName={spendCurrency.nameShort}
                 chosenCurrencyIcon={spendCurrency.icon}
-                onPressHandler={() => {
-                    setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
-                    setReceiveAmount(null);
-                    setReadyToProceed(false);
-                }}
+                // onPressHandler={() => {
+                //     setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
+                //     setReceiveAmount(null);
+                //     setReadyToProceed(false);
+                // }}
                 value={spendAmount}
                 placeholder={i18n.t(`${screen}.placeholder`)}
                 onChangeAmount={(amount) => {
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
         gap: hp('2%')
     },
     exchangeRateText: {
-        fontSize: 15,
+        fontSize: wp('3.5%'),
         color: 'gray',
         paddingTop: hp('0.5%'),
         paddingBottom: hp('4%')

@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 export const CustomInput = ({ icon, secureTextEntry, placeholder, onChangeText, enterKey }) => {
     return (
-        <View style={[styles.inputField, { flexDirection: 'row', justifyContent: 'space-between' }]}>
+        <View style={[styles.inputField, ]}>
             <TextInput style={styles.inputValue}
                        color='#293462'
                        secureTextEntry={secureTextEntry}
@@ -16,24 +16,29 @@ export const CustomInput = ({ icon, secureTextEntry, placeholder, onChangeText, 
                        selectTextOnFocus
                        enterKeyHint={enterKey} />
             <View style={{ flex: 0.05 }}/>
-            <View style={{ alignSelf: 'center', paddingRight: '3%' }}>{icon && icon}</View>
+            <View style={styles.icon}>{icon && icon}</View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     inputField: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
         backgroundColor: '#F7F8F9',
         borderColor: '#DADADA',
         borderWidth: 1,
         height: hp('7%'),
-        // marginHorizontal: '2%',
         marginVertical: '3%',
         paddingLeft: '3%',
         borderRadius: 5,
     },
     inputValue: {
         flex: 1,
-        fontSize: 13
+        fontSize: wp('3%')
+    },
+    icon: {
+        alignSelf: 'center',
+        paddingRight: '3%'
     }
 });

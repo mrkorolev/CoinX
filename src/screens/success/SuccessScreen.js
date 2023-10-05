@@ -42,17 +42,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontSize: 28,
+        fontSize: wp('7%'),
         color: '#293462',
         fontWeight: 'bold'
     },
     message: {
-        fontSize: 21,
+        fontSize: wp('5%'),
         color: 'gray',
         fontWeight: 'bold',
         textAlign: 'center',
-        paddingHorizontal: wp('10%'),
-        lineHeight: 25
+        paddingHorizontal: wp('10%')
     }
 });
 

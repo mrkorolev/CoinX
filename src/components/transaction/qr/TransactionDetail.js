@@ -34,10 +34,10 @@ const styles = StyleSheet.create({
     detailsTitle: {
         color: '#293462',
         fontWeight: 'bold',
-        fontSize: 16
+        fontSize: wp('3.5%')
     },
     detailsData: {
         color: 'gray',
-        fontSize: 12
+        fontSize: wp('3%')
     }
 });

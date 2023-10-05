@@ -9,8 +9,7 @@ export const PrimaryDetails = ({ name }) => {
     return (
         <View style={styles.layout}>
             <View style={styles.iconPlaceholder}>
-                {/* Profile icon will come in here */}
-                <UserIcon color='white' size={wp('30%')} />
+                <UserIcon color='white' size={wp('25%')} />
             </View>
             <Text style={styles.title}>{name}</Text>
         </View>
@@ -24,14 +23,14 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        fontSize: 30,
+        fontSize: wp('7%'),
         fontWeight: 'bold',
         color: '#293462'
     },
     iconPlaceholder: {
-        width: wp('45%'),
-        height: wp('45%'),
-        borderRadius: wp('45%') * 50,
+        width: wp('40%'),
+        height: wp('40%'),
+        borderRadius: wp('40%') * 50,
         backgroundColor: 'slategray',
         marginBottom: hp('2%'),
         marginTop: hp('4%'),

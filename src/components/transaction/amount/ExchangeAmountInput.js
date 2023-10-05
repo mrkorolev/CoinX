@@ -8,7 +8,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 export const ExchangeAmountInput = ({ operation, chosenCurrencyName, chosenCurrencyIcon, onPressHandler, onChangeAmount, placeholder, isEditable, value, textColor }) => {
 
     return (
-        <View style={styles.colContainer}>
+        <View>
             <Text style={styles.headerText}>{operation}</Text>
             <View style={styles.rowContainer}>
 
@@ -21,6 +21,7 @@ export const ExchangeAmountInput = ({ operation, chosenCurrencyName, chosenCurre
                 <TextInput
                     style={[styles.inputField, {color: textColor}]}
                     placeholder={placeholder ? placeholder : ''}
+                    fontSize={wp('3.5%')}
                     keyboardType='number-pad'
                     returnKeyType='done'
                     onChangeText={onChangeAmount}
@@ -35,9 +36,6 @@ export const ExchangeAmountInput = ({ operation, chosenCurrencyName, chosenCurre
 }
 
 const styles = StyleSheet.create({
-    colContainer: {
-
-    },
     rowContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -46,7 +44,7 @@ const styles = StyleSheet.create({
     headerText: {
         fontWeight: 'bold',
         color: 'gray',
-        fontSize: 15,
+        fontSize: wp('3.5%'),
         paddingBottom: hp('1.5%')
     },
     inputField: {

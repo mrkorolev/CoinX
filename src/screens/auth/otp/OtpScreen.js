@@ -58,12 +58,12 @@ const styles = StyleSheet.create({
     title: {
         fontWeight: 'bold',
         color: '#293462',
-        fontSize: 35,
+        fontSize: wp('8%'),
         marginTop: hp('3%'),
         marginBottom: hp('2%')
     },
     message: {
         color: 'gray',
-        fontSize: 20
+        fontSize: wp('5%')
     }
 });

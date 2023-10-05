@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         borderColor: '#293462',
         borderWidth: 5,
         borderRadius: 10,
-        marginBottom: hp('1%'),
+        marginVertical: hp('1%'),
         justifyContent: 'center',
         alignSelf: 'center',
         alignItems: 'center'
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     warningStyle: {
         color: 'gray',
         textAlign: 'center',
-        padding: wp('5%')
+        padding: wp('5%'),
+        fontSize: wp('3.5%')
     },
 });

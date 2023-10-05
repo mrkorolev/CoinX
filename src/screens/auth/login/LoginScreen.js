@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Alert, PixelRatio } from 'react-native';
 import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../../components/auth/login/CustomInput';
@@ -20,7 +20,6 @@ export const LoginScreen = () => {
     const nav = useNavigation();
 
     const screen = 'screens.login';
-
     const validateInput = (username, password) => {
         if(!username || !password){
             return false;
@@ -41,7 +40,7 @@ export const LoginScreen = () => {
                     <TouchableOpacity
                         onPress={() => {
                         setProtection(!protection);
-                        setIcon(!protection ? <EyeIcon color='#6A707C'/> : <EyeSlashIcon color='#6A707C'/>);}}>
+                        setIcon(!protection ? <EyeIcon color='#6A707C' size={wp('2%')}/> : <EyeSlashIcon color='#6A707C' size={wp('2%')} />);}}>
                         {icon}
                     </TouchableOpacity>
                 }
@@ -83,6 +82,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#293462',
         marginVertical: hp('3%'),
-        fontSize: 35
+        fontSize: wp('8%')
     }
 });

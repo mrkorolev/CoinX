@@ -7,7 +7,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 export const OtpInput = ({ value, focused }) => {
     return (
-        <View style={[styles.container, focused && { backgroundColor: '#E8ECF4' }, value && { borderColor: 'black', backgroundColor: 'white' }]}>
+        <View style={[styles.container, focused && { backgroundColor: '#E8ECF4' }, value && { borderColor: '#35C2C1', backgroundColor: 'white' }]}>
             <Text style={styles.value}>
                 {value}
             </Text>
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     value: {
-        fontSize: 20,
+        fontSize: wp('4%'),
         fontWeight: 'bold',
         textAlign: 'center',
         color: '#293462'

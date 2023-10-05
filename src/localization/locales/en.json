@@ -27,8 +27,8 @@
     },
     "transaction": {
       "screen_name": "New Transaction",
-      "pay": "Base Currency",
-      "receive": "Crypto Currency",
+      "pay": "Banknote",
+      "receive": "Cryptocurrency",
       "placeholder": "Enter the amount",
       "exchange_rate": "Exchange rate",
       "calculate_text": "Calculate",

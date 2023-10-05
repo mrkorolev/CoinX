@@ -15,7 +15,7 @@ export const Calculator = () => {
     // State for the chosen currency and amount, ready to send the request and setReceiveCurrency as a result (editable={false})
     const [spendAmount, setSpendAmount] = useState('');
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
-    const [receiveAmount, setReceiveAmount] = useState('');
+    const [receiveAmount, setReceiveAmount] = useState('---');
     const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
     const screen = 'screens.home';
 
@@ -42,10 +42,10 @@ export const Calculator = () => {
                 <TransactionCurrencyPicker
                     currencyName={spendCurrency.nameShort}
                     currencyIcon={spendCurrency.icon}
-                    onPressHandler={() => {
-                        setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
-                        setReceiveAmount('---');
-                    }}
+                    // onPressHandler={() => {
+                    //     setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
+                    //     setReceiveAmount('---');
+                    // }}
                 />
 
             </View>
@@ -64,7 +64,7 @@ export const Calculator = () => {
                         }
                     }}>
                     <View style={styles.separatorIcon}>
-                        <CustomIcon icon={faRightLeft}/>
+                        <CustomIcon icon={faRightLeft} iconSize={wp('5%')} boxSize={wp('10%')} />
                     </View>
                 </TouchableOpacity>
                 <Line backgroundColor='lightgray' />
@@ -79,7 +79,6 @@ export const Calculator = () => {
                                editable={false}
                                value={receiveAmount} />
                 </View>
-
 
                 <TransactionCurrencyPicker
                     currencyName={receiveCurrency.nameShort}
@@ -98,42 +97,39 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        gap: 10,
-        marginBottom: 30
+        gap: hp('2%'),
     },
     separator: {
         width: Dimensions.get('window').width,
         justifyContent: 'center',
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 40
+        gap: wp('13%')
     },
     separatorIcon: {
         backgroundColor: '#293462',
         borderRadius: 5,
-        width: 40,
-        height: 40,
+        width: wp('5%'),
+        height: wp('5%'),
         justifyContent: 'center',
         alignItems: 'center'
     },
     pickerLayout: {
         width: Dimensions.get('window').width,
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-around',
         alignItems: 'center',
-        columnGap: 50
     },
     operationContainer: {
-        height: hp('7%'),
-        width: wp('30%'),
-        borderWidth: 1,
+        justifyContent: 'center',
         paddingHorizontal: '2%',
-        borderRadius: 5,
-        justifyContent: 'center'
+        height: hp('7%'),
+        width: wp('25%'),
+        borderWidth: 1,
+        borderRadius: 5
     },
     operationAmount: {
-
-        fontSize: 17,
+        fontSize: wp('3%'),
         color: '#293462',
         fontWeight: 'bold'
     }

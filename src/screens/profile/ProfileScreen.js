@@ -76,12 +76,12 @@ const styles = StyleSheet.create({
         gap: hp('1%')
     },
     key: {
-        fontSize: 21,
+        fontSize: wp('5%'),
         fontWeight: 'bold',
         color: '#293462'
     },
     value: {
-        fontSize: 17,
+        fontSize: wp('4%'),
         color: 'gray'
     }
 });
