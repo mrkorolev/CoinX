@@ -10,7 +10,7 @@ const authentication = 'auth/check/';
 
 const walletEndpoint = 'capital/transac/desposit/wallet';
 const commissionEndpoint = 'user/info/user-commission';
-const userProfileEndpoint = 'user/info/user-profile';
+const userProfileEndpoint = 'user/info/user-settings';
 
 
 const generateErrorDescription = (reason, message, error) => {

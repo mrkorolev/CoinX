@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     },
     inputValue: {
         flex: 1,
-        fontSize: wp('3%')
+        fontSize: wp('3.5%')
     },
     icon: {
         alignSelf: 'center',

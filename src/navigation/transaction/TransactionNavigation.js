@@ -13,21 +13,30 @@ const Stack = createNativeStackNavigator();
 // const Stack = createStackNavigator();
 
 export const TransactionNavigator = () => (
-    <Stack.Navigator screenOptions={{ gestureEnabled: false }}>
+    <Stack.Navigator screenOptions={{
+        gestureEnabled: false,
+        headerShadowVisible: false
+    }}>
         <Stack.Screen
             name={`${i18n.t('screens.transaction.screen_name')}`}
             component={TransactionScreen}
             options={{
                 headerTitle: () => <CustomHeader title={i18n.t('screens.transaction.screen_name')} />,
-                headerTitleAlign: 'center'
+                headerTitleAlign: 'center',
+                headerStyle: {
+                    backgroundColor: 'whitesmoke'
+                }
             }}/>
         <Stack.Screen
             name={`${i18n.t('screens.qr_code.screen_name')}`}
             component={QrScreen}
             options={({navigation}) => ({
                 headerTitle: () => <CustomHeader title={i18n.t('screens.qr_code.screen_name')} />,
-                headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} icon={<ChevronLeftIcon color='#293462' />} /> : undefined,
-                headerTitleAlign: 'center'
+                headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
+                headerTitleAlign: 'center',
+                headerStyle: {
+                    backgroundColor: 'whitesmoke'
+                }
             })}/>
     </Stack.Navigator>
 );

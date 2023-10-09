@@ -46,12 +46,29 @@
       "wallet_address": "Wallet Address",
       "network": "Network"
     },
+    "settings": {
+      "screen_name": "Settings",
+      "dark_mode": "Dark mode",
+      "notifications": "Notifications",
+      "terms_and_conditions": "Terms and Conditions",
+      "privacy_policy": "Privacy Policy",
+      "about": "About"
+    },
     "profile": {
       "screen_name": "Profile",
       "phone_number": "Phone number",
       "email": "Email",
       "address": "Address",
       "commission_rate": "Commission rate"
+    },
+    "terms_and_conditions": {
+      "screen_name": "Terms and Conditions"
+    },
+    "privacy_policy": {
+      "screen_name": "Privacy Policy"
+    },
+    "about": {
+      "screen_name": "About"
     }
   },
   "request_errors": {

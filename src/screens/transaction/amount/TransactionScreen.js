@@ -148,7 +148,7 @@ export const TransactionScreen = () => {
 const styles = StyleSheet.create({
     layout: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'whitesmoke',
         justifyContent: 'center',
         padding: wp('2%'),
         gap: hp('2%')

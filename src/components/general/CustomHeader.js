@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from "react-native";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 export const CustomHeader = ({ title }) => {
     return (
@@ -12,7 +13,7 @@ export const CustomHeader = ({ title }) => {
 const styles = StyleSheet.create({
     screenTitle: {
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: wp('4.5%'),
         color: '#293462'
     }
 });

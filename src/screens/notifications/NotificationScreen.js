@@ -94,7 +94,7 @@ export const NotificationScreen = () => {
           }
     ];
 
-    const notifications = 
+    const notifications =
         data.sort((a,b) => a.timestamp < b.timestamp)
             .map(element => <Notification key={element.id} notification={element}/>);
 
@@ -110,6 +110,6 @@ export const NotificationScreen = () => {
 const styles  = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'whitesmoke'
     }
 });

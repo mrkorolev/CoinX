@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     layout: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'white',
+        backgroundColor: 'whitesmoke',
         // padding: wp('5%')
     },
     separator: {

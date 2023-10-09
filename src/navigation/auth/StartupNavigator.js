@@ -31,7 +31,7 @@ export const StartupNavigator = () => (
                     gestureEnabled: false,
                     headerTitle: '',
                     headerTransparent: true,
-                    headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} icon={<ChevronLeftIcon color='#293462' />} /> : undefined,
+                    headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
                 })}/>
             <Stack.Screen
                 name='Success'

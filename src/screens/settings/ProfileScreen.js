@@ -1,8 +1,8 @@
 import React, { useState , useEffect } from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 
-import { PrimaryDetails } from '../../components/profile/PrimaryDetails';
-import { SecondaryDetails } from '../../components/profile/SecondaryDetails';
+import { PrimaryDetails } from '../../components/settings/PrimaryDetails';
+import { SecondaryDetails } from '../../components/settings/SecondaryDetails';
 import {commissionDataRequest, userProfileVerification} from "../../services/authentication";
 import { accessToken } from "../../constants";
 
@@ -12,26 +12,9 @@ import { i18n } from "../../localization/i18n";
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-export const ProfileScreen = () => {
-
-    const [name, setName] = useState('---');
-    const [phone, setPhone] = useState('---');
-    const [address, setAddress] = useState('---');
-    const [email, setEmail] = useState('---');
-    const [commission, setCommission] = useState('---');
+export const ProfileScreen = ({ route }) => {
     const screen = 'screens.profile';
-
-    // useEffect(async () => {
-    //     console.log('Re-render initiated!');
-    //     const userData = await userProfileVerification(accessToken);
-    //     const commissionData = await commissionDataRequest(accessToken);
-    //
-    //     setName(userData.name);
-    //     setPhone(userData.phone);
-    //     setEmail(userData.email);
-    //     setAddress(userData.address);
-    //     setCommission(`${commissionData} %`);
-    // }, []);
+    const { name, phone, email, address, commission } = route.params;
 
     return (
         <View style={styles.layout}>
@@ -61,7 +44,7 @@ export const ProfileScreen = () => {
 const styles = StyleSheet.create({
     layout: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: 'whitesmoke',
         padding: wp('2%')
     },
     container: {
@@ -72,7 +55,6 @@ const styles = StyleSheet.create({
     },
     group: {
         paddingBottom: hp('2.5%'),
-        backgroundColor: 'white',
         gap: hp('1%')
     },
     key: {

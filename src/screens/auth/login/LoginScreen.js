@@ -16,7 +16,7 @@ export const LoginScreen = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [protection, setProtection] = useState(true);
-    const [icon, setIcon] = useState(<EyeIcon color='#6A707C'/>);
+    const [icon, setIcon] = useState(<EyeIcon color='#6A707C' size={wp('6%')} />);
     const nav = useNavigation();
 
     const screen = 'screens.login';
@@ -40,7 +40,7 @@ export const LoginScreen = () => {
                     <TouchableOpacity
                         onPress={() => {
                         setProtection(!protection);
-                        setIcon(!protection ? <EyeIcon color='#6A707C' size={wp('2%')}/> : <EyeSlashIcon color='#6A707C' size={wp('2%')} />);}}>
+                        setIcon(!protection ? <EyeIcon color='#6A707C' size={wp('6%')}/> : <EyeSlashIcon color='#6A707C' size={wp('6%')} />);}}>
                         {icon}
                     </TouchableOpacity>
                 }

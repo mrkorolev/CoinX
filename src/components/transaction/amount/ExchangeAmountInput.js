@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     inputField: {
         textAlign: 'right',
         fontWeight: 'bold',
-        backgroundColor: 'white',
+        backgroundColor: 'whitesmoke',
         borderColor: 'black',
         borderWidth: 1,
         height: hp('7%'),

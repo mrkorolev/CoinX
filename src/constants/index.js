@@ -9,7 +9,7 @@ export const apiKey = 'hm2y1s1ZpmSmD6zi7nitfQxSIaq5TTkHcj1vfoCqHOBJx4cUHQHIVChQN
 // System data:
 export const accessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk2MjYxOTgyLCJpYXQiOjE2OTYyNTgzODIsImp0aSI6IjE3ODFiZDRhM2I2MzRiNmE4ZDE0ZDM4MGJhY2RjODRmIiwidXNlcl9pZCI6MjMsIjM2MDAiOjE2OTYyNjE5ODJ9.aB0oyJzg-duNAi9uiaiukbVyzDUHbsmNvagSUZw7bWc';
 const  user1 = {
-    username: 'Nael.alyousefi@final.edu.tr',
+    username: 'nael.alyousefi@final.edu.tr',
     password: 'admin@1234'
 }
 const user2 = {
@@ -68,4 +68,33 @@ export const cryptoCurrencies = [
         bgColor: '#fff',
         icon: faDollarSign
     }
+];
+
+import { faMoon, faBell, faFileLines } from "@fortawesome/free-regular-svg-icons";
+import { faSignal, faQuestion } from "@fortawesome/free-solid-svg-icons";
+
+export const toggles = [
+    {
+        icon: faMoon,
+        bgColor: '#5956D7'
+    },
+    {
+        icon: faBell,
+        bgColor: '#007CFC'
+    }
 ]
+
+export const settings = [
+    {
+        icon: faFileLines,
+        bgColor: '#D35554'
+    },
+    {
+        icon: faSignal,
+        bgColor: '#30CC53'
+    },
+    {
+        icon: faQuestion,
+        bgColor: '#FFD600'
+    }
+];
