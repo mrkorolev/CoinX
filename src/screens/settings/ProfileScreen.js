@@ -11,8 +11,9 @@ import { i18n } from "../../localization/i18n";
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {CustomButton} from "../../components/general/CustomButton";
 
-export const ProfileScreen = ({ route }) => {
+export const ProfileScreen = ({ route, navigation }) => {
     const screen = 'screens.profile';
     const { name, phone, email, address, commission } = route.params;
 
@@ -36,6 +37,9 @@ export const ProfileScreen = ({ route }) => {
                     <Text style={styles.key}>{i18n.t(`${screen}.commission_rate`)}:</Text>
                     <Text style={styles.value}>{commission}</Text>
                 </View>
+
+                {/* CRUCIAL CHANGE REQUIRED - the auth flow model is not decided upon! */}
+                <CustomButton text='Logout' onPress={() => navigation.navigate('Login')} />
             </View>
         </View>
     );
@@ -49,21 +53,20 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        paddingHorizontal: wp('13%'),
+        paddingHorizontal: wp('7%'),
         paddingVertical: hp('2%'),
         marginBottom: hp('5%')
     },
     group: {
-        paddingBottom: hp('2.5%'),
-        gap: hp('1%')
+        paddingBottom: hp('1.5%'),
     },
     key: {
-        fontSize: wp('5%'),
+        fontSize: wp('4%'),
         fontWeight: 'bold',
         color: '#293462'
     },
     value: {
-        fontSize: wp('4%'),
+        fontSize: wp('3.5%'),
         color: 'gray'
     }
 });

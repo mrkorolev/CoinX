@@ -14,9 +14,9 @@ export const CustomUserIcon = ({ size, customStyle }) => {
 
 const styles = StyleSheet.create({
     iconPlaceholder: {
-        width: wp('40%'),
-        height: wp('40%'),
-        borderRadius: wp('40%') * 50,
+        width: wp('35%'),
+        height: wp('35%'),
+        borderRadius: wp('35%') * 50,
         backgroundColor: 'slategray',
         marginBottom: hp('2%'),
         marginTop: hp('4%'),

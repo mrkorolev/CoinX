@@ -108,13 +108,13 @@ export const TransactionScreen = () => {
                                     const walletData = await walletDataRequest(accessToken, `${finalSpendAmount * (1 + parseFloat(commission)/100)}`, spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
 
                                     // DEBUG:
-                                    nav.navigate(i18n.t('screens.qr_code.screen_name'), {
+                                    nav.navigate('QR', {
                                         walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfo',
                                         networkData: 'Tron (TRC20)'
                                     });
 
                                     // if(walletData){
-                                    //     nav.navigate(i18n.t('screens.qr_code.screen_name'), {
+                                    //     nav.navigate('QR', {
                                     //         // walletData: walletData.data.address,
                                     //         walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfoqwehf',
                                     //         networkData: 'Tron (TRC20)'
@@ -151,6 +151,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'whitesmoke',
         justifyContent: 'center',
         padding: wp('2%'),
+        paddingVertical: hp('1%'),
+        paddingHorizontal: wp('5%'),
         gap: hp('2%')
     },
     exchangeRateText: {

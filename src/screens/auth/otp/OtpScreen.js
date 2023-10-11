@@ -40,6 +40,8 @@ export const OtpScreen = () => {
                     //     console.log('Verification process passed! Proceed to main navigator!');
                     //     nav.navigate('Success');
                     // }
+
+                    // DEBUG
                     nav.navigate('Success');
                 }} />
 

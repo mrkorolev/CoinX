@@ -5,26 +5,43 @@ import { NotificationScreen } from '../../screens/notifications/NotificationScre
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { showNotifications } from "../../services/navigation";
 import { i18n } from "../../localization/i18n";
-import { Text, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Platform, StyleSheet } from 'react-native';
 import { ChevronLeftIcon } from "react-native-heroicons/solid";
 import { CustomHeader } from "../../components/general/CustomHeader";
-import { NotificationAlert } from "../../components/general/NotificationAlert";
+import { CustomHeaderIcon } from "../../components/general/CustomHeaderIcon";
 import { CustomBackButton } from "../../components/general/CustomBackButton";
+import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import { faHeadset } from "@fortawesome/free-solid-svg-icons";
+import {widthPercentageToDP as wp} from "react-native-responsive-screen";
+import {faBell} from "@fortawesome/free-regular-svg-icons";
 
 const Stack = createNativeStackNavigator();
 // const Stack = createStackNavigator();
 
 export const HomeNavigator = () => (
     <Stack.Navigator screenOptions={{
-        gestureEnabled: false,
+        // gestureEnabled: false,
         headerShadowVisible: false
     }}>
         <Stack.Screen
-            name={`${i18n.t('screens.home.screen_name')}`}
+            name={`HOME`}
             component={ HomeScreen }
             options={({navigation}) => ({
                 headerTitle: () => <CustomHeader title={i18n.t('screens.home.screen_name')} />,
-                headerRight: () => <NotificationAlert onPressHandler={() => navigation.navigate(i18n.t('screens.notifications.screen_name'))} hasUnread={true}  />,
+                headerRight: () => (
+                    <View style={styles.headerRightLayout}>
+                        <CustomHeaderIcon
+                            icon={faHeadset}
+                            onPressHandler={() =>
+                                // navigation.navigate('CUSTOMER_SUPPORT')
+                                alert('Support requested!')} />
+                        <CustomHeaderIcon
+                            isNotifiable
+                            hasUnread
+                            icon={faBell}
+                            onPressHandler={() => navigation.navigate('NOTIFICATIONS')}  />
+                    </View>
+                ),
                 headerLeft: () => {},
                 headerTitleAlign: 'center',
                 headerStyle: {
@@ -32,7 +49,7 @@ export const HomeNavigator = () => (
                 }
             })}/>
         <Stack.Screen
-            name={`${i18n.t('screens.notifications.screen_name')}`}
+            name={`NOTIFICATIONS`}
             component={ NotificationScreen }
             options={({navigation}) => ({
                 headerTitle: () => <CustomHeader title={i18n.t('screens.notifications.screen_name')} />,
@@ -44,3 +61,11 @@ export const HomeNavigator = () => (
             })}/>
     </Stack.Navigator>
 );
+
+const styles = StyleSheet.create({
+    headerRightLayout: {
+        flexDirection: 'row',
+        gap: wp('6%'),
+        paddingRight: wp('2%')
+    }
+});

@@ -8,7 +8,7 @@ import {CustomUserIcon} from "./CustomUserIcon";
 export const PrimaryDetails = ({ name }) => {
     return (
         <View style={styles.layout}>
-            <CustomUserIcon size={wp('20%')} />
+            <CustomUserIcon size={wp('18%')} />
             <Text style={styles.title}>{name}</Text>
         </View>
     );
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        fontSize: wp('7%'),
+        fontSize: wp('6%'),
         fontWeight: 'bold',
         color: '#293462'
     }

@@ -2,15 +2,15 @@ import axios from "axios";
 import { Alert } from 'react-native';
 import { i18n } from "../localization/i18n";
 
-const baseTestUrl = 'https://payone.com.tr/';
-// const baseTestUrl = 'http://192.168.5.5:25000/';
+const baseUrl = 'https://payone.com.tr/';
+// const baseUrl = 'http://192.168.5.5:25000/';
 
 const apiVersion = 'api/v1/';
 const authentication = 'auth/check/';
 
 const walletEndpoint = 'capital/transac/desposit/wallet';
 const commissionEndpoint = 'user/info/user-commission';
-const userProfileEndpoint = 'user/info/user-settings';
+const userProfileEndpoint = 'user/info/user-profile';
 
 
 const generateErrorDescription = (reason, message, error) => {
@@ -23,7 +23,7 @@ export const authenticateUser = async (username, password) => {
     try{
         const authenticationResponse = await axios({
             method: 'post',
-            url: `${baseTestUrl}${apiVersion}${authentication}user`,
+            url: `${baseUrl}${apiVersion}${authentication}user`,
             data: {
                 username: username,
                 password: password
@@ -47,7 +47,7 @@ export const otpVerification = async (accessToken, providedCode) => {
     try{
         const otpResponse = await axios({
             method: 'post',
-            url: `${baseTestUrl}${apiVersion}${authentication}2fa-otp`,
+            url: `${baseUrl}${apiVersion}${authentication}2fa-otp`,
             data: {
                 otp: providedCode
             },
@@ -71,7 +71,7 @@ export const walletDataRequest = async (accessToken, spendAmount, spendCurrency,
         // Wallet request for QR generation:
         const walletResponse = await axios({
             method: 'post',
-            url: `${baseTestUrl}${apiVersion}${walletEndpoint}`,
+            url: `${baseUrl}${apiVersion}${walletEndpoint}`,
             data: {
                 expected_amount: spendAmount,
                 expected_crypto: receiveAmount,
@@ -99,7 +99,7 @@ export const commissionDataRequest = async (accessToken) => {
     try{
         const commissionResponse = await axios({
             method: 'get',
-            url: `${baseTestUrl}${apiVersion}${commissionEndpoint}`,
+            url: `${baseUrl}${apiVersion}${commissionEndpoint}`,
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${accessToken}`
@@ -119,7 +119,7 @@ export const userProfileVerification = async (accessToken) => {
     try{
         const userProfileResponse = await axios({
             method: 'get',
-            url: `${baseTestUrl}${apiVersion}${userProfileEndpoint}`,
+            url: `${baseUrl}${apiVersion}${userProfileEndpoint}`,
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${accessToken}`

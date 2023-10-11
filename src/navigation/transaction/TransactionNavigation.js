@@ -14,11 +14,11 @@ const Stack = createNativeStackNavigator();
 
 export const TransactionNavigator = () => (
     <Stack.Navigator screenOptions={{
-        gestureEnabled: false,
+        // gestureEnabled: false,
         headerShadowVisible: false
     }}>
         <Stack.Screen
-            name={`${i18n.t('screens.transaction.screen_name')}`}
+            name='TRANSACTION'
             component={TransactionScreen}
             options={{
                 headerTitle: () => <CustomHeader title={i18n.t('screens.transaction.screen_name')} />,
@@ -28,7 +28,7 @@ export const TransactionNavigator = () => (
                 }
             }}/>
         <Stack.Screen
-            name={`${i18n.t('screens.qr_code.screen_name')}`}
+            name='QR'
             component={QrScreen}
             options={({navigation}) => ({
                 headerTitle: () => <CustomHeader title={i18n.t('screens.qr_code.screen_name')} />,

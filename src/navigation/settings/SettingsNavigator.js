@@ -6,7 +6,7 @@ import { showNotifications } from "../../services/navigation";
 
 import {i18n} from "../../localization/i18n";
 import { CustomHeader } from "../../components/general/CustomHeader";
-import {SettingScreen} from "../../screens/settings/SettingScreen";
+import {SettingsScreen} from "../../screens/settings/SettingsScreen";
 import {TermsAndConditionsScreen} from "../../screens/settings/TermsAndConditionsScreen";
 import {PrivacyPolicyScreen} from "../../screens/settings/PrivacyPolicyScreen";
 import {CustomBackButton} from "../../components/general/CustomBackButton";
@@ -19,13 +19,13 @@ const Stack = createNativeStackNavigator();
 // First screen is to become a navigator screen (subsequent navigation to other screens is to follow)
 export const SettingsNavigator = () => (
     <Stack.Navigator screenOptions={{
-        gestureEnabled: false,
+        // gestureEnabled: false,
         headerShadowVisible: false,
         headerLeft: () => {},
     }}>
         <Stack.Screen
-            name={`${i18n.t('screens.settings.screen_name')}`}
-            component={SettingScreen}
+            name='SETTINGS'
+            component={SettingsScreen}
             options={{
                 headerTitle: () => <CustomHeader title={i18n.t('screens.settings.screen_name')} />,
                 headerTitleAlign: 'center',
@@ -34,7 +34,7 @@ export const SettingsNavigator = () => (
                 }
             }}/>
         <Stack.Screen
-            name={`${i18n.t('screens.profile.screen_name')}`}
+            name='PROFILE'
             component={ProfileScreen}
             options={({navigation}) => ({
                 headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
@@ -46,7 +46,7 @@ export const SettingsNavigator = () => (
 
             })}/>
         <Stack.Screen
-            name={`${i18n.t('screens.terms_and_conditions.screen_name')}`}
+            name='TERMS_AND_CONDITIONS'
             component={TermsAndConditionsScreen}
             options={({navigation}) => ({
                 headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
@@ -57,7 +57,7 @@ export const SettingsNavigator = () => (
                 },
             })}/>
         <Stack.Screen
-            name={`${i18n.t('screens.privacy_policy.screen_name')}`}
+            name='PRIVACY_POLICY'
             component={PrivacyPolicyScreen}
             options={({navigation}) => ({
                 headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
@@ -68,7 +68,7 @@ export const SettingsNavigator = () => (
                 },
             })}/>
         <Stack.Screen
-            name={`${i18n.t('screens.about.screen_name')}`}
+            name='ABOUT'
             component={AboutScreen}
             options={({navigation}) => ({
                 headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,

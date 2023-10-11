@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native';
 export const CustomIcon = ({ icon, iconSize, boxSize }) => {
     return (
         <View style={[styles.layout, { width: boxSize, height: boxSize }]}>
-            <FontAwesomeIcon icon={icon} color='#fff' size={iconSize} spin />
+            <FontAwesomeIcon icon={icon} color={'white'} size={iconSize} spin />
         </View>
     );
 }

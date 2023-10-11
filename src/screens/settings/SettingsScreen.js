@@ -1,17 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {Appearance, StyleSheet, Text, View} from 'react-native';
 
 import {faChevronRight} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import React, {useState} from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import React, { useState, useEffect } from "react";
 import { CustomToggle } from "../../components/settings/CustomToggle";
-import {Setting} from "../../components/settings/Setting";
+import { Setting } from "../../components/settings/Setting";
 
-import { settings, toggles } from "../../constants";
+import {accessToken, settings, toggles} from "../../constants";
 import { i18n } from "../../localization/i18n";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import {CustomUserIcon} from "../../components/settings/CustomUserIcon";
+import {commissionDataRequest, userProfileVerification} from "../../services/authentication";
 
-export const SettingScreen = ({navigation}) => {
+export const SettingsScreen = ({navigation}) => {
 
     const [name, setName] = useState('---');
     const [phone, setPhone] = useState('---');
@@ -19,17 +20,18 @@ export const SettingScreen = ({navigation}) => {
     const [email, setEmail] = useState('---');
     const [commission, setCommission] = useState('---');
 
-    // useEffect(async () => {
-    //     console.log('Re-render initiated!');
-    //     const userData = await userProfileVerification(accessToken);
-    //     const commissionData = await commissionDataRequest(accessToken);
-    //
-    //     setName(userData.name);
-    //     setPhone(userData.phone);
-    //     setEmail(userData.email);
-    //     setAddress(userData.address);
-    //     setCommission(`${commissionData} %`);
-    // }, []);
+    useEffect(async () => {
+        console.log('Re-render initiated!');
+        const userData = await userProfileVerification(accessToken);
+        if(!userData) return;
+        const commissionData = await commissionDataRequest(accessToken);
+
+        setName(userData.name);
+        setPhone(userData.phone);
+        setEmail(userData.email);
+        setAddress(userData.address);
+        setCommission(`${commissionData} %`);
+    }, []);
 
     const screen = 'screens.settings';
 
@@ -48,7 +50,7 @@ export const SettingScreen = ({navigation}) => {
                         </View>
                     )}
                     component={<FontAwesomeIcon icon={faChevronRight} color='gray' />}
-                    onPressHandler={() => navigation.navigate(i18n.t('screens.profile.screen_name'), {
+                    onPressHandler={() => navigation.navigate('PROFILE', {
                         name: name,
                         phone: phone,
                         address: address,
@@ -75,7 +77,7 @@ export const SettingScreen = ({navigation}) => {
                     bgColor={toggles[0].bgColor} />
                 <Setting
                     title={<Text style={styles.settingTitle}>{i18n.t(`${screen}.notifications`)}</Text>}
-                    component={<CustomToggle />}
+                    component={<CustomToggle   />}
                     icon={<FontAwesomeIcon icon={toggles[1].icon} color={"white"} size={wp('4%')} />}
                     bgColor={toggles[1].bgColor} />
             </View>
@@ -84,7 +86,7 @@ export const SettingScreen = ({navigation}) => {
                 <Setting
                     title={<Text style={styles.settingTitle}>{i18n.t(`${screen}.terms_and_conditions`)}</Text>}
                     component={<FontAwesomeIcon icon={faChevronRight} color='gray' />}
-                    onPressHandler={() => navigation.navigate(i18n.t('screens.terms_and_conditions.screen_name'))}
+                    onPressHandler={() => navigation.navigate('TERMS_AND_CONDITIONS')}
                     icon={<FontAwesomeIcon icon={settings[0].icon} color={"white"} size={wp('4%')} />}
                     bgColor={settings[0].bgColor}
                     pressable
@@ -92,14 +94,14 @@ export const SettingScreen = ({navigation}) => {
                 <Setting
                     title={<Text style={styles.settingTitle}>{i18n.t(`${screen}.privacy_policy`)}</Text>}
                     component={<FontAwesomeIcon icon={faChevronRight} color='gray' />}
-                    onPressHandler={() => navigation.navigate(i18n.t('screens.privacy_policy.screen_name'))}
+                    onPressHandler={() => navigation.navigate('PRIVACY_POLICY')}
                     icon={<FontAwesomeIcon icon={settings[1].icon} color={"white"} size={wp('4%')} />}
                     bgColor={settings[1].bgColor}
                     pressable />
                 <Setting
                     title={<Text style={styles.settingTitle}>{i18n.t(`${screen}.about`)}</Text>}
                     component={<FontAwesomeIcon icon={faChevronRight} color='gray' />}
-                    onPressHandler={() => navigation.navigate(i18n.t('screens.about.screen_name'))}
+                    onPressHandler={() => navigation.navigate('ABOUT')}
                     icon={<FontAwesomeIcon icon={settings[2].icon} color={"white"} size={wp('4%')} />}
                     bgColor={settings[2].bgColor}
                     pressable />

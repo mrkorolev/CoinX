@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     rowContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: wp('1%')
+        gap: wp('2%')
     },
     headerText: {
         fontWeight: 'bold',
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderWidth: 1,
         height: hp('7%'),
-        width: wp('70%'),
-        paddingRight: 15,
+        width: wp('63%'),
+        paddingRight: wp('3%'),
         borderRadius: 5
     }
 });
