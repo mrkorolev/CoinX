@@ -5,7 +5,7 @@ import { TransactionCurrencyPicker } from '../../general/TransactionCurrencyPick
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-export const ExchangeAmountInput = ({ operation, chosenCurrencyName, chosenCurrencyIcon, onPressHandler, onChangeAmount, placeholder, isEditable, value, textColor }) => {
+export const ExchangeAmountInput = ({ operation, chosenCurrencyName, isNetwork, chosenCurrencyIcon, onPressHandler, onChangeAmount, placeholder, isEditable, value, textColor }) => {
 
     return (
         <View>
@@ -18,18 +18,21 @@ export const ExchangeAmountInput = ({ operation, chosenCurrencyName, chosenCurre
                     onPressHandler={onPressHandler}
                 />
 
-                <TextInput
-                    style={[styles.inputField, {color: textColor}]}
-                    placeholder={placeholder ? placeholder : ''}
-                    fontSize={wp('3.5%')}
-                    keyboardType='number-pad'
-                    returnKeyType='done'
-                    onChangeText={onChangeAmount}
-                    value={value}
-                    editable={isEditable}
-                    maxLength={10}
-                    selectTextOnFocus
-                />
+                { isNetwork ? null :
+                    <TextInput
+                        style={[styles.inputField, {color: textColor}]}
+                        placeholder={placeholder ? placeholder : ''}
+                        fontSize={wp('3.5%')}
+                        keyboardType='number-pad'
+                        returnKeyType='done'
+                        onChangeText={onChangeAmount}
+                        value={value}
+                        editable={isEditable}
+                        maxLength={10}
+                        selectTextOnFocus
+                    />
+                }
+
             </View>
         </View>
     );

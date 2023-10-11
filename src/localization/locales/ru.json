@@ -28,6 +28,7 @@
     "transaction": {
       "screen_name": "Новый Депозит",
       "pay": "Базовая Валюта",
+      "network": "Сеть",
       "receive": "Крипто Валюта",
       "placeholder": "Введите сумму для оплаты",
       "exchange_rate": "Курс Обмена",

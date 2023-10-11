@@ -10,31 +10,32 @@ import { i18n } from "../../../localization/i18n";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export const QrScreen = ({ route }) => {
-    const [wallet, setWallet] = useState('');
+    const [walletAddress, setWalletAddress] = useState('');
     const [network, setNetwork] = useState('');
+
     const { walletData, networkData } = route.params;
     const screen = 'screens.qr_code';
 
     useEffect(() => {
-        setWallet(walletData);
+        setWalletAddress(walletData);
         setNetwork(networkData);
     }, []);
 
     return (
         <View style={styles.layout}>
             <QrCode
-                wallet={wallet}
+                wallet={walletAddress}
                 warning={i18n.t(`${screen}.warning`)} />
 
             <View style={styles.separator} />
 
             <TransactionDetail
                 parameter={i18n.t(`${screen}.wallet_address`)}
-                value={wallet}
+                value={walletAddress}
                 icon={<ClipboardDocumentCheckIcon color='#293462' />}
                 onPressHandler={async () => {
-                    await Clipboard.setStringAsync(wallet);
-                    console.log('Clipboard set to: ' + wallet);
+                    await Clipboard.setStringAsync(walletAddress);
+                    console.log('Clipboard set to: ' + walletAddress);
                 }}
                 disabled={false} />
 

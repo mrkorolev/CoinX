@@ -2,13 +2,13 @@ import axios from "axios";
 import { Alert } from 'react-native';
 import { i18n } from "../localization/i18n";
 
-const baseUrl = 'https://payone.com.tr/';
-// const baseUrl = 'http://192.168.5.5:25000/';
+// const baseUrl = 'https://payone.com.tr/';
+const baseUrl = 'http://192.168.5.5:25000/';
 
 const apiVersion = 'api/v1/';
 const authentication = 'auth/check/';
 
-const walletEndpoint = 'capital/transac/desposit/wallet';
+const walletEndpoint = 'capital/transac/deposit/wallet';
 const commissionEndpoint = 'user/info/user-commission';
 const userProfileEndpoint = 'user/info/user-profile';
 
@@ -65,7 +65,7 @@ export const otpVerification = async (accessToken, providedCode) => {
     return null;
 }
 
-export const walletDataRequest = async (accessToken, spendAmount, spendCurrency, receiveAmount, receiveCurrency, exchangeRate, commission) => {
+export const walletDataRequest = async (accessToken, spendAmount, spendCurrency, receiveAmount, receiveCurrency, exchangeRate, commission, network) => {
     const request_error = 'request_errors.wallet_request';
     try{
         // Wallet request for QR generation:
@@ -78,7 +78,8 @@ export const walletDataRequest = async (accessToken, spendAmount, spendCurrency,
                 banknote: spendCurrency,
                 exchange_rate: exchangeRate,
                 commission_rate: commission,
-                coin: receiveCurrency
+                coin: receiveCurrency,
+                network: network
             },
             headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -87,7 +88,7 @@ export const walletDataRequest = async (accessToken, spendAmount, spendCurrency,
         });
         console.log(JSON.stringify(walletResponse.data, undefined, 4));
 
-        return walletResponse;
+        return walletResponse.data;
     }catch(error){
         generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }

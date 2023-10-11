@@ -19,6 +19,8 @@ export const SettingsScreen = ({navigation}) => {
     const [address, setAddress] = useState('---');
     const [email, setEmail] = useState('---');
     const [commission, setCommission] = useState('---');
+    const [darkMode, setDarkMode] = useState(Appearance.getColorScheme() === 'dark');
+    const [enablePush, setEnablePush] = useState(false);
 
     useEffect(async () => {
         console.log('Re-render initiated!');
@@ -72,12 +74,20 @@ export const SettingsScreen = ({navigation}) => {
             <View style={styles.settingsContainer}>
                 <Setting
                     title={<Text style={styles.settingTitle}>{i18n.t(`${screen}.dark_mode`)}</Text>}
-                    component={<CustomToggle />}
+                    component={<CustomToggle  value={darkMode} onValueToggle={() => {
+                        setDarkMode((prev) => !prev);
+                        console.log("Dark mode value just toggled!");
+                    }}
+                    />}
                     icon={<FontAwesomeIcon icon={toggles[0].icon} color={"white"} size={wp('4%')} />}
                     bgColor={toggles[0].bgColor} />
                 <Setting
                     title={<Text style={styles.settingTitle}>{i18n.t(`${screen}.notifications`)}</Text>}
-                    component={<CustomToggle   />}
+                    component={<CustomToggle value={enablePush} onValueToggle={() => {
+                        setEnablePush((prev) => !prev);
+                        console.log("Push notifications value just toggled!");
+                    }}
+                    />}
                     icon={<FontAwesomeIcon icon={toggles[1].icon} color={"white"} size={wp('4%')} />}
                     bgColor={toggles[1].bgColor} />
             </View>

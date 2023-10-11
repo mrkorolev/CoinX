@@ -4,13 +4,14 @@ import { ExchangeAmountInput } from '../../../components/transaction/amount/Exch
 import { ExchangeRate } from '../../../components/transaction/amount/ExchangeRate';
 import { CustomButton } from '../../../components/general/CustomButton';
 import { useNavigation } from '@react-navigation/native';
-import { accessToken, baseCurrencies, cryptoCurrencies } from "../../../constants/index";
+import {accessToken, availableNetworks, baseCurrencies, cryptoCurrencies} from "../../../constants/index";
 import { endpointPriceData } from "../../../services/binanceApiCalls";
 import { commissionDataRequest, walletDataRequest } from "../../../services/authentication";
 import { i18n } from "../../../localization/i18n";
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {TransactionCurrencyPicker} from "../../../components/general/TransactionCurrencyPicker";
 
 export const TransactionScreen = () => {
 
@@ -22,6 +23,8 @@ export const TransactionScreen = () => {
     const [rate, setRate] = useState(null);
     const [commission, setCommission] = useState('');
     const [readyToProceed, setReadyToProceed] = useState(false);
+    const [network, setNetwork] = useState(availableNetworks[0]);
+
     const screen = 'screens.transaction';
 
     useEffect(() => {
@@ -65,6 +68,20 @@ export const TransactionScreen = () => {
                 isEditable={true} />
 
             <ExchangeAmountInput
+                operation={i18n.t(`${screen}.network`)}
+                chosenCurrencyName={network.networkCode}
+                chosenCurrencyIcon={network.icon}
+                onPressHandler={ () => {
+                    setNetwork(availableNetworks[(availableNetworks.indexOf(network) + 1) % availableNetworks.length]);
+                    setReceiveAmount(null);
+                    setReadyToProceed(null);
+                }}
+                isEditable={false}
+                value={network.networkName}
+                textColor='gray'
+            />
+
+            <ExchangeAmountInput
                 operation={i18n.t(`${screen}.receive`)}
                 chosenCurrencyName={receiveCurrency.nameShort}
                 chosenCurrencyIcon={receiveCurrency.icon}
@@ -76,6 +93,8 @@ export const TransactionScreen = () => {
                 value={receiveAmount}
                 textColor='#293462'
                 isEditable={false} />
+
+
 
             { rate ?
                 <ExchangeRate style={styles.exchangeRateText} from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :
@@ -105,21 +124,13 @@ export const TransactionScreen = () => {
                                 onPress: async () => {
                                     const finalSpendAmount = parseFloat(spendAmount.replaceAll(',', ''));
                                     transactionDebug(finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
-                                    const walletData = await walletDataRequest(accessToken, `${finalSpendAmount * (1 + parseFloat(commission)/100)}`, spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
+                                    const walletData = await walletDataRequest(accessToken, `${finalSpendAmount * (1 + parseFloat(commission)/100)}`, spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
 
                                     // DEBUG:
                                     nav.navigate('QR', {
-                                        walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfo',
-                                        networkData: 'Tron (TRC20)'
+                                        walletData: walletData.address,
+                                        networkData: `${network.networkName} (${network.networkCode})`
                                     });
-
-                                    // if(walletData){
-                                    //     nav.navigate('QR', {
-                                    //         // walletData: walletData.data.address,
-                                    //         walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfoqwehf',
-                                    //         networkData: 'Tron (TRC20)'
-                                    //     });
-                                    // }
                                 }
                             }]);
                     } else {
@@ -132,6 +143,7 @@ export const TransactionScreen = () => {
                         setReceiveAmount(amountToReceive);
                         setRate(pricePerUnit);
                         setReadyToProceed(true);
+                        console.log(network.networkCode);
 
                         // DEBUG:
                         // nav.navigate(i18n.t('screens.qr_code.screen_name'), {

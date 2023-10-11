@@ -33,10 +33,10 @@ export const ExchangeRatesData = () => {
             nameLong={coinObject.nameLong}
             lastPrice={coinObject.lastPrice === '---' ?
                 coinObject.lastPrice :
-                `${parseFloat(coinObject.lastPrice).toFixed(2)}`}
+                `${parseFloat(coinObject.lastPrice).toFixed(4)}`}
             priceChangePercent={coinObject.priceChangePercent === '---' ?
                 coinObject.priceChangePercent :
-                `${parseFloat(coinObject.priceChangePercent) >= 0 ? '+' : ''}${parseFloat(coinObject.priceChangePercent).toFixed(2)}`}
+                `${parseFloat(coinObject.priceChangePercent) >= 0 ? '+' : ''}${parseFloat(coinObject.priceChangePercent).toFixed(3)}`}
             bgColor={coinObject.bgColor}
             coinIcon={coinObject.icon} />);
     }

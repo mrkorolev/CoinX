@@ -1,15 +1,23 @@
-import {faBitcoinSign, faTurkishLiraSign} from '@fortawesome/free-solid-svg-icons';
-import { faEthereum } from '@fortawesome/free-brands-svg-icons';
+import {
+    faBitcoinSign,
+    faCircleNodes,
+    faEthernet,
+    faGlobe,
+    faServer,
+    faTurkishLiraSign
+} from '@fortawesome/free-solid-svg-icons';
+import {faEthereum, faHive} from '@fortawesome/free-brands-svg-icons';
 import { faLitecoinSign } from '@fortawesome/free-solid-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { faMoon, faBell, faFileLines } from "@fortawesome/free-regular-svg-icons";
 import { faSignal, faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faNetworkWired } from "@fortawesome/free-solid-svg-icons";
 
 // Binance API Key
 export const apiKey = 'hm2y1s1ZpmSmD6zi7nitfQxSIaq5TTkHcj1vfoCqHOBJx4cUHQHIVChQNgqu2lxG';
 
 // System data:
-export const accessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk2OTQ4ODQ4LCJpYXQiOjE2OTY5NDUyNDgsImp0aSI6IjBjMDdjODg3YWJhNTRjYTE5YWQ2YWEwOWNkOWJhYmEyIiwidXNlcl9pZCI6MjMsIjM2MDAiOjE2OTY5NDg4NDh9.mBmdoZcaWpk3m0pO55WNPa44UNkKYibYacw1sdRCK-4';
+export const accessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk3MDM3NTA5LCJpYXQiOjE2OTcwMzM5MDksImp0aSI6ImVjY2E3ZjhiYzMzNTQzZDdhMDBiMmI4OTBlOWZhYjUyIiwidXNlcl9pZCI6MjMsIjM2MDAiOjE2OTcwMzc1MDl9.Ow5kPhjW4awf--bZdC06df4rig6W5PUvo_V9dJLlcbE';
 const  user1 = {
     username: 'nael.alyousefi@final.edu.tr',
     password: 'admin@1234'
@@ -55,8 +63,8 @@ export const cryptoCurrencies = [
         icon: faBitcoinSign
     },
     {
-        nameShort: 'LTC',
-        nameLong: 'Litecoin',
+        nameShort: 'TRX',
+        nameLong: 'Tron',
         lastPrice:'---',
         priceChangePercent: '---',
         bgColor: '#F0F4FF',
@@ -69,6 +77,24 @@ export const cryptoCurrencies = [
         priceChangePercent: '---',
         bgColor: '#fff',
         icon: faDollarSign
+    }
+];
+
+export const availableNetworks = [
+    {
+        networkCode: 'TRC20',
+        networkName: 'Tron',
+        icon: faHive
+    },
+    {
+        networkCode: 'BTC',
+        networkName: 'Bitcoin',
+        icon: faHive
+    },
+    {
+        networkCode: 'ECR20',
+        networkName: 'Ethereum',
+        icon: faHive
     }
 ];
 
