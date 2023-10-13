@@ -2,7 +2,7 @@ import {Appearance, StyleSheet, Text, View} from 'react-native';
 
 import {faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { CustomToggle } from "../../components/settings/CustomToggle";
 import { Setting } from "../../components/settings/Setting";
 
@@ -11,15 +11,22 @@ import { i18n } from "../../localization/i18n";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import {CustomUserIcon} from "../../components/settings/CustomUserIcon";
 import {commissionDataRequest, userProfileVerification} from "../../services/authentication";
+import {AppContext} from "../../global/AppContext";
+import {appTheme} from "../../config/theme";
 
 export const SettingsScreen = ({navigation}) => {
+
+    const {
+        themeName, setThemeName,
+        theme, setTheme,
+        pushEnabled, setPushEnabled } = useContext(AppContext);
+    const screen = 'screens.settings';
 
     const [name, setName] = useState('---');
     const [phone, setPhone] = useState('---');
     const [address, setAddress] = useState('---');
     const [email, setEmail] = useState('---');
     const [commission, setCommission] = useState('---');
-    const [darkMode, setDarkMode] = useState(Appearance.getColorScheme() === 'dark');
     const [enablePush, setEnablePush] = useState(false);
 
     useEffect(async () => {
@@ -35,23 +42,24 @@ export const SettingsScreen = ({navigation}) => {
         setCommission(`${commissionData} %`);
     }, []);
 
-    const screen = 'screens.settings';
+
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: theme.screenBgColor }]}>
 
             <View style={[styles.settingsContainer, {
                 paddingLeft: wp('2%'),
+                backgroundColor: theme.settingGroupBgColor
             }]}>
                 <Setting
                     customStyle={{ paddingLeft: wp('5%'), gap: wp('9%'), marginVertical: hp('2.5%') }}
                     title={(
                         <View style={styles.profileSetting}>
-                            <Text style={styles.profileTitle}>{name}</Text>
-                            <Text style={styles.settingTitle}>Arekan Teknoloji</Text>
+                            <Text style={[styles.profileTitle, { color: theme.inputColor }]}>{name}</Text>
+                            <Text style={[styles.settingTitle, { color: theme.inputColor }]}>Arekan Teknoloji</Text>
                         </View>
                     )}
-                    component={<FontAwesomeIcon icon={faChevronRight} color='gray' />}
+                    component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                     onPressHandler={() => navigation.navigate('PROFILE', {
                         name: name,
                         phone: phone,
@@ -71,19 +79,25 @@ export const SettingsScreen = ({navigation}) => {
                     pressable />
             </View>
 
-            <View style={styles.settingsContainer}>
+            <View style={[styles.settingsContainer, { backgroundColor: theme.settingGroupBgColor}]}>
                 <Setting
-                    title={<Text style={styles.settingTitle}>{i18n.t(`${screen}.dark_mode`)}</Text>}
-                    component={<CustomToggle  value={darkMode} onValueToggle={() => {
-                        setDarkMode((prev) => !prev);
-                        console.log("Dark mode value just toggled!");
+                    title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.dark_mode`)}</Text>}
+                    component={<CustomToggle
+                        value={themeName === 'dark'}
+                        onValueToggle={() => {
+                            setTheme(() => themeName === 'light' ? appTheme.dark : appTheme.light);
+                            setThemeName((prev) => prev === 'light' ? 'dark' : 'light');
+                            console.log("Dark mode just turned on!!!");
+
                     }}
                     />}
                     icon={<FontAwesomeIcon icon={toggles[0].icon} color={"white"} size={wp('4%')} />}
                     bgColor={toggles[0].bgColor} />
                 <Setting
-                    title={<Text style={styles.settingTitle}>{i18n.t(`${screen}.notifications`)}</Text>}
-                    component={<CustomToggle value={enablePush} onValueToggle={() => {
+                    title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.notifications`)}</Text>}
+                    component={<CustomToggle
+                        value={enablePush}
+                        onValueToggle={() => {
                         setEnablePush((prev) => !prev);
                         console.log("Push notifications value just toggled!");
                     }}
@@ -92,25 +106,25 @@ export const SettingsScreen = ({navigation}) => {
                     bgColor={toggles[1].bgColor} />
             </View>
 
-            <View style={styles.settingsContainer}>
+            <View style={[styles.settingsContainer, { backgroundColor: theme.settingGroupBgColor} ]}>
                 <Setting
-                    title={<Text style={styles.settingTitle}>{i18n.t(`${screen}.terms_and_conditions`)}</Text>}
-                    component={<FontAwesomeIcon icon={faChevronRight} color='gray' />}
+                    title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.terms_and_conditions`)}</Text>}
+                    component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                     onPressHandler={() => navigation.navigate('TERMS_AND_CONDITIONS')}
                     icon={<FontAwesomeIcon icon={settings[0].icon} color={"white"} size={wp('4%')} />}
                     bgColor={settings[0].bgColor}
                     pressable
                 />
                 <Setting
-                    title={<Text style={styles.settingTitle}>{i18n.t(`${screen}.privacy_policy`)}</Text>}
-                    component={<FontAwesomeIcon icon={faChevronRight} color='gray' />}
+                    title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.privacy_policy`)}</Text>}
+                    component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                     onPressHandler={() => navigation.navigate('PRIVACY_POLICY')}
                     icon={<FontAwesomeIcon icon={settings[1].icon} color={"white"} size={wp('4%')} />}
                     bgColor={settings[1].bgColor}
                     pressable />
                 <Setting
-                    title={<Text style={styles.settingTitle}>{i18n.t(`${screen}.about`)}</Text>}
-                    component={<FontAwesomeIcon icon={faChevronRight} color='gray' />}
+                    title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.about`)}</Text>}
+                    component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                     onPressHandler={() => navigation.navigate('ABOUT')}
                     icon={<FontAwesomeIcon icon={settings[2].icon} color={"white"} size={wp('4%')} />}
                     bgColor={settings[2].bgColor}
@@ -123,7 +137,6 @@ export const SettingsScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'whitesmoke',
         padding: wp('5%'),
         justifyContent: 'center',
         gap: hp('3%')
@@ -131,12 +144,11 @@ const styles = StyleSheet.create({
     settingsContainer: {
         paddingVertical: hp('2%'),
         borderRadius: 10,
-        backgroundColor: 'white',
         paddingHorizontal: wp('4%'),
         gap: hp('3%')
     },
     settingTitle: {
-        fontSize: wp('4%')
+        fontSize: wp('4%'),
     },
     profileSetting: {
         gap: hp('1%')

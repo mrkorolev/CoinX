@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { TransactionCurrencyPicker } from '../../general/TransactionCurrencyPicker';
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {AppContext} from "../../../global/AppContext";
 
 export const ExchangeAmountInput = ({ operation, chosenCurrencyName, isNetwork, chosenCurrencyIcon, onPressHandler, onChangeAmount, placeholder, isEditable, value, textColor }) => {
-
+    const { theme } = useContext(AppContext);
     return (
         <View>
-            <Text style={styles.headerText}>{operation}</Text>
+            <Text style={[styles.headerText, { color: theme.secondaryContentColor }]}>{operation}</Text>
             <View style={styles.rowContainer}>
 
                 <TransactionCurrencyPicker
@@ -20,8 +21,9 @@ export const ExchangeAmountInput = ({ operation, chosenCurrencyName, isNetwork, 
 
                 { isNetwork ? null :
                     <TextInput
-                        style={[styles.inputField, {color: textColor}]}
+                        style={[styles.inputField, {color: textColor, backgroundColor: theme.screenBgColor, borderColor: theme.calcAmountBorderColor}]}
                         placeholder={placeholder ? placeholder : ''}
+                        placeholderTextColor={theme.secondaryContentColor}
                         fontSize={wp('3.5%')}
                         keyboardType='number-pad'
                         returnKeyType='done'
@@ -46,15 +48,12 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontWeight: 'bold',
-        color: 'gray',
         fontSize: wp('3.5%'),
         paddingBottom: hp('1.5%')
     },
     inputField: {
         textAlign: 'right',
         fontWeight: 'bold',
-        backgroundColor: 'whitesmoke',
-        borderColor: 'black',
         borderWidth: 1,
         height: hp('7%'),
         width: wp('63%'),

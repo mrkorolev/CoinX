@@ -2,10 +2,10 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { View, StyleSheet } from 'react-native';
 
-export const CustomIcon = ({ icon, iconSize, boxSize }) => {
+export const CustomIcon = ({ icon, iconSize, boxSize, color, bgColor }) => {
     return (
-        <View style={[styles.layout, { width: boxSize, height: boxSize }]}>
-            <FontAwesomeIcon icon={icon} color={'white'} size={iconSize} spin />
+        <View style={[styles.layout, { width: boxSize, height: boxSize, backgroundColor: bgColor }]}>
+            <FontAwesomeIcon icon={icon} color={color} size={iconSize} spin />
         </View>
     );
 }

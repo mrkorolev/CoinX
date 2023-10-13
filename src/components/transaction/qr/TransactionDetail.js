@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {AppContext} from "../../../global/AppContext";
 
 export const TransactionDetail = ({ parameter, value, icon, disabled, onPressHandler }) => {
+
+    const { theme } = useContext(AppContext);
+
     return (
         <View style={styles.detailsContainer}>
             <View style={styles.detailsLayout}>
-                <Text style={styles.detailsTitle}>{parameter}</Text>
-                <Text style={styles.detailsData}>{value}</Text>
+                <Text style={[styles.detailsTitle, { color: theme.primaryContentColor }]}>{parameter}</Text>
+                <Text style={[styles.detailsData, { color: theme.qrInformationColor }]}>{value}</Text>
             </View>
             <View style={{ flex: 0.15 }} />
             <TouchableOpacity
@@ -32,7 +36,6 @@ const styles = StyleSheet.create({
         gap: hp('0.25%')
     },
     detailsTitle: {
-        color: '#293462',
         fontWeight: 'bold',
         fontSize: wp('3.5%')
     },

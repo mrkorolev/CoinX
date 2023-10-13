@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { ExchangeAmountInput } from '../../../components/transaction/amount/ExchangeAmountInput';
 import { ExchangeRate } from '../../../components/transaction/amount/ExchangeRate';
@@ -12,10 +12,13 @@ import { i18n } from "../../../localization/i18n";
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {TransactionCurrencyPicker} from "../../../components/general/TransactionCurrencyPicker";
+import {AppContext} from "../../../global/AppContext";
 
-export const TransactionScreen = () => {
+export const TransactionScreen = ({ navigation }) => {
 
-    const nav = useNavigation();
+    const { theme } = useContext(AppContext);
+    const screen = 'screens.transaction';
+
     const [spendAmount, setSpendAmount] = useState('');
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
     const [receiveAmount, setReceiveAmount] = useState('');
@@ -25,7 +28,6 @@ export const TransactionScreen = () => {
     const [readyToProceed, setReadyToProceed] = useState(false);
     const [network, setNetwork] = useState(availableNetworks[0]);
 
-    const screen = 'screens.transaction';
 
     useEffect(() => {
         console.log(spendCurrency.nameShort);
@@ -43,7 +45,22 @@ export const TransactionScreen = () => {
     }
 
     return (
-        <View style={styles.layout}>
+        <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
+
+            <ExchangeAmountInput
+                operation={i18n.t(`${screen}.network`)}
+                chosenCurrencyName={network.networkCode}
+                chosenCurrencyIcon={network.icon}
+                onPressHandler={ () => {
+                    setNetwork(availableNetworks[(availableNetworks.indexOf(network) + 1) % availableNetworks.length]);
+                    setReceiveAmount(null);
+                    setReadyToProceed(null);
+                }}
+                isEditable={false}
+                value={network.networkName}
+                textColor={theme.primaryContentColor}
+            />
+
             <ExchangeAmountInput
                 operation={i18n.t(`${screen}.pay`)}
                 chosenCurrencyName={spendCurrency.nameShort}
@@ -64,22 +81,8 @@ export const TransactionScreen = () => {
                     setReceiveAmount(null);
                     setReadyToProceed(false);
                 }}
-                textColor='gray'
+                textColor={theme.primaryContentColor}
                 isEditable={true} />
-
-            <ExchangeAmountInput
-                operation={i18n.t(`${screen}.network`)}
-                chosenCurrencyName={network.networkCode}
-                chosenCurrencyIcon={network.icon}
-                onPressHandler={ () => {
-                    setNetwork(availableNetworks[(availableNetworks.indexOf(network) + 1) % availableNetworks.length]);
-                    setReceiveAmount(null);
-                    setReadyToProceed(null);
-                }}
-                isEditable={false}
-                value={network.networkName}
-                textColor='gray'
-            />
 
             <ExchangeAmountInput
                 operation={i18n.t(`${screen}.receive`)}
@@ -91,16 +94,19 @@ export const TransactionScreen = () => {
                     setReadyToProceed(false);
                 }}
                 value={receiveAmount}
-                textColor='#293462'
+                textColor={theme.primaryContentColor}
                 isEditable={false} />
 
 
 
             { rate ?
-                <ExchangeRate style={styles.exchangeRateText} from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :
+                <ExchangeRate style={[styles.exchangeRateText, { color: theme.secondaryContentColor }]} from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :
                 <Text style={styles.exchangeRateText}>{' '}</Text>}
 
             <CustomButton
+                textColor={theme.mainBtnTextColor}
+                bgColor={theme.mainBtnBgColor}
+                borderColor={theme.mainBtnBorderColor}
                 text={readyToProceed ? i18n.t(`${screen}.generate_qr_text`) : i18n.t(`${screen}.calculate_text`)}
                 onPress={ async () => {
 
@@ -124,10 +130,10 @@ export const TransactionScreen = () => {
                                 onPress: async () => {
                                     const finalSpendAmount = parseFloat(spendAmount.replaceAll(',', ''));
                                     transactionDebug(finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
-                                    const walletData = await walletDataRequest(accessToken, `${finalSpendAmount * (1 + parseFloat(commission)/100)}`, spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
+                                    const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
 
                                     // DEBUG:
-                                    nav.navigate('QR', {
+                                    navigation.navigate('QR', {
                                         walletData: walletData.address,
                                         networkData: `${network.networkName} (${network.networkCode})`
                                     });
@@ -138,7 +144,6 @@ export const TransactionScreen = () => {
                         const commissionRate = parseFloat(await commissionDataRequest(accessToken));
                         const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
                         const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
-
                         setCommission(`${commissionRate}`);
                         setReceiveAmount(amountToReceive);
                         setRate(pricePerUnit);
@@ -146,7 +151,7 @@ export const TransactionScreen = () => {
                         console.log(network.networkCode);
 
                         // DEBUG:
-                        // nav.navigate(i18n.t('screens.qr_code.screen_name'), {
+                        // navigation.navigate(i18n.t('screens.qr_code.screen_name'), {
                         //     walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfo',
                         //     networkData: 'Tron (TRC20)'
                         // });
@@ -160,7 +165,6 @@ export const TransactionScreen = () => {
 const styles = StyleSheet.create({
     layout: {
         flex: 1,
-        backgroundColor: 'whitesmoke',
         justifyContent: 'center',
         padding: wp('2%'),
         paddingVertical: hp('1%'),
@@ -169,7 +173,6 @@ const styles = StyleSheet.create({
     },
     exchangeRateText: {
         fontSize: wp('3.5%'),
-        color: 'gray',
         paddingTop: hp('0.5%'),
         paddingBottom: hp('4%')
     }

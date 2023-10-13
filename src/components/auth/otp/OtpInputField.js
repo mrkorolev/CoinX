@@ -1,8 +1,9 @@
 import { View, StyleSheet, Text, Pressable, TextInput } from 'react-native';
-import { useEffect, useRef, useState } from 'react';
+import {useContext, useEffect, useRef, useState} from 'react';
 import { OtpInput } from './OtpInput';
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {AppContext} from "../../../global/AppContext";
 
 export const OtpInputField = ({ code, setCode, setPinReady, maxLength }) => {
 
@@ -10,6 +11,8 @@ export const OtpInputField = ({ code, setCode, setPinReady, maxLength }) => {
         setPinReady(code.length === maxLength);
         return () => setPinReady(false);
     }, [code]);
+
+    const { theme } = useContext(AppContext);
 
     const codeDigitsArray = new Array(maxLength).fill(0);
 
@@ -44,13 +47,13 @@ export const OtpInputField = ({ code, setCode, setPinReady, maxLength }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={ styles.container }>
             <Pressable style={styles.pressContainer}
                        onPress={handleOnPress}>
                 {codeDigitsArray.map(toCodeDigitInput)}
             </Pressable>
             <TextInput
-                style={styles.inputField}
+                style={[styles.inputField, { color: theme.inputColor }]}
                 value={code}
                 onChangeText={setCode}
                 maxLength={maxLength}

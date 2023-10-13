@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { CustomButton } from '../../../components/general/CustomButton';
 import { useNavigation } from '@react-navigation/native';
@@ -10,18 +10,22 @@ import { i18n } from "../../../localization/i18n";
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {AppContext} from "../../../global/AppContext";
 
-export const OtpScreen = () => {
+export const OtpScreen = ({ navigation }) => {
+
+    const { theme } = useContext(AppContext);
+    const screen = 'screens.otp';
+
     const [code, setCode] = useState("");
     const [pinReady, setPinReady] = useState(false);
     const MAX_CODE_LENGTH = 6;
-    const nav = useNavigation();
-    const screen = 'screens.otp';
+
 
     return (
-        <View style={styles.layout}>
-            <Text style={styles.title}>{i18n.t(`${screen}.title`)}</Text>
-            <Text style={styles.message}>{i18n.t(`${screen}.secondary_text`)}</Text>
+        <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
+            <Text style={[styles.title, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.title`)}</Text>
+            <Text style={[styles.message, { color: theme.secondaryContentColor }]}>{i18n.t(`${screen}.secondary_text`)}</Text>
 
             <OtpInputField
                 code={code}
@@ -30,19 +34,22 @@ export const OtpScreen = () => {
                 maxLength={MAX_CODE_LENGTH} />
 
             <CustomButton
+                textColor={theme.mainBtnTextColor}
+                bgColor={theme.mainBtnBgColor}
+                borderColor={theme.mainBtnBorderColor}
                 text={i18n.t(`${screen}.button_text`)}
                 isDisabled={!pinReady}
                 onPress={async () => {
                     console.log(code);
-                    const response = await otpVerification(accessToken, code);
-
-                    if(response && response.status === 200){
-                        console.log('Verification process passed! Proceed to main navigator!');
-                        nav.navigate('Success');
-                    }
+                    // const response = await otpVerification(accessToken, code);
+                    //
+                    // if(response && response.status === 200){
+                    //     console.log('Verification process passed! Proceed to main navigator!');
+                    //     navigation.navigate('Success');
+                    // }
 
                     // DEBUG
-                    // nav.navigate('Success');
+                    navigation.navigate('Success');
                 }} />
 
             <View style={{ flex: 0.25 }}/>
@@ -54,12 +61,10 @@ const styles = StyleSheet.create({
     layout: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'white',
         padding: wp('5%')
     },
     title: {
         fontWeight: 'bold',
-        color: '#293462',
         fontSize: wp('8%'),
         marginTop: hp('3%'),
         marginBottom: hp('2%')

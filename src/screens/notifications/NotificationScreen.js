@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Notification } from '../../components/notifications/Notification';
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {AppContext} from "../../global/AppContext";
 
 export const NotificationScreen = () => {
+
+    const { theme } = useContext(AppContext);
 
     const data = [
           {
@@ -99,7 +102,7 @@ export const NotificationScreen = () => {
             .map(element => <Notification key={element.id} notification={element}/>);
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: theme.screenBgColor }]}>
             <ScrollView>
                 {notifications}
             </ScrollView>
@@ -109,7 +112,6 @@ export const NotificationScreen = () => {
 
 const styles  = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: 'whitesmoke'
+        flex: 1
     }
 });

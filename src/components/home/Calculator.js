@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import {View, TouchableOpacity, StyleSheet, Dimensions, Text, TextInput, Keyboard, Alert} from 'react-native';
 import {faRightLeft, faTurkishLiraSign} from '@fortawesome/free-solid-svg-icons';
 import {Line} from "./Line";
@@ -9,21 +9,25 @@ import { i18n } from "../../localization/i18n";
 import {TransactionCurrencyPicker} from "../general/TransactionCurrencyPicker";
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {AppContext} from "../../global/AppContext";
 
 export const Calculator = () => {
+
+    const { theme } = useContext(AppContext);
+    const screen = 'screens.home';
 
     // State for the chosen currency and amount, ready to send the request and setReceiveCurrency as a result (editable={false})
     const [spendAmount, setSpendAmount] = useState('');
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
     const [receiveAmount, setReceiveAmount] = useState('---');
     const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
-    const screen = 'screens.home';
+
 
     return (
         <View style={styles.container}>
             <View style={styles.pickerLayout}>
-                <View style={styles.operationContainer}>
-                    <TextInput style={styles.operationAmount}
+                <View style={[styles.operationContainer, { borderColor: theme.calcAmountBorderColor }]}>
+                    <TextInput style={[styles.operationAmount, { color: theme.primaryContentColor }]}
                                maxLength={10}
                                keyboardType='number-pad'
                                enterKeyHint='done'
@@ -35,6 +39,7 @@ export const Calculator = () => {
                                }}
                                value={spendAmount}
                                placeholder='...'
+                               placeholderTextColor={theme.secondaryContentColor}
                                selectTextOnFocus
                     />
                 </View>
@@ -51,7 +56,7 @@ export const Calculator = () => {
             </View>
 
             <View style={styles.separator}>
-                <Line backgroundColor='lightgray' />
+                <Line backgroundColor={theme.sepLineColor} />
                 <TouchableOpacity
                     onPress={async () => {
                         if(!spendAmount){
@@ -63,16 +68,21 @@ export const Calculator = () => {
                             setReceiveAmount(`${(toSpend / required).toFixed(4)}`);
                         }
                     }}>
-                    <View style={styles.separatorIcon}>
-                        <CustomIcon icon={faRightLeft} iconSize={wp('5%')} boxSize={wp('10%')} />
+                    <View style={[styles.separatorIcon, { backgroundColor: theme.primaryContentColor }]}>
+                        <CustomIcon
+                            icon={faRightLeft}
+                            iconSize={wp('5%')}
+                            boxSize={wp('10%')}
+                            color={theme.screenBgColor}
+                            bgColor={theme.primaryContentColor} />
                     </View>
                 </TouchableOpacity>
-                <Line backgroundColor='lightgray' />
+                <Line backgroundColor={theme.sepLineColor} />
             </View>
 
             <View style={styles.pickerLayout}>
-                <View style={styles.operationContainer}>
-                    <TextInput style={styles.operationAmount}
+                <View style={[styles.operationContainer, { borderColor: theme.calcAmountBorderColor}]}>
+                    <TextInput style={[styles.operationAmount, { color: theme.primaryContentColor }]}
                                maxLength={10}
                                keyboardType='decimal-pad'
                                keyboardKeyType='done'
@@ -107,7 +117,6 @@ const styles = StyleSheet.create({
         gap: wp('13%')
     },
     separatorIcon: {
-        backgroundColor: '#293462',
         borderRadius: 5,
         width: wp('5%'),
         height: wp('5%'),
@@ -130,7 +139,6 @@ const styles = StyleSheet.create({
     },
     operationAmount: {
         fontSize: wp('3%'),
-        color: '#293462',
         fontWeight: 'bold'
     }
 });

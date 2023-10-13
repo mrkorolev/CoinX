@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../../screens/home/HomeScreen';
 import { NotificationScreen } from '../../screens/notifications/NotificationScreen';
@@ -14,53 +14,59 @@ import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import { faHeadset } from "@fortawesome/free-solid-svg-icons";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {faBell} from "@fortawesome/free-regular-svg-icons";
+import {AppContext} from "../../global/AppContext";
 
 const Stack = createNativeStackNavigator();
 // const Stack = createStackNavigator();
 
-export const HomeNavigator = () => (
-    <Stack.Navigator screenOptions={{
-        // gestureEnabled: false,
-        headerShadowVisible: false
-    }}>
-        <Stack.Screen
-            name={`HOME`}
-            component={ HomeScreen }
-            options={({navigation}) => ({
-                headerTitle: () => <CustomHeader title={i18n.t('screens.home.screen_name')} />,
-                headerRight: () => (
-                    <View style={styles.headerRightLayout}>
-                        <CustomHeaderIcon
-                            icon={faHeadset}
-                            onPressHandler={() =>
-                                // navigation.navigate('CUSTOMER_SUPPORT')
-                                alert('Support requested!')} />
-                        <CustomHeaderIcon
-                            isNotifiable
-                            hasUnread
-                            icon={faBell}
-                            onPressHandler={() => navigation.navigate('NOTIFICATIONS')}  />
-                    </View>
-                ),
-                headerLeft: () => {},
-                headerTitleAlign: 'center',
-                headerStyle: {
-                    backgroundColor: 'whitesmoke'
-                }
-            })}/>
-        <Stack.Screen
-            name={`NOTIFICATIONS`}
-            component={ NotificationScreen }
-            options={({navigation}) => ({
-                headerTitle: () => <CustomHeader title={i18n.t('screens.notifications.screen_name')} />,
-                headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
-                headerTitleAlign: 'center',
-                headerStyle: {
-                    backgroundColor: 'whitesmoke'
-                }
-            })}/>
-    </Stack.Navigator>
-);
+export const HomeNavigator = () => {
+
+    const { theme } = useContext(AppContext);
+
+    return (
+        <Stack.Navigator screenOptions={{
+            // gestureEnabled: false,
+            headerShadowVisible: false
+        }}>
+            <Stack.Screen
+                name={`HOME`}
+                component={ HomeScreen }
+                options={({navigation}) => ({
+                    headerTitle: () => <CustomHeader title={i18n.t('screens.home.screen_name')} />,
+                    headerRight: () => (
+                        <View style={styles.headerRightLayout}>
+                            <CustomHeaderIcon
+                                icon={faHeadset}
+                                onPressHandler={() =>
+                                    // navigation.navigate('CUSTOMER_SUPPORT')
+                                    console.log('request support!!!')} />
+                            <CustomHeaderIcon
+                                isNotifiable
+                                hasUnread
+                                icon={faBell}
+                                onPressHandler={() => navigation.navigate('NOTIFICATIONS')}  />
+                        </View>
+                    ),
+                    headerLeft: () => {},
+                    headerTitleAlign: 'center',
+                    headerStyle: {
+                        backgroundColor: theme.screenBgColor
+                    }
+                })}/>
+            <Stack.Screen
+                name={`NOTIFICATIONS`}
+                component={ NotificationScreen }
+                options={({navigation}) => ({
+                    headerTitle: () => <CustomHeader title={i18n.t('screens.notifications.screen_name')} />,
+                    headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
+                    headerTitleAlign: 'center',
+                    headerStyle: {
+                        backgroundColor: theme.screenBgColor
+                    }
+                })}/>
+        </Stack.Navigator>
+    );
+}
 
 const styles = StyleSheet.create({
     headerRightLayout: {

@@ -1,14 +1,19 @@
-import React from "react"
+import React, {useContext} from "react"
 import { View, Text, StyleSheet } from 'react-native'
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
-// Color from design: '#35C2C1'
+import {AppContext} from "../../../global/AppContext";
 
 export const OtpInput = ({ value, focused }) => {
+
+    const { theme } = useContext(AppContext);
+
     return (
-        <View style={[styles.container, focused && { backgroundColor: '#E8ECF4' }, value && { borderColor: '#35C2C1', backgroundColor: 'white' }]}>
-            <Text style={styles.value}>
+        <View style={[styles.container,
+            { backgroundColor: theme.otpIptNoFcsBgColor, borderColor: theme.otpIptNoFcsBorderColor },
+            focused && { borderColor: theme.otpIptFcsBorderColor},
+            value && { borderColor: theme.otpIptHasValueBorderColor }]}>
+            <Text style={[styles.value, { color: theme.inputColor }]}>
                 {value}
             </Text>
         </View>
@@ -17,11 +22,9 @@ export const OtpInput = ({ value, focused }) => {
 
 const styles = StyleSheet.create({
     container: {
-        borderColor: '#E8ECF4',
-        backgroundColor: '#F7F8F9',
         minWidth: wp('12%'),
         minHeight: hp('8%'),
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: 5,
         padding: wp('3%'),
         justifyContent: 'center',
@@ -29,7 +32,6 @@ const styles = StyleSheet.create({
     value: {
         fontSize: wp('4%'),
         fontWeight: 'bold',
-        textAlign: 'center',
-        color: '#293462'
+        textAlign: 'center'
     }
 });

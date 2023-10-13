@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 
 import { PrimaryDetails } from '../../components/settings/PrimaryDetails';
@@ -12,34 +12,41 @@ import { i18n } from "../../localization/i18n";
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {CustomButton} from "../../components/general/CustomButton";
+import {AppContext} from "../../global/AppContext";
 
 export const ProfileScreen = ({ route, navigation }) => {
+    const { theme } = useContext(AppContext);
     const screen = 'screens.profile';
     const { name, phone, email, address, commission } = route.params;
 
     return (
-        <View style={styles.layout}>
+        <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
             <PrimaryDetails name={name} />
             <View style={styles.container}>
                 <View style={styles.group}>
-                    <Text style={styles.key}>{i18n.t(`${screen}.phone_number`)}:</Text>
-                    <Text style={styles.value}>{phone}</Text>
+                    <Text style={[styles.key, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.phone_number`)}:</Text>
+                    <Text style={[styles.value, { color: theme.secondaryContentColor }]}>{phone}</Text>
                 </View>
                 <View style={styles.group}>
-                    <Text style={styles.key}>{i18n.t(`${screen}.email`)}:</Text>
-                    <Text style={styles.value}>{email}</Text>
+                    <Text style={[styles.key, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.email`)}:</Text>
+                    <Text style={[styles.value, { color: theme.secondaryContentColor }]}>{email}</Text>
                 </View>
                 <View style={styles.group}>
-                    <Text style={styles.key}>{i18n.t(`${screen}.address`)}:</Text>
-                    <Text style={styles.value}>{address}</Text>
+                    <Text style={[styles.key, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.address`)}:</Text>
+                    <Text style={[styles.value, { color: theme.secondaryContentColor }]}>{address}</Text>
                 </View>
                 <View style={styles.group}>
-                    <Text style={styles.key}>{i18n.t(`${screen}.commission_rate`)}:</Text>
-                    <Text style={styles.value}>{commission}</Text>
+                    <Text style={[styles.key, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.commission_rate`)}:</Text>
+                    <Text style={[styles.value, { color: theme.secondaryContentColor }]}>{commission}</Text>
                 </View>
 
                 {/* CRUCIAL CHANGE REQUIRED - the auth flow model is not decided upon! */}
-                <CustomButton text='Logout' onPress={() => navigation.navigate('Login')} />
+                <CustomButton
+                    textColor={theme.mainBtnTextColor}
+                    bgColor={theme.mainBtnBgColor}
+                    borderColor={theme.mainBtnBorderColor}
+                    text='Logout'
+                    onPress={() => navigation.navigate('Login')} />
             </View>
         </View>
     );
@@ -48,7 +55,6 @@ export const ProfileScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     layout: {
         flex: 1,
-        backgroundColor: 'whitesmoke',
         padding: wp('2%')
     },
     container: {

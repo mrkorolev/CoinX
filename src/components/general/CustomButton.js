@@ -1,30 +1,30 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-
-// Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {AppContext} from "../../global/AppContext";
 
-export const CustomButton = ({ text, isDisabled, onPress }) => {
+export const CustomButton = ({ text, isDisabled, onPress, textColor, bgColor, borderColor }) => {
+
+    const { theme } = useContext(AppContext);
+
     return (
         <TouchableOpacity
-            style={styles.appButtonContainer}
+            style={[styles.appButtonContainer, { backgroundColor: bgColor, borderColor: borderColor }]}
             onPress={onPress}
             disabled={isDisabled} >
-            <Text style={styles.appButton}>{text}</Text>
+            <Text style={[styles.appButton, { color: textColor }]}>{text}</Text>
         </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     appButtonContainer: {
-        backgroundColor: '#293462',
         borderRadius: 5,
         justifyContent: 'center',
         marginTop: hp('5%'),
         height: hp('7%')
     },
     appButton: {
-        color: 'white',
         fontWeight: 'bold',
         alignSelf: 'center',
         fontSize: wp('4%')

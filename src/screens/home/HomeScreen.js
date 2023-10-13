@@ -4,11 +4,14 @@ import { ExchangeRatesData } from '../../components/home/ExchangeRatesData';
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {useContext} from "react";
+import {AppContext} from "../../global/AppContext";
 
 export const HomeScreen = () => {
+    const { theme } = useContext(AppContext);
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: theme.screenBgColor }]}>
             <ExchangeRatesData />
             <Calculator />
         </View>
@@ -18,7 +21,6 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'whitesmoke',
         alignItems: 'center',
         justifyContent: 'space-around',
         paddingBottom: hp('5%')

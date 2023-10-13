@@ -9,6 +9,7 @@ const apiVersion = 'api/v1/';
 const authentication = 'auth/check/';
 
 const walletEndpoint = 'capital/transac/deposit/wallet';
+const cancelTransactionEndpoint = 'capital/transac/cancel/wallet';
 const commissionEndpoint = 'user/info/user-commission';
 const userProfileEndpoint = 'user/info/user-profile';
 
@@ -91,6 +92,31 @@ export const walletDataRequest = async (accessToken, spendAmount, spendCurrency,
         return walletResponse.data;
     }catch(error){
         generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
+    }
+    return null;
+}
+
+export const cancelTransactionRequest = async (accessToken, walletAddress) => {
+    const request_error = 'request_errors.transaction_cancel_request';
+    try{
+        // Wallet request for QR generation:
+        const transactionCancelResponse = await axios({
+            method: 'post',
+            url: `${baseUrl}${apiVersion}${cancelTransactionEndpoint}`,
+            data: {
+                wallet: walletAddress
+            },
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        console.log(JSON.stringify(transactionCancelResponse.data, undefined, 4));
+
+        return transactionCancelResponse.data;
+    }catch(error){
+        // generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
+        generateErrorDescription('Transaction cancel', 'Transaction cancellation failed!', error);
     }
     return null;
 }

@@ -1,20 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {View, StyleSheet, Dimensions, Alert} from 'react-native';
 import { ClipboardDocumentCheckIcon, ArrowsRightLeftIcon } from 'react-native-heroicons/solid';
 import * as Clipboard from 'expo-clipboard';
 import { QrCode } from '../../../components/transaction/qr/QrCode';
 import { TransactionDetail } from '../../../components/transaction/qr/TransactionDetail';
 import { i18n } from "../../../localization/i18n";
 
-// Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {CustomButton} from "../../../components/general/CustomButton";
+import {cancelTransactionRequest} from "../../../services/authentication";
+import {accessToken} from "../../../constants";
+import {AppContext} from "../../../global/AppContext";
 
-export const QrScreen = ({ route }) => {
+export const QrScreen = ({ route, navigation }) => {
+
+    const { theme } = useContext(AppContext);
+    const screen = 'screens.qr_code';
+
     const [walletAddress, setWalletAddress] = useState('');
     const [network, setNetwork] = useState('');
 
     const { walletData, networkData } = route.params;
-    const screen = 'screens.qr_code';
+
 
     useEffect(() => {
         setWalletAddress(walletData);
@@ -22,7 +29,7 @@ export const QrScreen = ({ route }) => {
     }, []);
 
     return (
-        <View style={styles.layout}>
+        <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
             <QrCode
                 wallet={walletAddress}
                 warning={i18n.t(`${screen}.warning`)} />
@@ -32,7 +39,7 @@ export const QrScreen = ({ route }) => {
             <TransactionDetail
                 parameter={i18n.t(`${screen}.wallet_address`)}
                 value={walletAddress}
-                icon={<ClipboardDocumentCheckIcon color='#293462' />}
+                icon={<ClipboardDocumentCheckIcon color={theme.helperIconColor} />}
                 onPressHandler={async () => {
                     await Clipboard.setStringAsync(walletAddress);
                     console.log('Clipboard set to: ' + walletAddress);
@@ -42,8 +49,38 @@ export const QrScreen = ({ route }) => {
             <TransactionDetail
                 parameter={i18n.t(`${screen}.network`)}
                 value={network}
-                icon={<ArrowsRightLeftIcon color='#293462' />}
+                icon={<ArrowsRightLeftIcon color={theme.helperIconColor} />}
                 disabled={true} />
+
+            <View style={styles.cancelButtonContainer}>
+                <CustomButton
+                    textColor={theme.cancelBtnTextColor}
+                    bgColor={theme.cancelBtnBgColor}
+                    borderColor={theme.cancelBtnBorderColor}
+                    text='Cancel Transaction'
+                    onPress={async () => {
+                    Alert.alert('Cancel Transaction', 'Are you sure you want to cancel this transaction?', [{
+                        text: 'No',
+                        style: 'default',
+                        onPress: () => {
+                            console.log('Not cancelling current transaction!');
+                        }
+                    },
+                        {
+                            text: 'Confirm',
+                            style: 'destructive',
+                            onPress: async () => {
+                                const cancelStatus = await cancelTransactionRequest(accessToken, walletAddress);
+
+                                if(cancelStatus){
+                                    alert('Successfully cancelled transaction!');
+                                    navigation.goBack();
+                                }
+                            }
+                        }]);
+                }} />
+            </View>
+
         </View>
     );
 }
@@ -52,7 +89,6 @@ const styles = StyleSheet.create({
     layout: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'whitesmoke',
         // padding: wp('5%')
     },
     separator: {
@@ -61,5 +97,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightgray',
         alignItems: 'center',
         marginVertical: hp('2%')
+    },
+    cancelButtonContainer: {
+        flex: 1,
+        paddingHorizontal: wp('5%')
     }
 });

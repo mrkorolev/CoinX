@@ -11,7 +11,7 @@ export const Setting = ({customStyle, icon, bgColor, title, component, pressable
                 <View style={[styles.iconContainer, { backgroundColor: bgColor }]}>
                     {icon}
                 </View>
-                {title}
+                <Text style={{ color: '#293462' }}>{title}</Text>
             </View>
             {component}
         </TouchableOpacity>

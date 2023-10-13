@@ -1,15 +1,25 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { ChevronDownIcon } from 'react-native-heroicons/solid';
 import { CustomIcon } from './CustomIcon';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
+import {AppContext} from "../../global/AppContext";
 
 export const TransactionCurrencyPicker = ({ currencyName, currencyIcon, onPressHandler }) => {
+
+    const { theme } = useContext(AppContext);
+
     return (
-        <TouchableOpacity style={styles.layout} onPress={onPressHandler} disabled={!onPressHandler}>
+        <TouchableOpacity style={[styles.layout, { borderColor: theme.calcAmountBorderColor }]} onPress={onPressHandler} disabled={!onPressHandler}>
                 <View style={styles.iconContainer}>
-                    <CustomIcon icon={currencyIcon} iconSize={wp('5%')} boxSize={wp('7%')} />
-                    <Text style={styles.currency}>{currencyName}</Text>
+                    <CustomIcon
+                        icon={currencyIcon}
+                        iconSize={wp('5%')}
+                        boxSize={wp('7%')}
+                        color={theme.calcCurrencyIconColor}
+                        bgColor={theme.calcCurrencyIconBgColor}
+                    />
+                    <Text style={[styles.currency, { color: theme.primaryContentColor }]}>{currencyName}</Text>
                 </View>
         </TouchableOpacity>
     );
@@ -32,7 +42,6 @@ const styles = StyleSheet.create({
         gap: wp('2%')
     },
     currency: {
-        color: 'gray',
         fontWeight: 'bold',
         fontSize: wp('3%')
     }

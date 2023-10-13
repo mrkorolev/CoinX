@@ -2,19 +2,26 @@ import {TextInput, View, StyleSheet } from "react-native";
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {AppContext} from "../../../global/AppContext";
+import {useContext} from "react";
 
 export const CustomInput = ({ icon, secureTextEntry, placeholder, onChangeText, enterKey }) => {
+
+    const { theme } = useContext(AppContext);
+
     return (
-        <View style={[styles.inputField, ]}>
+        <View style={[styles.inputField, { backgroundColor: theme.placeholderBgColor, borderColor: theme.inputBorderColor }]}>
             <TextInput style={styles.inputValue}
-                       color='#293462'
+                       color={theme.inputColor}
                        secureTextEntry={secureTextEntry}
                        placeholder={placeholder}
-                       placeholderTextColor='#8391A1'
+                       placeholderTextColor={theme.placeholderTextColor}
+                       placeholderTextStyle={{ fontWeight: 'bold' }}
                        autoCapitalize='none'
                        onChangeText={onChangeText}
-                       selectTextOnFocus
+                       // selectTextOnFocus
                        enterKeyHint={enterKey} />
+
             <View style={{ flex: 0.05 }}/>
             <View style={styles.icon}>{icon && icon}</View>
         </View>
@@ -25,8 +32,6 @@ const styles = StyleSheet.create({
     inputField: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        backgroundColor: '#F7F8F9',
-        borderColor: '#DADADA',
         borderWidth: 1,
         height: hp('7%'),
         marginVertical: '3%',

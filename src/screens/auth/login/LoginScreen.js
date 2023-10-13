@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Alert, PixelRatio } from 'react-native';
 import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
@@ -11,12 +11,17 @@ import { i18n } from '../../../localization/i18n.js';
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {AppContext} from "../../../global/AppContext";
 
 export const LoginScreen = () => {
+
+    // App context
+    const { theme } = useContext(AppContext);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [protection, setProtection] = useState(true);
-    const [icon, setIcon] = useState(<EyeIcon color='#6A707C' size={wp('6%')} />);
+    const [icon, setIcon] = useState(<EyeIcon color={`${theme.passwordIconColor}`} size={wp('6%')} />);
     const nav = useNavigation();
 
     const screen = 'screens.login';
@@ -28,8 +33,8 @@ export const LoginScreen = () => {
     }
 
     return (
-        <View style={styles.layout}>
-            <Text style={styles.title}>{i18n.t(`${screen}.title`)}</Text>
+        <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
+            <Text style={[styles.title, { color: theme.primaryContentColor }  ]}>{i18n.t(`${screen}.title`)}</Text>
             <CustomInput
                 placeholder={i18n.t(`${screen}.email_placeholder`)}
                 onChangeText={(text) => setUsername(text)}
@@ -40,7 +45,9 @@ export const LoginScreen = () => {
                     <TouchableOpacity
                         onPress={() => {
                         setProtection(!protection);
-                        setIcon(!protection ? <EyeIcon color='#6A707C' size={wp('6%')}/> : <EyeSlashIcon color='#6A707C' size={wp('6%')} />);}}>
+                        setIcon(!protection ?
+                            <EyeIcon color={theme.passwordIconColor} size={wp('6%')}/> :
+                            <EyeSlashIcon color={theme.passwordIconColor} size={wp('6%')} />);}}>
                         {icon}
                     </TouchableOpacity>
                 }
@@ -51,6 +58,9 @@ export const LoginScreen = () => {
 
             <CustomButton
                 text={i18n.t(`${screen}.button_text`)}
+                textColor={theme.mainBtnTextColor}
+                bgColor={theme.mainBtnBgColor}
+                borderColor={theme.mainBtnBorderColor}
                 onPress={async () => {
 
                     if(!validateInput(username, password)){
@@ -58,11 +68,11 @@ export const LoginScreen = () => {
                         return;
                     }
 
-                    const response = await authenticateUser(username, password);
-                    if(response && response.status === 200){
-                        console.log('LOGIN SUCCESSFUL! Proceed to OTP!');
-                        nav.navigate('Otp');
-                    }
+                    // const response = await authenticateUser(username, password);
+                    // if(response && response.status === 200){
+                    //     console.log('LOGIN SUCCESSFUL! Proceed to OTP!');
+                    //     nav.navigate('Otp');
+                    // }
                     nav.navigate('Otp');
                 }}
             />
@@ -75,12 +85,10 @@ const styles = StyleSheet.create({
     layout: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'white',
         padding: wp('5%')
     },
     title: {
         fontWeight: 'bold',
-        color: '#293462',
         marginVertical: hp('3%'),
         fontSize: wp('8%')
     }

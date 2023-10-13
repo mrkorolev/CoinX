@@ -1,27 +1,26 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import { useNavigation } from "@react-navigation/native";
-import { SuccessfulOperation } from "../../components/success/SuccessfulOperation";
 import { CheckBadgeIcon } from "react-native-heroicons/solid";
 import { i18n } from "../../localization/i18n";
 import {StyleSheet, Text, View} from "react-native";
-
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {AppContext} from "../../global/AppContext";
 
-export const SuccessScreen = () => {
-    const nav = useNavigation();
+export const SuccessScreen = ({ navigation }) => {
+    const { theme } = useContext(AppContext);
     const screen = 'screens.success';
 
     setTimeout(() => {
-        nav.navigate('Main');
+        navigation.navigate('Main');
     }, 1000);
 
     return (
-        <View style={styles.layout}>
-            <CheckBadgeIcon color='#293462' size={wp('40%')}/>
+        <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
+            <CheckBadgeIcon color={theme.supportIconColor} size={wp('40%')}/>
             <View style={styles.container}>
-                <Text style={styles.title}>{i18n.t(`${screen}.title`)}</Text>
-                <Text style={styles.message}>{i18n.t(`${screen}.secondary_text`)}</Text>
+                <Text style={[styles.title, { color: theme.primaryContentColor}]}>{i18n.t(`${screen}.title`)}</Text>
+                <Text style={[styles.message, { color: theme.secondaryContentColor }]}>{i18n.t(`${screen}.secondary_text`)}</Text>
             </View>
             <View style={{ flex: 0.3 }} />
         </View>
@@ -33,7 +32,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white'
     },
     container: {
         gap: hp('1.5%'),
@@ -43,12 +41,10 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: wp('7%'),
-        color: '#293462',
         fontWeight: 'bold'
     },
     message: {
         fontSize: wp('5%'),
-        color: 'gray',
         fontWeight: 'bold',
         textAlign: 'center',
         paddingHorizontal: wp('10%')

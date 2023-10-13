@@ -1,20 +1,31 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { CustomIcon } from '../general/CustomIcon';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {useContext} from "react";
+import {AppContext} from "../../global/AppContext";
 
-export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePercent, bgColor, coinIcon }) => {
+export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePercent, bgColor, primaryColor, secondaryColor, coinIcon }) => {
+
+    const { theme } = useContext(AppContext);
+
     return (
-        <View style={[styles.coinLayout, { backgroundColor: `${bgColor}` }, nameShort === 'USDT' && styles.usdStyling]}>
+        <View style={[styles.coinLayout, { backgroundColor: bgColor }, nameShort === 'USDT' && { borderColor: theme.usdBorderColor, borderWidth: 2, borderStyle: 'dashed' }]}>
             <View style={styles.topLevel}>
                 <View style={{ gap: hp('0.25%') }}>
-                    <Text style={styles.coinInsides}>{nameShort}</Text>
-                    <Text style={styles.coinInsides}>{lastPrice}</Text>
+                    <Text style={[styles.coinInsides, { color: primaryColor }]}>{nameShort}</Text>
+                    <Text style={[styles.coinInsides, { color: primaryColor }]}>{lastPrice}</Text>
                 </View>
-                <Text style={[styles.coinInsides, styles.percentChangeText]}>{priceChangePercent} %</Text>
+                <Text style={[styles.coinInsides, styles.percentChangeText, { color: secondaryColor }]}>{priceChangePercent} %</Text>
             </View>
             <View style={styles.bottomLevel}>
-                <CustomIcon icon={coinIcon} iconSize={wp('5%')} boxSize={wp('7%')} />
-                <Text style={styles.coinInsides}>{nameLong}</Text>
+                <CustomIcon
+                    icon={coinIcon}
+                    iconSize={wp('5%')}
+                    boxSize={wp('7%')}
+                    color={theme.exchangeIconColor}
+                    bgColor={theme.exchangeIconBgColor}
+                />
+                <Text style={[styles.coinInsides, { color: primaryColor}]}>{nameLong}</Text>
             </View>
         </View>
     );
@@ -32,20 +43,13 @@ const styles = StyleSheet.create({
     },
     coinInsides: {
         fontWeight: 'bold',
-        color: '#293462',
         fontSize: wp('3%')
-    },
-    usdStyling: {
-        borderColor: 'gray',
-        borderWidth: 2,
-        borderStyle: 'dashed'
     },
     topLevel: {
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
     percentChangeText: {
-        color: 'gray',
         fontWeight: 'normal'
     },
     bottomLevel: {

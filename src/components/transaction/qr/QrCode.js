@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import QRCode from "react-native-qrcode-svg";
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {AppContext} from "../../../global/AppContext";
 
 export const QrCode = ({ warning, wallet }) => {
+
+    const { theme } = useContext(AppContext);
+
     return (
         <View>
-            <View style={styles.qr}>
-                <QRCode wallet={wallet} size={wp('60%')} />
+            <View style={[styles.qr, { borderColor: theme.primaryContentColor }]}>
+                <QRCode wallet={wallet} color={theme.qrInformationColor} backgroundColor={theme.screenBgColor} size={wp('60%')} />
             </View>
-            <Text style={styles.warningStyle}>
+            <Text style={[styles.warningStyle, { color: theme.qrInformationColor }]}>
                 {warning}
             </Text>
         </View>
@@ -21,7 +25,6 @@ const styles = StyleSheet.create({
     qr: {
         width: wp('75%'),
         height: wp('75%'),
-        borderColor: '#293462',
         borderWidth: 5,
         borderRadius: 10,
         marginVertical: hp('1%'),
@@ -30,7 +33,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     warningStyle: {
-        color: 'gray',
         textAlign: 'center',
         padding: wp('5%'),
         fontSize: wp('3.5%')

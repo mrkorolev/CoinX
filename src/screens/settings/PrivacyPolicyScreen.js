@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, Text, StyleSheet } from "react-native";
+import {AppContext} from "../../global/AppContext";
+import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 
 export const PrivacyPolicyScreen = () => {
+
+    const { theme } = useContext(AppContext);
+
     return (
-        <View style={styles.layout}>
-            <Text>Welcome to Privacy Policy Screen!</Text>
+        <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
+            <Text style={{ fontSize: wp('4%'), color: theme.primaryContentColor }}>Welcome to Privacy Policy Screen!</Text>
         </View>
     );
 }
@@ -12,7 +17,6 @@ export const PrivacyPolicyScreen = () => {
 const styles = StyleSheet.create({
     layout: {
         flex: 1,
-        backgroundColor: 'whitesmoke',
         justifyContent: 'center',
         alignItems: 'center'
     }

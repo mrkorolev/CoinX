@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, Text, StyleSheet } from "react-native";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+import {AppContext} from "../../global/AppContext";
 
 export const CustomHeader = ({ title }) => {
+
+    const { theme } = useContext(AppContext);
+
     return (
         <View>
-            <Text style={styles.screenTitle}>{title}</Text>
+            <Text style={[styles.screenTitle, { color: theme.primaryContentColor }]}>{title}</Text>
         </View>
     );
 }
@@ -13,7 +17,6 @@ export const CustomHeader = ({ title }) => {
 const styles = StyleSheet.create({
     screenTitle: {
         fontWeight: 'bold',
-        fontSize: wp('4.5%'),
-        color: '#293462'
+        fontSize: wp('4.5%')
     }
 });
