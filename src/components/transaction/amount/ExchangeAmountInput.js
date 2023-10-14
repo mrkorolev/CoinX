@@ -14,16 +14,18 @@ export const ExchangeAmountInput = ({ operation, chosenCurrencyName, isNetwork, 
             <View style={styles.rowContainer}>
 
                 <TransactionCurrencyPicker
+                    customWidth={wp('25%')}
                     currencyName={chosenCurrencyName}
                     currencyIcon={chosenCurrencyIcon}
                     onPressHandler={onPressHandler}
+                    hasBorder
                 />
 
                 { isNetwork ? null :
                     <TextInput
-                        style={[styles.inputField, {color: textColor, backgroundColor: theme.screenBgColor, borderColor: theme.calcAmountBorderColor}]}
+                        style={[styles.inputField, {color: textColor, backgroundColor: theme.screenBgColor, borderColor: theme.convertInputBorderColor}]}
                         placeholder={placeholder ? placeholder : ''}
-                        placeholderTextColor={theme.secondaryContentColor}
+                        placeholderTextColor={theme.placeholderTextColor}
                         fontSize={wp('3.5%')}
                         keyboardType='number-pad'
                         returnKeyType='done'

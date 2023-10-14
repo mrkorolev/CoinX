@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: wp('7%'),
-        paddingVertical: hp('2%'),
+        paddingBottom: hp('2%'),
         marginBottom: hp('5%')
     },
     group: {

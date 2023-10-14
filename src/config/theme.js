@@ -23,7 +23,7 @@ export const appTheme = {
         supportIconColor: '#293462',
 
         cancelBtnTextColor: '#FF2D55',
-        cancelBtnBgColor: '#FFFFFF',
+        cancelBtnBgColor: 'whitesmoke',
         cancelBtnBorderColor: '#FF2D55',
 
         // Bottom tabs
@@ -66,6 +66,10 @@ export const appTheme = {
 
         calcCurrencyIconColor: '#FFFFFF',
         calcCurrencyIconBgColor: '#293462',
+
+        convertInputBorderColor: '#DADADA',
+        userIconColor: '#FFFFFF',
+        userIconBgColor: '#slategray'
     },
     dark: {
         sbContent: 'light',
@@ -133,5 +137,10 @@ export const appTheme = {
 
         calcCurrencyIconColor: '#FFFFFF',
         calcCurrencyIconBgColor: '#292F38',
+
+        convertInputBorderColor: '#DADADA',
+        userIconColor: '#FFFFFF',
+        userIconBgColor: '#slategray'
     }
 }
+// #292F38

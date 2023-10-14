@@ -5,12 +5,12 @@ import { CustomIcon } from './CustomIcon';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import {AppContext} from "../../global/AppContext";
 
-export const TransactionCurrencyPicker = ({ currencyName, currencyIcon, onPressHandler }) => {
+export const TransactionCurrencyPicker = ({ currencyName, currencyIcon, customWidth, hasBorder, onPressHandler }) => {
 
     const { theme } = useContext(AppContext);
 
     return (
-        <TouchableOpacity style={[styles.layout, { borderColor: theme.calcAmountBorderColor }]} onPress={onPressHandler} disabled={!onPressHandler}>
+        <TouchableOpacity style={[styles.layout, { width: customWidth, borderColor: theme.convertInputBorderColor, borderWidth: hasBorder ? 1 : undefined }]} onPress={onPressHandler} disabled={!onPressHandler}>
                 <View style={styles.iconContainer}>
                     <CustomIcon
                         icon={currencyIcon}
@@ -28,12 +28,10 @@ export const TransactionCurrencyPicker = ({ currencyName, currencyIcon, onPressH
 const styles = StyleSheet.create({
     layout: {
         height: hp('7%'),
-        width: wp('25%'),
         paddingHorizontal: wp('3%'),
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius: 5,
-        borderWidth: 1,
     },
     iconContainer: {
         flexDirection: 'row',

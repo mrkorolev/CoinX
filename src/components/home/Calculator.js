@@ -47,6 +47,8 @@ export const Calculator = () => {
                 <TransactionCurrencyPicker
                     currencyName={spendCurrency.nameShort}
                     currencyIcon={spendCurrency.icon}
+                    customWidth={wp('26%')}
+                    // hasBorder
                     // onPressHandler={() => {
                     //     setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
                     //     setReceiveAmount('---');
@@ -91,8 +93,10 @@ export const Calculator = () => {
                 </View>
 
                 <TransactionCurrencyPicker
+                    customWidth={wp('26%')}
                     currencyName={receiveCurrency.nameShort}
                     currencyIcon={receiveCurrency.icon}
+                    // hasBorder
                     onPressHandler={() => {
                         setReceiveCurrency(cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length]);
                         setReceiveAmount('---');
@@ -107,14 +111,14 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        gap: hp('2%'),
+        gap: hp('2%')
     },
     separator: {
         width: Dimensions.get('window').width,
         justifyContent: 'center',
         flexDirection: 'row',
         alignItems: 'center',
-        gap: wp('13%')
+        gap: wp('10%')
     },
     separatorIcon: {
         borderRadius: 5,
@@ -132,13 +136,14 @@ const styles = StyleSheet.create({
     operationContainer: {
         justifyContent: 'center',
         paddingHorizontal: '2%',
-        height: hp('7%'),
-        width: wp('25%'),
+        height: hp('6%'),
+        width: wp('26%'),
         borderWidth: 1,
         borderRadius: 5
     },
     operationAmount: {
         fontSize: wp('3%'),
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 });

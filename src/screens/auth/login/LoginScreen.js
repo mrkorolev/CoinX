@@ -1,15 +1,12 @@
 import React, {useContext, useState} from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Alert, PixelRatio } from 'react-native';
+import {Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../../components/auth/login/CustomInput';
 import { CustomButton } from '../../../components/general/CustomButton';
 import { authenticateUser } from "../../../services/authentication";
 
-// Localization:
 import { i18n } from '../../../localization/i18n.js';
-
-// Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {AppContext} from "../../../global/AppContext";
 
@@ -33,50 +30,53 @@ export const LoginScreen = () => {
     }
 
     return (
-        <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
-            <Text style={[styles.title, { color: theme.primaryContentColor }  ]}>{i18n.t(`${screen}.title`)}</Text>
-            <CustomInput
-                placeholder={i18n.t(`${screen}.email_placeholder`)}
-                onChangeText={(text) => setUsername(text)}
-                enterKey='next'/>
+        <View
+            style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
+                <Text style={[styles.title, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.title`)}</Text>
+                <CustomInput
+                    placeholder={i18n.t(`${screen}.email_placeholder`)}
+                    onChangeText={(text) => setUsername(text)}
+                    enterKey='next'/>
 
-            <CustomInput
-                icon={
-                    <TouchableOpacity
-                        onPress={() => {
-                        setProtection(!protection);
-                        setIcon(!protection ?
-                            <EyeIcon color={theme.passwordIconColor} size={wp('6%')}/> :
-                            <EyeSlashIcon color={theme.passwordIconColor} size={wp('6%')} />);}}>
-                        {icon}
-                    </TouchableOpacity>
-                }
-                secureTextEntry={protection}
-                placeholder={i18n.t(`${screen}.password_placeholder`)}
-                onChangeText={(text) => setPassword(text)}
-                enterKey='done' />
-
-            <CustomButton
-                text={i18n.t(`${screen}.button_text`)}
-                textColor={theme.mainBtnTextColor}
-                bgColor={theme.mainBtnBgColor}
-                borderColor={theme.mainBtnBorderColor}
-                onPress={async () => {
-
-                    if(!validateInput(username, password)){
-                        Alert.alert(i18n.t(`${screen}.invalid_credentials_title`), i18n.t(`${screen}.invalid_credentials_message`));
-                        return;
+                <CustomInput
+                    icon={
+                        <TouchableOpacity
+                            onPress={() => {
+                            setProtection(!protection);
+                            setIcon(!protection ?
+                                <EyeIcon color={theme.passwordIconColor} size={wp('6%')}/> :
+                                <EyeSlashIcon color={theme.passwordIconColor} size={wp('6%')} />);}}>
+                            {icon}
+                        </TouchableOpacity>
                     }
+                    secureTextEntry={protection}
+                    placeholder={i18n.t(`${screen}.password_placeholder`)}
+                    onChangeText={(text) => setPassword(text)}
+                    enterKey='done' />
 
-                    // const response = await authenticateUser(username, password);
-                    // if(response && response.status === 200){
-                    //     console.log('LOGIN SUCCESSFUL! Proceed to OTP!');
-                    //     nav.navigate('Otp');
-                    // }
-                    nav.navigate('Otp');
-                }}
-            />
-            <View style={{ flex: 0.25 }}/>
+                <CustomButton
+                    text={i18n.t(`${screen}.button_text`)}
+                    textColor={theme.mainBtnTextColor}
+                    bgColor={theme.mainBtnBgColor}
+                    borderColor={theme.mainBtnBorderColor}
+                    onPress={async () => {
+
+                        if(!validateInput(username, password)){
+                            Alert.alert(i18n.t(`${screen}.invalid_credentials_title`), i18n.t(`${screen}.invalid_credentials_message`));
+                            return;
+                        }
+
+                        const response = await authenticateUser(username, password);
+                        if(response && response.status === 200){
+                            console.log('LOGIN SUCCESSFUL! Proceed to OTP!');
+                            nav.navigate('Otp');
+                        }
+
+                        //DEBUG
+                        // nav.navigate('Otp');
+                    }}
+                />
+                <View style={{ flex: 0.25 }}/>
         </View>
     );
 }

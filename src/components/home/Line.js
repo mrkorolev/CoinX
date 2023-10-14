@@ -5,8 +5,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 
 export const Line = ({ backgroundColor }) => (
     <View style={{
-        width: wp('20%'),
-        height: hp('0.25%'),
+        width: wp('24%'),
+        height: hp('0.1%'),
         backgroundColor: `${backgroundColor}`
     }} />
 );

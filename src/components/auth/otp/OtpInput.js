@@ -22,8 +22,8 @@ export const OtpInput = ({ value, focused }) => {
 
 const styles = StyleSheet.create({
     container: {
-        minWidth: wp('12%'),
-        minHeight: hp('8%'),
+        minWidth: wp('13%'),
+        minHeight: wp('13%'),
         borderWidth: 1,
         borderRadius: 5,
         padding: wp('3%'),

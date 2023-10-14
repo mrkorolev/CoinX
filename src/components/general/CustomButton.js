@@ -5,8 +5,6 @@ import {AppContext} from "../../global/AppContext";
 
 export const CustomButton = ({ text, isDisabled, onPress, textColor, bgColor, borderColor }) => {
 
-    const { theme } = useContext(AppContext);
-
     return (
         <TouchableOpacity
             style={[styles.appButtonContainer, { backgroundColor: bgColor, borderColor: borderColor }]}
@@ -20,6 +18,7 @@ export const CustomButton = ({ text, isDisabled, onPress, textColor, bgColor, bo
 const styles = StyleSheet.create({
     appButtonContainer: {
         borderRadius: 5,
+        borderWidth: 1,
         justifyContent: 'center',
         marginTop: hp('5%'),
         height: hp('7%')

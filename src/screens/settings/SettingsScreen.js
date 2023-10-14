@@ -45,14 +45,14 @@ export const SettingsScreen = ({navigation}) => {
 
 
     return (
-        <View style={[styles.container, { backgroundColor: theme.screenBgColor }]}>
+        <View style={[styles.container, { backgroundColor: theme.screenBgColor, gap: hp('6%') }]}>
 
             <View style={[styles.settingsContainer, {
                 paddingLeft: wp('2%'),
-                backgroundColor: theme.settingGroupBgColor
+                backgroundColor: theme.settingGroupBgColor,
             }]}>
                 <Setting
-                    customStyle={{ paddingLeft: wp('5%'), gap: wp('9%'), marginVertical: hp('2.5%') }}
+                    customStyle={{ paddingLeft: wp('5%'), gap: wp('9%'), marginVertical: hp('1.0%') }}
                     title={(
                         <View style={styles.profileSetting}>
                             <Text style={[styles.profileTitle, { color: theme.inputColor }]}>{name}</Text>
@@ -75,10 +75,11 @@ export const SettingsScreen = ({navigation}) => {
                                 borderRadius: wp('20%') * 50
                             }}
                     />}
-                    bgColor='gray'
+                    // bgColor={theme.userIconColor}
                     pressable />
             </View>
 
+            <View style={{ gap: hp('2%') }}>
             <View style={[styles.settingsContainer, { backgroundColor: theme.settingGroupBgColor}]}>
                 <Setting
                     title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.dark_mode`)}</Text>}
@@ -130,6 +131,8 @@ export const SettingsScreen = ({navigation}) => {
                     bgColor={settings[2].bgColor}
                     pressable />
             </View>
+            </View>
+            <View style={{ flex: 0.25 }}/>
         </View>
     );
 }
@@ -139,13 +142,13 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: wp('5%'),
         justifyContent: 'center',
-        gap: hp('3%')
+        gap: hp('2%')
     },
     settingsContainer: {
-        paddingVertical: hp('2%'),
+        paddingVertical: hp('1.5%'),
         borderRadius: 10,
-        paddingHorizontal: wp('4%'),
-        gap: hp('3%')
+        paddingHorizontal: wp('5%'),
+        gap: hp('1.5%')
     },
     settingTitle: {
         fontSize: wp('4%'),

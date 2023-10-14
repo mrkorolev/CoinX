@@ -57,7 +57,7 @@ export const QrScreen = ({ route, navigation }) => {
                     textColor={theme.cancelBtnTextColor}
                     bgColor={theme.cancelBtnBgColor}
                     borderColor={theme.cancelBtnBorderColor}
-                    text='Cancel Transaction'
+                    text='cancel transaction'
                     onPress={async () => {
                     Alert.alert('Cancel Transaction', 'Are you sure you want to cancel this transaction?', [{
                         text: 'No',
