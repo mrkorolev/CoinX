@@ -14,7 +14,7 @@ import {AppContext} from "../../../global/AppContext";
 
 export const OtpScreen = ({ navigation }) => {
 
-    const { theme } = useContext(AppContext);
+    const { theme, accessToken } = useContext(AppContext);
     const screen = 'screens.otp';
 
     const [code, setCode] = useState("");

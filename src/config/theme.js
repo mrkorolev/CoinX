@@ -48,7 +48,7 @@ export const appTheme = {
         // Crypto colors from home
         ethBgColor: '#E8DCF8',
         btcBgColor: '#FFFBE6',
-        trxBgColor: '#F0F4FF',
+        trxBgColor: '#638FFE1A',
         usdBgColor: 'whitesmoke',
         usdBorderColor: '#A7A7A7',
 

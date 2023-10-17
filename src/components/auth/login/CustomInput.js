@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import {AppContext} from "../../../global/AppContext";
 import {useContext} from "react";
 
-export const CustomInput = ({ icon, secureTextEntry, placeholder, onChangeText, enterKey }) => {
+export const CustomInput = ({ icon, value, secureTextEntry, placeholder, onChangeText, enterKey }) => {
 
     const { theme } = useContext(AppContext);
 
@@ -13,6 +13,7 @@ export const CustomInput = ({ icon, secureTextEntry, placeholder, onChangeText, 
         <View style={[styles.inputField, { backgroundColor: theme.placeholderBgColor, borderColor: theme.inputBorderColor }]}>
             <TextInput style={styles.inputValue}
                        color={theme.inputColor}
+                       value={value}
                        secureTextEntry={secureTextEntry}
                        placeholder={placeholder}
                        placeholderTextColor={theme.placeholderTextColor}

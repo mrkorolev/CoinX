@@ -49,7 +49,9 @@ export const MainNavigator = () => {
             <Tab.Screen
                 name={i18n.t('screens.home.screen_name')}
                 component={HomeNavigator}
-                options={ screenTabConfig(<FontAwesomeIcon icon={faTent} color={theme.activeTintColor} size={wp('6%')} />, <FontAwesomeIcon icon={faTent} color={theme.inactiveTintColor} size={wp('6%')} />) }/>
+                options={ screenTabConfig(
+                    <FontAwesomeIcon icon={faTent} color={theme.activeTintColor} size={wp('6%')} />,
+                    <FontAwesomeIcon icon={faTent} color={theme.inactiveTintColor} size={wp('6%')} />) }/>
             <Tab.Screen
                 name={i18n.t('screens.transaction.screen_name')}
                 component={TransactionNavigator}

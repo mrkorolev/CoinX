@@ -27,7 +27,7 @@ export const TransactionDetail = ({ parameter, value, icon, disabled, onPressHan
 const styles = StyleSheet.create({
     detailsContainer: {
         flexDirection: 'row',
-        paddingVertical: hp('2%'),
+        paddingVertical: hp('1%'),
         paddingHorizontal: wp('5%')
     },
     detailsLayout: {

@@ -1,11 +1,24 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { View, Text, StyleSheet } from "react-native";
 import {AppContext} from "../../global/AppContext";
-import {widthPercentageToDP as wp} from "react-native-responsive-screen";
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
 
-export const AboutScreen = () => {
+export const AboutScreen = ({ navigation }) => {
 
     const { theme } = useContext(AppContext);
+    // useEffect(() => {
+    //     navigation.getParent()?.setOptions({
+    //         tabBarStyle: {
+    //             display: 'none',
+    //             backgroundColor: theme.screenBgColor,
+    //             borderTopWidth: 0
+    //         },
+    //         tabBarVisible: false });
+    //     return () => navigation.getParent()?.setOptions({
+    //         tabBarStyle: undefined,
+    //         tabBarVisible: undefined,
+    //     });
+    // }, [navigation]);
 
     return (
         <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>

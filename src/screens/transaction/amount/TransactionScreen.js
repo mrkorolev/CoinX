@@ -16,18 +16,18 @@ import {AppContext} from "../../../global/AppContext";
 
 export const TransactionScreen = ({ navigation }) => {
 
-    const { theme } = useContext(AppContext);
+    const { theme, accessToken } = useContext(AppContext);
     const screen = 'screens.transaction';
 
     const [spendAmount, setSpendAmount] = useState('');
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
     const [receiveAmount, setReceiveAmount] = useState('');
-    const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
+    const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[1]);
     const [rate, setRate] = useState(null);
     const [commission, setCommission] = useState('');
     const [readyToProceed, setReadyToProceed] = useState(false);
-    const [network, setNetwork] = useState(availableNetworks[0]);
-
+    const [network, setNetwork] = useState(availableNetworks[1]);
+    const [networkDisabled, setNetworkDisabled] = useState(true);
 
     useEffect(() => {
         console.log(spendCurrency.nameShort);
@@ -130,9 +130,8 @@ export const TransactionScreen = ({ navigation }) => {
                                 onPress: async () => {
                                     const finalSpendAmount = parseFloat(spendAmount.replaceAll(',', ''));
                                     transactionDebug(finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
-                                    const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
 
-                                    // DEBUG:
+                                    const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
                                     navigation.navigate('QR', {
                                         walletData: walletData.address,
                                         networkData: `${network.networkName} (${network.networkCode})`
@@ -140,6 +139,13 @@ export const TransactionScreen = ({ navigation }) => {
                                 }
                             }]);
                     } else {
+
+                        // DEBUG
+                        // navigation.navigate('QR', {
+                        //     walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfo',
+                        //     networkData: 'Tron (TRC20)'
+                        // });
+
                         const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
                         const commissionRate = parseFloat(await commissionDataRequest(accessToken));
                         const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
@@ -149,12 +155,6 @@ export const TransactionScreen = ({ navigation }) => {
                         setRate(pricePerUnit);
                         setReadyToProceed(true);
                         console.log(network.networkCode);
-
-                        // DEBUG:
-                        // navigation.navigate(i18n.t('screens.qr_code.screen_name'), {
-                        //     walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfo',
-                        //     networkData: 'Tron (TRC20)'
-                        // });
                     }
                 }} />
             <View style={{ flex: 0.25 }}/>

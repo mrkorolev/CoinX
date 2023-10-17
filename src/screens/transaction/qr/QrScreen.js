@@ -14,7 +14,7 @@ import {AppContext} from "../../../global/AppContext";
 
 export const QrScreen = ({ route, navigation }) => {
 
-    const { theme } = useContext(AppContext);
+    const { theme, accessToken } = useContext(AppContext);
     const screen = 'screens.qr_code';
 
     const [walletAddress, setWalletAddress] = useState('');
@@ -57,25 +57,28 @@ export const QrScreen = ({ route, navigation }) => {
                     textColor={theme.cancelBtnTextColor}
                     bgColor={theme.cancelBtnBgColor}
                     borderColor={theme.cancelBtnBorderColor}
-                    text='cancel transaction'
+                    text={i18n.t(`${screen}.cancel_title`)}
                     onPress={async () => {
-                    Alert.alert('Cancel Transaction', 'Are you sure you want to cancel this transaction?', [{
-                        text: 'No',
+                    Alert.alert(i18n.t(`${screen}.warning_title`), i18n.t(`${screen}.warning_message`), [{
+                        text: i18n.t(`${screen}.deny_message`),
                         style: 'default',
                         onPress: () => {
                             console.log('Not cancelling current transaction!');
                         }
                     },
                         {
-                            text: 'Confirm',
+                            text: i18n.t(`${screen}.confirm_message`),
                             style: 'destructive',
                             onPress: async () => {
-                                const cancelStatus = await cancelTransactionRequest(accessToken, walletAddress);
+                                // const cancelStatus = await cancelTransactionRequest(accessToken, walletAddress);
+                                //
+                                // if(cancelStatus){
+                                //     alert('Successfully cancelled transaction!');
+                                //     navigation.goBack();
+                                // }
 
-                                if(cancelStatus){
-                                    alert('Successfully cancelled transaction!');
-                                    navigation.goBack();
-                                }
+                                // DEBUG:
+                                navigation.goBack();
                             }
                         }]);
                 }} />

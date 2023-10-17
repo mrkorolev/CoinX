@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
@@ -13,15 +13,17 @@ import {AppContext} from "../../../global/AppContext";
 export const LoginScreen = () => {
 
     // App context
-    const { theme } = useContext(AppContext);
+    const {
+        theme, accessToken,
+        setAccessToken, setRefreshToken } = useContext(AppContext);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [protection, setProtection] = useState(true);
     const [icon, setIcon] = useState(<EyeIcon color={`${theme.passwordIconColor}`} size={wp('6%')} />);
     const nav = useNavigation();
-
     const screen = 'screens.login';
+
     const validateInput = (username, password) => {
         if(!username || !password){
             return false;
@@ -34,11 +36,13 @@ export const LoginScreen = () => {
             style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
                 <Text style={[styles.title, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.title`)}</Text>
                 <CustomInput
+                    value={username}
                     placeholder={i18n.t(`${screen}.email_placeholder`)}
                     onChangeText={(text) => setUsername(text)}
-                    enterKey='next'/>
+                    enterKey='next' />
 
                 <CustomInput
+                    value={password}
                     icon={
                         <TouchableOpacity
                             onPress={() => {
@@ -49,6 +53,7 @@ export const LoginScreen = () => {
                             {icon}
                         </TouchableOpacity>
                     }
+
                     secureTextEntry={protection}
                     placeholder={i18n.t(`${screen}.password_placeholder`)}
                     onChangeText={(text) => setPassword(text)}
@@ -60,6 +65,8 @@ export const LoginScreen = () => {
                     bgColor={theme.mainBtnBgColor}
                     borderColor={theme.mainBtnBorderColor}
                     onPress={async () => {
+                        console.log(`Username: ${username}`);
+                        console.log(`Password: ${password}`);
 
                         if(!validateInput(username, password)){
                             Alert.alert(i18n.t(`${screen}.invalid_credentials_title`), i18n.t(`${screen}.invalid_credentials_message`));
@@ -68,11 +75,14 @@ export const LoginScreen = () => {
 
                         const response = await authenticateUser(username, password);
                         if(response && response.status === 200){
-                            console.log('LOGIN SUCCESSFUL! Proceed to OTP!');
+                            setAccessToken(response.data.access_token);
+                            setRefreshToken(response.data.refresh_token);
+                            console.log('LOGIN SUCCESSFUL (token saved)! Proceed to OTP!');
                             nav.navigate('Otp');
                         }
 
-                        //DEBUG
+                        // DEBUG
+                        // setAccessToken('123123');
                         // nav.navigate('Otp');
                     }}
                 />

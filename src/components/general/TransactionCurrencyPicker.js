@@ -10,7 +10,10 @@ export const TransactionCurrencyPicker = ({ currencyName, currencyIcon, customWi
     const { theme } = useContext(AppContext);
 
     return (
-        <TouchableOpacity style={[styles.layout, { width: customWidth, borderColor: theme.convertInputBorderColor, borderWidth: hasBorder ? 1 : undefined }]} onPress={onPressHandler} disabled={!onPressHandler}>
+        <TouchableOpacity
+            style={[styles.layout, { width: customWidth, borderColor: theme.convertInputBorderColor, borderWidth: hasBorder ? 1 : undefined }]}
+            onPress={onPressHandler}
+            disabled={!onPressHandler}>
                 <View style={styles.iconContainer}>
                     <CustomIcon
                         icon={currencyIcon}

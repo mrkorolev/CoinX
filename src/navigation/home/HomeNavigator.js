@@ -37,14 +37,17 @@ export const HomeNavigator = () => {
                         <View style={styles.headerRightLayout}>
                             <CustomHeaderIcon
                                 icon={faHeadset}
-                                onPressHandler={() =>
-                                    // navigation.navigate('CUSTOMER_SUPPORT')
-                                    console.log('request support!!!')} />
+                                onPressHandler={() => {}}
+                            />
                             <CustomHeaderIcon
                                 isNotifiable
                                 hasUnread
                                 icon={faBell}
-                                onPressHandler={() => navigation.navigate('NOTIFICATIONS')}  />
+                                // onPresshandler={() => {}}
+
+                                onPressHandler={() => navigation.navigate('NOTIFICATIONS')}
+
+                            />
                         </View>
                     ),
                     headerLeft: () => {},

@@ -15,9 +15,21 @@ import {CustomButton} from "../../components/general/CustomButton";
 import {AppContext} from "../../global/AppContext";
 
 export const ProfileScreen = ({ route, navigation }) => {
-    const { theme } = useContext(AppContext);
+    const { theme, setAccessToken } = useContext(AppContext);
     const screen = 'screens.profile';
     const { name, phone, email, address, commission } = route.params;
+
+    // useEffect(() => {
+    //     navigation.getParent()?.setOptions({
+    //         tabBarStyle: {
+    //             display: 'none',
+    //             backgroundColor: theme.screenBgColor
+    //         },
+    //         tabBarVisible: false });
+    //     return () => navigation.getParent()?.setOptions({
+    //         tabBarStyle: undefined,
+    //         tabBarVisible: undefined, });
+    // }, [navigation]);
 
     return (
         <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
@@ -45,8 +57,11 @@ export const ProfileScreen = ({ route, navigation }) => {
                     textColor={theme.mainBtnTextColor}
                     bgColor={theme.mainBtnBgColor}
                     borderColor={theme.mainBtnBorderColor}
-                    text='Logout'
-                    onPress={() => navigation.navigate('Login')} />
+                    text={i18n.t(`${screen}.logout_title`)}
+                    onPress={() => {
+                        setAccessToken(undefined);
+                        navigation.navigate('Login')
+                    }} />
             </View>
         </View>
     );

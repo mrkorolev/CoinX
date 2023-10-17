@@ -45,7 +45,12 @@
       "screen_name": "QR Code",
       "warning": "Send only BTC to this deposit address. This address does not support deposit of non-fungible token, please go to NFT page to deposit NFT.",
       "wallet_address": "Wallet Address",
-      "network": "Network"
+      "network": "Network",
+      "cancel_title": "cancel transaction",
+      "warning_title": "Cancel Transaction",
+      "warning_message": "Are you sure you want to cancel this transaction?",
+      "deny_message": "Deny",
+      "confirm_message": "Confirm"
     },
     "settings": {
       "screen_name": "Settings",
@@ -60,7 +65,8 @@
       "phone_number": "Phone number",
       "email": "Email",
       "address": "Address",
-      "commission_rate": "Commission rate"
+      "commission_rate": "Commission rate",
+      "logout_title": "Logout"
     },
     "terms_and_conditions": {
       "screen_name": "Terms and Conditions"

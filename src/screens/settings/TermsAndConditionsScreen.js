@@ -1,9 +1,9 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { View, Text, StyleSheet } from "react-native";
 import { AppContext } from "../../global/AppContext";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
-export const TermsAndConditionsScreen = () => {
+export const TermsAndConditionsScreen = ({ navigation }) => {
 
     const { theme } = useContext(AppContext);
 

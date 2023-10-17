@@ -17,7 +17,7 @@ export const CustomHeaderIcon = ({ icon, hasUnread, isNotifiable, onPressHandler
                 <FontAwesomeIcon icon={icon} color={theme.helperIconColor} size={iconDimensions} />
                 { isNotifiable ? <View style={[styles.iconContainer, { width: notWidth }]}>
                     { hasUnread ?
-                        <View style={[styles.unread, { backgroundColor: theme.helperIconColor }]}/> :
+                        <View style={[styles.unread, { backgroundColor: theme.helperIconColor, borderColor: theme.screenBgColor }]}/> :
                         null
                     }
                 </View> : null }
@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     },
     unread: {
         width: wp('2%'),
-        height: hp('1%'),
-        borderRadius: wp('2%')/2
+        height: wp('2%'),
+        borderRadius: wp('2%')/2,
+        borderWidth: 1.5
     }
 });

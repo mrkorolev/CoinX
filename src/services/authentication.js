@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 import { i18n } from "../localization/i18n";
 
 // const baseUrl = 'https://payone.com.tr/';
-const baseUrl = 'http://192.168.5.5:25000/';
+const baseUrl = 'http://192.168.5.5:7075/';
 
 const apiVersion = 'api/v1/';
 const authentication = 'auth/check/';
@@ -34,7 +34,6 @@ export const authenticateUser = async (username, password) => {
             }
         });
 
-        // Access/refresh tokens come into picture right here:
         console.log(JSON.stringify(authenticationResponse.data, undefined, 4));
         return authenticationResponse;
     }catch(error){

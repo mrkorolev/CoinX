@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, View, Text } from 'react-native';
+import { StyleSheet, Dimensions, View, Text, TouchableOpacity } from 'react-native';
 import { InboxArrowDownIcon, CheckCircleIcon, BackspaceIcon } from 'react-native-heroicons/solid';
 
 export const Notification = ( {notification} ) => {
@@ -21,16 +21,16 @@ export const Notification = ( {notification} ) => {
 
     return (
         <View>
-            <View style={[styles.container, {backgroundColor: `${backgroundStatus}`}]}>
+            <TouchableOpacity style={[styles.container, {backgroundColor: `${backgroundStatus}`}]}>
                 {icon}
                 <View style={{ flex: 0.075 }} />
                 <View style={{ flex: 1, alignItems: 'flex-start'}}>
-                    <Text style={styles.primaryText}>{notification.title}</Text>  
+                    <Text style={styles.primaryText}>{notification.title}</Text>
                     <Text style={styles.secondaryText}>{notification.body}</Text>
                 </View>
                 {/* <View style={{ flex: 0.075 }} /> */}
                 <Text style={{ fontSize: 11}}>{notification.timestamp}</Text>
-            </View>
+            </TouchableOpacity>
             <View style={{ width: Dimensions.get('window').width, height: 0.5, backgroundColor: 'lightgray' }} />
         </View>
     );

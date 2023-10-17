@@ -2,7 +2,7 @@ import {Appearance, StyleSheet, Text, View} from 'react-native';
 
 import {faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect, useContext, useLayoutEffect} from "react";
 import { CustomToggle } from "../../components/settings/CustomToggle";
 import { Setting } from "../../components/settings/Setting";
 
@@ -19,7 +19,8 @@ export const SettingsScreen = ({navigation}) => {
     const {
         themeName, setThemeName,
         theme, setTheme,
-        pushEnabled, setPushEnabled } = useContext(AppContext);
+        pushEnabled, setPushEnabled,
+        accessToken } = useContext(AppContext);
     const screen = 'screens.settings';
 
     const [name, setName] = useState('---');
@@ -29,23 +30,34 @@ export const SettingsScreen = ({navigation}) => {
     const [commission, setCommission] = useState('---');
     const [enablePush, setEnablePush] = useState(false);
 
-    useEffect(async () => {
-        console.log('Re-render initiated!');
-        const userData = await userProfileVerification(accessToken);
-        if(!userData) return;
-        const commissionData = await commissionDataRequest(accessToken);
+    useLayoutEffect(() => {
+        let requestUserData = async () => {
+            console.log('Re-render initiated!');
+            const userData = await userProfileVerification(accessToken);
+            if(!userData) return;
+            const commissionData = await commissionDataRequest(accessToken);
 
-        setName(userData.name);
-        setPhone(userData.phone);
-        setEmail(userData.email);
-        setAddress(userData.address);
-        setCommission(`${commissionData} %`);
+            setName(userData.name);
+            setPhone(userData.phone);
+            setEmail(userData.email);
+            setAddress(userData.address);
+            setCommission(`${commissionData} %`);
+        }
+        requestUserData();
+
+        return () => {
+            setName('---');
+            setPhone('---');
+            setEmail('---');
+            setAddress('---');
+            setCommission('---');
+        }
     }, []);
 
 
 
     return (
-        <View style={[styles.container, { backgroundColor: theme.screenBgColor, gap: hp('6%') }]}>
+        <View style={[styles.container, { backgroundColor: theme.screenBgColor }]}>
 
             <View style={[styles.settingsContainer, {
                 paddingLeft: wp('2%'),
@@ -132,7 +144,6 @@ export const SettingsScreen = ({navigation}) => {
                     pressable />
             </View>
             </View>
-            <View style={{ flex: 0.25 }}/>
         </View>
     );
 }
@@ -142,7 +153,8 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: wp('5%'),
         justifyContent: 'center',
-        gap: hp('2%')
+        gap: hp('6%'),
+        paddingBottom: hp('13%')
     },
     settingsContainer: {
         paddingVertical: hp('1.5%'),

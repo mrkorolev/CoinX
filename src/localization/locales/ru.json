@@ -45,15 +45,37 @@
       "screen_name": "QR Код Депозита",
       "warning": "Отправляйте на предоставленный адрес только BTC. Данный адрес не поддерживает NFT депозиты, в целях создания NFT депозита сделайте это на странице NFT.",
       "wallet_address": "Адрес Кошелька",
-      "network": "Сеть"
+      "network": "Сеть",
+      "cancel_title": "отмена депозита",
+      "warning_title": "Отмена Депозита",
+      "warning_message": "Вы уверены в отмене выполнение данного депозита?",
+      "deny_message": "Отмена",
+      "confirm_message": "Подтвердить"
     },
     "settings": {
       "screen_name": "Настройки",
       "dark_mode": "Темная тема",
       "notifications": "Пуш-уведомления",
       "terms_and_conditions": "Условия Использования",
-      "privacy_policy": "Политика Конфиденциальности",
+      "privacy_policy": "Конфиденциальность",
       "about": "Информация"
+    },
+    "profile": {
+      "screen_name": "Профиль",
+      "phone_number": "Номер телефона",
+      "email": "Почтовый адрес",
+      "address": "Адрес",
+      "commission_rate": "Коммиссия",
+      "logout_title": "Выход"
+    },
+    "terms_and_conditions": {
+      "screen_name": "Условия Использования"
+    },
+    "privacy_policy": {
+      "screen_name": "Конфиденциальность"
+    },
+    "about": {
+      "screen_name": "Информация"
     }
   },
   "request_errors": {

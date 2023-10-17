@@ -44,14 +44,37 @@
       "screen_name": "QR Kodu",
       "warning": "Sadece BTC'yi bu yatırma adresine gönderin. Bu adres, non-fungible token yatırımını desteklememektedir. Lütfen NFT sayfasına giderek NFT yatırımı yapın.",
       "wallet_address": "Cüzdan Adresi",
-      "network": "Ağ"
+      "network": "Ağ",
+      "cancel_title": "işlemi iptal et",
+      "warning_title": "İşlemi İptal Et",
+      "warning_message": "Bu işlemi iptal etmek istediğinizden emin misiniz?",
+      "deny_message": "Reddet",
+      "confirm_message": "Onayla"
+    },
+    "settings": {
+      "screen_name": "Ayarlar",
+      "dark_mode": "Koyu mod",
+      "notifications": "Anında bildirimler",
+      "terms_and_conditions": "Kullanım Koşulları",
+      "privacy_policy": "Gizlilik Politikası",
+      "about": "Hakkında"
     },
     "profile": {
       "screen_name": "Profil",
       "phone_number": "Telefon numarası",
       "email": "E-posta",
       "address": "Adres",
-      "commission_rate": "Komisyon oranı"
+      "commission_rate": "Komisyon oranı",
+      "logout_title": "Çıkış Yap"
+    },
+    "terms_and_conditions": {
+      "screen_name": "Kullanım Koşulları"
+    },
+    "privacy_policy": {
+      "screen_name": "Gizlilik Politikası"
+    },
+    "about": {
+      "screen_name": "Hakkında"
     }
   },
   "request_errors": {
