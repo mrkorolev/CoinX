@@ -74,18 +74,18 @@ export const cryptoCurrencies = [
 
 export const availableNetworks = [
     {
-        networkCode: 'TRC20',
-        networkName: 'Tron',
-        icon: faHive
-    },
-    {
         networkCode: 'BTC',
         networkName: 'Bitcoin',
         icon: faHive
     },
     {
-        networkCode: 'ECR20',
+        networkCode: 'ERC20',
         networkName: 'Ethereum',
+        icon: faHive
+    },
+    {
+        networkCode: 'TRC20',
+        networkName: 'Tron',
         icon: faHive
     }
 ];

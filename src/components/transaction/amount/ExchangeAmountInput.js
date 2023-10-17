@@ -6,7 +6,7 @@ import { TransactionCurrencyPicker } from '../../general/TransactionCurrencyPick
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {AppContext} from "../../../global/AppContext";
 
-export const ExchangeAmountInput = ({ operation, chosenCurrencyName, isNetwork, networkEnabled, chosenCurrencyIcon, onPressHandler, onChangeAmount, placeholder, isEditable, value, textColor }) => {
+export const ExchangeAmountInput = ({ operation, chosenCurrencyName, isNetwork, pickerDisabled, chosenCurrencyIcon, onPressHandler, onChangeAmount, placeholder, isEditable, value, textColor }) => {
     const { theme } = useContext(AppContext);
     return (
         <View>
@@ -14,7 +14,7 @@ export const ExchangeAmountInput = ({ operation, chosenCurrencyName, isNetwork, 
             <View style={styles.rowContainer}>
 
                 <TransactionCurrencyPicker
-
+                    isEditable={pickerDisabled}
                     customWidth={wp('25%')}
                     currencyName={chosenCurrencyName}
                     currencyIcon={chosenCurrencyIcon}

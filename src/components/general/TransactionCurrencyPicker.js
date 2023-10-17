@@ -5,7 +5,7 @@ import { CustomIcon } from './CustomIcon';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import {AppContext} from "../../global/AppContext";
 
-export const TransactionCurrencyPicker = ({ currencyName, currencyIcon, customWidth, hasBorder, onPressHandler }) => {
+export const TransactionCurrencyPicker = ({ currencyName, currencyIcon, customWidth, hasBorder, onPressHandler, isEditable }) => {
 
     const { theme } = useContext(AppContext);
 
@@ -13,7 +13,7 @@ export const TransactionCurrencyPicker = ({ currencyName, currencyIcon, customWi
         <TouchableOpacity
             style={[styles.layout, { width: customWidth, borderColor: theme.convertInputBorderColor, borderWidth: hasBorder ? 1 : undefined }]}
             onPress={onPressHandler}
-            disabled={!onPressHandler}>
+            disabled={isEditable}>
                 <View style={styles.iconContainer}>
                     <CustomIcon
                         icon={currencyIcon}

@@ -34,8 +34,8 @@ npx expo start
 ```
 
 Valid testing credentials: \
-Username: arekan-user \
-Password: ArekanSoft123
+Username: nael.alyousefi@final.edu.tr \
+Password: admin@1234
 
 
 ## Screens
