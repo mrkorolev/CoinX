@@ -1,37 +1,49 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, Dimensions, View, Text, TouchableOpacity } from 'react-native';
-import { InboxArrowDownIcon, CheckCircleIcon, BackspaceIcon } from 'react-native-heroicons/solid';
+import { faClock, faCircleXmark, faCircleCheck } from "@fortawesome/free-regular-svg-icons";
+import {AppContext} from "../../global/AppContext";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
-export const Notification = ( {notification} ) => {
+export const Notification = ({ notification, navigation }) => {
 
-    let backgroundStatus = 'white'
-    let icon = <InboxArrowDownIcon color='black'/>;
-    switch(notification.status){
-        case 'success':
-            backgroundStatus = '#DCFFE9'
-            icon = <CheckCircleIcon color='black'/>
+    const { theme } = useContext(AppContext);
+    let backgroundStatus;
+    let icon;
+
+    switch(notification.transaction_status){
+        case -1:
+            backgroundStatus = `${theme.depositBgCancel}`;
+            icon = faCircleXmark;
             break;
-        case 'failure':
-            backgroundStatus = 'mistyrose'
-            icon = <BackspaceIcon color='black'/>
+        case 0:
+            backgroundStatus = `${theme.depositBgPending}`;
+            icon = faClock
             break;
-        default:
+        case 1:
+            backgroundStatus = `${theme.depositBgSuccess}`
+            icon = faCircleCheck
             break;
     }
 
     return (
         <View>
-            <TouchableOpacity style={[styles.container, {backgroundColor: `${backgroundStatus}`}]}>
-                {icon}
-                <View style={{ flex: 0.075 }} />
-                <View style={{ flex: 1, alignItems: 'flex-start'}}>
-                    <Text style={styles.primaryText}>{notification.title}</Text>
-                    <Text style={styles.secondaryText}>{notification.body}</Text>
+            <TouchableOpacity
+                style={[styles.container, {backgroundColor: `${backgroundStatus}`}]}
+                onPress={() => navigation.navigate('QR_HISTORY', {
+                    walletData: notification.address,
+                    networkData: `${notification.network}`,
+                    // Can just send the number, everything else should be ok!
+                    depositStatus: notification.transaction_status
+                })}>
+                <FontAwesomeIcon size={wp('6%')} icon={icon} color={theme.primaryContentColor} />
+                <View style={styles.statusMessageContainer}>
+                    <Text style={[styles.primaryText, { color: theme.primaryContentColor }]}>{`${notification.expected_crypto} ${notification.coin}`}</Text>
+                    <Text style={[styles.secondaryText, { color: theme.primaryContentColor } ]}>{`Network: ${notification.network}`}</Text>
                 </View>
-                {/* <View style={{ flex: 0.075 }} /> */}
-                <Text style={{ fontSize: 11}}>{notification.timestamp}</Text>
+                <Text style={{ fontSize: wp('3.5%'), color: theme.primaryContentColor }}>{notification.start_timestamp}</Text>
             </TouchableOpacity>
-            <View style={{ width: Dimensions.get('window').width, height: 0.5, backgroundColor: 'lightgray' }} />
+            <View style={[styles.itemSeparator, { backgroundColor: theme.secondaryContentColor }]} />
         </View>
     );
 }
@@ -39,15 +51,26 @@ export const Notification = ( {notification} ) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        padding: 15
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: hp('1%'),
+        paddingHorizontal: wp('6%'),
+        gap: wp('7%')
+    },
+    statusMessageContainer: {
+        flex: 1,
+        alignItems: 'flex-start',
+        gap: hp('0.7%')
     },
     primaryText: {
-        fontSize: 13,
+        fontSize: wp('3.5%'),
         fontWeight: 'bold'
     },
     secondaryText: {
-        fontSize: 9,
-        color: 'gray',
-        paddingTop: 5
+        fontSize: wp('3%')
+    },
+    itemSeparator: {
+        width: Dimensions.get('window').width,
+        height: hp('0.03%')
     }
 });

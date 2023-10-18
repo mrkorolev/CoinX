@@ -22,8 +22,8 @@
       "error_title": "Input Error",
       "error_message": "Invalid or empty input! Try again!"
     },
-    "notifications": {
-      "screen_name": "Notifications"
+    "history": {
+      "screen_name": "Deposit History"
     },
     "transaction": {
       "screen_name": "New Transaction",
@@ -46,6 +46,7 @@
       "warning": "Send only BTC to this deposit address. This address does not support deposit of non-fungible token, please go to NFT page to deposit NFT.",
       "wallet_address": "Wallet Address",
       "network": "Network",
+      "status": "Status",
       "cancel_title": "cancel transaction",
       "warning_title": "Cancel Transaction",
       "warning_message": "Are you sure you want to cancel this transaction?",
@@ -86,6 +87,10 @@
     "otp_request": {
       "reason": "OTP Verification",
       "message": "\nAn error occurred while trying to perform your OTP verification! Check your OTP validity and try again "
+    },
+    "history_request": {
+      "reason": "Deposit History",
+      "message": "\nAn error occurred while trying to request your deposit history! Try to log out and log in again "
     },
     "wallet_request": {
       "reason": "Wallet Information",

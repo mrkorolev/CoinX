@@ -2,12 +2,13 @@ import axios from "axios";
 import { Alert } from 'react-native';
 import { i18n } from "../localization/i18n";
 
-// const baseUrl = 'https://payone.com.tr/';
-const baseUrl = 'http://192.168.5.5:7075/';
+const baseUrl = 'https://payone.com.tr/';
+// const baseUrl = 'http://192.168.5.5:7075/';
 
 const apiVersion = 'api/v1/';
 const authentication = 'auth/check/';
 
+const depositHistoryEndpoint = 'user/info/user-transactions'
 const walletEndpoint = 'capital/transac/deposit/wallet';
 const cancelTransactionEndpoint = 'capital/transac/cancel/wallet';
 const commissionEndpoint = 'user/info/user-commission';
@@ -59,6 +60,26 @@ export const otpVerification = async (accessToken, providedCode) => {
 
         console.log(JSON.stringify(otpResponse.data, undefined, 4));
         return otpResponse;
+    }catch(error){
+        generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
+    }
+    return null;
+}
+
+export const depositHistoryRequest = async (accessToken) => {
+    const request_error = 'request_errors.history_request';
+    try{
+        const historyResponse = await axios({
+            method: 'get',
+            url: `${baseUrl}${apiVersion}${depositHistoryEndpoint}`,
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-type': 'application/json'
+            }
+        });
+
+        console.log(JSON.stringify(historyResponse.data, undefined, 4));
+        return historyResponse;
     }catch(error){
         generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }

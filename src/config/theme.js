@@ -69,7 +69,11 @@ export const appTheme = {
 
         convertInputBorderColor: '#DADADA',
         userIconColor: '#FFFFFF',
-        userIconBgColor: '#slategray'
+        userIconBgColor: '#slategray',
+
+        depositBgSuccess: '#EAFDDF',
+        depositBgPending: '#FEFFEC',
+        depositBgCancel: '#FFF5F5'
     },
     dark: {
         sbContent: 'light',
@@ -140,7 +144,11 @@ export const appTheme = {
 
         convertInputBorderColor: '#DADADA',
         userIconColor: '#FFFFFF',
-        userIconBgColor: '#slategray'
+        userIconBgColor: '#slategray',
+
+        depositBgSuccess: '#22303C',
+        depositBgPending: '#3D3D3D',
+        depositBgCancel: '#212124'
     }
 }
 // #292F38

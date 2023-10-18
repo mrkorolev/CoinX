@@ -1,117 +1,59 @@
-import React, {useContext} from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import { ScrollView, StyleSheet, View, Text, RefreshControl } from 'react-native';
 import { Notification } from '../../components/notifications/Notification';
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {AppContext} from "../../global/AppContext";
+import {depositHistoryRequest} from "../../services/authentication";
 
-export const NotificationScreen = () => {
+export const NotificationScreen = ({ navigation }) => {
 
-    const { theme } = useContext(AppContext);
+    const { theme, themeName, accessToken } = useContext(AppContext);
+    const [history, setHistory] = useState();
 
-    const data = [
-          {
-            id: 0,
-            timestamp: "09:00 AM",
-            title: "Received",
-            body: "Transaction completed successfully",
-            status: "success"
-          },
-          {
-            id: 1,
-            timestamp: "01:30 PM",
-            title: "Sent",
-            body: "Funds transferred to recipient",
-            status: "success"
-          },
-          {
-            id: 2,
-            timestamp: "10:45 AM",
-            title: "Received",
-            body: "Payment received from client",
-            status: "success"
-          },
-          {
-            id: 3,
-            timestamp: "07:15 PM",
-            title: "Sent",
-            body: "Transaction failed due to insufficient funds",
-            status: "failure"
-          },
-          {
-            id: 4,
-            timestamp: "09:00 AM",
-            title: "Received",
-            body: "Transaction completed successfully",
-            status: "success"
-          },
-          {
-            id: 5,
-            timestamp: "01:30 PM",
-            title: "Sent",
-            body: "Funds transferred to recipient",
-            status: "success"
-          },
-          {
-            id: 6,
-            timestamp: "10:45 AM",
-            title: "Received",
-            body: "Payment received from client",
-            status: "success"
-          },
-          {
-            id: 7,
-            timestamp: "07:15 PM",
-            title: "Sent",
-            body: "Transaction failed due to insufficient funds",
-            status: "failure"
-          },
-          {
-            id: 8,
-            timestamp: "09:00 AM",
-            title: "Received",
-            body: "Transaction completed successfully",
-            status: "success"
-          },
-          {
-            id: 9,
-            timestamp: "01:30 PM",
-            title: "Sent",
-            body: "Funds transferred to recipient",
-            status: "success"
-          },
-          {
-            id: 10,
-            timestamp: "10:45 AM",
-            title: "Received",
-            body: "Payment received from client",
-            status: "success"
-          },
-          {
-            id: 11,
-            timestamp: "07:15 PM",
-            title: "Sent",
-            body: "Transaction failed due to insufficient funds",
-            status: "failure"
-          }
-    ];
+    const createNotifications = (deposits) => {
+        return deposits
+            .sort((h1, h2) => h2.start_timestamp - h1.start_timestamp)
+            .map(element => <Notification key={element.id} notification={element} navigation={navigation}/>);
+    }
 
-    const notifications =
-        data.sort((a,b) => a.timestamp < b.timestamp)
-            .map(element => <Notification key={element.id} notification={element}/>);
+    // Create a refresh function right here!
+
+    useEffect(() => {
+        const getDepositHistoryData = async () => {
+            const historyResponse = await depositHistoryRequest(accessToken);
+            console.log(historyResponse.data);
+            if(historyResponse && historyResponse.status === 200){
+                setHistory(historyResponse.data);
+            }
+        }
+        getDepositHistoryData();
+    }, []);
 
     return (
         <View style={[styles.container, { backgroundColor: theme.screenBgColor }]}>
-            <ScrollView>
-                {notifications}
-            </ScrollView>
+            {history ?
+                <ScrollView
+                    indicatorStyle={themeName === 'light' ? 'black' : 'white'}
+                    showsVerticalScrollIndicator
+                    horizontal={false}
+                    // refreshControl={
+                    //     <RefreshControl refreshing={true} onRefresh={} />
+                    // } >
+                    >
+                    {createNotifications(history)}
+                </ScrollView> :
+                <Text style={{color: theme.primaryContentColor, fontSize: wp('3.5%')}}>No history to display just yet...</Text>
+            }
         </View>
     );
 }
 
 const styles  = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });

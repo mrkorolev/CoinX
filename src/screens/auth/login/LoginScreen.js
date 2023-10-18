@@ -9,6 +9,8 @@ import { authenticateUser } from "../../../services/authentication";
 import { i18n } from '../../../localization/i18n.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {AppContext} from "../../../global/AppContext";
+import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 
 export const LoginScreen = () => {
 
@@ -20,7 +22,7 @@ export const LoginScreen = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [protection, setProtection] = useState(true);
-    const [icon, setIcon] = useState(<EyeIcon color={`${theme.passwordIconColor}`} size={wp('6%')} />);
+    const [icon, setIcon] = useState(<FontAwesomeIcon icon={faEye} color={`${theme.passwordIconColor}`} size={wp('6%')} />);
     const nav = useNavigation();
     const screen = 'screens.login';
 
@@ -48,8 +50,8 @@ export const LoginScreen = () => {
                             onPress={() => {
                             setProtection(!protection);
                             setIcon(!protection ?
-                                <EyeIcon color={theme.passwordIconColor} size={wp('6%')}/> :
-                                <EyeSlashIcon color={theme.passwordIconColor} size={wp('6%')} />);}}>
+                                <FontAwesomeIcon icon={faEye} color={theme.passwordIconColor} size={wp('6%')}/> :
+                                <FontAwesomeIcon icon={faEyeSlash} color={theme.passwordIconColor} size={wp('6%')} />);}}>
                             {icon}
                         </TouchableOpacity>
                     }

@@ -153,10 +153,18 @@ export const TransactionScreen = ({ navigation }) => {
                                     const finalSpendAmount = parseFloat(spendAmount.replaceAll(',', ''));
                                     transactionDebug(network, finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
 
+                                    // DEBUG
+                                    // navigation.navigate('QR', {
+                                    //     walletData: '123123123123123123',
+                                    //     networkData: `TRC20`,
+                                    //     depositStatus: 0
+                                    // });
+
                                     const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
                                     navigation.navigate('QR', {
                                         walletData: walletData.address,
-                                        networkData: `${network.networkName} (${network.networkCode})`
+                                        networkData: `${network.networkCode}`,
+                                        depositStatus: 'Pending'
                                     });
                                 }
                             }]);

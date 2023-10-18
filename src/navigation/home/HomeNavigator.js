@@ -15,6 +15,7 @@ import { faHeadset } from "@fortawesome/free-solid-svg-icons";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {faBell} from "@fortawesome/free-regular-svg-icons";
 import {AppContext} from "../../global/AppContext";
+import {QrScreen} from "../../screens/transaction/qr/QrScreen";
 
 const Stack = createNativeStackNavigator();
 // const Stack = createStackNavigator();
@@ -43,10 +44,7 @@ export const HomeNavigator = () => {
                                 isNotifiable
                                 hasUnread
                                 icon={faBell}
-                                // onPresshandler={() => {}}
-
-                                onPressHandler={() => navigation.navigate('NOTIFICATIONS')}
-
+                                onPressHandler={() => navigation.navigate('DEPOSIT_HISTORY')}
                             />
                         </View>
                     ),
@@ -57,16 +55,27 @@ export const HomeNavigator = () => {
                     }
                 })}/>
             <Stack.Screen
-                name={`NOTIFICATIONS`}
+                name={`DEPOSIT_HISTORY`}
                 component={ NotificationScreen }
                 options={({navigation}) => ({
-                    headerTitle: () => <CustomHeader title={i18n.t('screens.notifications.screen_name')} />,
+                    headerTitle: () => <CustomHeader title={i18n.t('screens.history.screen_name')} />,
                     headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
                     headerTitleAlign: 'center',
                     headerStyle: {
                         backgroundColor: theme.screenBgColor
                     }
                 })}/>
+            <Stack.Screen
+                name={'QR_HISTORY'}
+                component={ QrScreen }
+                options={({navigation}) => ({
+                    headerTitle: () => <CustomHeader title={i18n.t('screens.qr_code.screen_name')} />,
+                    headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
+                    headerTitleAlign: 'center',
+                    headerStyle: {
+                        backgroundColor: theme.screenBgColor
+                    }
+                })} />
         </Stack.Navigator>
     );
 }

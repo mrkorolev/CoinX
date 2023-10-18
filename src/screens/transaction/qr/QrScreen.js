@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {View, StyleSheet, Dimensions, Alert} from 'react-native';
-import { ClipboardDocumentCheckIcon, ArrowsRightLeftIcon } from 'react-native-heroicons/solid';
+import {ClipboardDocumentCheckIcon, ArrowsRightLeftIcon, ChartBarIcon} from 'react-native-heroicons/solid';
 import * as Clipboard from 'expo-clipboard';
 import { QrCode } from '../../../components/transaction/qr/QrCode';
 import { TransactionDetail } from '../../../components/transaction/qr/TransactionDetail';
@@ -11,6 +11,8 @@ import {CustomButton} from "../../../components/general/CustomButton";
 import {cancelTransactionRequest} from "../../../services/authentication";
 import {accessToken} from "../../../constants";
 import {AppContext} from "../../../global/AppContext";
+import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import {faArrowRightArrowLeft, faFileLines} from "@fortawesome/free-solid-svg-icons";
 
 export const QrScreen = ({ route, navigation }) => {
 
@@ -19,13 +21,14 @@ export const QrScreen = ({ route, navigation }) => {
 
     const [walletAddress, setWalletAddress] = useState('');
     const [network, setNetwork] = useState('');
-
-    const { walletData, networkData } = route.params;
+    const [status, setStatus] = useState();
+    const { walletData, networkData, depositStatus } = route.params;
 
 
     useEffect(() => {
         setWalletAddress(walletData);
         setNetwork(networkData);
+        setStatus(depositStatus);
     }, []);
 
     return (
@@ -39,7 +42,7 @@ export const QrScreen = ({ route, navigation }) => {
             <TransactionDetail
                 parameter={i18n.t(`${screen}.wallet_address`)}
                 value={walletAddress}
-                icon={<ClipboardDocumentCheckIcon color={theme.helperIconColor} />}
+                icon={<FontAwesomeIcon size={wp('5.5%')} icon={faFileLines} color={theme.helperIconColor} />}
                 onPressHandler={async () => {
                     await Clipboard.setStringAsync(walletAddress);
                     console.log('Clipboard set to: ' + walletAddress);
@@ -49,10 +52,10 @@ export const QrScreen = ({ route, navigation }) => {
             <TransactionDetail
                 parameter={i18n.t(`${screen}.network`)}
                 value={network}
-                icon={<ArrowsRightLeftIcon color={theme.helperIconColor} />}
+                icon={<FontAwesomeIcon size={wp('5.5%')} icon={faArrowRightArrowLeft} color={theme.helperIconColor} />}
                 disabled={true} />
 
-            <View style={styles.cancelButtonContainer}>
+            { status === 0 && <View style={styles.cancelButtonContainer}>
                 <CustomButton
                     textColor={theme.cancelBtnTextColor}
                     bgColor={theme.cancelBtnBgColor}
@@ -82,7 +85,7 @@ export const QrScreen = ({ route, navigation }) => {
                             }
                         }]);
                 }} />
-            </View>
+            </View> }
 
         </View>
     );
