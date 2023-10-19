@@ -22,8 +22,9 @@
       "error_title": "Ошибка ввода",
       "error_message": "Неверный или пустой ввод! Попробуйте снова!"
     },
-    "notifications": {
-      "screen_name": "История Депозитов"
+    "history": {
+      "screen_name": "История Депозитов",
+      "waiting_message": "Ожидание истории депозитов..."
     },
     "transaction": {
       "screen_name": "Новый Депозит",

@@ -73,15 +73,15 @@ export const QrScreen = ({ route, navigation }) => {
                             text: i18n.t(`${screen}.confirm_message`),
                             style: 'destructive',
                             onPress: async () => {
-                                // const cancelStatus = await cancelTransactionRequest(accessToken, walletAddress);
-                                //
-                                // if(cancelStatus){
-                                //     alert('Successfully cancelled transaction!');
-                                //     navigation.goBack();
-                                // }
+                                const cancelStatus = await cancelTransactionRequest(accessToken, walletAddress);
+
+                                if(cancelStatus){
+                                    alert('Successfully cancelled transaction!');
+                                    navigation.goBack();
+                                }
 
                                 // DEBUG:
-                                navigation.goBack();
+                                // navigation.goBack();
                             }
                         }]);
                 }} />

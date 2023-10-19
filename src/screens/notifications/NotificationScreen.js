@@ -1,16 +1,27 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { ScrollView, StyleSheet, View, Text, RefreshControl } from 'react-native';
 import { Notification } from '../../components/notifications/Notification';
-
-// Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {AppContext} from "../../global/AppContext";
 import {depositHistoryRequest} from "../../services/authentication";
+import {i18n} from "../../localization/i18n";
 
 export const NotificationScreen = ({ navigation }) => {
 
     const { theme, themeName, accessToken } = useContext(AppContext);
     const [history, setHistory] = useState();
+    const [refreshing, setRefreshing] = useState(false);
+    const screen = 'screens.history';
+
+    useEffect(() => {
+        navigation.addListener('focus', () => {
+            getDepositHistoryData();
+        });
+
+        return () => {
+            navigation.removeListener('focus');
+        }
+    }, [navigation]);
 
     const createNotifications = (deposits) => {
         return deposits
@@ -18,18 +29,14 @@ export const NotificationScreen = ({ navigation }) => {
             .map(element => <Notification key={element.id} notification={element} navigation={navigation}/>);
     }
 
-    // Create a refresh function right here!
-
-    useEffect(() => {
-        const getDepositHistoryData = async () => {
-            const historyResponse = await depositHistoryRequest(accessToken);
-            console.log(historyResponse.data);
-            if(historyResponse && historyResponse.status === 200){
-                setHistory(historyResponse.data);
-            }
+    const getDepositHistoryData = async () => {
+        const historyResponse = await depositHistoryRequest(accessToken);
+        console.log(historyResponse.data);
+        if(historyResponse && historyResponse.status === 200){
+            setHistory(historyResponse.data);
         }
-        getDepositHistoryData();
-    }, []);
+        return historyResponse.status;
+    }
 
     return (
         <View style={[styles.container, { backgroundColor: theme.screenBgColor }]}>
@@ -38,13 +45,26 @@ export const NotificationScreen = ({ navigation }) => {
                     indicatorStyle={themeName === 'light' ? 'black' : 'white'}
                     showsVerticalScrollIndicator
                     horizontal={false}
-                    // refreshControl={
-                    //     <RefreshControl refreshing={true} onRefresh={} />
-                    // } >
-                    >
+                    refreshControl={
+                        <RefreshControl
+                            tintColor={theme.primaryContentColor}
+                            colors={theme.primaryContentColor}
+                            refreshing={refreshing} onRefresh={async () => {
+                            setRefreshing(true);
+                            let status = await getDepositHistoryData();
+                            if(status === 200){
+                                setRefreshing(false);
+                            }else{
+                                setTimeout(() => {
+                                    setRefreshing(false);
+                                    Alert.alert(i18n.t('request_errors.history_request.reason'), i18n.t('request_errors.history_request.message'));
+                                }, 5000);
+                            }
+                        }} />
+                    } >
                     {createNotifications(history)}
                 </ScrollView> :
-                <Text style={{color: theme.primaryContentColor, fontSize: wp('3.5%')}}>No history to display just yet...</Text>
+                <Text style={{color: theme.primaryContentColor, fontSize: wp('3.5%')}}>{i18n.t(`${screen}.waiting_message`)}</Text>
             }
         </View>
     );

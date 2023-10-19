@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 export const Notification = ({ notification, navigation }) => {
 
     const { theme } = useContext(AppContext);
+    const date = new Date(parseInt(notification.start_timestamp) * 1000);
+
     let backgroundStatus;
     let icon;
 
@@ -26,6 +28,7 @@ export const Notification = ({ notification, navigation }) => {
             break;
     }
 
+    const formatInput = (input) => input < 10 ? `0${input}` : input
     return (
         <View>
             <TouchableOpacity
@@ -33,7 +36,6 @@ export const Notification = ({ notification, navigation }) => {
                 onPress={() => navigation.navigate('QR_HISTORY', {
                     walletData: notification.address,
                     networkData: `${notification.network}`,
-                    // Can just send the number, everything else should be ok!
                     depositStatus: notification.transaction_status
                 })}>
                 <FontAwesomeIcon size={wp('6%')} icon={icon} color={theme.primaryContentColor} />
@@ -41,7 +43,10 @@ export const Notification = ({ notification, navigation }) => {
                     <Text style={[styles.primaryText, { color: theme.primaryContentColor }]}>{`${notification.expected_crypto} ${notification.coin}`}</Text>
                     <Text style={[styles.secondaryText, { color: theme.primaryContentColor } ]}>{`Network: ${notification.network}`}</Text>
                 </View>
-                <Text style={{ fontSize: wp('3.5%'), color: theme.primaryContentColor }}>{notification.start_timestamp}</Text>
+                <View style={[styles.statusMessageContainer, { alignItems: 'flex-end' }]}>
+                    <Text style={[styles.secondaryText, { color: theme.primaryContentColor }]}>{formatInput(date.getDate())}/{formatInput(date.getMonth())}/{formatInput(date.getFullYear())}</Text>
+                    <Text style={[styles.secondaryText, { color: theme.primaryContentColor } ]}>{formatInput(date.getHours())}:{formatInput(date.getMinutes())}</Text>
+                </View>
             </TouchableOpacity>
             <View style={[styles.itemSeparator, { backgroundColor: theme.secondaryContentColor }]} />
         </View>
@@ -55,7 +60,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: hp('1%'),
         paddingHorizontal: wp('6%'),
-        gap: wp('7%')
+        gap: wp('7%'),
+        // width: Dimensions.get('window').width
     },
     statusMessageContainer: {
         flex: 1,

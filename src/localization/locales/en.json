@@ -23,7 +23,8 @@
       "error_message": "Invalid or empty input! Try again!"
     },
     "history": {
-      "screen_name": "Deposit History"
+      "screen_name": "Deposit History",
+      "waiting_message": "Waiting for deposit history..."
     },
     "transaction": {
       "screen_name": "New Transaction",
