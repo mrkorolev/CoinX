@@ -42,6 +42,7 @@ export const SettingsNavigator = ({ navigation }) => {
                 name='PROFILE'
                 component={ProfileScreen}
                 options={({navigation}) => ({
+                    headerTintColor: theme.primaryContentColor,
                     headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
                     headerTitle: () => <CustomHeader title={i18n.t('screens.profile.screen_name')} />,
                     headerTitleAlign: 'center',
@@ -53,6 +54,7 @@ export const SettingsNavigator = ({ navigation }) => {
                 name='TERMS_AND_CONDITIONS'
                 component={TermsAndConditionsScreen}
                 options={({navigation}) => ({
+                    headerTintColor: theme.primaryContentColor,
                     headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
                     headerTitle: () => <CustomHeader title={i18n.t('screens.terms_and_conditions.screen_name')} />,
                     headerTitleAlign: 'center',
@@ -64,6 +66,7 @@ export const SettingsNavigator = ({ navigation }) => {
                 name='PRIVACY_POLICY'
                 component={PrivacyPolicyScreen}
                 options={({navigation}) => ({
+                    headerTintColor: theme.primaryContentColor,
                     headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
                     headerTitle: () => <CustomHeader title={i18n.t('screens.privacy_policy.screen_name')} />,
                     headerTitleAlign: 'center',
@@ -75,6 +78,7 @@ export const SettingsNavigator = ({ navigation }) => {
                 name='ABOUT'
                 component={AboutScreen}
                 options={({navigation}) => ({
+                    headerTintColor: theme.primaryContentColor,
                     headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
                     headerTitle: () => <CustomHeader title={i18n.t('screens.about.screen_name')} />,
                     headerTitleAlign: 'center',

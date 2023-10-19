@@ -36,6 +36,7 @@ export const TransactionNavigator = () => {
                 name='QR'
                 component={QrScreen}
                 options={({navigation}) => ({
+                    headerTintColor: theme.primaryContentColor,
                     headerTitle: () => <CustomHeader title={i18n.t('screens.qr_code.screen_name')}/>,
                     headerLeft: () => Platform.OS === 'ios' ?
                         <CustomBackButton onPressHandler={() => navigation.goBack()}/> : undefined,

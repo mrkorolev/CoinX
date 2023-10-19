@@ -55,7 +55,7 @@ export const QrScreen = ({ route, navigation }) => {
                 icon={<FontAwesomeIcon size={wp('5.5%')} icon={faArrowRightArrowLeft} color={theme.helperIconColor} />}
                 disabled={true} />
 
-            { status === 0 && <View style={styles.cancelButtonContainer}>
+            { status === 0 ? <View style={styles.cancelButtonContainer}>
                 <CustomButton
                     textColor={theme.cancelBtnTextColor}
                     bgColor={theme.cancelBtnBgColor}
@@ -85,7 +85,7 @@ export const QrScreen = ({ route, navigation }) => {
                             }
                         }]);
                 }} />
-            </View> }
+            </View> : <View style={{ flex: 0.5 }}/>}
 
         </View>
     );
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         marginVertical: hp('2%')
     },
     cancelButtonContainer: {
-        flex: 1,
+        flex: 0.5,
         paddingHorizontal: wp('5%')
     }
 });

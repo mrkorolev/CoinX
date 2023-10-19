@@ -5,6 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import {AppContext} from "../../global/AppContext";
 import {depositHistoryRequest} from "../../services/authentication";
 import {i18n} from "../../localization/i18n";
+import * as Progress from 'react-native-progress';
 
 export const NotificationScreen = ({ navigation }) => {
 
@@ -48,7 +49,6 @@ export const NotificationScreen = ({ navigation }) => {
                     refreshControl={
                         <RefreshControl
                             tintColor={theme.primaryContentColor}
-                            colors={theme.primaryContentColor}
                             refreshing={refreshing} onRefresh={async () => {
                             setRefreshing(true);
                             let status = await getDepositHistoryData();
@@ -61,7 +61,7 @@ export const NotificationScreen = ({ navigation }) => {
                                 }, 5000);
                             }
                         }} />
-                    } >
+                    }>
                     {createNotifications(history)}
                 </ScrollView> :
                 <Text style={{color: theme.primaryContentColor, fontSize: wp('3.5%')}}>{i18n.t(`${screen}.waiting_message`)}</Text>

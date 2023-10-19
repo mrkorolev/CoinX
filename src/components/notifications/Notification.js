@@ -32,6 +32,7 @@ export const Notification = ({ notification, navigation }) => {
     return (
         <View>
             <TouchableOpacity
+                disabled={notification.transaction_status !== 0}
                 style={[styles.container, {backgroundColor: `${backgroundStatus}`}]}
                 onPress={() => navigation.navigate('QR_HISTORY', {
                     walletData: notification.address,

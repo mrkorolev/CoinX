@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import {AppContext} from "../../global/AppContext";
 
-export const CustomHeaderIcon = ({ icon, hasUnread, isNotifiable, onPressHandler }) => {
+export const CustomHeaderIcon = ({ icon, onPressHandler }) => {
 
     const { theme } = useContext(AppContext);
 
@@ -15,12 +15,6 @@ export const CustomHeaderIcon = ({ icon, hasUnread, isNotifiable, onPressHandler
             <TouchableOpacity
                 onPress={onPressHandler}>
                 <FontAwesomeIcon icon={icon} color={theme.helperIconColor} size={iconDimensions} />
-                { isNotifiable ? <View style={[styles.iconContainer, { width: notWidth }]}>
-                    { hasUnread ?
-                        <View style={[styles.unread, { backgroundColor: theme.helperIconColor, borderColor: theme.screenBgColor }]}/> :
-                        null
-                    }
-                </View> : null }
             </TouchableOpacity>
         </View>
     );

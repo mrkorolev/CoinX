@@ -34,6 +34,7 @@ export const StartupNavigator = () => {
                     options={({navigation}) => ({
                         gestureEnabled: false,
                         headerTitle: '',
+                        headerTintColor: theme.primaryContentColor,
                         headerTransparent: true,
                         headerLeft: () => Platform.OS === 'ios' ?
                             <CustomBackButton onPressHandler={() => navigation.goBack()}/> : undefined,

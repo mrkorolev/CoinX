@@ -71,9 +71,11 @@ export const appTheme = {
         userIconColor: '#FFFFFF',
         userIconBgColor: '#slategray',
 
-        depositBgSuccess: '#EAFDDF',
+        depositBgSuccess: '#DCFFE9',
         depositBgPending: '#FEFFEC',
-        depositBgCancel: '#FFF5F5'
+        depositBgCancel: 'mistyrose',
+
+        historyLoadBorderColor: '#293462'
     },
     dark: {
         sbContent: 'light',
@@ -148,7 +150,9 @@ export const appTheme = {
 
         depositBgSuccess: '#22303C',
         depositBgPending: '#3D3D3D',
-        depositBgCancel: '#212124'
+        depositBgCancel: '#212124',
+
+        historyLoadBorderColor: '#FFFFFF',
     }
 }
 // #292F38

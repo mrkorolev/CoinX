@@ -11,7 +11,7 @@ import { CustomHeader } from "../../components/general/CustomHeader";
 import { CustomHeaderIcon } from "../../components/general/CustomHeaderIcon";
 import { CustomBackButton } from "../../components/general/CustomBackButton";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import { faHeadset } from "@fortawesome/free-solid-svg-icons";
+import {faHeadset, faShuffle} from "@fortawesome/free-solid-svg-icons";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {faBell} from "@fortawesome/free-regular-svg-icons";
 import {AppContext} from "../../global/AppContext";
@@ -40,12 +40,12 @@ export const HomeNavigator = () => {
                                 icon={faHeadset}
                                 onPressHandler={() => {}}
                             />
+
                             <CustomHeaderIcon
-                                isNotifiable
-                                hasUnread
-                                icon={faBell}
+                                icon={faShuffle}
                                 onPressHandler={() => navigation.navigate('DEPOSIT_HISTORY')}
                             />
+
                         </View>
                     ),
                     headerLeft: () => {},
@@ -58,6 +58,7 @@ export const HomeNavigator = () => {
                 name={`DEPOSIT_HISTORY`}
                 component={ NotificationScreen }
                 options={({navigation}) => ({
+                    headerTintColor: theme.primaryContentColor,
                     headerTitle: () => <CustomHeader title={i18n.t('screens.history.screen_name')} />,
                     headerLeft: () => Platform.OS === 'ios' ? <CustomBackButton onPressHandler={() => navigation.goBack()} /> : undefined,
                     headerTitleAlign: 'center',
