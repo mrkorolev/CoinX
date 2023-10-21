@@ -12,7 +12,7 @@ import { CustomHeaderIcon } from "../../components/general/CustomHeaderIcon";
 import { CustomBackButton } from "../../components/general/CustomBackButton";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faHeadset, faShuffle} from "@fortawesome/free-solid-svg-icons";
-import {widthPercentageToDP as wp} from "react-native-responsive-screen";
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {faBell} from "@fortawesome/free-regular-svg-icons";
 import {AppContext} from "../../global/AppContext";
 import {QrScreen} from "../../screens/transaction/qr/QrScreen";
@@ -26,7 +26,6 @@ export const HomeNavigator = () => {
 
     return (
         <Stack.Navigator screenOptions={{
-            // gestureEnabled: false,
             headerShadowVisible: false
         }}>
             <Stack.Screen
@@ -41,11 +40,21 @@ export const HomeNavigator = () => {
                                 onPressHandler={() => {}}
                             />
 
+                            <View>
+                                <CustomHeaderIcon
+                                    customStyle={styles.iconContainer}
+                                    icon={faBell}
+                                    onPressHandler={() => navigation.navigate('DEPOSIT_HISTORY')}
+                                    notifiable
+                                />
+                            </View>
+
+
+
                             <CustomHeaderIcon
                                 icon={faShuffle}
-                                onPressHandler={() => navigation.navigate('DEPOSIT_HISTORY')}
+                                onPressHandler={() => {}}
                             />
-
                         </View>
                     ),
                     headerLeft: () => {},
@@ -84,7 +93,7 @@ export const HomeNavigator = () => {
 const styles = StyleSheet.create({
     headerRightLayout: {
         flexDirection: 'row',
-        gap: wp('6%'),
+        gap: wp('4.5%'),
         paddingRight: wp('2%')
     }
 });

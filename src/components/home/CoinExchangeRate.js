@@ -15,7 +15,7 @@ export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePe
                     <Text style={[styles.coinInsides, { color: primaryColor }]}>{nameShort}</Text>
                     <Text style={[styles.coinInsides, { color: primaryColor }]}>{lastPrice}</Text>
                 </View>
-                <Text style={[styles.coinInsides, styles.percentChangeText, { color: secondaryColor }]}>{priceChangePercent} %</Text>
+                <Text style={[styles.coinInsides, styles.percentChangeText, { color: secondaryColor }]}>{priceChangePercent}%</Text>
             </View>
             <View style={styles.bottomLevel}>
                 <CustomIcon
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         height: hp('20%'),
         borderRadius: 10,
         justifyContent: 'space-between',
-        paddingHorizontal: wp('4%'),
+        paddingHorizontal: wp('3.5%'),
         paddingVertical: wp('6%'),
         margin: wp('1.5%')
     },
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
     bottomLevel: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: wp('4%')
+        gap: wp('2.5%')
     }
 });

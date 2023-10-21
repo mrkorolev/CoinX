@@ -47,8 +47,9 @@ export const appTheme = {
 
         // Crypto colors from home
         ethBgColor: '#E8DCF8',
-        btcBgColor: '#FFFBE6',
-        trxBgColor: '#638FFE1A',
+        btcBgColor: '#FFD60033',
+        trxBgColor: '#FF525233',
+
         usdBgColor: 'whitesmoke',
         usdBorderColor: '#A7A7A7',
 
@@ -124,13 +125,13 @@ export const appTheme = {
 
         // Crypto colors from home
         ethBgColor: '#7B61FF',
-        btcBgColor: '#FFD600',
-        trxBgColor: '#638FFE',
+        btcBgColor: '#F0B90B',
+        trxBgColor: '#FF5252',
         usdBgColor: '#1F252D',
         usdBorderColor: '#FFFFFF',
 
-        btcPrimaryColor: '#000000',
-        btcSecondaryColor: '#000000',
+        btcPrimaryColor: '#FFFFFF',
+        btcSecondaryColor: '#FFFFFF',
 
         exchangeIconColor: '#1F252D',
         exchangeIconBgColor: '#FFFFFF',

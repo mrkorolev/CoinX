@@ -44,17 +44,17 @@ export const Calculator = () => {
                     />
                 </View>
 
+
                 <TransactionCurrencyPicker
                     currencyName={spendCurrency.nameShort}
                     currencyIcon={spendCurrency.icon}
                     customWidth={wp('26%')}
-                    // hasBorder
+                    hasBorder
                     // onPressHandler={() => {
                     //     setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
                     //     setReceiveAmount('---');
                     // }}
                 />
-
             </View>
 
             <View style={styles.separator}>
@@ -83,20 +83,21 @@ export const Calculator = () => {
             </View>
 
             <View style={styles.pickerLayout}>
-                <View style={[styles.operationContainer, { borderColor: theme.calcAmountBorderColor}]}>
-                    <TextInput style={[styles.operationAmount, { color: theme.primaryContentColor }]}
-                               maxLength={10}
-                               keyboardType='decimal-pad'
-                               keyboardKeyType='done'
-                               editable={false}
-                               value={receiveAmount} />
-                </View>
+                    <View style={[styles.operationContainer, { borderColor: theme.calcAmountBorderColor}]}>
+                        <TextInput style={[styles.operationAmount, { color: theme.primaryContentColor }]}
+                                   maxLength={10}
+                                   keyboardType='decimal-pad'
+                                   keyboardKeyType='done'
+                                   editable={false}
+                                   value={receiveAmount} />
+                    </View>
+
 
                 <TransactionCurrencyPicker
                     customWidth={wp('26%')}
                     currencyName={receiveCurrency.nameShort}
                     currencyIcon={receiveCurrency.icon}
-                    // hasBorder
+                    hasBorder
                     onPressHandler={() => {
                         setReceiveCurrency(cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length]);
                         setReceiveAmount('---');
@@ -130,12 +131,12 @@ const styles = StyleSheet.create({
     pickerLayout: {
         width: Dimensions.get('window').width,
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
+        justifyContent: 'space-around'
     },
     operationContainer: {
         justifyContent: 'center',
-        paddingHorizontal: '2%',
+        paddingHorizontal: wp('2%'),
+        marginTop: hp('0.8%'),
         height: hp('6%'),
         width: wp('26%'),
         borderWidth: 1,
@@ -145,5 +146,11 @@ const styles = StyleSheet.create({
         fontSize: wp('3%'),
         fontWeight: 'bold',
         textAlign: 'center'
+    },
+    operationAmountText: {
+        fontSize: wp('3%'),
+        borderLeftWidth: 2,
+        borderRightWidth: 2,
+        paddingHorizontal: wp('0.25%')
     }
 });

@@ -36,11 +36,11 @@ export const ExchangeRatesData = () => {
             lastPrice:
                 coinObject.lastPrice === '---' ?
                     coinObject.lastPrice :
-                    `${parseFloat(coinObject.lastPrice).toFixed(4)}`,
+                    `${parseFloat(coinObject.lastPrice).toFixed(3)}`,
             priceChangePercent:
                 coinObject.priceChangePercent === '---' ?
                     coinObject.priceChangePercent :
-                    `${parseFloat(coinObject.priceChangePercent) >= 0 ? '+' : ''}${parseFloat(coinObject.priceChangePercent).toFixed(3)}`,
+                    `${parseFloat(coinObject.priceChangePercent) >= 0 ? '+' : ''}${parseFloat(coinObject.priceChangePercent).toFixed(2)}`,
             coinIcon: coinObject.icon
         }));
     }
@@ -89,7 +89,6 @@ export const ExchangeRatesData = () => {
             </View>
             <View style={styles.rowContainer}>
 
-                {/* Add TRX and USDT here */}
                 <CoinExchangeRate
                     nameShort={coinComponents[2].nameShort}
                     nameLong={coinComponents[2].nameLong}

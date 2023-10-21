@@ -4,32 +4,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import {AppContext} from "../../global/AppContext";
 
-export const CustomHeaderIcon = ({ icon, onPressHandler }) => {
+export const CustomHeaderIcon = ({ icon, onPressHandler, notifiable }) => {
 
     const { theme } = useContext(AppContext);
 
-    const iconDimensions = wp('6%');
-    const notWidth = iconDimensions - wp('0.75%');
+    const iconDimensions = wp('6.2%');
+    const blobDimensions = wp('5.8%');
     return (
         <View>
             <TouchableOpacity
                 onPress={onPressHandler}>
                 <FontAwesomeIcon icon={icon} color={theme.helperIconColor} size={iconDimensions} />
+                <View style={[styles.blobContainer, { height: blobDimensions, width: blobDimensions }]}>
+                    {notifiable ?
+                        <View style={{ borderWidth: 2, borderRadius: wp('3%')/2, borderColor: theme.screenBgColor }}>
+                            <View style={[ styles.blob, { backgroundColor: theme.primaryContentColor }]} />
+                        </View>: undefined}
+                </View>
             </TouchableOpacity>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    iconContainer: {
+    blobContainer: {
         position: 'absolute',
         alignItems: 'flex-end',
-        height: hp('0.5%')
+        paddingRight: wp('0.5%'),
+        paddingTop: hp('0.1%')
     },
-    unread: {
-        width: wp('2%'),
-        height: wp('2%'),
-        borderRadius: wp('2%')/2,
-        borderWidth: 1.5
+    blob: {
+        borderRadius: wp('1.5%')/2,
+        width: wp('1.5%'),
+        height: wp('1.5%')
     }
 });
