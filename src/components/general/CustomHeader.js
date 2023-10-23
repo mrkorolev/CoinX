@@ -17,6 +17,6 @@ export const CustomHeader = ({ title }) => {
 const styles = StyleSheet.create({
     screenTitle: {
         fontWeight: 'bold',
-        fontSize: wp('4.5%')
+        fontSize: wp('4%')
     }
 });

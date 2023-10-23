@@ -85,7 +85,7 @@ export const MainNavigator = () => {
                         backgroundColor: theme.tabBgColor,
                         height: hp('12%'),
                         borderTopWidth: 0,
-                        display: hideTabBar(route, ['QR_DETAILS'])
+                        display: hideTabBar(route, ['QR_DETAILS']) ? 'none' : 'flex'
                     }
                 })} />
             <Tab.Screen
@@ -103,7 +103,7 @@ export const MainNavigator = () => {
                         height: hp('12%'),
                         borderTopWidth: 0,
                         position: 'absolute',
-                        display: hideTabBar(route, ['PROFILE', 'TERMS_OF_USE', 'PRIVACY', 'ABOUT'], 'SETTINGS')
+                        display: hideTabBar(route, ['PROFILE', 'TERMS_OF_USE', 'PRIVACY', 'ABOUT'], 'SETTINGS') ? 'none' : 'flex'
                     }
                 })} />
         </Tab.Navigator>

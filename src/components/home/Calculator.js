@@ -11,7 +11,7 @@ import {TransactionCurrencyPicker} from "../general/TransactionCurrencyPicker";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {AppContext} from "../../global/AppContext";
 
-export const Calculator = () => {
+export const Calculator = ({ modifyScrollAction }) => {
 
     const { theme } = useContext(AppContext);
     const screen = 'screens.home';
@@ -31,6 +31,7 @@ export const Calculator = () => {
                                maxLength={10}
                                keyboardType='number-pad'
                                enterKeyHint='done'
+                               onFocus={() => setReceiveAmount('---')}
                                onChangeText={(text) => {
                                    let inputValue = text;
                                    inputValue = inputValue.replace(/[,\.]/g, '');
@@ -50,6 +51,7 @@ export const Calculator = () => {
                     currencyIcon={spendCurrency.icon}
                     customWidth={wp('26%')}
                     hasBorder
+                    disabled={false}
                     // onPressHandler={() => {
                     //     setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
                     //     setReceiveAmount('---');
@@ -113,7 +115,8 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        gap: hp('2%')
+        gap: hp('2%'),
+        paddingBottom: hp('10%')
     },
     separator: {
         width: Dimensions.get('window').width,

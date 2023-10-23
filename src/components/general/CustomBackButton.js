@@ -14,7 +14,7 @@ export const CustomBackButton = ({ onPressHandler }) => {
         <TouchableOpacity
             style={styles.container}
             onPress={onPressHandler}>
-            <FontAwesomeIcon icon={faChevronLeft} color={theme.primaryContentColor} size={wp('5%')} />
+            <FontAwesomeIcon icon={faChevronLeft} color={theme.primaryContentColor} size={wp('4.5%')} />
         </TouchableOpacity>
     );
 }
