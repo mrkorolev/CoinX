@@ -15,7 +15,7 @@ export const ExchangeAmountInput = ({ operation, chosenCurrencyName, isNetwork, 
 
                 <TransactionCurrencyPicker
                     isEditable={pickerDisabled}
-                    customWidth={wp('25%')}
+                    customStyle={{ flex: 1 }}
                     currencyName={chosenCurrencyName}
                     currencyIcon={chosenCurrencyIcon}
                     onPressHandler={onPressHandler}

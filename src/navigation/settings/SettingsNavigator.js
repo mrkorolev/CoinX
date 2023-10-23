@@ -51,7 +51,7 @@ export const SettingsNavigator = ({ navigation }) => {
                     }
                 })}/>
             <Stack.Screen
-                name='TERMS_AND_CONDITIONS'
+                name='TERMS_OF_USE'
                 component={TermsAndConditionsScreen}
                 options={({navigation}) => ({
                     headerTintColor: theme.primaryContentColor,
@@ -63,7 +63,7 @@ export const SettingsNavigator = ({ navigation }) => {
                     }
                 })}/>
             <Stack.Screen
-                name='PRIVACY_POLICY'
+                name='PRIVACY'
                 component={PrivacyPolicyScreen}
                 options={({navigation}) => ({
                     headerTintColor: theme.primaryContentColor,
@@ -84,7 +84,8 @@ export const SettingsNavigator = ({ navigation }) => {
                     headerTitleAlign: 'center',
                     headerStyle: {
                         backgroundColor: theme.screenBgColor
-                    }
+                    },
+
                 })}/>
         </Stack.Navigator>
     );

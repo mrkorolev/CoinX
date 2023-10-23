@@ -83,14 +83,14 @@ export const Calculator = () => {
             </View>
 
             <View style={styles.pickerLayout}>
-                    <View style={[styles.operationContainer, { borderColor: theme.calcAmountBorderColor}]}>
-                        <TextInput style={[styles.operationAmount, { color: theme.primaryContentColor }]}
-                                   maxLength={10}
-                                   keyboardType='decimal-pad'
-                                   keyboardKeyType='done'
-                                   editable={false}
-                                   value={receiveAmount} />
-                    </View>
+                <View style={[styles.operationContainer, { borderColor: theme.calcAmountBorderColor}]}>
+                    <TextInput style={[styles.operationAmount, { color: theme.primaryContentColor }]}
+                               maxLength={10}
+                               keyboardType='decimal-pad'
+                               keyboardKeyType='done'
+                               editable={false}
+                               value={receiveAmount} />
+                </View>
 
 
                 <TransactionCurrencyPicker
@@ -104,6 +104,7 @@ export const Calculator = () => {
                     }}
                 />
             </View>
+
         </View>
     );
 }

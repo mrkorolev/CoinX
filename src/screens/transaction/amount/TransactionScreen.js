@@ -11,6 +11,7 @@ import { i18n } from "../../../localization/i18n";
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {AppContext} from "../../../global/AppContext";
+import {TransactionCurrencyPicker} from "../../../components/general/TransactionCurrencyPicker";
 
 export const TransactionScreen = ({ navigation }) => {
 
@@ -57,7 +58,8 @@ export const TransactionScreen = ({ navigation }) => {
                     setReadyToProceed(null);
                 }}
                 pickerDisabled={networkDisabled}
-                isEditable={false}
+                isEditable
+                isNetwork
                 value={network.networkName}
                 textColor={theme.primaryContentColor} />
 
@@ -154,18 +156,18 @@ export const TransactionScreen = ({ navigation }) => {
                                     transactionDebug(network, finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
 
                                     // DEBUG
-                                    // navigation.navigate('QR', {
-                                    //     walletData: '123123123123123123',
-                                    //     networkData: `TRC20`,
-                                    //     depositStatus: 0
-                                    // });
-
-                                    const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
-                                    navigation.navigate('QR', {
-                                        walletData: walletData.address,
-                                        networkData: `${network.networkCode}`,
-                                        depositStatus: 'Pending'
+                                    navigation.navigate('QR_DETAILS', {
+                                        walletData: '123123123123123123',
+                                        networkData: `TRC20`,
+                                        depositStatus: 0
                                     });
+
+                                    // const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
+                                    // navigation.navigate('QR', {
+                                    //     walletData: walletData.address,
+                                    //     networkData: `${network.networkCode}`,
+                                    //     depositStatus: 'Pending'
+                                    // });
                                 }
                             }]);
                     } else {
@@ -187,7 +189,7 @@ export const TransactionScreen = ({ navigation }) => {
                         console.log(network.networkCode);
                     }
                 }} />
-            <View style={{ flex: 0.25 }}/>
+            <View style={{ flex: 0.5 }}/>
         </View>
     );
 }

@@ -39,54 +39,87 @@ export const QrScreen = ({ route, navigation }) => {
 
             <View style={styles.separator} />
 
-            <TransactionDetail
-                parameter={i18n.t(`${screen}.wallet_address`)}
-                value={walletAddress}
-                icon={<FontAwesomeIcon size={wp('5.5%')} icon={faFileLines} color={theme.helperIconColor} />}
-                onPressHandler={async () => {
-                    await Clipboard.setStringAsync(walletAddress);
-                    console.log('Clipboard set to: ' + walletAddress);
-                }}
-                disabled={false} />
+            <View style={{ paddingBottom: hp('3') }}>
+                <TransactionDetail
+                    parameter={i18n.t(`${screen}.wallet_address`)}
+                    value={walletAddress}
+                    icon={<FontAwesomeIcon size={wp('5.5%')} icon={faFileLines} color={theme.helperIconColor} />}
+                    onPressHandler={async () => {
+                        await Clipboard.setStringAsync(walletAddress);
+                        console.log('Clipboard set to: ' + walletAddress);
+                    }}
+                    disabled={false} />
 
-            <TransactionDetail
-                parameter={i18n.t(`${screen}.network`)}
-                value={network}
-                icon={<FontAwesomeIcon size={wp('5.5%')} icon={faArrowRightArrowLeft} color={theme.helperIconColor} />}
-                disabled={true} />
+                <TransactionDetail
+                    parameter={i18n.t(`${screen}.network`)}
+                    value={network}
+                    icon={<FontAwesomeIcon size={wp('5.5%')} icon={faArrowRightArrowLeft} color={theme.helperIconColor} />}
+                    disabled={true} />
+            </View>
 
-            { status === 0 ? <View style={styles.cancelButtonContainer}>
+            <View style={styles.cancelButtonContainer}>
                 <CustomButton
                     textColor={theme.cancelBtnTextColor}
                     bgColor={theme.cancelBtnBgColor}
                     borderColor={theme.cancelBtnBorderColor}
                     text={i18n.t(`${screen}.cancel_title`)}
                     onPress={async () => {
-                    Alert.alert(i18n.t(`${screen}.warning_title`), i18n.t(`${screen}.warning_message`), [{
-                        text: i18n.t(`${screen}.deny_message`),
-                        style: 'default',
-                        onPress: () => {
-                            console.log('Not cancelling current transaction!');
-                        }
-                    },
-                        {
-                            text: i18n.t(`${screen}.confirm_message`),
-                            style: 'destructive',
-                            onPress: async () => {
-                                const cancelStatus = await cancelTransactionRequest(accessToken, walletAddress);
-
-                                if(cancelStatus){
-                                    alert('Successfully cancelled transaction!');
-                                    navigation.goBack();
-                                }
-
-                                // DEBUG:
-                                // navigation.goBack();
+                        Alert.alert(i18n.t(`${screen}.warning_title`), i18n.t(`${screen}.warning_message`), [{
+                            text: i18n.t(`${screen}.deny_message`),
+                            style: 'default',
+                            onPress: () => {
+                                console.log('Not cancelling current transaction!');
                             }
-                        }]);
-                }} />
-            </View> : <View style={{ flex: 0.5 }}/>}
+                        },
+                            {
+                                text: i18n.t(`${screen}.confirm_message`),
+                                style: 'destructive',
+                                onPress: async () => {
+                                    const cancelStatus = await cancelTransactionRequest(accessToken, walletAddress);
 
+                                    if(cancelStatus){
+                                        alert('Successfully cancelled transaction!');
+                                        navigation.goBack();
+                                    }
+
+                                    // DEBUG:
+                                    // navigation.goBack();
+                                }
+                            }]);
+                    }} />
+            </View>
+
+            {/*{ status === 0 ? <View style={styles.cancelButtonContainer}>*/}
+            {/*    <CustomButton*/}
+            {/*        textColor={theme.cancelBtnTextColor}*/}
+            {/*        bgColor={theme.cancelBtnBgColor}*/}
+            {/*        borderColor={theme.cancelBtnBorderColor}*/}
+            {/*        text={i18n.t(`${screen}.cancel_title`)}*/}
+            {/*        onPress={async () => {*/}
+            {/*        Alert.alert(i18n.t(`${screen}.warning_title`), i18n.t(`${screen}.warning_message`), [{*/}
+            {/*            text: i18n.t(`${screen}.deny_message`),*/}
+            {/*            style: 'default',*/}
+            {/*            onPress: () => {*/}
+            {/*                console.log('Not cancelling current transaction!');*/}
+            {/*            }*/}
+            {/*        },*/}
+            {/*            {*/}
+            {/*                text: i18n.t(`${screen}.confirm_message`),*/}
+            {/*                style: 'destructive',*/}
+            {/*                onPress: async () => {*/}
+            {/*                    const cancelStatus = await cancelTransactionRequest(accessToken, walletAddress);*/}
+
+            {/*                    if(cancelStatus){*/}
+            {/*                        alert('Successfully cancelled transaction!');*/}
+            {/*                        navigation.goBack();*/}
+            {/*                    }*/}
+
+            {/*                    // DEBUG:*/}
+            {/*                    // navigation.goBack();*/}
+            {/*                }*/}
+            {/*            }]);*/}
+            {/*    }} />*/}
+            {/*</View> : <View style={{ flex: 0.7 }}/>}*/}
         </View>
     );
 }
@@ -105,7 +138,7 @@ const styles = StyleSheet.create({
         marginVertical: hp('2%')
     },
     cancelButtonContainer: {
-        flex: 0.5,
+        flex: 0.7,
         paddingHorizontal: wp('5%')
     }
 });

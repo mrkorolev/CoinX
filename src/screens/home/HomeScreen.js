@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, SafeAreaView, StyleSheet } from 'react-native';
 import { Calculator } from '../../components/home/Calculator';
 import { ExchangeRatesData } from '../../components/home/ExchangeRatesData';
 
@@ -10,11 +10,12 @@ export const HomeScreen = () => {
     const { theme } = useContext(AppContext);
 
     return (
-        <View
+        <SafeAreaView
             style={[styles.container, { backgroundColor: theme.screenBgColor }]}>
             <ExchangeRatesData />
             <Calculator />
-        </View>
+            <View style={{ flex: 0.2 }} />
+        </SafeAreaView>
     );
 }
 

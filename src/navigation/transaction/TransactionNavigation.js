@@ -33,7 +33,7 @@ export const TransactionNavigator = () => {
                     }
                 }}/>
             <Stack.Screen
-                name='QR'
+                name='QR_DETAILS'
                 component={QrScreen}
                 options={({navigation}) => ({
                     headerTintColor: theme.primaryContentColor,

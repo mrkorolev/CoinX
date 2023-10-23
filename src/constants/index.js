@@ -1,11 +1,8 @@
 import { faBitcoinSign, faTurkishLiraSign } from '@fortawesome/free-solid-svg-icons';
 import {faEthereum, faHive} from '@fortawesome/free-brands-svg-icons';
-import { faLitecoinSign } from '@fortawesome/free-solid-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { faMoon, faBell, faFileLines } from "@fortawesome/free-regular-svg-icons";
 import { faSignal, faQuestion, faT } from "@fortawesome/free-solid-svg-icons";
-import {useContext} from "react";
-import {AppContext} from "../global/AppContext";
 
 // Separate into different files and move into 'config' directory
 

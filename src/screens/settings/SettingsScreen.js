@@ -41,7 +41,7 @@ export const SettingsScreen = ({navigation}) => {
             setPhone(userData.phone);
             setEmail(userData.email);
             setAddress(userData.address);
-            setCommission(`${commissionData} %`);
+            setCommission(commissionData !== null ? commissionData : '---');
         }
         requestUserData();
 
@@ -92,58 +92,59 @@ export const SettingsScreen = ({navigation}) => {
             </View>
 
             <View style={{ gap: hp('2%') }}>
-            <View style={[styles.settingsContainer, { backgroundColor: theme.settingGroupBgColor}]}>
-                <Setting
-                    title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.dark_mode`)}</Text>}
-                    component={<CustomToggle
-                        value={themeName === 'dark'}
-                        onValueToggle={() => {
-                            setTheme(() => themeName === 'light' ? appTheme.dark : appTheme.light);
-                            setThemeName((prev) => prev === 'light' ? 'dark' : 'light');
-                            console.log("Dark mode just turned on!!!");
+                <View style={[styles.settingsContainer, { backgroundColor: theme.settingGroupBgColor}]}>
+                    <Setting
+                        title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.dark_mode`)}</Text>}
+                        component={<CustomToggle
+                            value={themeName === 'dark'}
+                            onValueToggle={() => {
+                                setTheme(() => themeName === 'light' ? appTheme.dark : appTheme.light);
+                                setThemeName((prev) => prev === 'light' ? 'dark' : 'light');
+                                console.log("Dark mode just turned on!!!");
 
-                    }}
-                    />}
-                    icon={<FontAwesomeIcon icon={toggles[0].icon} color={"white"} size={wp('4%')} />}
-                    bgColor={toggles[0].bgColor} />
-                <Setting
-                    title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.notifications`)}</Text>}
-                    component={<CustomToggle
-                        value={enablePush}
-                        onValueToggle={() => {
-                        setEnablePush((prev) => !prev);
-                        console.log("Push notifications value just toggled!");
-                    }}
-                    />}
-                    icon={<FontAwesomeIcon icon={toggles[1].icon} color={"white"} size={wp('4%')} />}
-                    bgColor={toggles[1].bgColor} />
-            </View>
+                        }}
+                        />}
+                        icon={<FontAwesomeIcon icon={toggles[0].icon} color={"white"} size={wp('4%')} />}
+                        bgColor={toggles[0].bgColor} />
+                    <Setting
+                        title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.notifications`)}</Text>}
+                        component={<CustomToggle
+                            value={enablePush}
+                            onValueToggle={() => {
+                            setEnablePush((prev) => !prev);
+                            console.log("Push notifications value just toggled!");
+                        }}
+                        />}
+                        icon={<FontAwesomeIcon icon={toggles[1].icon} color={"white"} size={wp('4%')} />}
+                        bgColor={toggles[1].bgColor} />
+                </View>
 
-            <View style={[styles.settingsContainer, { backgroundColor: theme.settingGroupBgColor} ]}>
-                <Setting
-                    title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.terms_and_conditions`)}</Text>}
-                    component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
-                    onPressHandler={() => navigation.navigate('TERMS_AND_CONDITIONS')}
-                    icon={<FontAwesomeIcon icon={settings[0].icon} color={"white"} size={wp('4%')} />}
-                    bgColor={settings[0].bgColor}
-                    pressable
-                />
-                <Setting
-                    title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.privacy_policy`)}</Text>}
-                    component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
-                    onPressHandler={() => navigation.navigate('PRIVACY_POLICY')}
-                    icon={<FontAwesomeIcon icon={settings[1].icon} color={"white"} size={wp('4%')} />}
-                    bgColor={settings[1].bgColor}
-                    pressable />
-                <Setting
-                    title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.about`)}</Text>}
-                    component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
-                    onPressHandler={() => navigation.navigate('ABOUT')}
-                    icon={<FontAwesomeIcon icon={settings[2].icon} color={"white"} size={wp('4%')} />}
-                    bgColor={settings[2].bgColor}
-                    pressable />
+                <View style={[styles.settingsContainer, { backgroundColor: theme.settingGroupBgColor} ]}>
+                    <Setting
+                        title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.terms_and_conditions`)}</Text>}
+                        component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
+                        onPressHandler={() => navigation.navigate('TERMS_OF_USE')}
+                        icon={<FontAwesomeIcon icon={settings[0].icon} color={"white"} size={wp('4%')} />}
+                        bgColor={settings[0].bgColor}
+                        pressable
+                    />
+                    <Setting
+                        title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.privacy_policy`)}</Text>}
+                        component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
+                        onPressHandler={() => navigation.navigate('PRIVACY')}
+                        icon={<FontAwesomeIcon icon={settings[1].icon} color={"white"} size={wp('4%')} />}
+                        bgColor={settings[1].bgColor}
+                        pressable />
+                    <Setting
+                        title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.about`)}</Text>}
+                        component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
+                        onPressHandler={() => navigation.navigate('ABOUT')}
+                        icon={<FontAwesomeIcon icon={settings[2].icon} color={"white"} size={wp('4%')} />}
+                        bgColor={settings[2].bgColor}
+                        pressable />
+                </View>
             </View>
-            </View>
+            <View style={{ flex: 0.3 }} />
         </View>
     );
 }

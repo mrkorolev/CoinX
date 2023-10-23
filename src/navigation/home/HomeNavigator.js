@@ -44,16 +44,14 @@ export const HomeNavigator = () => {
                                 <CustomHeaderIcon
                                     customStyle={styles.iconContainer}
                                     icon={faBell}
-                                    onPressHandler={() => navigation.navigate('DEPOSIT_HISTORY')}
+                                    onPressHandler={() => {}}
                                     notifiable
                                 />
                             </View>
 
-
-
                             <CustomHeaderIcon
                                 icon={faShuffle}
-                                onPressHandler={() => {}}
+                                onPressHandler={() => navigation.navigate('DEPOSIT_HISTORY')}
                             />
                         </View>
                     ),
