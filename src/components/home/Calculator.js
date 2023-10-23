@@ -22,16 +22,20 @@ export const Calculator = ({ modifyScrollAction }) => {
     const [receiveAmount, setReceiveAmount] = useState('---');
     const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
 
-
     return (
         <View style={styles.container}>
             <View style={styles.pickerLayout}>
-                <View style={[styles.operationContainer, { borderColor: theme.calcAmountBorderColor }]}>
+                <View
+                    style={[styles.operationContainer, { borderColor: theme.calcAmountBorderColor }]}>
                     <TextInput style={[styles.operationAmount, { color: theme.primaryContentColor }]}
                                maxLength={10}
                                keyboardType='number-pad'
                                enterKeyHint='done'
-                               onFocus={() => setReceiveAmount('---')}
+                               onBlur={() => modifyScrollAction(false)}
+                               onFocus={() => {
+                                   setReceiveAmount('---');
+                                   modifyScrollAction(true);
+                               }}
                                onChangeText={(text) => {
                                    let inputValue = text;
                                    inputValue = inputValue.replace(/[,\.]/g, '');
@@ -49,9 +53,9 @@ export const Calculator = ({ modifyScrollAction }) => {
                 <TransactionCurrencyPicker
                     currencyName={spendCurrency.nameShort}
                     currencyIcon={spendCurrency.icon}
-                    customWidth={wp('26%')}
+                    customStyle={{width: wp('25%')}}
                     hasBorder
-                    disabled={false}
+                    disabled={true}
                     // onPressHandler={() => {
                     //     setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
                     //     setReceiveAmount('---');
@@ -96,7 +100,7 @@ export const Calculator = ({ modifyScrollAction }) => {
 
 
                 <TransactionCurrencyPicker
-                    customWidth={wp('26%')}
+                    customStyle={{width: wp('25%')}}
                     currencyName={receiveCurrency.nameShort}
                     currencyIcon={receiveCurrency.icon}
                     hasBorder
@@ -139,7 +143,6 @@ const styles = StyleSheet.create({
     },
     operationContainer: {
         justifyContent: 'center',
-        paddingHorizontal: wp('2%'),
         marginTop: hp('0.8%'),
         height: hp('6%'),
         width: wp('26%'),
@@ -149,7 +152,9 @@ const styles = StyleSheet.create({
     operationAmount: {
         fontSize: wp('3%'),
         fontWeight: 'bold',
-        textAlign: 'center'
+        textAlign: 'center',
+        height: hp('6%'),
+        width: wp('26%')
     },
     operationAmountText: {
         fontSize: wp('3%'),

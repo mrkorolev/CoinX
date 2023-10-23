@@ -14,7 +14,7 @@ export const ExchangeAmountInput = ({ operation, chosenCurrencyName, isNetwork, 
             <View style={styles.rowContainer}>
 
                 <TransactionCurrencyPicker
-                    isEditable={pickerDisabled}
+                    disabled={pickerDisabled}
                     customStyle={{ flex: 1 }}
                     currencyName={chosenCurrencyName}
                     currencyIcon={chosenCurrencyIcon}

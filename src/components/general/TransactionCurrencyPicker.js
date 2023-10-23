@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: wp('3%'),
         flexDirection: 'row',
         alignItems: 'center',
-        borderRadius: 5,
-        // flex: 1         // this allows full length in the container (don't forget!)
+        borderRadius: 5
     },
     iconContainer: {
         flexDirection: 'row',

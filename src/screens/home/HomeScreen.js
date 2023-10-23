@@ -8,19 +8,24 @@ import { AppContext } from "../../global/AppContext";
 
 export const HomeScreen = () => {
     const { theme } = useContext(AppContext);
-
+    const [scrollable, setScrollable] = useState(false);
     return (
-            <KeyboardAvoidingView behavior='position'>
-                <View style={[styles.innerContainer , { backgroundColor: theme.screenBgColor} ]}>
+            <KeyboardAvoidingView
+                contentContainerStyle={{ backgroundColor: theme.screenBgColor}}
+                behavior={Platform.OS === 'ios' ? 'position' : 'padding'}>
+                <ScrollView
+                    scrollEnabled={scrollable}
+                    contentContainerStyle={styles.innerContainer}>
                         <ExchangeRatesData />
-                        <Calculator />
-                </View>
+                        <Calculator modifyScrollAction={setScrollable}/>
+                </ScrollView>
             </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
     innerContainer: {
+
         height: hp('90%'),
         alignItems: 'center',
         justifyContent: 'space-around',
