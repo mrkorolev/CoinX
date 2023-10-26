@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import {Text, View, TouchableOpacity, StyleSheet, Alert, Platform} from 'react-native';
 import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../../components/auth/login/CustomInput';
-import { CustomButton } from '../../../components/general/CustomButton';
+import { CustomButton } from '../../../components/general/components/CustomButton';
 import { authenticateUser } from "../../../services/authentication";
 
 import { i18n } from '../../../localization/i18n.js';
@@ -75,20 +75,20 @@ export const LoginScreen = () => {
                             return;
                         }
 
-                        const response = await authenticateUser(username, password);
-                        if(response && response.status === 200){
-                            setAccessToken(response.data.access_token);
-                            setRefreshToken(response.data.refresh_token);
-                            console.log('LOGIN SUCCESSFUL (token saved)! Proceed to OTP!');
-                            nav.navigate('Otp');
-                        }
+                        // const response = await authenticateUser(username, password);
+                        // if(response && response.status === 200){
+                        //     setAccessToken(response.data.access_token);
+                        //     setRefreshToken(response.data.refresh_token);
+                        //     console.log('LOGIN SUCCESSFUL (token saved)! Proceed to OTP!');
+                        //     nav.navigate('Otp');
+                        // }
 
                         // DEBUG
-                        // setAccessToken('123123');
-                        // nav.navigate('Otp');
+                        setAccessToken('123123');
+                        nav.navigate('Otp');
                     }}
                 />
-                <View style={{ flex: 0.25 }}/>
+            <View style={{ flex: 0.45 }} />
         </View>
     );
 }
@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
     layout: {
         flex: 1,
         justifyContent: 'center',
-        padding: wp('5%')
+        paddingHorizontal: wp('5%'),
+        // paddingBottom: hp('25%')
     },
     title: {
         fontWeight: 'bold',

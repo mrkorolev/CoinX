@@ -7,7 +7,7 @@ import { TransactionDetail } from '../../../components/transaction/qr/Transactio
 import { i18n } from "../../../localization/i18n";
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {CustomButton} from "../../../components/general/CustomButton";
+import {CustomButton} from "../../../components/general/components/CustomButton";
 import {cancelTransactionRequest} from "../../../services/authentication";
 import {accessToken} from "../../../constants";
 import {AppContext} from "../../../global/AppContext";

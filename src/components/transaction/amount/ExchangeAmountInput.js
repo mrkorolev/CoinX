@@ -1,10 +1,11 @@
 import React, {useContext, useState} from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { TransactionCurrencyPicker } from '../../general/TransactionCurrencyPicker';
+import { TransactionCurrencyPicker } from '../../general/components/TransactionCurrencyPicker';
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {AppContext} from "../../../global/AppContext";
+import {CustomIcon} from "../../general/components/CustomIcon";
 
 export const ExchangeAmountInput = ({ operation, chosenCurrencyName, isNetwork, pickerDisabled, chosenCurrencyIcon, onPressHandler, onChangeAmount, placeholder, isEditable, value, textColor }) => {
     const { theme } = useContext(AppContext);

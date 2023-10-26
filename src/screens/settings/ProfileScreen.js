@@ -11,7 +11,7 @@ import { i18n } from "../../localization/i18n";
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {CustomButton} from "../../components/general/CustomButton";
+import {CustomButton} from "../../components/general/components/CustomButton";
 import {AppContext} from "../../global/AppContext";
 
 export const ProfileScreen = ({ route, navigation }) => {
@@ -87,11 +87,9 @@ const styles = StyleSheet.create({
     },
     key: {
         fontSize: wp('4%'),
-        fontWeight: 'bold',
-        color: '#293462'
+        fontWeight: 'bold'
     },
     value: {
-        fontSize: wp('3.5%'),
-        color: 'gray'
+        fontSize: wp('3.5%')
     }
 });

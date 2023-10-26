@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
-import {AppContext} from "../../global/AppContext";
+import {AppContext} from "../../../global/AppContext";
 
 export const CustomHeaderIcon = ({ icon, onPressHandler, notifiable }) => {
 

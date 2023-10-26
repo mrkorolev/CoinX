@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { CustomIcon } from '../general/CustomIcon';
+import { CustomIcon } from '../general/components/CustomIcon';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {useContext} from "react";
 import {AppContext} from "../../global/AppContext";
@@ -18,13 +18,7 @@ export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePe
                 <Text style={[styles.coinInsides, styles.percentChangeText, { color: secondaryColor }]}>{priceChangePercent}%</Text>
             </View>
             <View style={styles.bottomLevel}>
-                <CustomIcon
-                    icon={coinIcon}
-                    iconSize={wp('5%')}
-                    boxSize={wp('7%')}
-                    color={theme.exchangeIconColor}
-                    bgColor={theme.exchangeIconBgColor}
-                />
+                {coinIcon}
                 <Text style={[styles.coinInsides, { color: primaryColor}]}>{nameLong}</Text>
             </View>
         </View>

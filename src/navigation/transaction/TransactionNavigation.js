@@ -4,8 +4,8 @@ import { TransactionScreen } from '../../screens/transaction/amount/TransactionS
 import { QrScreen } from '../../screens/transaction/qr/QrScreen';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {i18n} from "../../localization/i18n";
-import {CustomHeader} from "../../components/general/CustomHeader";
-import {CustomBackButton} from "../../components/general/CustomBackButton";
+import {CustomHeader} from "../../components/general/components/CustomHeader";
+import {CustomBackButton} from "../../components/general/components/CustomBackButton";
 import {ChevronLeftIcon} from "react-native-heroicons/solid";
 import { Platform } from "react-native";
 import {AppContext} from "../../global/AppContext";

@@ -3,9 +3,11 @@ import {StyleSheet, View} from 'react-native';
 import { CoinExchangeRate } from './CoinExchangeRate';
 import { cryptoCurrencies } from '../../constants/index';
 import { endpoint24hrData } from "../../services/binanceApiCalls";
-
+import { SvgUri } from "react-native-svg";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {AppContext} from "../../global/AppContext";
+import {CustomIcon} from "../general/components/CustomIcon";
+import { TronCustomIcon} from "../general/icons/TronCustomIcon";
 
 function modifyCurrentState(arr1, arr2){
     for(let key in arr1){
@@ -21,7 +23,6 @@ function modifyCurrentState(arr1, arr2){
 }
 
 const apiCallInterval = 2000;
-
 export const ExchangeRatesData = () => {
 
     const { theme } = useContext(AppContext);
@@ -69,7 +70,15 @@ export const ExchangeRatesData = () => {
                     nameLong={coinComponents[0].nameLong}
                     lastPrice={coinComponents[0].lastPrice}
                     priceChangePercent={coinComponents[0].priceChangePercent}
-                    coinIcon={coinComponents[0].coinIcon}
+                    coinIcon={
+                        <CustomIcon
+                            icon={coinComponents[0].coinIcon}
+                            iconSize={wp('4%')}
+                            boxSize={wp('7%')}
+                            color={theme.exchangeIconColor}
+                            bgColor={theme.exchangeIconBgColor}
+                        />
+                    }
                     bgColor={theme.ethBgColor}
                     primaryColor={theme.exPrimaryColor}
                     secondaryColor={theme.exSecondaryColor}
@@ -80,7 +89,15 @@ export const ExchangeRatesData = () => {
                     nameLong={coinComponents[1].nameLong}
                     lastPrice={coinComponents[1].lastPrice}
                     priceChangePercent={coinComponents[1].priceChangePercent}
-                    coinIcon={coinComponents[1].coinIcon}
+                    coinIcon={
+                        <CustomIcon
+                        icon={coinComponents[1].coinIcon}
+                        iconSize={wp('4%')}
+                        boxSize={wp('7%')}
+                        color={theme.exchangeIconColor}
+                        bgColor={theme.exchangeIconBgColor}
+                        />
+                    }
                     bgColor={theme.btcBgColor}
                     primaryColor={theme.btcPrimaryColor}
                     secondaryColor={theme.btcSecondaryColor}
@@ -94,7 +111,12 @@ export const ExchangeRatesData = () => {
                     nameLong={coinComponents[2].nameLong}
                     lastPrice={coinComponents[2].lastPrice}
                     priceChangePercent={coinComponents[2].priceChangePercent}
-                    coinIcon={coinComponents[2].coinIcon}
+                    coinIcon={
+                        <TronCustomIcon
+                            color={theme.exchangeIconColor}
+                            bgColor={theme.exchangeIconBgColor}
+                            size={wp('4%')}/>
+                    }
                     bgColor={theme.trxBgColor}
                     primaryColor={theme.exPrimaryColor}
                     secondaryColor={theme.exSecondaryColor}
@@ -105,7 +127,15 @@ export const ExchangeRatesData = () => {
                     nameLong={coinComponents[3].nameLong}
                     lastPrice={coinComponents[3].lastPrice}
                     priceChangePercent={coinComponents[3].priceChangePercent}
-                    coinIcon={coinComponents[3].coinIcon}
+                    coinIcon={
+                        <CustomIcon
+                        icon={coinComponents[3].coinIcon}
+                        iconSize={wp('4%')}
+                        boxSize={wp('7%')}
+                        color={theme.exchangeIconColor}
+                        bgColor={theme.exchangeIconBgColor}
+                        />
+                    }
                     bgColor={theme.usdBgColor}
                     primaryColor={theme.exPrimaryColor}
                     secondaryColor={theme.exSecondaryColor}

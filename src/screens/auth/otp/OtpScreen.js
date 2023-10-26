@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
-import { CustomButton } from '../../../components/general/CustomButton';
+import { CustomButton } from '../../../components/general/components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import {OtpInputField} from "../../../components/auth/otp/OtpInputField";
 import { otpVerification } from "../../../services/authentication";
@@ -51,7 +51,6 @@ export const OtpScreen = ({ navigation }) => {
                     // DEBUG
                     navigation.navigate('Success');
                 }} />
-
             <View style={{ flex: 0.25 }}/>
         </View>
     );
@@ -61,7 +60,8 @@ const styles = StyleSheet.create({
     layout: {
         flex: 1,
         justifyContent: 'center',
-        padding: wp('5%')
+        paddingHorizontal: wp('5%'),
+        paddingBottom: hp('20%')
     },
     title: {
         fontWeight: 'bold',

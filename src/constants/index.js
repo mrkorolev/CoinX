@@ -1,8 +1,9 @@
-import { faBitcoinSign, faTurkishLiraSign } from '@fortawesome/free-solid-svg-icons';
+import {faBitcoinSign, faLanguage, faTurkishLiraSign} from '@fortawesome/free-solid-svg-icons';
 import {faEthereum, faHive} from '@fortawesome/free-brands-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { faMoon, faBell, faFileLines } from "@fortawesome/free-regular-svg-icons";
 import { faSignal, faQuestion, faT } from "@fortawesome/free-solid-svg-icons";
+import {TronCustomIcon} from "../components/general/icons/TronCustomIcon";
 
 // Separate into different files and move into 'config' directory
 
@@ -58,7 +59,6 @@ export const cryptoCurrencies = [
         nameLong: 'Tron',
         lastPrice:'---',
         priceChangePercent: '---',
-        icon: faT
     },
     {
         nameShort: 'USDT',
@@ -73,22 +73,21 @@ export const availableNetworks = [
     {
         networkCode: 'BTC',
         networkName: 'Bitcoin',
-        icon: faHive
+        icon: faBitcoinSign
     },
     {
         networkCode: 'ERC20',
         networkName: 'Ethereum',
-        icon: faHive
+        icon: faEthereum
     },
     {
         networkCode: 'TRC20',
-        networkName: 'Tron',
-        icon: faHive
+        networkName: 'Tron'
     }
 ];
 
 
-export const toggles = [
+export const funcSettings = [
     {
         icon: faMoon,
         bgColor: '#5956D7'
@@ -96,10 +95,15 @@ export const toggles = [
     {
         icon: faBell,
         bgColor: '#007CFC'
+    },
+    {
+        icon: faLanguage,
+        bgColor: 'purple'
     }
+
 ]
 
-export const settings = [
+export const descSettings = [
     {
         icon: faFileLines,
         bgColor: '#D35554'

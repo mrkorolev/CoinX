@@ -58,6 +58,7 @@
       "screen_name": "Settings",
       "dark_mode": "Dark mode",
       "notifications": "Push notifications",
+      "language": "Language",
       "terms_and_conditions": "Terms and Conditions",
       "privacy_policy": "Privacy Policy",
       "about": "About"
@@ -69,6 +70,9 @@
       "address": "Address",
       "commission_rate": "Commission rate",
       "logout_title": "Logout"
+    },
+    "language": {
+      "screen_name": "Language"
     },
     "terms_and_conditions": {
       "screen_name": "Terms and Conditions"

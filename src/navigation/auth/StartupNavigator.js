@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ChevronLeftIcon } from 'react-native-heroicons/outline';
 import { SuccessScreen } from "../../screens/success/SuccessScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import {CustomBackButton} from "../../components/general/CustomBackButton";
+import {CustomBackButton} from "../../components/general/components/CustomBackButton";
 import {Platform, StatusBar} from "react-native";
 import {AppContext, AppContextProvider} from "../../global/AppContext";
 

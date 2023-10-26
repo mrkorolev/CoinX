@@ -12,6 +12,9 @@ import {FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { i18n } from "../../localization/i18n";
 import {AppContext} from "../../global/AppContext";
 import {getFocusedRouteNameFromRoute} from "@react-navigation/native";
+import {HomeTabBarIcon} from "../../components/general/icons/HomeTabBarIcon";
+import {ScanTabBarIcon} from "../../components/general/icons/ScanTabBarIcon";
+import {SettingTabBarIcon} from "../../components/general/icons/SettingTabBarIcon";
 
 const Tab = createBottomTabNavigator();
 
@@ -48,8 +51,10 @@ export const MainNavigator = () => {
                 component={HomeNavigator}
                 options={({route}) => ({
                     tabBarIcon: ({focused}) => focused ?
-                        <FontAwesomeIcon icon={faTent} color={theme.activeTintColor} size={wp('6%')} /> :
-                        <FontAwesomeIcon icon={faTent} color={theme.inactiveTintColor} size={wp('6%')} />,
+                    //     // <FontAwesomeIcon icon={faTent} color={theme.activeTintColor} size={wp('6%')} /> :
+                    //     // <FontAwesomeIcon icon={faTent} color={theme.inactiveTintColor} size={wp('6%')} />,
+                        <HomeTabBarIcon color={theme.activeTintColor} bgColor={theme.tabBgColor} size={wp('6.5%')} /> :
+                        <HomeTabBarIcon color={theme.inactiveTintColor} bgColor={theme.tabBgColor} size={wp('6.5%')} />,
                     tabBarIconStyle: {
                         marginTop: hp('1%')
                     },
@@ -73,7 +78,8 @@ export const MainNavigator = () => {
                             height: wp('14%'),
                             borderRadius: wp('14%')/2,
                             backgroundColor: theme.qrBgColor }}>
-                            <FontAwesomeIcon icon={faQrcode} color={theme.qrColor} size={wp('6%')} />
+                            {/*<FontAwesomeIcon icon={faQrcode} color={theme.qrColor} size={wp('6%')} />*/}
+                            <ScanTabBarIcon color={theme.qrColor} size={wp('7%')}/>
                         </View>
                     ),
                     tabBarLabel: '',
@@ -93,8 +99,8 @@ export const MainNavigator = () => {
                 component={SettingsNavigator}
                 options={({route}) => ({
                     tabBarIcon: ({focused}) => focused ?
-                        <FontAwesomeIcon icon={faGear} color={theme.activeTintColor} size={wp('6%')} /> :
-                        <FontAwesomeIcon icon={faGear} color={theme.inactiveTintColor} size={wp('6%')} />,
+                        <SettingTabBarIcon color={theme.activeTintColor} bgColor={theme.tabBgColor} size={wp('6.5%')} /> :
+                        <SettingTabBarIcon color={theme.inactiveTintColor} bgColor={theme.tabBgColor} size={wp('6.5%')} />,
                     tabBarIconStyle: {
                         marginTop: hp('1%')
                     },
@@ -103,7 +109,7 @@ export const MainNavigator = () => {
                         height: hp('12%'),
                         borderTopWidth: 0,
                         position: 'absolute',
-                        display: hideTabBar(route, ['PROFILE', 'TERMS_OF_USE', 'PRIVACY', 'ABOUT'], 'SETTINGS') ? 'none' : 'flex'
+                        display: hideTabBar(route, ['PROFILE', 'LANGUAGE', 'TERMS_OF_USE', 'PRIVACY', 'ABOUT'], 'SETTINGS') ? 'none' : 'flex'
                     }
                 })} />
         </Tab.Navigator>

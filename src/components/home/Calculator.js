@@ -2,14 +2,16 @@ import React, {useContext, useState} from 'react';
 import {View, TouchableOpacity, StyleSheet, Dimensions, Text, TextInput, Keyboard, Alert} from 'react-native';
 import {faRightLeft, faTurkishLiraSign} from '@fortawesome/free-solid-svg-icons';
 import {Line} from "./Line";
-import {CustomIcon} from "../general/CustomIcon";
+import {CustomIcon} from "../general/components/CustomIcon";
 import {baseCurrencies, cryptoCurrencies} from "../../constants/index";
 import { endpointPriceData } from "../../services/binanceApiCalls";
 import { i18n } from "../../localization/i18n";
-import {TransactionCurrencyPicker} from "../general/TransactionCurrencyPicker";
+import {TransactionCurrencyPicker} from "../general/components/TransactionCurrencyPicker";
+import { OutlinedTextField } from "rn-material-ui-textfield";
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {AppContext} from "../../global/AppContext";
+import {TronCustomIcon} from "../general/icons/TronCustomIcon";
 
 export const Calculator = ({ modifyScrollAction }) => {
 
@@ -17,50 +19,60 @@ export const Calculator = ({ modifyScrollAction }) => {
     const screen = 'screens.home';
 
     // State for the chosen currency and amount, ready to send the request and setReceiveCurrency as a result (editable={false})
-    const [spendAmount, setSpendAmount] = useState('');
+    const [spendAmount, setSpendAmount] = useState(undefined);
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
-    const [receiveAmount, setReceiveAmount] = useState('---');
+    const [receiveAmount, setReceiveAmount] = useState(undefined);
     const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
 
     return (
         <View style={styles.container}>
             <View style={styles.pickerLayout}>
-                <View
-                    style={[styles.operationContainer, { borderColor: theme.calcAmountBorderColor }]}>
-                    <TextInput style={[styles.operationAmount, { color: theme.primaryContentColor }]}
-                               maxLength={10}
-                               keyboardType='number-pad'
-                               enterKeyHint='done'
-                               onBlur={() => modifyScrollAction(false)}
-                               onFocus={() => {
-                                   setReceiveAmount('---');
-                                   modifyScrollAction(true);
-                               }}
-                               onChangeText={(text) => {
-                                   let inputValue = text;
-                                   inputValue = inputValue.replace(/[,\.]/g, '');
-                                   inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                   setSpendAmount(inputValue)
-                               }}
-                               value={spendAmount}
-                               placeholder='...'
-                               placeholderTextColor={theme.secondaryContentColor}
-                               selectTextOnFocus
+                    <OutlinedTextField
+                        inputContainerStyle={styles.operationContainer}
+                        label='from'
+                        fontSize={wp('4%')}
+                        activeLineWidth={1}
+                        textColor={theme.primaryContentColor}
+                        tintColor={theme.primaryContentColor}
+                        baseColor={theme.primaryContentColor}
+
+                        onBlur={() => modifyScrollAction(false)}
+                        onFocus={() => {
+                            setReceiveAmount(undefined);
+                            modifyScrollAction(true);
+                        }}
+                        onChangeText={(text) => {
+                            let inputValue = text;
+                            inputValue = inputValue.replace(/[,\.]/g, '');
+                            inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            setSpendAmount(inputValue);
+                            setReceiveAmount(undefined)
+                        }}
+                        value={spendAmount}
+                        maxLength={10}
+                        keyboardType='number-pad'
+                        enterKeyHint='done'
+                        selectTextOnFocus />
+
+                    <TransactionCurrencyPicker
+                        currencyName={spendCurrency.nameShort}
+                        currencyIcon={
+                            <CustomIcon
+                            icon={ spendCurrency.icon}
+                            iconSize={wp('4%')}
+                            boxSize={wp('7%')}
+                            color={theme.calcCurrencyIconColor}
+                            bgColor={theme.calcCurrencyIconBgColor}
+                            />
+                        }
+                        customStyle={{width: wp('25%')}}
+                        // hasBorder
+                        disabled={true}
+                        // onPressHandler={() => {
+                        //     setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
+                        //     setReceiveAmount(undefined);
+                        // }}
                     />
-                </View>
-
-
-                <TransactionCurrencyPicker
-                    currencyName={spendCurrency.nameShort}
-                    currencyIcon={spendCurrency.icon}
-                    customStyle={{width: wp('25%')}}
-                    hasBorder
-                    disabled={true}
-                    // onPressHandler={() => {
-                    //     setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
-                    //     setReceiveAmount('---');
-                    // }}
-                />
             </View>
 
             <View style={styles.separator}>
@@ -89,24 +101,37 @@ export const Calculator = ({ modifyScrollAction }) => {
             </View>
 
             <View style={styles.pickerLayout}>
-                <View style={[styles.operationContainer, { borderColor: theme.calcAmountBorderColor}]}>
-                    <TextInput style={[styles.operationAmount, { color: theme.primaryContentColor }]}
-                               maxLength={10}
-                               keyboardType='decimal-pad'
-                               keyboardKeyType='done'
-                               editable={false}
-                               value={receiveAmount} />
-                </View>
-
+                <OutlinedTextField
+                    textColor={theme.primaryContentColor}
+                    label='to'
+                    baseColor={theme.primaryContentColor}
+                    inputContainerStyle={styles.operationContainer}
+                    maxLength={10}
+                    keyboardType='decimal-pad'
+                    keyboardKeyType='done'
+                    editable={false}
+                    value={receiveAmount} />
 
                 <TransactionCurrencyPicker
                     customStyle={{width: wp('25%')}}
                     currencyName={receiveCurrency.nameShort}
-                    currencyIcon={receiveCurrency.icon}
-                    hasBorder
+                    currencyIcon={
+                    receiveCurrency.nameLong === 'Tron' ?
+                        <TronCustomIcon
+                            color={theme.calcCurrencyIconColor}
+                            bgColor={theme.calcCurrencyIconBgColor} /> :
+                        <CustomIcon
+                            icon={receiveCurrency.icon}
+                            iconSize={wp('4%')}
+                            boxSize={wp('7%')}
+                            color={theme.calcCurrencyIconColor}
+                            bgColor={theme.calcCurrencyIconBgColor}
+                        />
+                    }
+                    // hasBorder
                     onPressHandler={() => {
                         setReceiveCurrency(cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length]);
-                        setReceiveAmount('---');
+                        setReceiveAmount(undefined);
                     }}
                 />
             </View>
@@ -119,8 +144,8 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        gap: hp('2%'),
-        paddingBottom: hp('10%')
+        paddingBottom: hp('10%'),
+        gap: hp('2%')
     },
     separator: {
         width: Dimensions.get('window').width,
@@ -139,27 +164,12 @@ const styles = StyleSheet.create({
     pickerLayout: {
         width: Dimensions.get('window').width,
         flexDirection: 'row',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
     },
     operationContainer: {
         justifyContent: 'center',
-        marginTop: hp('0.8%'),
         height: hp('6%'),
-        width: wp('26%'),
-        borderWidth: 1,
-        borderRadius: 5
-    },
-    operationAmount: {
-        fontSize: wp('3%'),
-        fontWeight: 'bold',
-        textAlign: 'center',
-        height: hp('6%'),
-        width: wp('26%')
-    },
-    operationAmountText: {
-        fontSize: wp('3%'),
-        borderLeftWidth: 2,
-        borderRightWidth: 2,
-        paddingHorizontal: wp('0.25%')
+        width: wp('27%'),
+        borderRadius: 5,
     }
 });

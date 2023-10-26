@@ -57,6 +57,7 @@
       "screen_name": "Настройки",
       "dark_mode": "Темная тема",
       "notifications": "Пуш-уведомления",
+      "language": "Язык",
       "terms_and_conditions": "Условия Использования",
       "privacy_policy": "Конфиденциальность",
       "about": "Информация"
@@ -68,6 +69,9 @@
       "address": "Адрес",
       "commission_rate": "Коммиссия",
       "logout_title": "Выход"
+    },
+    "language": {
+      "screen_name": "Язык"
     },
     "terms_and_conditions": {
       "screen_name": "Условия Использования"

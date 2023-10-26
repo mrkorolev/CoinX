@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { ExchangeAmountInput } from '../../../components/transaction/amount/ExchangeAmountInput';
 import { ExchangeRate } from '../../../components/transaction/amount/ExchangeRate';
-import { CustomButton } from '../../../components/general/CustomButton';
+import { CustomButton } from '../../../components/general/components/CustomButton';
 import { availableNetworks, baseCurrencies, cryptoCurrencies} from "../../../constants/index";
 import { endpointPriceData } from "../../../services/binanceApiCalls";
 import { commissionDataRequest, walletDataRequest } from "../../../services/authentication";
@@ -11,7 +11,9 @@ import { i18n } from "../../../localization/i18n";
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {AppContext} from "../../../global/AppContext";
-import {TransactionCurrencyPicker} from "../../../components/general/TransactionCurrencyPicker";
+import {TransactionCurrencyPicker} from "../../../components/general/components/TransactionCurrencyPicker";
+import {CustomIcon} from "../../../components/general/components/CustomIcon";
+import {TronCustomIcon} from "../../../components/general/icons/TronCustomIcon";
 
 export const TransactionScreen = ({ navigation }) => {
 
@@ -45,7 +47,20 @@ export const TransactionScreen = ({ navigation }) => {
             <ExchangeAmountInput
                 operation={i18n.t(`${screen}.network`)}
                 chosenCurrencyName={network.networkCode}
-                chosenCurrencyIcon={network.icon}
+                chosenCurrencyIcon={
+                    network.networkName === 'Tron' ?
+                        <TronCustomIcon
+                            color={theme.calcCurrencyIconColor}
+                            bgColor={theme.calcCurrencyIconBgColor}
+                        /> :
+                        <CustomIcon
+                            icon={network.icon}
+                            iconSize={wp('4%')}
+                            boxSize={wp('7%')}
+                            color={theme.calcCurrencyIconColor}
+                            bgColor={theme.calcCurrencyIconBgColor}
+                        />
+                }
                 onPressHandler={ () => {
                     if(receiveCurrency.nameShort === 'USDT'){
                         let nextNetwork = availableNetworks[(availableNetworks.indexOf(network) + 1) % availableNetworks.length];
@@ -66,7 +81,15 @@ export const TransactionScreen = ({ navigation }) => {
             <ExchangeAmountInput
                 operation={i18n.t(`${screen}.pay`)}
                 chosenCurrencyName={spendCurrency.nameShort}
-                chosenCurrencyIcon={spendCurrency.icon}
+                chosenCurrencyIcon={
+                    <CustomIcon
+                        icon={spendCurrency.icon}
+                        iconSize={wp('4%')}
+                        boxSize={wp('7%')}
+                        color={theme.calcCurrencyIconColor}
+                        bgColor={theme.calcCurrencyIconBgColor}
+                    />
+                }
                 // onPressHandler={() => {
                 //     setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
                 //     setReceiveAmount(null);
@@ -90,7 +113,19 @@ export const TransactionScreen = ({ navigation }) => {
             <ExchangeAmountInput
                 operation={i18n.t(`${screen}.receive`)}
                 chosenCurrencyName={receiveCurrency.nameShort}
-                chosenCurrencyIcon={receiveCurrency.icon}
+                chosenCurrencyIcon={
+                    receiveCurrency.nameLong === 'Tron' ?
+                        <TronCustomIcon
+                            color={theme.calcCurrencyIconColor}
+                            bgColor={theme.calcCurrencyIconBgColor} /> :
+                        <CustomIcon
+                            icon={receiveCurrency.icon}
+                            iconSize={wp('4%')}
+                            boxSize={wp('7%')}
+                            color={theme.calcCurrencyIconColor}
+                            bgColor={theme.calcCurrencyIconBgColor}
+                        />
+                }
                 onPressHandler={() => {
                     setReceiveAmount(undefined);
                     setReadyToProceed(false);
