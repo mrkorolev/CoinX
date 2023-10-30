@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, Alert} from 'react-native';
 
 import { PrimaryDetails } from '../../components/settings/PrimaryDetails';
 import { SecondaryDetails } from '../../components/settings/SecondaryDetails';
@@ -18,18 +18,6 @@ export const ProfileScreen = ({ route, navigation }) => {
     const { theme, setAccessToken } = useContext(AppContext);
     const screen = 'screens.profile';
     const { name, phone, email, address, commission } = route.params;
-
-    // useEffect(() => {
-    //     navigation.getParent()?.setOptions({
-    //         tabBarStyle: {
-    //             display: 'none',
-    //             backgroundColor: theme.screenBgColor
-    //         },
-    //         tabBarVisible: false });
-    //     return () => navigation.getParent()?.setOptions({
-    //         tabBarStyle: undefined,
-    //         tabBarVisible: undefined, });
-    // }, [navigation]);
 
     return (
         <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
@@ -62,7 +50,23 @@ export const ProfileScreen = ({ route, navigation }) => {
                         text={i18n.t(`${screen}.logout_title`)}
                         onPress={() => {
                             setAccessToken(undefined);
-                            navigation.navigate('Login')
+                            navigation.navigate('Login');
+                            // Alert.alert(i18n.t(`${screen}.logout_operation_title`), i18n.t(`${screen}.logout_operation_message`), [
+                            //     {
+                            //         text: i18n.t(`${screen}.logout_cancel`),
+                            //         style: 'default',
+                            //         onPress: () => {
+                            //             console.log('Logout cancelled!');
+                            //         }
+                            //     },
+                            //     {
+                            //         text: i18n.t(`${screen}.logout_confirm`),
+                            //         style: 'destructive',
+                            //         onPress: () => {
+                            //             setAccessToken(undefined);
+                            //             navigation.navigate('Login');
+                            //             console.log('Token has been cancelled!');
+                            //     }}]);
                         }} />
             </View>
         </View>

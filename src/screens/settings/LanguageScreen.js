@@ -5,9 +5,10 @@ import {i18n} from "../../localization/i18n";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faCheck, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import React, {useContext, useState} from "react";
+import {useIsFocused} from "@react-navigation/native";
 
 export const LanguageScreen = ({ navigation }) => {
-
+    const tabIndex = useIsFocused();
     const languages = [
         {
             language: 'English',

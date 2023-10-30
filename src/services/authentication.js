@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {request} from "axios";
 import { Alert } from 'react-native';
 import { i18n } from "../localization/i18n";
 
@@ -8,17 +8,17 @@ const baseUrl = 'https://payone.com.tr/';
 const apiVersion = 'api/v1/';
 const authentication = 'auth/check/';
 
-const depositHistoryEndpoint = 'user/info/user-transactions'
+const depositHistoryEndpoint = 'user/info/user-transactions';
 const walletEndpoint = 'capital/transac/deposit/wallet';
 const cancelTransactionEndpoint = 'capital/transac/cancel/wallet';
 const commissionEndpoint = 'user/info/user-commission';
 const userProfileEndpoint = 'user/info/user-profile';
 
-
 const generateErrorDescription = (reason, message, error) => {
     console.log("Error info: " + JSON.stringify(error.toJSON(), undefined, 4));
     Alert.alert(reason, ` ${message} (${error.response.status})`);
 }
+
 
 export const authenticateUser = async (username, password) => {
     const request_error = 'request_errors.login_request'
@@ -32,12 +32,13 @@ export const authenticateUser = async (username, password) => {
             },
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
         });
 
         console.log(JSON.stringify(authenticationResponse.data, undefined, 4));
         return authenticationResponse;
     }catch(error){
+        return;
         generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }
     return null;

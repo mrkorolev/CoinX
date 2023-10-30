@@ -58,6 +58,7 @@ export const MainNavigator = () => {
                     tabBarIconStyle: {
                         marginTop: hp('1%')
                     },
+                    tabBarHideOnKeyboard: true,
                     tabBarStyle: {
                         position: 'absolute',
                         backgroundColor: theme.tabBgColor,
@@ -82,6 +83,7 @@ export const MainNavigator = () => {
                             <ScanTabBarIcon color={theme.qrColor} size={wp('7%')}/>
                         </View>
                     ),
+                    tabBarHideOnKeyboard: true,
                     tabBarLabel: '',
                     tabBarIconStyle: {
                         marginTop: hp('0.25%')

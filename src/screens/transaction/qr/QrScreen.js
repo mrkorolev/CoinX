@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {View, StyleSheet, Dimensions, Alert} from 'react-native';
-import {ClipboardDocumentCheckIcon, ArrowsRightLeftIcon, ChartBarIcon} from 'react-native-heroicons/solid';
 import * as Clipboard from 'expo-clipboard';
 import { QrCode } from '../../../components/transaction/qr/QrCode';
 import { TransactionDetail } from '../../../components/transaction/qr/TransactionDetail';
@@ -22,8 +21,10 @@ export const QrScreen = ({ route, navigation }) => {
     const [walletAddress, setWalletAddress] = useState('');
     const [network, setNetwork] = useState('');
     const [status, setStatus] = useState();
+    const [hasResponse, setHasResponse] = useState(true);
     const { walletData, networkData, depositStatus } = route.params;
 
+    const qrDisabledHandler = () => !(hasResponse);
 
     useEffect(() => {
         setWalletAddress(walletData);
@@ -59,24 +60,27 @@ export const QrScreen = ({ route, navigation }) => {
 
             <View style={styles.cancelButtonContainer}>
                 <CustomButton
+                    isDisabled={qrDisabledHandler()}
                     textColor={theme.cancelBtnTextColor}
                     bgColor={theme.cancelBtnBgColor}
                     borderColor={theme.cancelBtnBorderColor}
                     text={i18n.t(`${screen}.cancel_title`)}
                     onPress={async () => {
+                        setHasResponse(false);
                         Alert.alert(i18n.t(`${screen}.warning_title`), i18n.t(`${screen}.warning_message`), [{
                             text: i18n.t(`${screen}.deny_message`),
                             style: 'default',
                             onPress: () => {
                                 console.log('Not cancelling current transaction!');
+                                setHasResponse(true);
                             }
                         },
                             {
                                 text: i18n.t(`${screen}.confirm_message`),
                                 style: 'destructive',
                                 onPress: async () => {
-                                    const cancelStatus = await cancelTransactionRequest(accessToken, walletAddress);
 
+                                    const cancelStatus = await cancelTransactionRequest(accessToken, walletAddress);
                                     if(cancelStatus){
                                         alert('Successfully cancelled transaction!');
                                         navigation.goBack();
@@ -84,6 +88,7 @@ export const QrScreen = ({ route, navigation }) => {
 
                                     // DEBUG:
                                     // navigation.goBack();
+                                    setHasResponse(true);
                                 }
                             }]);
                     }} />

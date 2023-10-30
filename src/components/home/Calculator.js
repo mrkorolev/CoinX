@@ -13,7 +13,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import {AppContext} from "../../global/AppContext";
 import {TronCustomIcon} from "../general/icons/TronCustomIcon";
 
-export const Calculator = ({ modifyScrollAction }) => {
+export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
 
     const { theme } = useContext(AppContext);
     const screen = 'screens.home';
@@ -40,6 +40,7 @@ export const Calculator = ({ modifyScrollAction }) => {
                         onFocus={() => {
                             setReceiveAmount(undefined);
                             modifyScrollAction(true);
+                            onFocusScroll();
                         }}
                         onChangeText={(text) => {
                             let inputValue = text;
@@ -119,7 +120,9 @@ export const Calculator = ({ modifyScrollAction }) => {
                     receiveCurrency.nameLong === 'Tron' ?
                         <TronCustomIcon
                             color={theme.calcCurrencyIconColor}
-                            bgColor={theme.calcCurrencyIconBgColor} /> :
+                            bgColor={theme.calcCurrencyIconBgColor}
+                            size={wp('4%')}
+                        /> :
                         <CustomIcon
                             icon={receiveCurrency.icon}
                             iconSize={wp('4%')}
@@ -145,7 +148,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingBottom: hp('10%'),
-        gap: hp('2%')
+        gap: hp('2.5%')
     },
     separator: {
         width: Dimensions.get('window').width,

@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
+import {View, Text, StyleSheet, Alert, Platform, ScrollView, KeyboardAvoidingView} from 'react-native';
 import { ExchangeAmountInput } from '../../../components/transaction/amount/ExchangeAmountInput';
 import { ExchangeRate } from '../../../components/transaction/amount/ExchangeRate';
 import { CustomButton } from '../../../components/general/components/CustomButton';
@@ -14,6 +14,9 @@ import {AppContext} from "../../../global/AppContext";
 import {TransactionCurrencyPicker} from "../../../components/general/components/TransactionCurrencyPicker";
 import {CustomIcon} from "../../../components/general/components/CustomIcon";
 import {TronCustomIcon} from "../../../components/general/icons/TronCustomIcon";
+import {useIsFocused} from "@react-navigation/native";
+import {ExchangeRatesData} from "../../../components/home/ExchangeRatesData";
+import {Calculator} from "../../../components/home/Calculator";
 
 export const TransactionScreen = ({ navigation }) => {
 
@@ -29,6 +32,10 @@ export const TransactionScreen = ({ navigation }) => {
     const [readyToProceed, setReadyToProceed] = useState(false);
     const [network, setNetwork] = useState(availableNetworks[0]);
     const [networkDisabled, setNetworkDisabled] = useState(true);
+    const [hasResponse, setHasResponse] = useState(true);
+    const active = useIsFocused();
+
+    const transactionDisableHandler = () => !(spendAmount && hasResponse);
 
     const transactionDebug = (network, spendingAmount, spendingCurrency, receivingAmount, receivingCurrency, rate, commission) => {
         console.log('DEBUG');
@@ -41,202 +48,416 @@ export const TransactionScreen = ({ navigation }) => {
         console.log('============');
     }
 
+
+
+    useEffect(() => {
+        return () => {
+            setReadyToProceed(false);
+            setRate(undefined);
+            setSpendAmount(undefined);
+            setReceiveAmount(undefined);
+        }
+    },[active]);
+
     return (
-        <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
+        <KeyboardAvoidingView
+            contentContainerStyle={{ backgroundColor: Platform.OS === 'ios' ? theme.screenBgColor : undefined }}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+            <ScrollView
+                scrollEnabled={false}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
 
-            <ExchangeAmountInput
-                operation={i18n.t(`${screen}.network`)}
-                chosenCurrencyName={network.networkCode}
-                chosenCurrencyIcon={
-                    network.networkName === 'Tron' ?
-                        <TronCustomIcon
-                            color={theme.calcCurrencyIconColor}
-                            bgColor={theme.calcCurrencyIconBgColor}
-                        /> :
-                        <CustomIcon
-                            icon={network.icon}
-                            iconSize={wp('4%')}
-                            boxSize={wp('7%')}
-                            color={theme.calcCurrencyIconColor}
-                            bgColor={theme.calcCurrencyIconBgColor}
-                        />
-                }
-                onPressHandler={ () => {
-                    if(receiveCurrency.nameShort === 'USDT'){
-                        let nextNetwork = availableNetworks[(availableNetworks.indexOf(network) + 1) % availableNetworks.length];
-                        if(nextNetwork.networkCode === 'BTC'){
-                            nextNetwork = availableNetworks[availableNetworks.indexOf(nextNetwork) + 1];
+                <ExchangeAmountInput
+                    operation={i18n.t(`${screen}.network`)}
+                    chosenCurrencyName={network.networkCode}
+                    chosenCurrencyIcon={
+                        network.networkName === 'Tron' ?
+                            <TronCustomIcon
+                                color={theme.calcCurrencyIconColor}
+                                bgColor={theme.calcCurrencyIconBgColor}
+                                size={wp('4%')}
+                            /> :
+                            <CustomIcon
+                                icon={network.icon}
+                                iconSize={wp('4%')}
+                                boxSize={wp('7%')}
+                                color={theme.calcCurrencyIconColor}
+                                bgColor={theme.calcCurrencyIconBgColor}
+                            />
+                    }
+                    onPressHandler={ () => {
+                        if(receiveCurrency.nameShort === 'USDT'){
+                            let nextNetwork = availableNetworks[(availableNetworks.indexOf(network) + 1) % availableNetworks.length];
+                            if(nextNetwork.networkCode === 'BTC'){
+                                nextNetwork = availableNetworks[availableNetworks.indexOf(nextNetwork) + 1];
+                            }
+                            setNetwork(nextNetwork);
                         }
-                        setNetwork(nextNetwork);
-                    }
-                    setReceiveAmount(null);
-                    setReadyToProceed(null);
-                }}
-                pickerDisabled={networkDisabled}
-                isEditable
-                isNetwork
-                value={network.networkName}
-                textColor={theme.primaryContentColor} />
+                        setReceiveAmount(null);
+                        setReadyToProceed(null);
+                    }}
+                    pickerDisabled={networkDisabled}
+                    isEditable
+                    isNetwork
+                    value={network.networkName}
+                    textColor={theme.primaryContentColor} />
 
-            <ExchangeAmountInput
-                operation={i18n.t(`${screen}.pay`)}
-                chosenCurrencyName={spendCurrency.nameShort}
-                chosenCurrencyIcon={
-                    <CustomIcon
-                        icon={spendCurrency.icon}
-                        iconSize={wp('4%')}
-                        boxSize={wp('7%')}
-                        color={theme.calcCurrencyIconColor}
-                        bgColor={theme.calcCurrencyIconBgColor}
-                    />
-                }
-                // onPressHandler={() => {
-                //     setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
-                //     setReceiveAmount(null);
-                //     setReadyToProceed(false);
-                // }}
-                value={spendAmount}
-                placeholder={i18n.t(`${screen}.placeholder`)}
-                onChangeAmount={(amount) => {
-                    let inputValue = amount;
-                    inputValue = inputValue.replace(/[,\.]/g, '');
-                    inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-                    setSpendAmount(inputValue);
-                    setReceiveAmount(null);
-                    setReadyToProceed(false);
-                }}
-                textColor={theme.primaryContentColor}
-                isEditable={true}
-                pickerDisabled={true} />
-
-            <ExchangeAmountInput
-                operation={i18n.t(`${screen}.receive`)}
-                chosenCurrencyName={receiveCurrency.nameShort}
-                chosenCurrencyIcon={
-                    receiveCurrency.nameLong === 'Tron' ?
-                        <TronCustomIcon
-                            color={theme.calcCurrencyIconColor}
-                            bgColor={theme.calcCurrencyIconBgColor} /> :
+                <ExchangeAmountInput
+                    operation={i18n.t(`${screen}.pay`)}
+                    chosenCurrencyName={spendCurrency.nameShort}
+                    chosenCurrencyIcon={
                         <CustomIcon
-                            icon={receiveCurrency.icon}
+                            icon={spendCurrency.icon}
                             iconSize={wp('4%')}
                             boxSize={wp('7%')}
                             color={theme.calcCurrencyIconColor}
                             bgColor={theme.calcCurrencyIconBgColor}
                         />
-                }
-                onPressHandler={() => {
-                    setReceiveAmount(undefined);
-                    setReadyToProceed(false);
-                    const toBeChosenNext = cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length];
-
-                    switch(toBeChosenNext.nameShort){
-                        case 'ETH':
-                            setNetwork(availableNetworks.find((element) => element.networkCode === 'ERC20'));
-                            setNetworkDisabled(true);
-                            break;
-
-                        case 'BTC':
-                            setNetwork(availableNetworks.find((element) => element.networkCode === 'BTC'));
-                            setNetworkDisabled(true);
-                            break;
-
-                        case 'TRX':
-                            setNetwork(availableNetworks.find((element) => element.networkCode === 'TRC20'));
-                            setNetworkDisabled(true);
-                            break;
-
-                        case 'USDT':
-                            setNetwork(availableNetworks.find(element => element.networkCode !== 'BTC'));
-                            setNetworkDisabled(false);
-                            break;
                     }
-                    setReceiveCurrency(toBeChosenNext);
-                }}
-                value={receiveAmount}
-                textColor={theme.primaryContentColor}
-                isEditable={false} />
+                    // onPressHandler={() => {
+                    //     setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
+                    //     setReceiveAmount(null);
+                    //     setReadyToProceed(false);
+                    // }}
+                    value={spendAmount}
+                    placeholder={i18n.t(`${screen}.placeholder`)}
+                    onChangeAmount={(amount) => {
+                        let inputValue = amount;
+                        inputValue = inputValue.replace(/[,\.]/g, '');
+                        inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            { rate ?
-                <ExchangeRate style={[styles.exchangeRateText, { color: theme.secondaryContentColor }]} from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :
-                <Text style={styles.exchangeRateText}>{' '}</Text>}
+                        setSpendAmount(inputValue);
+                        setReceiveAmount(null);
+                        setReadyToProceed(false);
+                    }}
+                    textColor={theme.primaryContentColor}
+                    isEditable={true}
+                    pickerDisabled={true} />
 
-            <CustomButton
-                textColor={theme.mainBtnTextColor}
-                bgColor={theme.mainBtnBgColor}
-                borderColor={theme.mainBtnBorderColor}
-                text={readyToProceed ? i18n.t(`${screen}.generate_qr_text`) : i18n.t(`${screen}.calculate_text`)}
-                onPress={ async () => {
-
-                    if(!spendAmount){
-                        Alert.alert(i18n.t(`${screen}.error_title`), i18n.t(`${screen}.error_message`));
-                        return;
+                <ExchangeAmountInput
+                    operation={i18n.t(`${screen}.receive`)}
+                    chosenCurrencyName={receiveCurrency.nameShort}
+                    chosenCurrencyIcon={
+                        receiveCurrency.nameLong === 'Tron' ?
+                            <TronCustomIcon
+                                color={theme.calcCurrencyIconColor}
+                                bgColor={theme.calcCurrencyIconBgColor}
+                                size={wp('4%')}
+                            /> :
+                            <CustomIcon
+                                icon={receiveCurrency.icon}
+                                iconSize={wp('4%')}
+                                boxSize={wp('7%')}
+                                color={theme.calcCurrencyIconColor}
+                                bgColor={theme.calcCurrencyIconBgColor}
+                            />
                     }
+                    onPressHandler={() => {
+                        setReceiveAmount(undefined);
+                        setReadyToProceed(false);
+                        const toBeChosenNext = cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length];
 
-                    if(readyToProceed){
-                        Alert.alert(i18n.t(`${screen}.qr_approval_title`), i18n.t(`${screen}.qr_approval_message`), [
-                            {
-                                text: i18n.t(`${screen}.qr_approval_cancel`),
-                                style: 'destructive',
-                                onPress: () => {
-                                    console.log('Transaction Cancelled!');
-                                }
-                            },
-                            {
-                                text: i18n.t(`${screen}.qr_approval_proceed`),
-                                style: 'default',
-                                onPress: async () => {
-                                    const finalSpendAmount = parseFloat(spendAmount.replaceAll(',', ''));
-                                    transactionDebug(network, finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
+                        switch(toBeChosenNext.nameShort){
+                            case 'ETH':
+                                setNetwork(availableNetworks.find((element) => element.networkCode === 'ERC20'));
+                                setNetworkDisabled(true);
+                                break;
 
-                                    // DEBUG
-                                    navigation.navigate('QR_DETAILS', {
-                                        walletData: '123123123123123123',
-                                        networkData: `TRC20`,
-                                        depositStatus: 0
-                                    });
+                            case 'BTC':
+                                setNetwork(availableNetworks.find((element) => element.networkCode === 'BTC'));
+                                setNetworkDisabled(true);
+                                break;
 
-                                    // const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
-                                    // navigation.navigate('QR', {
-                                    //     walletData: walletData.address,
-                                    //     networkData: `${network.networkCode}`,
-                                    //     depositStatus: 'Pending'
-                                    // });
-                                }
-                            }]);
-                    } else {
+                            case 'TRX':
+                                setNetwork(availableNetworks.find((element) => element.networkCode === 'TRC20'));
+                                setNetworkDisabled(true);
+                                break;
 
-                        // DEBUG
-                        // navigation.navigate('QR', {
-                        //     walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfo',
-                        //     networkData: 'Tron (TRC20)'
-                        // });
+                            case 'USDT':
+                                setNetwork(availableNetworks.find(element => element.networkCode !== 'BTC'));
+                                setNetworkDisabled(false);
+                                break;
+                        }
+                        setReceiveCurrency(toBeChosenNext);
+                    }}
+                    value={receiveAmount}
+                    textColor={theme.primaryContentColor}
+                    isEditable={false} />
 
-                        const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
-                        const commissionRate = parseFloat(await commissionDataRequest(accessToken));
-                        const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
-                        const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
-                        setCommission(`${commissionRate}`);
-                        setReceiveAmount(amountToReceive);
-                        setRate(pricePerUnit);
-                        setReadyToProceed(true);
-                        console.log(network.networkCode);
-                    }
-                }} />
-            <View style={{ flex: 0.5 }}/>
-        </View>
+                { rate ?
+                    <ExchangeRate style={[styles.exchangeRateText, { color: theme.secondaryContentColor }]} from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :
+                    <Text style={styles.exchangeRateText}>{' '}</Text>}
+
+                <CustomButton
+                    isDisabled={transactionDisableHandler()}
+                    textColor={theme.mainBtnTextColor}
+                    bgColor={theme.mainBtnBgColor}
+                    borderColor={theme.mainBtnBorderColor}
+                    text={readyToProceed ? i18n.t(`${screen}.generate_qr_text`) : i18n.t(`${screen}.calculate_text`)}
+                    onPress={ async () => {
+                        setHasResponse(false);
+                        if(!spendAmount){
+                            Alert.alert(i18n.t(`${screen}.error_title`), i18n.t(`${screen}.error_message`));
+                            return;
+                        }
+
+                        if(readyToProceed){
+                            Alert.alert(i18n.t(`${screen}.qr_approval_title`), i18n.t(`${screen}.qr_approval_message`), [
+                                {
+                                    text: i18n.t(`${screen}.qr_approval_cancel`),
+                                    style: 'destructive',
+                                    onPress: () => {
+                                        console.log('Transaction Cancelled!');
+                                        setHasResponse(true);
+                                    }
+                                },
+                                {
+                                    text: i18n.t(`${screen}.qr_approval_proceed`),
+                                    style: 'default',
+                                    onPress: async () => {
+                                        const finalSpendAmount = parseFloat(spendAmount.replaceAll(',', ''));
+                                        transactionDebug(network, finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
+
+                                        // DEBUG
+                                        navigation.navigate('QR_DETAILS', {
+                                            walletData: '123123123123123123',
+                                            networkData: `TRC20`,
+                                            depositStatus: 'Pending'
+                                        });
+
+                                        // const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
+                                        setHasResponse(true);
+                                        // navigation.navigate('QR_DETAILS', {
+                                        //     walletData: walletData.address,
+                                        //     networkData: `${network.networkCode}`,
+                                        //     depositStatus: 'Pending'
+                                        // });
+                                    }
+                                }]);
+                        } else {
+
+                            // DEBUG
+                            // navigation.navigate('QR', {
+                            //     walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfo',
+                            //     networkData: 'Tron (TRC20)'
+                            // });
+
+                            const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
+                            const commissionRate = parseFloat(await commissionDataRequest(accessToken));
+                            const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
+                            const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
+                            setCommission(`${commissionRate}`);
+                            setReceiveAmount(amountToReceive);
+                            setRate(pricePerUnit);
+                            setReadyToProceed(true);
+                            console.log(network.networkCode);
+
+                            setHasResponse(true);
+                        }
+                    }} />
+                <View style={{ flex: 0.6 }}/>
+            </ScrollView>
+        </KeyboardAvoidingView>
+
+        // <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
+        //     <ExchangeAmountInput
+        //         operation={i18n.t(`${screen}.network`)}
+        //         chosenCurrencyName={network.networkCode}
+        //         chosenCurrencyIcon={
+        //             network.networkName === 'Tron' ?
+        //                 <TronCustomIcon
+        //                     color={theme.calcCurrencyIconColor}
+        //                     bgColor={theme.calcCurrencyIconBgColor}
+        //                     size={wp('4%')}
+        //                 /> :
+        //                 <CustomIcon
+        //                     icon={network.icon}
+        //                     iconSize={wp('4%')}
+        //                     boxSize={wp('7%')}
+        //                     color={theme.calcCurrencyIconColor}
+        //                     bgColor={theme.calcCurrencyIconBgColor}
+        //                 />
+        //         }
+        //         onPressHandler={ () => {
+        //             if(receiveCurrency.nameShort === 'USDT'){
+        //                 let nextNetwork = availableNetworks[(availableNetworks.indexOf(network) + 1) % availableNetworks.length];
+        //                 if(nextNetwork.networkCode === 'BTC'){
+        //                     nextNetwork = availableNetworks[availableNetworks.indexOf(nextNetwork) + 1];
+        //                 }
+        //                 setNetwork(nextNetwork);
+        //             }
+        //             setReceiveAmount(null);
+        //             setReadyToProceed(null);
+        //         }}
+        //         pickerDisabled={networkDisabled}
+        //         isEditable
+        //         isNetwork
+        //         value={network.networkName}
+        //         textColor={theme.primaryContentColor} />
+        //
+        //     <ExchangeAmountInput
+        //         operation={i18n.t(`${screen}.pay`)}
+        //         chosenCurrencyName={spendCurrency.nameShort}
+        //         chosenCurrencyIcon={
+        //             <CustomIcon
+        //                 icon={spendCurrency.icon}
+        //                 iconSize={wp('4%')}
+        //                 boxSize={wp('7%')}
+        //                 color={theme.calcCurrencyIconColor}
+        //                 bgColor={theme.calcCurrencyIconBgColor}
+        //             />
+        //         }
+        //         // onPressHandler={() => {
+        //         //     setSpendCurrency(baseCurrencies[(baseCurrencies.indexOf(spendCurrency) + 1) % baseCurrencies.length]);
+        //         //     setReceiveAmount(null);
+        //         //     setReadyToProceed(false);
+        //         // }}
+        //         value={spendAmount}
+        //         placeholder={i18n.t(`${screen}.placeholder`)}
+        //         onChangeAmount={(amount) => {
+        //             let inputValue = amount;
+        //             inputValue = inputValue.replace(/[,\.]/g, '');
+        //             inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        //
+        //             setSpendAmount(inputValue);
+        //             setReceiveAmount(null);
+        //             setReadyToProceed(false);
+        //         }}
+        //         textColor={theme.primaryContentColor}
+        //         isEditable={true}
+        //         pickerDisabled={true} />
+        //
+        //     <ExchangeAmountInput
+        //         operation={i18n.t(`${screen}.receive`)}
+        //         chosenCurrencyName={receiveCurrency.nameShort}
+        //         chosenCurrencyIcon={
+        //             receiveCurrency.nameLong === 'Tron' ?
+        //                 <TronCustomIcon
+        //                     color={theme.calcCurrencyIconColor}
+        //                     bgColor={theme.calcCurrencyIconBgColor}
+        //                     size={wp('4%')}
+        //                 /> :
+        //                 <CustomIcon
+        //                     icon={receiveCurrency.icon}
+        //                     iconSize={wp('4%')}
+        //                     boxSize={wp('7%')}
+        //                     color={theme.calcCurrencyIconColor}
+        //                     bgColor={theme.calcCurrencyIconBgColor}
+        //                 />
+        //         }
+        //         onPressHandler={() => {
+        //             setReceiveAmount(undefined);
+        //             setReadyToProceed(false);
+        //             const toBeChosenNext = cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length];
+        //
+        //             switch(toBeChosenNext.nameShort){
+        //                 case 'ETH':
+        //                     setNetwork(availableNetworks.find((element) => element.networkCode === 'ERC20'));
+        //                     setNetworkDisabled(true);
+        //                     break;
+        //
+        //                 case 'BTC':
+        //                     setNetwork(availableNetworks.find((element) => element.networkCode === 'BTC'));
+        //                     setNetworkDisabled(true);
+        //                     break;
+        //
+        //                 case 'TRX':
+        //                     setNetwork(availableNetworks.find((element) => element.networkCode === 'TRC20'));
+        //                     setNetworkDisabled(true);
+        //                     break;
+        //
+        //                 case 'USDT':
+        //                     setNetwork(availableNetworks.find(element => element.networkCode !== 'BTC'));
+        //                     setNetworkDisabled(false);
+        //                     break;
+        //             }
+        //             setReceiveCurrency(toBeChosenNext);
+        //         }}
+        //         value={receiveAmount}
+        //         textColor={theme.primaryContentColor}
+        //         isEditable={false} />
+        //
+        //     { rate ?
+        //         <ExchangeRate style={[styles.exchangeRateText, { color: theme.secondaryContentColor }]} from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :
+        //         <Text style={styles.exchangeRateText}>{' '}</Text>}
+        //
+        //     <CustomButton
+        //         textColor={theme.mainBtnTextColor}
+        //         bgColor={theme.mainBtnBgColor}
+        //         borderColor={theme.mainBtnBorderColor}
+        //         text={readyToProceed ? i18n.t(`${screen}.generate_qr_text`) : i18n.t(`${screen}.calculate_text`)}
+        //         onPress={ async () => {
+        //
+        //             if(!spendAmount){
+        //                 Alert.alert(i18n.t(`${screen}.error_title`), i18n.t(`${screen}.error_message`));
+        //                 return;
+        //             }
+        //
+        //             if(readyToProceed){
+        //                 Alert.alert(i18n.t(`${screen}.qr_approval_title`), i18n.t(`${screen}.qr_approval_message`), [
+        //                     {
+        //                         text: i18n.t(`${screen}.qr_approval_cancel`),
+        //                         style: 'destructive',
+        //                         onPress: () => {
+        //                             console.log('Transaction Cancelled!');
+        //                         }
+        //                     },
+        //                     {
+        //                         text: i18n.t(`${screen}.qr_approval_proceed`),
+        //                         style: 'default',
+        //                         onPress: async () => {
+        //                             const finalSpendAmount = parseFloat(spendAmount.replaceAll(',', ''));
+        //                             transactionDebug(network, finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
+        //
+        //                             // DEBUG
+        //                             navigation.navigate('QR_DETAILS', {
+        //                                 walletData: '123123123123123123',
+        //                                 networkData: `TRC20`,
+        //                                 depositStatus: 0
+        //                             });
+        //
+        //                             // const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
+        //                             // navigation.navigate('QR_DETAILS', {
+        //                             //     walletData: walletData.address,
+        //                             //     networkData: `${network.networkCode}`,
+        //                             //     depositStatus: 'Pending'
+        //                             // });
+        //                         }
+        //                     }]);
+        //             } else {
+        //
+        //                 // DEBUG
+        //                 // navigation.navigate('QR', {
+        //                 //     walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfo',
+        //                 //     networkData: 'Tron (TRC20)'
+        //                 // });
+        //
+        //                 const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort)).toFixed(4);
+        //                 const commissionRate = parseFloat(await commissionDataRequest(accessToken));
+        //                 const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
+        //                 const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
+        //                 setCommission(`${commissionRate}`);
+        //                 setReceiveAmount(amountToReceive);
+        //                 setRate(pricePerUnit);
+        //                 setReadyToProceed(true);
+        //                 console.log(network.networkCode);
+        //             }
+        //         }} />
+        //     <View style={{ flex: 0.5 }}/>
+        // </View>
     );
 }
 
 const styles = StyleSheet.create({
     layout: {
-        flex: 1,
+        // flex: 1,
         justifyContent: 'center',
         padding: wp('2%'),
         paddingVertical: hp('1%'),
         paddingHorizontal: wp('5%'),
-        gap: hp('2%')
+        gap: hp('2%'),
+        height: hp('90%')
     },
     exchangeRateText: {
         fontSize: wp('3.5%'),

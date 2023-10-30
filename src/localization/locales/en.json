@@ -69,7 +69,11 @@
       "email": "Email",
       "address": "Address",
       "commission_rate": "Commission rate",
-      "logout_title": "Logout"
+      "logout_title": "Logout",
+      "logout_operation_title": "Confirm Logout",
+      "logout_operation_message": "Are you sure you want to logout?",
+      "logout_cancel": "Cancel",
+      "logout_confirm": "Logout"
     },
     "language": {
       "screen_name": "Language"

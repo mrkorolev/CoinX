@@ -1,33 +1,33 @@
 import {View, KeyboardAvoidingView, ScrollView, StyleSheet, Platform} from 'react-native';
 import { Calculator } from '../../components/home/Calculator';
 import { ExchangeRatesData } from '../../components/home/ExchangeRatesData';
-
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {useContext, useState} from "react";
+import {useContext, useRef, useState} from "react";
 import { AppContext } from "../../global/AppContext";
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 export const HomeScreen = () => {
-
+    const scrollViewRef = useRef(this);
     const { theme } = useContext(AppContext);
     const [scrollable, setScrollable] = useState(false);
-    return (
-            <KeyboardAvoidingView
-                contentContainerStyle={{ backgroundColor: theme.screenBgColor }}
-                behavior='position'>
-                <ScrollView
-                    ref={ref => {this.scrollView = ref}}
-                    onContentSizeChange={() => this.scrollView.scrollToEnd()}
-                    scrollEnabled={scrollable}
-                    contentContainerStyle={[styles.innerContainer, scrollable && {
-                        paddingTop: hp('30%'),
-                        height: Platform.OS === 'ios' ? hp('110%') : hp('90%'),
-                        justifyContent: 'center',
-                        gap: hp('3%') }]}>
 
-                        <ExchangeRatesData />
-                        <Calculator modifyScrollAction={setScrollable}/>
-                </ScrollView>
-            </KeyboardAvoidingView>
+    const onFocusHandler = () => {
+        scrollViewRef.current.scrollToEnd();
+    }
+
+    return (
+        <KeyboardAvoidingView
+            contentContainerStyle={{ backgroundColor: Platform.OS === 'ios' ? theme.screenBgColor : undefined }}
+            behavior={Platform.OS === 'ios' ? 'position' : 'height'}>
+            <ScrollView
+                ref={scrollViewRef}
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={scrollable}
+                contentContainerStyle={[styles.innerContainer, { backgroundColor: theme.screenBgColor }]}>
+                <ExchangeRatesData />
+                <Calculator modifyScrollAction={setScrollable} onFocusScroll={onFocusHandler} />
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }
 

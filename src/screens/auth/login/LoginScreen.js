@@ -19,13 +19,18 @@ export const LoginScreen = () => {
         theme, accessToken,
         setAccessToken, setRefreshToken } = useContext(AppContext);
 
+    const loginDisabledHandler = () => !(username && password && hasResponse);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [hasResponse, setHasResponse] = useState(true);
     const [protection, setProtection] = useState(true);
     const [icon, setIcon] = useState(<FontAwesomeIcon icon={faEye} color={`${theme.passwordIconColor}`} size={wp('6%')} />);
     const nav = useNavigation();
     const screen = 'screens.login';
 
+
+    // Improvement here is possible!
     const validateInput = (username, password) => {
         if(!username || !password){
             return false;
@@ -66,7 +71,9 @@ export const LoginScreen = () => {
                     textColor={theme.mainBtnTextColor}
                     bgColor={theme.mainBtnBgColor}
                     borderColor={theme.mainBtnBorderColor}
+                    isDisabled={loginDisabledHandler()}
                     onPress={async () => {
+                        setHasResponse(false);
                         console.log(`Username: ${username}`);
                         console.log(`Password: ${password}`);
 
@@ -75,17 +82,20 @@ export const LoginScreen = () => {
                             return;
                         }
 
-                        // const response = await authenticateUser(username, password);
-                        // if(response && response.status === 200){
-                        //     setAccessToken(response.data.access_token);
-                        //     setRefreshToken(response.data.refresh_token);
-                        //     console.log('LOGIN SUCCESSFUL (token saved)! Proceed to OTP!');
-                        //     nav.navigate('Otp');
-                        // }
+                        const response = await authenticateUser(username, password);
+                        setHasResponse(true);
+                        if(response && response.status === 200){
+                            setAccessToken(response.data.access_token);
+                            setRefreshToken(response.data.refresh_token);
+                            console.log('LOGIN SUCCESSFUL (token saved)! Proceed to OTP!');
+                            nav.navigate('Otp');
+                        }else{
+                            Alert.alert('Request Timeout!', 'Check your connection or contact support for further assistance');
+                        }
 
                         // DEBUG
-                        setAccessToken('123123');
-                        nav.navigate('Otp');
+                        // setAccessToken('123123');
+                        // nav.navigate('Otp');
                     }}
                 />
             <View style={{ flex: 0.45 }} />

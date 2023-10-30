@@ -18,9 +18,11 @@ export const OtpScreen = ({ navigation }) => {
     const screen = 'screens.otp';
 
     const [code, setCode] = useState("");
+    const [hasResponse, setHasResponse] = useState(true);
     const [pinReady, setPinReady] = useState(false);
     const MAX_CODE_LENGTH = 6;
 
+    const otpDisabledHandler = () => !(pinReady && hasResponse);
 
     return (
         <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
@@ -38,20 +40,21 @@ export const OtpScreen = ({ navigation }) => {
                 bgColor={theme.mainBtnBgColor}
                 borderColor={theme.mainBtnBorderColor}
                 text={i18n.t(`${screen}.button_text`)}
-                isDisabled={!pinReady}
+                isDisabled={otpDisabledHandler()}
                 onPress={async () => {
+                    setHasResponse(false);
                     console.log(code);
                     // const response = await otpVerification(accessToken, code);
-                    //
+
+                    setHasResponse(true);
                     // if(response && response.status === 200){
                     //     console.log('Verification process passed! Proceed to main navigator!');
                     //     navigation.navigate('Success');
                     // }
-
                     // DEBUG
                     navigation.navigate('Success');
                 }} />
-            <View style={{ flex: 0.25 }}/>
+            <View style={{ flex: 0.35 }}/>
         </View>
     );
 }
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         paddingHorizontal: wp('5%'),
-        paddingBottom: hp('20%')
+        // paddingBottom: hp('20%')
     },
     title: {
         fontWeight: 'bold',
