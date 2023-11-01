@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet, Alert, Platform} from 'react-native';
 import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
@@ -14,13 +14,13 @@ import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 
 export const LoginScreen = () => {
 
-    // App context
     const {
-        theme, accessToken,
-        setAccessToken, setRefreshToken } = useContext(AppContext);
+        theme,
+        accessToken,
+        setAccessToken } = useContext(AppContext);
 
     const loginDisabledHandler = () => !(username && password && hasResponse);
-
+    const passwordRef = useRef(null);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [hasResponse, setHasResponse] = useState(true);
@@ -29,8 +29,6 @@ export const LoginScreen = () => {
     const nav = useNavigation();
     const screen = 'screens.login';
 
-
-    // Improvement here is possible!
     const validateInput = (username, password) => {
         if(!username || !password){
             return false;
@@ -44,11 +42,13 @@ export const LoginScreen = () => {
                 <Text style={[styles.title, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.title`)}</Text>
                 <CustomInput
                     value={username}
+                    onSubmitHandler={() => passwordRef.current.focus()}
                     placeholder={i18n.t(`${screen}.email_placeholder`)}
                     onChangeText={(text) => setUsername(text)}
                     enterKey='next' />
 
                 <CustomInput
+                    customRef={passwordRef}
                     value={password}
                     icon={
                         <TouchableOpacity
@@ -60,7 +60,6 @@ export const LoginScreen = () => {
                             {icon}
                         </TouchableOpacity>
                     }
-
                     secureTextEntry={protection}
                     placeholder={i18n.t(`${screen}.password_placeholder`)}
                     onChangeText={(text) => setPassword(text)}
@@ -86,7 +85,6 @@ export const LoginScreen = () => {
                         setHasResponse(true);
                         if(response && response.status === 200){
                             setAccessToken(response.data.access_token);
-                            setRefreshToken(response.data.refresh_token);
                             console.log('LOGIN SUCCESSFUL (token saved)! Proceed to OTP!');
                             nav.navigate('Otp');
                         }else{
@@ -108,7 +106,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         paddingHorizontal: wp('5%'),
-        // paddingBottom: hp('25%')
     },
     title: {
         fontWeight: 'bold',

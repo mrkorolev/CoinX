@@ -21,7 +21,6 @@ export const SettingsScreen = ({navigation}) => {
         theme, setTheme,
         pushEnabled, setPushEnabled,
         accessToken } = useContext(AppContext);
-    const screen = 'screens.settings';
 
     const [name, setName] = useState('---');
     const [phone, setPhone] = useState('---');
@@ -29,6 +28,7 @@ export const SettingsScreen = ({navigation}) => {
     const [email, setEmail] = useState('---');
     const [commission, setCommission] = useState('---');
     const [enablePush, setEnablePush] = useState(false);
+    const screen = 'screens.settings';
 
     useLayoutEffect(() => {
         let requestUserData = async () => {
@@ -110,10 +110,6 @@ export const SettingsScreen = ({navigation}) => {
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.notifications`)}</Text>}
                         component={<CustomToggle
                             value={enablePush}
-                            onValueToggle={() => {
-                            setEnablePush((prev) => !prev);
-                            console.log("Push notifications value just toggled!");
-                        }}
                         />}
                         icon={<FontAwesomeIcon icon={funcSettings[1].icon} color={"white"} size={wp('4%')} />}
                         bgColor={funcSettings[1].bgColor} />
@@ -134,7 +130,7 @@ export const SettingsScreen = ({navigation}) => {
                         onPressHandler={() => navigation.navigate('TERMS_OF_USE')}
                         icon={<FontAwesomeIcon icon={descSettings[0].icon} color={"white"} size={wp('4%')} />}
                         bgColor={descSettings[0].bgColor}
-                        pressable
+                        // pressable
                     />
                     <Setting
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.privacy_policy`)}</Text>}
@@ -142,14 +138,16 @@ export const SettingsScreen = ({navigation}) => {
                         onPressHandler={() => navigation.navigate('PRIVACY')}
                         icon={<FontAwesomeIcon icon={descSettings[1].icon} color={"white"} size={wp('4%')} />}
                         bgColor={descSettings[1].bgColor}
-                        pressable />
+                        // pressable
+                    />
                     <Setting
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.about`)}</Text>}
                         component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                         onPressHandler={() => navigation.navigate('ABOUT')}
                         icon={<FontAwesomeIcon icon={descSettings[2].icon} color={"white"} size={wp('4%')} />}
                         bgColor={descSettings[2].bgColor}
-                        pressable />
+                        // pressable
+                    />
                 </View>
             </View>
             <View style={{ flex: 0.6 }} />

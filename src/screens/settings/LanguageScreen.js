@@ -2,13 +2,11 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
 import {AppContext} from "../../global/AppContext";
 import {i18n} from "../../localization/i18n";
-import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {faCheck, faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import React, {useContext, useState} from "react";
-import {useIsFocused} from "@react-navigation/native";
 
 export const LanguageScreen = ({ navigation }) => {
-    const tabIndex = useIsFocused();
     const languages = [
         {
             language: 'English',
@@ -31,11 +29,11 @@ export const LanguageScreen = ({ navigation }) => {
         return languages.map(item => (
             <TouchableOpacity
                 key={item.locale}
-                style={{ paddingHorizontal: wp('4%')}}
+                style={{ paddingHorizontal: wp('4%'), paddingVertical: hp('2.5%') }}
                 onPress={() => {
                     i18n.locale = item.locale;
                     setLocale(item);
-                    navigation.navigate('SETTINGS');
+                    navigation.goBack();
                 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ fontSize: wp('4%'), fontWeight: 'bold', color: theme.primaryContentColor }}>{item.language}</Text>
@@ -56,7 +54,6 @@ export const LanguageScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        gap: hp('4.5%')
+        justifyContent: 'center'
     }
 });

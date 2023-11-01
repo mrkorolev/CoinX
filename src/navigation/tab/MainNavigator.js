@@ -21,7 +21,6 @@ const Tab = createBottomTabNavigator();
 export const MainNavigator = () => {
 
     const { theme } = useContext(AppContext);
-
     const hideTabBar = (route, tabHiddenScreens, fallbackScreen) => {
         const routeName = getFocusedRouteNameFromRoute(route) ?? fallbackScreen;
         return tabHiddenScreens.includes(routeName);
@@ -34,12 +33,6 @@ export const MainNavigator = () => {
                 fontSize: wp('2.8%'),
                 paddingBottom: Platform.OS === 'ios' ? hp('0.5%') : hp('3%')
             },
-            // tabBarBackground: () => theme.tabBgColor,
-            // tabBarStyle: {
-            //     backgroundColor: theme.tabBgColor,
-            //     height: hp('12%'),
-            //     borderTopWidth: 0
-            // },
             tabBarItemStyle: {
                 paddingTop: hp('1.5%'),
             },
@@ -51,8 +44,6 @@ export const MainNavigator = () => {
                 component={HomeNavigator}
                 options={({route}) => ({
                     tabBarIcon: ({focused}) => focused ?
-                    //     // <FontAwesomeIcon icon={faTent} color={theme.activeTintColor} size={wp('6%')} /> :
-                    //     // <FontAwesomeIcon icon={faTent} color={theme.inactiveTintColor} size={wp('6%')} />,
                         <HomeTabBarIcon color={theme.activeTintColor} bgColor={theme.tabBgColor} size={wp('6.5%')} /> :
                         <HomeTabBarIcon color={theme.inactiveTintColor} bgColor={theme.tabBgColor} size={wp('6.5%')} />,
                     tabBarIconStyle: {
@@ -79,7 +70,6 @@ export const MainNavigator = () => {
                             height: wp('14%'),
                             borderRadius: wp('14%')/2,
                             backgroundColor: theme.qrBgColor }}>
-                            {/*<FontAwesomeIcon icon={faQrcode} color={theme.qrColor} size={wp('6%')} />*/}
                             <ScanTabBarIcon color={theme.qrColor} size={wp('7%')}/>
                         </View>
                     ),

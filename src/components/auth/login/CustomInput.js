@@ -5,22 +5,24 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import {AppContext} from "../../../global/AppContext";
 import {useContext} from "react";
 
-export const CustomInput = ({ icon, value, secureTextEntry, placeholder, onChangeText, enterKey }) => {
+export const CustomInput = ({ icon, value, secureTextEntry, placeholder, onChangeText, enterKey, onSubmitHandler, customRef }) => {
 
     const { theme } = useContext(AppContext);
 
     return (
         <View style={[styles.inputField, { backgroundColor: theme.placeholderBgColor, borderColor: theme.inputBorderColor }]}>
             <TextInput style={styles.inputValue}
+                       ref={customRef}
                        color={theme.inputColor}
                        value={value}
                        secureTextEntry={secureTextEntry}
                        placeholder={placeholder}
                        placeholderTextColor={theme.placeholderTextColor}
                        placeholderTextStyle={{ fontWeight: 'bold' }}
+                       onSubmitEditing={onSubmitHandler}
                        autoCapitalize='none'
                        onChangeText={onChangeText}
-                       // selectTextOnFocus
+                       selectTextOnFocus
                        enterKeyHint={enterKey} />
 
             <View style={{ flex: 0.05 }}/>

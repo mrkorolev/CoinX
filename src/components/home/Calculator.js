@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
-import {View, TouchableOpacity, StyleSheet, Dimensions, Text, TextInput, Keyboard, Alert} from 'react-native';
-import {faRightLeft, faTurkishLiraSign} from '@fortawesome/free-solid-svg-icons';
+import {View, TouchableOpacity, StyleSheet, Dimensions, Alert} from 'react-native';
+import {faRightLeft} from '@fortawesome/free-solid-svg-icons';
 import {Line} from "./Line";
 import {CustomIcon} from "../general/components/CustomIcon";
 import {baseCurrencies, cryptoCurrencies} from "../../constants/index";
@@ -18,9 +18,9 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
     const { theme } = useContext(AppContext);
     const screen = 'screens.home';
 
-    // State for the chosen currency and amount, ready to send the request and setReceiveCurrency as a result (editable={false})
     const [spendAmount, setSpendAmount] = useState(undefined);
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
+
     const [receiveAmount, setReceiveAmount] = useState(undefined);
     const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
 
@@ -35,7 +35,7 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
                         textColor={theme.primaryContentColor}
                         tintColor={theme.primaryContentColor}
                         baseColor={theme.primaryContentColor}
-
+                        returnKeyType='done'
                         onBlur={() => modifyScrollAction(false)}
                         onFocus={() => {
                             setReceiveAmount(undefined);

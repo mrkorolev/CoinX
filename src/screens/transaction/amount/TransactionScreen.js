@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {View, Text, StyleSheet, Alert, Platform, ScrollView, KeyboardAvoidingView} from 'react-native';
 import { ExchangeAmountInput } from '../../../components/transaction/amount/ExchangeAmountInput';
 import { ExchangeRate } from '../../../components/transaction/amount/ExchangeRate';
@@ -8,20 +8,17 @@ import { endpointPriceData } from "../../../services/binanceApiCalls";
 import { commissionDataRequest, walletDataRequest } from "../../../services/authentication";
 import { i18n } from "../../../localization/i18n";
 
-// Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {AppContext} from "../../../global/AppContext";
-import {TransactionCurrencyPicker} from "../../../components/general/components/TransactionCurrencyPicker";
 import {CustomIcon} from "../../../components/general/components/CustomIcon";
 import {TronCustomIcon} from "../../../components/general/icons/TronCustomIcon";
 import {useIsFocused} from "@react-navigation/native";
-import {ExchangeRatesData} from "../../../components/home/ExchangeRatesData";
-import {Calculator} from "../../../components/home/Calculator";
 
 export const TransactionScreen = ({ navigation }) => {
-
     const { theme, accessToken } = useContext(AppContext);
     const screen = 'screens.transaction';
+
+    // const scrollViewRef = useRef(this);
 
     const [spendAmount, setSpendAmount] = useState('');
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
@@ -48,8 +45,6 @@ export const TransactionScreen = ({ navigation }) => {
         console.log('============');
     }
 
-
-
     useEffect(() => {
         return () => {
             setReadyToProceed(false);
@@ -63,7 +58,9 @@ export const TransactionScreen = ({ navigation }) => {
         <KeyboardAvoidingView
             contentContainerStyle={{ backgroundColor: Platform.OS === 'ios' ? theme.screenBgColor : undefined }}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+
             <ScrollView
+                // ref={scrollViewRef}
                 scrollEnabled={false}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
@@ -444,7 +441,7 @@ export const TransactionScreen = ({ navigation }) => {
         //                 console.log(network.networkCode);
         //             }
         //         }} />
-        //     <View style={{ flex: 0.5 }}/>
+        //     <View style={{ flex: 0.6 }}/>
         // </View>
     );
 }
