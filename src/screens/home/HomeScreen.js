@@ -3,7 +3,7 @@ import { Calculator } from '../../components/home/Calculator';
 import { ExchangeRatesData } from '../../components/home/ExchangeRatesData';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {useContext, useRef, useState} from "react";
-import { AppContext } from "../../global/AppContext";
+import { AppContext } from "../../config/context/AppContext";
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 export const HomeScreen = () => {

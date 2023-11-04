@@ -1,13 +1,13 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
 import { CoinExchangeRate } from './CoinExchangeRate';
-import { cryptoCurrencies } from '../../constants/index';
-import { endpoint24hrData } from "../../services/binanceApiCalls";
+import { cryptoCurrencies } from '../../config/constants/operations';
+import { endpoint24hrData } from "../../services/binance";
 import { SvgUri } from "react-native-svg";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../global/AppContext";
+import {AppContext} from "../../config/context/AppContext";
 import {CustomIcon} from "../general/components/CustomIcon";
-import { TronCustomIcon} from "../general/icons/TronCustomIcon";
+import { Tron} from "../general/icons/Tron";
 
 function modifyCurrentState(arr1, arr2){
     for(let key in arr1){
@@ -112,7 +112,7 @@ export const ExchangeRatesData = () => {
                     lastPrice={coinComponents[2].lastPrice}
                     priceChangePercent={coinComponents[2].priceChangePercent}
                     coinIcon={
-                        <TronCustomIcon
+                        <Tron
                             color={theme.exchangeIconColor}
                             bgColor={theme.exchangeIconBgColor}
                             size={wp('4%')}/>

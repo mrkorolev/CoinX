@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import QRCode from "react-native-qrcode-svg";
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../../global/AppContext";
+import {AppContext} from "../../../config/context/AppContext";
 
 export const QrCode = ({ warning, wallet }) => {
 

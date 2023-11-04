@@ -4,7 +4,7 @@ import { TransactionCurrencyPicker } from '../../general/components/TransactionC
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../../global/AppContext";
+import {AppContext} from "../../../config/context/AppContext";
 import {CustomIcon} from "../../general/components/CustomIcon";
 
 export const ExchangeAmountInput = ({ operation, chosenCurrencyName, isNetwork, pickerDisabled, chosenCurrencyIcon, onPressHandler, onChangeAmount, placeholder, isEditable, value, textColor }) => {

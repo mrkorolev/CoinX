@@ -2,7 +2,7 @@ import React, {useContext} from "react"
 import { View, Text, StyleSheet } from 'react-native'
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../../global/AppContext";
+import {AppContext} from "../../../config/context/AppContext";
 
 export const OtpInput = ({ value, focused }) => {
 

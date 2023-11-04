@@ -1,14 +1,11 @@
-import React, { useContext } from 'react';
-import { StartupNavigator } from './src/navigation/auth/StartupNavigator';
-import { AppContext, AppContextProvider } from "./src/global/AppContext";
-import { StatusBar } from "react-native";
+import React from 'react';
+import { AppStack } from './src/navigation/AppStack';
+import { AppContextProvider } from "./src/config/context/AppContext";
 
-const App = () => {
-  return (
+const App = () => (
       <AppContextProvider>
-        <StartupNavigator />
+        <AppStack />
       </AppContextProvider>
-  );
-}
+);
 
 export default App;

@@ -3,15 +3,15 @@ import {View, TouchableOpacity, StyleSheet, Dimensions, Alert} from 'react-nativ
 import {faRightLeft} from '@fortawesome/free-solid-svg-icons';
 import {Line} from "./Line";
 import {CustomIcon} from "../general/components/CustomIcon";
-import {baseCurrencies, cryptoCurrencies} from "../../constants/index";
-import { endpointPriceData } from "../../services/binanceApiCalls";
-import { i18n } from "../../localization/i18n";
+import {baseCurrencies, cryptoCurrencies} from "../../config/constants/operations";
+import { endpointPriceData } from "../../services/binance";
+import { i18n } from "../../config/localization/i18n";
 import {TransactionCurrencyPicker} from "../general/components/TransactionCurrencyPicker";
 import { OutlinedTextField } from "rn-material-ui-textfield";
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../global/AppContext";
-import {TronCustomIcon} from "../general/icons/TronCustomIcon";
+import {AppContext} from "../../config/context/AppContext";
+import {Tron} from "../general/icons/Tron";
 
 export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
 
@@ -118,7 +118,7 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
                     currencyName={receiveCurrency.nameShort}
                     currencyIcon={
                     receiveCurrency.nameLong === 'Tron' ?
-                        <TronCustomIcon
+                        <Tron
                             color={theme.calcCurrencyIconColor}
                             bgColor={theme.calcCurrencyIconBgColor}
                             size={wp('4%')}

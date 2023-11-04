@@ -43,34 +43,34 @@ Password: admin@1234
 - Screen 1 - Login
 - Screen 2 - OTP Verification
 - Screen 3 - Successful Operation
-- Screen 4 - Home / Main
+- Screen 4 - HomeTab / Main
 - Screen 5 - New Transaction 
 - Screen 6 - QR Code Generator
-- Screen 7 - Settings
+- Screen 7 - SettingsTab
 - Screen 8 - Profile / Account
 
 
 
 | Screen 1                         | Screen 1                       | Screen 2                       | Screen 2                     |
 |----------------------------------|--------------------------------|--------------------------------|------------------------------|
-| ![](media/light/login_light.png) | ![](media/dark/login_dark.png) | ![](media/light/otp_light.png) | ![](media/dark/otp_dark.png) |
+| ![](assets/light/login_light.png) | ![](assets/dark/login_dark.png) | ![](assets/light/otp_light.png) | ![](assets/dark/otp_dark.png) |
 
 
 
 | Screen 3                            | Screen 3                         | Screen 4                         | Screen 4                      |
 |-------------------------------------|----------------------------------|----------------------------------|-------------------------------|
-| ![](media/light/success_light.png)  | ![](media/dark/success_dark.png) | ![](media/light/home_light.png)  | ![](media/dark/home_dark.png) |
+| ![](assets/light/success_light.png)  | ![](assets/dark/success_dark.png) | ![](assets/light/home_light.png)  | ![](assets/dark/home_dark.png) |
 
 
 
 | Screen 5                               | Screen 5                             | Screen 6                      | Screen 6                    |
 |----------------------------------------|--------------------------------------|-------------------------------|-----------------------------|
-| ![](media/light/transaction_light.png) | ![](media/dark/transaction_dark.png) | ![](media/light/qr_light.png) | ![](media/dark/qr_dark.png) |
+| ![](assets/light/transaction_light.png) | ![](assets/dark/transaction_dark.png) | ![](assets/light/qr_light.png) | ![](assets/dark/qr_dark.png) |
 
 
 | Screen 7                            | Screen 7                          | Screen 8                           | Screen 8                         |
 |-------------------------------------|-----------------------------------|------------------------------------|----------------------------------|
-| ![](media/light/settings_light.png) | ![](media/dark/settings_dark.png) | ![](media/light/profile_light.png) | ![](media/dark/profile_dark.png) |
+| ![](assets/light/settings_light.png) | ![](assets/dark/settings_dark.png) | ![](assets/light/profile_light.png) | ![](assets/dark/profile_dark.png) |
 
 
 

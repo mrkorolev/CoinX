@@ -2,7 +2,7 @@ import {TextInput, View, StyleSheet } from "react-native";
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../../global/AppContext";
+import {AppContext} from "../../../config/context/AppContext";
 import {useContext} from "react";
 
 export const CustomInput = ({ icon, value, secureTextEntry, placeholder, onChangeText, enterKey, onSubmitHandler, customRef }) => {

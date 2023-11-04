@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { ChevronDownIcon } from 'react-native-heroicons/solid';
 import { CustomIcon } from './CustomIcon';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
-import {AppContext} from "../../../global/AppContext";
+import {AppContext} from "../../../config/context/AppContext";
 
 export const TransactionCurrencyPicker = ({ currencyName, currencyIcon, customStyle, hasBorder, onPressHandler, disabled }) => {
 

@@ -1,6 +1,5 @@
 # Expo
 .expo
-media/custom_icons/*.svg
 __generated__
 web-build
 bare-apps
@@ -141,7 +140,7 @@ docs/pages/versions/*/react-native/ADDED_*.md
 docs/pages/versions/*/react-native/REMOVED_*.md
 docs/pages/versions/*/react-native/*.diff
 
-# Home
+# HomeTab
 /home/dist
 
 # Prebuilds

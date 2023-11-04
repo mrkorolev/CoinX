@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import { View, Text, StyleSheet } from "react-native";
-import { AppContext } from "../../global/AppContext";
+import { AppContext } from "../../config/context/AppContext";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 export const TermsAndConditionsScreen = ({ navigation }) => {

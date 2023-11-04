@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {CustomUserIcon} from "./CustomUserIcon";
-import {AppContext} from "../../global/AppContext";
+import {AppContext} from "../../config/context/AppContext";
 
 export const PrimaryDetails = ({ name }) => {
 

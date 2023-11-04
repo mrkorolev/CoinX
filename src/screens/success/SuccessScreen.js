@@ -2,10 +2,10 @@ import React, {useContext} from "react";
 
 import { useNavigation } from "@react-navigation/native";
 import { CheckBadgeIcon } from "react-native-heroicons/solid";
-import { i18n } from "../../localization/i18n";
+import { i18n } from "../../config/localization/i18n";
 import {StyleSheet, Text, View} from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../global/AppContext";
+import {AppContext} from "../../config/context/AppContext";
 
 export const SuccessScreen = ({ navigation }) => {
     const { theme } = useContext(AppContext);

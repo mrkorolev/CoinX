@@ -1,18 +1,18 @@
-import {Appearance, StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 
 import {faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import React, {useState, useEffect, useContext, useLayoutEffect} from "react";
+import React, {useState, useContext, useLayoutEffect} from "react";
 import { CustomToggle } from "../../components/settings/CustomToggle";
 import { Setting } from "../../components/settings/Setting";
 
-import {accessToken, descSettings, funcSettings, settings, toggles} from "../../constants";
-import { i18n } from "../../localization/i18n";
+import { funcSettings, descSettings } from "../../config/constants/settings";
+import { i18n } from "../../config/localization/i18n";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import {CustomUserIcon} from "../../components/settings/CustomUserIcon";
-import {commissionDataRequest, userProfileVerification} from "../../services/authentication";
-import {AppContext} from "../../global/AppContext";
-import {appTheme} from "../../config/theme";
+import {commissionDataRequest, userProfileVerification} from "../../services/payone";
+import {AppContext} from "../../config/context/AppContext";
+import {appTheme} from "../../config/theme/theme";
 
 export const SettingsScreen = ({navigation}) => {
 
@@ -87,7 +87,6 @@ export const SettingsScreen = ({navigation}) => {
                                 borderRadius: wp('20%') * 50
                             }}
                     />}
-                    // bgColor={theme.userIconColor}
                     pressable />
             </View>
 

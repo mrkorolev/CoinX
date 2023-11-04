@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { CustomIcon } from '../general/components/CustomIcon';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {useContext} from "react";
-import {AppContext} from "../../global/AppContext";
+import {AppContext} from "../../config/context/AppContext";
 
 export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePercent, bgColor, primaryColor, secondaryColor, coinIcon }) => {
 

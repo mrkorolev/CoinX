@@ -2,22 +2,19 @@ import React, {useState, useEffect, useContext} from 'react';
 import {View, StyleSheet, Text, Alert} from 'react-native';
 
 import { PrimaryDetails } from '../../components/settings/PrimaryDetails';
-import { SecondaryDetails } from '../../components/settings/SecondaryDetails';
-import {commissionDataRequest, userProfileVerification} from "../../services/authentication";
-import { accessToken } from "../../constants";
 
 // Localization:
-import { i18n } from "../../localization/i18n";
+import { i18n } from "../../config/localization/i18n";
 
 // Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {CustomButton} from "../../components/general/components/CustomButton";
-import {AppContext} from "../../global/AppContext";
+import {AppContext} from "../../config/context/AppContext";
 
 export const ProfileScreen = ({ route, navigation }) => {
     const { theme, setAccessToken } = useContext(AppContext);
-    const screen = 'screens.profile';
     const { name, phone, email, address, commission } = route.params;
+    const screen = 'screens.profile';
 
     return (
         <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
@@ -42,32 +39,15 @@ export const ProfileScreen = ({ route, navigation }) => {
                     </View>
                 </View>
 
-                {/* CRUCIAL CHANGE REQUIRED - the auth flow model is not decided upon! */}
-                    <CustomButton
-                        textColor={theme.mainBtnTextColor}
-                        bgColor={theme.mainBtnBgColor}
-                        borderColor={theme.mainBtnBorderColor}
-                        text={i18n.t(`${screen}.logout_title`)}
-                        onPress={() => {
-                            setAccessToken(undefined);
-                            navigation.navigate('Login');
-                            // Alert.alert(i18n.t(`${screen}.logout_operation_title`), i18n.t(`${screen}.logout_operation_message`), [
-                            //     {
-                            //         text: i18n.t(`${screen}.logout_cancel`),
-                            //         style: 'default',
-                            //         onPress: () => {
-                            //             console.log('Logout cancelled!');
-                            //         }
-                            //     },
-                            //     {
-                            //         text: i18n.t(`${screen}.logout_confirm`),
-                            //         style: 'destructive',
-                            //         onPress: () => {
-                            //             setAccessToken(undefined);
-                            //             navigation.navigate('Login');
-                            //             console.log('Token has been cancelled!');
-                            //     }}]);
-                        }} />
+                <CustomButton
+                    textColor={theme.mainBtnTextColor}
+                    bgColor={theme.mainBtnBgColor}
+                    borderColor={theme.mainBtnBorderColor}
+                    text={i18n.t(`${screen}.logout_title`)}
+                    onPress={() => {
+                        setAccessToken(undefined);
+                        navigation.navigate('Login');
+                    }} />
             </View>
         </View>
     );

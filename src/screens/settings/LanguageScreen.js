@@ -1,29 +1,17 @@
+import React, { useContext, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
-import {AppContext} from "../../global/AppContext";
-import {i18n} from "../../localization/i18n";
+import { AppContext } from "../../config/context/AppContext";
+import { i18n } from "../../config/localization/i18n";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import React, {useContext, useState} from "react";
+
+import { supportedLanguages } from "../../config/constants/languages";
 
 export const LanguageScreen = ({ navigation }) => {
-    const languages = [
-        {
-            language: 'English',
-            locale: 'en'
-        },
-        {
-            language: 'Türkçe',
-            locale: 'tr'
-        },
-        {
-            language: 'Русский',
-            locale: 'ru'
-        }
-    ];
 
     const { theme } = useContext(AppContext);
-    const [locale, setLocale] = useState(languages[0]);
+    const [locale, setLocale] = useState(supportedLanguages[0]);
 
     const languageOptions = (languages) => {
         return languages.map(item => (
@@ -45,7 +33,7 @@ export const LanguageScreen = ({ navigation }) => {
 
     return (
         <View style={[styles.container, { backgroundColor: theme.screenBgColor }]}>
-            {languageOptions(languages)}
+            {languageOptions(supportedLanguages)}
             <View style={{ flex: 0.85 }}/>
         </View>
     );
