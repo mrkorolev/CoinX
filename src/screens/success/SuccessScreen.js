@@ -1,11 +1,10 @@
 import React, {useContext} from "react";
-
-import { useNavigation } from "@react-navigation/native";
-import { CheckBadgeIcon } from "react-native-heroicons/solid";
 import { i18n } from "../../config/localization/i18n";
-import {StyleSheet, Text, View} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../config/context/AppContext";
+import { AppContext } from "../../config/context/AppContext";
+import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import {faCircleCheck} from "@fortawesome/free-solid-svg-icons";
 
 export const SuccessScreen = ({ navigation }) => {
     const { theme } = useContext(AppContext);
@@ -17,7 +16,7 @@ export const SuccessScreen = ({ navigation }) => {
 
     return (
         <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
-            <CheckBadgeIcon color={theme.supportIconColor} size={wp('40%')}/>
+            <FontAwesomeIcon icon={faCircleCheck} color={theme.supportIconColor} size={wp('40%')}/>
             <View style={styles.container}>
                 <Text style={[styles.title, { color: theme.primaryContentColor}]}>{i18n.t(`${screen}.title`)}</Text>
                 <Text style={[styles.message, { color: theme.secondaryContentColor }]}>{i18n.t(`${screen}.secondary_text`)}</Text>

@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View, Text, RefreshControl } from 'react-native';
 import { HistoryRecord } from '../../components/history/HistoryRecord';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { AppContext } from "../../config/context/AppContext";
 import { depositHistoryRequest } from "../../services/payone";
 import { i18n } from "../../config/localization/i18n";

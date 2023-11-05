@@ -1,9 +1,9 @@
-import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {View, Text, StyleSheet, Alert, Platform, ScrollView, KeyboardAvoidingView} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import { View, Text, StyleSheet, Alert, Platform, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { ExchangeAmountInput } from '../../components/transaction/amount/ExchangeAmountInput';
 import { ExchangeRate } from '../../components/transaction/amount/ExchangeRate';
 import { CustomButton } from '../../components/general/components/CustomButton';
-import { availableNetworks, baseCurrencies, cryptoCurrencies} from "../../config/constants/operations";
+import { availableNetworks, baseCurrencies, cryptoCurrencies } from "../../config/constants/operations";
 import { endpointPriceData } from "../../services/binance";
 import { commissionDataRequest, walletDataRequest } from "../../services/payone";
 import { i18n } from "../../config/localization/i18n";
@@ -17,9 +17,6 @@ import {useIsFocused} from "@react-navigation/native";
 export const TransactionScreen = ({ navigation }) => {
     const { theme, accessToken } = useContext(AppContext);
     const screen = 'screens.transaction';
-
-    // const scrollViewRef = useRef(this);
-
     const [spendAmount, setSpendAmount] = useState('');
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
     const [receiveAmount, setReceiveAmount] = useState('');
@@ -217,19 +214,19 @@ export const TransactionScreen = ({ navigation }) => {
                                         transactionDebug(network, finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
 
                                         // DEBUG
-                                        navigation.navigate('QR_DETAILS', {
-                                            walletData: '123123123123123123',
-                                            networkData: `TRC20`,
-                                            depositStatus: 'Pending'
-                                        });
-
-                                        // const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
-                                        setHasResponse(true);
                                         // navigation.navigate('QR_DETAILS', {
-                                        //     walletData: walletData.address,
-                                        //     networkData: `${network.networkCode}`,
+                                        //     walletData: '123123123123123123',
+                                        //     networkData: `TRC20`,
                                         //     depositStatus: 'Pending'
                                         // });
+
+                                        const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
+                                        setHasResponse(true);
+                                        navigation.navigate('QR_DETAILS', {
+                                            walletData: walletData.address,
+                                            networkData: `${network.networkCode}`,
+                                            depositStatus: 'Pending'
+                                        });
                                     }
                                 }]);
                         } else {

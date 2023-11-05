@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Dimensions, View, Text, TouchableOpacity } from 'react-native';
 import { faClock, faCircleXmark, faCircleCheck } from "@fortawesome/free-regular-svg-icons";
-import {AppContext} from "../../config/context/AppContext";
+import { AppContext } from "../../config/context/AppContext";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
@@ -39,7 +39,7 @@ export const HistoryRecord = ({ notification, navigation }) => {
                     networkData: `${notification.network}`,
                     depositStatus: notification.transaction_status
                 })}>
-                <FontAwesomeIcon size={wp('6%')} icon={icon} color={theme.primaryContentColor} />
+                <FontAwesomeIcon size={wp('6%')} icon={icon} color={theme.primaryContentColor}  />
                 <View style={styles.statusMessageContainer}>
                     <Text style={[styles.primaryText, { color: theme.primaryContentColor }]}>{`${notification.expected_crypto} ${notification.coin}`}</Text>
                     <Text style={[styles.secondaryText, { color: theme.primaryContentColor } ]}>{`Network: ${notification.network}`}</Text>

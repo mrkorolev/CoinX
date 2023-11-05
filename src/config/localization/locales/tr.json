@@ -22,12 +22,14 @@
       "error_title": "Giriş Hatası",
       "error_message": "Geçersiz veya boş giriş! Tekrar deneyin!"
     },
-    "notifications": {
-      "screen_name": "Bildirimler"
+    "history": {
+      "screen_name": "Bildirimler",
+      "waiting_message": "Para yatırma geçmişini bekliyorum..."
     },
     "transaction": {
       "screen_name": "Yeni İşlem",
       "pay": "Para Birimi",
+      "network": "Ağ",
       "receive": "Kripto Para Birimi",
       "placeholder": "Miktarı girin",
       "exchange_rate": "Döviz Kuru",
@@ -55,6 +57,7 @@
       "screen_name": "Ayarlar",
       "dark_mode": "Koyu mod",
       "notifications": "Anında bildirimler",
+      "language": "Dil",
       "terms_and_conditions": "Kullanım Koşulları",
       "privacy_policy": "Gizlilik Politikası",
       "about": "Hakkında"
@@ -66,6 +69,9 @@
       "address": "Adres",
       "commission_rate": "Komisyon oranı",
       "logout_title": "Çıkış Yap"
+    },
+    "language": {
+      "screen_name": "Dil"
     },
     "terms_and_conditions": {
       "screen_name": "Kullanım Koşulları"
@@ -86,17 +92,35 @@
       "reason": "OTP Doğrulama İsteği",
       "message": "OTP doğrulama işleminizi gerçekleştirirken bir hata oluştu! OTP'nizin geçerliliğini kontrol edin ve tekrar deneyin."
     },
+    "history_request": {
+      "reason": "Mevduat Geçmişi",
+      "message": "\nPara yatırma geçmişinizi istemeye çalışırken bir hata oluştu! Oturumu kapatıp tekrar giriş yapmayı deneyin "
+    },
     "wallet_request": {
       "reason": "Cüzdan Bilgisi İsteği",
       "message": "İşlem bilgisi istenirken bir hata oluştu! Çıkış yapmayı deneyin ve tekrar giriş yapmayı deneyin."
     },
+    "commission_request": {
+      "reason": "Komisyon Bilgileri",
+      "message": "\nKullanıcı komisyon bilgisi istenmeye çalışılırken bir hata oluştu! Oturumu kapatıp tekrar giriş yapmayı deneyin "
+    },
     "profile_request": {
       "reason": "Kullanıcı Profili Bilgileri",
-      "message": "Kişisel bilgilerinizi istenirken bir hata oluştu! Çıkış yapmayı deneyin ve tekrar giriş yapmayı deneyin."
+      "message": "\nKişisel bilgilerinizi istenirken bir hata oluştu! Çıkış yapmayı deneyin ve tekrar giriş yapmayı deneyin."
     },
     "binance_request": {
       "reason": "Döviz Kuru Talebi",
-      "message": "Döviz kuru bilgilerini istenirken bir hata oluştu! API anahtarınızın geçerliliğini kontrol edin ve tekrar deneyin."
+      "message": "\nDöviz kuru bilgilerini istenirken bir hata oluştu! API anahtarınızın geçerliliğini kontrol edin ve tekrar deneyin."
     }
+  },
+  "response_errors": {
+    "response_timeout": {
+      "reason": "Yanıt zaman aşımı",
+      "message": "\nBağlantınızı kontrol edin. Sorun devam ederse daha fazla yardım için teknik desteğe başvurun "
+    }
+  },
+  "session_expired": {
+    "title": "Oturum süresi doldu",
+    "message": "\nUygulamaya erişiminizin süresi doldu!"
   }
 }

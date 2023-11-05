@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from "react-native";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
-import {AppContext} from "../../../config/context/AppContext";
+import { AppContext } from "../../../config/context/AppContext";
 
 export const CustomHeader = ({ title }) => {
 

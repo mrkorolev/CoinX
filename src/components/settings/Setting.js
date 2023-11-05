@@ -1,7 +1,5 @@
 import React from 'react';
-import {Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 export const Setting = ({customStyle, icon, bgColor, title, component, pressable, onPressHandler }) => {

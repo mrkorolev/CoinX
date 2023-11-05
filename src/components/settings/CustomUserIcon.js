@@ -1,10 +1,9 @@
-
-import { View, StyleSheet} from "react-native";
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
-import {faUser} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {useContext} from "react";
-import {AppContext} from "../../config/context/AppContext";
+import { View, StyleSheet } from "react-native";
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { useContext } from "react";
+import { AppContext } from "../../config/context/AppContext";
 
 export const CustomUserIcon = ({ size, customStyle }) => {
 

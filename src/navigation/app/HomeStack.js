@@ -31,6 +31,7 @@ export const HomeStack = () => {
                     headerTitle: () => <CustomHeader title={i18n.t('screens.home.screen_name')} />,
                     headerRight: () => (
                         <View style={styles.headerRightLayout}>
+
                             <CustomHeaderIcon
                                 icon={faHeadset}
                                 onPressHandler={() => {}}

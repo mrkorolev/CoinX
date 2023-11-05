@@ -47,7 +47,6 @@
       "warning": "Send only BTC to this deposit address. This address does not support deposit of non-fungible token, please go to NFT page to deposit NFT.",
       "wallet_address": "Wallet Address",
       "network": "Network",
-      "status": "Status",
       "cancel_title": "cancel transaction",
       "warning_title": "Cancel Transaction",
       "warning_message": "Are you sure you want to cancel this transaction?",
@@ -69,11 +68,7 @@
       "email": "Email",
       "address": "Address",
       "commission_rate": "Commission rate",
-      "logout_title": "Logout",
-      "logout_operation_title": "Confirm Logout",
-      "logout_operation_message": "Are you sure you want to logout?",
-      "logout_cancel": "Cancel",
-      "logout_confirm": "Logout"
+      "logout_title": "Logout"
     },
     "language": {
       "screen_name": "Language"
@@ -117,5 +112,15 @@
       "reason": "Exchange Rates Request",
       "message": "\nAn error occurred while trying to request exchange rates information! Check the validity of your exchange rates API key and try again "
     }
+  },
+  "response_errors": {
+    "response_timeout": {
+      "reason": "Response Timeout",
+      "message": "\nCheck your connection. If the problem persists, contact technical support for further help "
+    }
+  },
+  "session_expired": {
+    "title": "Session expired",
+    "message": "\nYour access to the app has expired!"
   }
 }

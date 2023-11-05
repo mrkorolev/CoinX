@@ -1,10 +1,8 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-
-// Responsiveness:
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {CustomUserIcon} from "./CustomUserIcon";
-import {AppContext} from "../../config/context/AppContext";
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { CustomUserIcon } from "./CustomUserIcon";
+import { AppContext } from "../../config/context/AppContext";
 
 export const PrimaryDetails = ({ name }) => {
 

@@ -1,6 +1,6 @@
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import { SvgXml } from 'react-native-svg';
 import {StyleSheet, View} from "react-native";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 export const Tron = ({color, bgColor, size}) => {
 

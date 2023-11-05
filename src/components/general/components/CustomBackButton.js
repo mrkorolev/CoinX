@@ -1,9 +1,8 @@
-import React, {useContext} from 'react';
-import { TouchableOpacity, View, StyleSheet } from "react-native";
-import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import React, { useContext } from 'react';
+import { TouchableOpacity, StyleSheet } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { ChevronLeftIcon } from "react-native-heroicons/solid";
-import {AppContext} from "../../../config/context/AppContext";
+import { AppContext } from "../../../config/context/AppContext";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 export const CustomBackButton = ({ onPressHandler }) => {

@@ -1,13 +1,12 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { CoinExchangeRate } from './CoinExchangeRate';
 import { cryptoCurrencies } from '../../config/constants/operations';
 import { endpoint24hrData } from "../../services/binance";
-import { SvgUri } from "react-native-svg";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../config/context/AppContext";
-import {CustomIcon} from "../general/components/CustomIcon";
-import { Tron} from "../general/icons/Tron";
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { AppContext } from "../../config/context/AppContext";
+import { CustomIcon } from "../general/components/CustomIcon";
+import { Tron } from "../general/icons/Tron";
 
 function modifyCurrentState(arr1, arr2){
     for(let key in arr1){
@@ -64,7 +63,6 @@ export const ExchangeRatesData = () => {
         <View>
             <View style={styles.rowContainer}>
 
-                {/* Add EHT and BTC here */}
                 <CoinExchangeRate
                     nameShort={coinComponents[0].nameShort}
                     nameLong={coinComponents[0].nameLong}

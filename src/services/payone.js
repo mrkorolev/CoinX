@@ -1,4 +1,5 @@
-import axios, {request} from "axios";
+import axios from "axios";
+
 import { Alert } from 'react-native';
 import { i18n } from "../config/localization/i18n";
 
@@ -14,11 +15,19 @@ const cancelTransactionEndpoint = 'capital/transac/cancel/wallet';
 const commissionEndpoint = 'user/info/user-commission';
 const userProfileEndpoint = 'user/info/user-profile';
 
-const generateErrorDescription = (reason, message, error) => {
+const requestTimeout = 15000;
+const responsePath = 'response_errors.response_timeout';
+
+// DEBUG FUNCTION
+const invalidRequestDescription = (reason, message, error) => {
     console.log("Error info: " + JSON.stringify(error.toJSON(), undefined, 4));
     Alert.alert(reason, ` ${message} (${error.response.status})`);
 }
 
+const invalidResponseDescription = (title, message) => {
+    console.log('Request timeout error!');
+    Alert.alert(title, message);
+}
 
 export const authenticateUser = async (username, password) => {
     const request_error = 'request_errors.login_request'
@@ -33,13 +42,17 @@ export const authenticateUser = async (username, password) => {
             headers: {
                 'Content-Type': 'application/json'
             },
+            timeout: requestTimeout
         });
 
         console.log(JSON.stringify(authenticationResponse.data, undefined, 4));
         return authenticationResponse;
     }catch(error){
-        return;
-        generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
+        if(error.code === 'ECONNABORTED'){
+            invalidResponseDescription(i18n.t(`${responsePath}.reason`), i18n.t(`${responsePath}.message`));
+        }else{
+            invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
+        }
     }
     return null;
 }
@@ -56,13 +69,14 @@ export const otpVerification = async (accessToken, providedCode) => {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json'
-            }
+            },
+            timeout: requestTimeout
         });
 
         console.log(JSON.stringify(otpResponse.data, undefined, 4));
         return otpResponse;
     }catch(error){
-        generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
+        invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }
     return null;
 }
@@ -76,13 +90,14 @@ export const depositHistoryRequest = async (accessToken) => {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 'Content-type': 'application/json'
-            }
+            },
+            timeout: requestTimeout
         });
 
         console.log(JSON.stringify(historyResponse.data, undefined, 4));
         return historyResponse;
     }catch(error){
-        generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
+        invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }
     return null;
 }
@@ -106,13 +121,14 @@ export const walletDataRequest = async (accessToken, spendAmount, spendCurrency,
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json'
-            }
+            },
+            timeout: requestTimeout
         });
         console.log(JSON.stringify(walletResponse.data, undefined, 4));
 
         return walletResponse.data;
     }catch(error){
-        generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
+        invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }
     return null;
 }
@@ -130,14 +146,14 @@ export const cancelTransactionRequest = async (accessToken, walletAddress) => {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json'
-            }
+            },
+            timeout: requestTimeout
         });
         console.log(JSON.stringify(transactionCancelResponse.data, undefined, 4));
 
         return transactionCancelResponse.data;
     }catch(error){
-        // generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
-        generateErrorDescription('Transaction cancel', 'Transaction cancellation failed!', error);
+        invalidRequestDescription('Transaction cancel', 'Transaction cancellation failed!', error);
     }
     return null;
 }
@@ -151,13 +167,14 @@ export const commissionDataRequest = async (accessToken) => {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${accessToken}`
-            }
+            },
+            timeout: requestTimeout
         });
         console.log(commissionResponse);
         console.log(JSON.stringify(commissionResponse.data, undefined, 4));
         return commissionResponse.data.commission;
     }catch(error){
-        generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
+        invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }
     return null;
 }
@@ -171,12 +188,13 @@ export const userProfileVerification = async (accessToken) => {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${accessToken}`
-            }
+            },
+            timeout: requestTimeout
         });
         console.log(JSON.stringify(userProfileResponse.data, undefined, 4));
         return userProfileResponse.data;
     }catch(error){
-        generateErrorDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
+        invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }
     return null;
 }

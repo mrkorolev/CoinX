@@ -156,4 +156,3 @@ export const appTheme = {
         historyLoadBorderColor: '#FFFFFF',
     }
 }
-// #292F38

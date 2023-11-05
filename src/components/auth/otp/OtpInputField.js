@@ -1,9 +1,9 @@
-import { View, StyleSheet, Text, Pressable, TextInput } from 'react-native';
-import {useContext, useEffect, useRef, useState} from 'react';
+import { View, StyleSheet, Pressable, TextInput } from 'react-native';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { OtpInput } from './OtpInput';
 
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../../config/context/AppContext";
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { AppContext } from "../../../config/context/AppContext";
 
 export const OtpInputField = ({ code, setCode, setPinReady, maxLength }) => {
 
@@ -27,7 +27,6 @@ export const OtpInputField = ({ code, setCode, setPinReady, maxLength }) => {
 
     const handleOnBlur = () => {
         setInputContainerFocused(false);
-        // set Input BorderColor and backgroundColor to white and blue
     }
 
     const toCodeDigitInput = (_value, index) => {

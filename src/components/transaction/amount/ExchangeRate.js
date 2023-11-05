@@ -1,9 +1,6 @@
-import React, {useContext} from 'react';
-import { View, Text, Dimensions, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { i18n } from "../../../config/localization/i18n";
-
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../../config/context/AppContext";
 
 export const ExchangeRate = ({ style, from, to, rate }) => {
 

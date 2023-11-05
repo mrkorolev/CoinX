@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from "react-native";
 import { AppContext } from "../../config/context/AppContext";
-import { widthPercentageToDP as wp} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
-export const AboutScreen = () => {
+export const AboutScreen = ({ navigation }) => {
 
     const { theme } = useContext(AppContext);
 

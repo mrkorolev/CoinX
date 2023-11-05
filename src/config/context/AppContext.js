@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { appTheme } from "../theme/theme";
 
 export const AppContext = React.createContext(undefined);
@@ -8,6 +8,7 @@ export const AppContextProvider = ({ children }) => {
     const [theme, setTheme] = useState(appTheme.light);
     const [pushEnabled, setPushEnabled] = useState(false);
     const [accessToken, setAccessToken] = useState(undefined);
+    const [customTimeout, setCustomTimeout] = useState(null);
 
     return (
         <AppContext.Provider value={{
@@ -15,6 +16,7 @@ export const AppContextProvider = ({ children }) => {
             theme, setTheme,
             pushEnabled, setPushEnabled,
             accessToken, setAccessToken,
+            customTimeout, setCustomTimeout
         }}>
             {children}
         </AppContext.Provider>

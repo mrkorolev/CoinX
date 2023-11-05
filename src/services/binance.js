@@ -1,7 +1,5 @@
 import axios from 'axios';
-import {apiKey} from "../config/constants/operations";
-import {baseCurrencies} from "../config/constants/operations";
-import { i18n } from "../config/localization/i18n";
+import { apiKey, baseCurrencies } from "../config/constants/operations";
 
 const baseUrl = 'https://api.binance.com/';
 const apiVersion = 'api/v3/';
@@ -79,4 +77,3 @@ export const endpointPriceData = async (baseCurrency, cryptoCurrency) => {
         console.log(error);
     }
 }
-

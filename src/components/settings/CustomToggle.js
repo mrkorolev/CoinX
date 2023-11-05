@@ -1,6 +1,6 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Appearance, Switch} from "react-native";
-import {AppContext} from "../../config/context/AppContext";
+import React, { useContext } from "react";
+import { Switch } from "react-native";
+import { AppContext } from "../../config/context/AppContext";
 
 export const CustomToggle = ({ value, onValueToggle }) => {
 

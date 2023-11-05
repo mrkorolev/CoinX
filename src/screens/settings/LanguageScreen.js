@@ -5,7 +5,6 @@ import { AppContext } from "../../config/context/AppContext";
 import { i18n } from "../../config/localization/i18n";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-
 import { supportedLanguages } from "../../config/constants/languages";
 
 export const LanguageScreen = ({ navigation }) => {

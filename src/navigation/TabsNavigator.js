@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Platform, View } from 'react-native';
+import { BackHandler, Platform, View } from 'react-native';
 import { HomeStack } from './app/HomeStack';
 import { TransactionNavigator } from './app/TransactionStack';
 import { SettingStack } from "./app/SettingStack";
@@ -15,19 +15,25 @@ import { SettingsTab } from "../components/general/icons/SettingsTab";
 
 const Tab = createBottomTabNavigator();
 
-export const TabsNavigator = ({navigation}) => {
+export const TabsNavigator = () => {
 
-    const { theme, setAccessToken } = useContext(AppContext);
+    const userTimeout = 1000 * 60 * 60;
+    const { theme, setAccessToken, setCustomTimeout } = useContext(AppContext);
     const hideTabBar = (route, tabHiddenScreens, fallbackScreen) => {
         const routeName = getFocusedRouteNameFromRoute(route) ?? fallbackScreen;
         return tabHiddenScreens.includes(routeName);
     }
 
-    // MAY NEED REFACTORING
-    // setTimeout(() => {
-    //     setAccessToken(undefined);
-    //     navigation.navigate('Login');
-    // }, 30000);
+    useEffect(() => {
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true);
+        setCustomTimeout(setTimeout( () => {
+                setAccessToken(undefined);
+            }, userTimeout));
+        return () => {
+            backHandler.remove();
+            // clearInterval(customTimeout);
+        }
+    }, []);
 
     return (
         <Tab.Navigator screenOptions={{

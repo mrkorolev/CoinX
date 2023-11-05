@@ -1,16 +1,13 @@
-import React, {useContext, useState} from 'react';
-import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 import { CustomButton } from '../../components/general/components/CustomButton';
-import { useNavigation } from '@react-navigation/native';
 import {OtpInputField} from "../../components/auth/otp/OtpInputField";
 import { otpVerification } from "../../services/payone";
 import { accessToken } from "../../config/constants/operations";
-// Localization:
-import { i18n } from "../../config/localization/i18n";
 
-// Responsiveness:
+import { i18n } from "../../config/localization/i18n";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../config/context/AppContext";
+import { AppContext } from "../../config/context/AppContext";
 
 export const OtpScreen = ({ navigation }) => {
 
@@ -44,15 +41,15 @@ export const OtpScreen = ({ navigation }) => {
                 onPress={async () => {
                     setHasResponse(false);
                     console.log(code);
-                    // const response = await otpVerification(accessToken, code);
+                    const response = await otpVerification(accessToken, code);
 
                     setHasResponse(true);
-                    // if(response && response.status === 200){
-                    //     console.log('Verification process passed! Proceed to main navigator!');
-                    //     navigation.navigate('Success');
-                    // }
+                    if(response && response.status === 200){
+                        console.log('Verification process passed! Proceed to main navigator!');
+                        navigation.navigate('Success');
+                    }
                     // DEBUG
-                    navigation.navigate('Success');
+                    // navigation.navigate('Success');
                 }} />
             <View style={{ flex: 0.35 }}/>
         </View>

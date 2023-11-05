@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, {useContext } from 'react';
+import {NavigationContainer } from '@react-navigation/native';
 import { LoginScreen } from '../screens/auth/LoginScreen';
 import { OtpScreen } from '../screens/auth/OtpScreen';
 import {  TabsNavigator } from './TabsNavigator';
@@ -12,8 +12,8 @@ import { AppContext } from "../config/context/AppContext";
 const Stack = createNativeStackNavigator();
 
 export const AppStack = () => {
+    const { theme } = useContext(AppContext);
 
-    const {theme} = useContext(AppContext);
     return (
         <NavigationContainer>
             <Stack.Navigator>

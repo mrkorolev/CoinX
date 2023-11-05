@@ -1,5 +1,5 @@
-import {faBell, faFileLines, faMoon} from "@fortawesome/free-regular-svg-icons";
-import {faLanguage, faQuestion, faSignal} from "@fortawesome/free-solid-svg-icons";
+import { faBell, faFileLines, faMoon } from "@fortawesome/free-regular-svg-icons";
+import { faLanguage, faQuestion, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 
 export const funcSettings = [
     {
@@ -23,7 +23,7 @@ export const descSettings = [
         bgColor: '#D35554'
     },
     {
-        icon: faSignal,
+        icon: faShieldHalved,
         bgColor: '#30CC53'
     },
     {

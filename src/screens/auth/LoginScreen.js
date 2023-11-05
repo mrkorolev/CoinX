@@ -1,6 +1,5 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
-import {Text, View, TouchableOpacity, StyleSheet, Alert, Platform} from 'react-native';
-import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../components/auth/login/CustomInput';
 import { CustomButton } from '../../components/general/components/CustomButton';
@@ -8,9 +7,9 @@ import { authenticateUser } from "../../services/payone";
 
 import { i18n } from '../../config/localization/i18n.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {AppContext} from "../../config/context/AppContext";
-import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from "../../config/context/AppContext";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export const LoginScreen = () => {
 
@@ -25,10 +24,14 @@ export const LoginScreen = () => {
     const [password, setPassword] = useState('');
     const [hasResponse, setHasResponse] = useState(true);
     const [protection, setProtection] = useState(true);
-    // FA ICON
     const [icon, setIcon] = useState(<FontAwesomeIcon icon={faEye} color={`${theme.passwordIconColor}`} size={wp('6%')} />);
     const nav = useNavigation();
     const screen = 'screens.login';
+
+    useEffect(() => {
+        setUsername(null);
+        setPassword(null);
+    }, [accessToken]);
 
     const validateInput = (username, password) => (!username || !password) ? false : true;
 

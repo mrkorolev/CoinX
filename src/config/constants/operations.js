@@ -1,7 +1,5 @@
-import { faBitcoinSign, faLanguage, faTurkishLiraSign } from '@fortawesome/free-solid-svg-icons';
+import { faBitcoinSign, faTurkishLiraSign, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { faEthereum } from '@fortawesome/free-brands-svg-icons';
-import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
-
 
 export const apiKey = 'hm2y1s1ZpmSmD6zi7nitfQxSIaq5TTkHcj1vfoCqHOBJx4cUHQHIVChQNgqu2lxG';
 

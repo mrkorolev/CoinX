@@ -1,18 +1,13 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {View, StyleSheet, Text, Alert} from 'react-native';
-
+import React, { useContext } from 'react';
+import {View, StyleSheet, Text } from 'react-native';
 import { PrimaryDetails } from '../../components/settings/PrimaryDetails';
-
-// Localization:
 import { i18n } from "../../config/localization/i18n";
-
-// Responsiveness:
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import {CustomButton} from "../../components/general/components/CustomButton";
-import {AppContext} from "../../config/context/AppContext";
+import { CustomButton } from "../../components/general/components/CustomButton";
+import { AppContext } from "../../config/context/AppContext";
 
 export const ProfileScreen = ({ route, navigation }) => {
-    const { theme, setAccessToken } = useContext(AppContext);
+    const { theme, setAccessToken, customTimeout } = useContext(AppContext);
     const { name, phone, email, address, commission } = route.params;
     const screen = 'screens.profile';
 
@@ -46,6 +41,7 @@ export const ProfileScreen = ({ route, navigation }) => {
                     text={i18n.t(`${screen}.logout_title`)}
                     onPress={() => {
                         setAccessToken(undefined);
+                        clearTimeout(customTimeout);
                         navigation.navigate('Login');
                     }} />
             </View>
@@ -64,7 +60,6 @@ const styles = StyleSheet.create({
         paddingBottom: hp('2%'),
         marginBottom: hp('15%'),
         gap: hp('12%')
-
     },
     group: {
         paddingBottom: hp('1.5%'),
