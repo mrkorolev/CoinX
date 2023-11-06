@@ -1,13 +1,12 @@
 import React, {useContext} from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
 import { TransactionScreen } from '../../screens/transaction/TransactionScreen';
 import { QrScreen } from '../../screens/transaction/QrScreen';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import {i18n} from "../../config/localization/i18n";
-import {CustomHeader} from "../../components/general/components/CustomHeader";
-import {CustomBackButton} from "../../components/general/components/CustomBackButton";
+import { i18n } from "../../config/localization/i18n";
+import { CustomHeader } from "../../components/general/components/CustomHeader";
+import { CustomBackButton } from "../../components/general/components/CustomBackButton";
 import { Platform } from "react-native";
-import {AppContext} from "../../config/context/AppContext";
+import { AppContext } from "../../config/context/AppContext";
 
 const Stack = createNativeStackNavigator();
 

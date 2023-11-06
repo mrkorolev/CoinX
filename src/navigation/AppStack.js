@@ -3,7 +3,7 @@ import {NavigationContainer } from '@react-navigation/native';
 import { LoginScreen } from '../screens/auth/LoginScreen';
 import { OtpScreen } from '../screens/auth/OtpScreen';
 import {  TabsNavigator } from './TabsNavigator';
-import { SuccessScreen } from "../screens/success/SuccessScreen";
+import { SuccessScreen } from "../screens/auth/SuccessScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CustomBackButton } from "../components/general/components/CustomBackButton";
 import { Platform, StatusBar } from "react-native";

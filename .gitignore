@@ -3,6 +3,7 @@
 __generated__
 web-build
 bare-apps
+eas.json
 
 # macOS
 .DS_Store
