@@ -6,9 +6,10 @@ import { useContext, useRef, useState } from "react";
 import { AppContext } from "../../config/context/AppContext";
 
 export const HomeScreen = () => {
-    const scrollViewRef = useRef(this);
-    const { theme } = useContext(AppContext);
+
     const [scrollable, setScrollable] = useState(false);
+    const { theme } = useContext(AppContext);
+    const scrollViewRef = useRef(this);
 
     const onFocusHandler = () => {
         scrollViewRef.current.scrollToEnd();

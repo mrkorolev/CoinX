@@ -21,7 +21,7 @@ Following features are supported:
 - [x] App Responsiveness and security
 - [x] Dark mode
 
-## Installation and testing
+## Installation and building
 
 It is recommended to update ```Node``` from time to time.
 Use ```git clone``` and ```git pull``` downloading the project and latest changes respectively.
@@ -30,6 +30,15 @@ Use ```git clone``` and ```git pull``` downloading the project and latest change
 cd <project_folder>/ && npm install
 npx expo start (--reset-cache is optional)
 ```
+
+Building:
+
+```
+npm install -g eas-cli
+eas login
+eas build --platform android/ios --profile android-apk/ios-simulator
+```
+
 
 Valid testing credentials (username --- password):
 

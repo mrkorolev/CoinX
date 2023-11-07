@@ -80,17 +80,17 @@ export const LoginScreen = () => {
                             return;
                         }
 
-                        // const response = await authenticateUser(username, password);
-                        // setHasResponse(true);
-                        // if(response && response.status === 200){
-                        //     setAccessToken(response.data.access_token);
-                        //     console.log('LOGIN SUCCESSFUL (token saved)! Proceed to OTP!');
-                        //     nav.navigate('Otp');
-                        // }
-
+                        const response = await authenticateUser(username, password);
+                        setHasResponse(true);
+                        if(response && response.status === 200){
+                            setAccessToken(response.data.access_token);
+                            console.log('LOGIN SUCCESSFUL (token saved)! Proceed to OTP!');
+                            nav.navigate('Otp');
+                        }
+                        
                         // DEBUG
-                        setAccessToken('123123');
-                        nav.navigate('Otp');
+                        // setAccessToken('123123');
+                        // nav.navigate('Otp');
                     }}
                 />
             <View style={{ flex: 0.45 }} />

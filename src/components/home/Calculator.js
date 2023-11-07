@@ -3,7 +3,7 @@ import {View, TouchableOpacity, StyleSheet, Dimensions, Alert, Platform} from 'r
 import { faRightLeft } from '@fortawesome/free-solid-svg-icons';
 import { Line } from "./Line";
 import { CustomIcon } from "../general/components/CustomIcon";
-import { baseCurrencies, cryptoCurrencies } from "../../config/constants/operations";
+import { baseCurrencies, cryptoCurrencies, cryptoCurrenciesCalculate } from "../../config/constants/operations";
 import { endpointPriceData } from "../../services/binance";
 import { i18n } from "../../config/localization/i18n";
 import { TransactionCurrencyPicker } from "../general/components/TransactionCurrencyPicker";
@@ -11,17 +11,34 @@ import { OutlinedTextField } from "rn-material-ui-textfield";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { AppContext } from "../../config/context/AppContext";
 import { Tron } from "../general/icons/Tron";
+import {commissionDataRequest} from "../../services/payone";
 
 export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
 
-    const { theme } = useContext(AppContext);
+    const { theme, accessToken } = useContext(AppContext);
     const screen = 'screens.home';
 
     const [spendAmount, setSpendAmount] = useState(undefined);
     const [spendCurrency, setSpendCurrency] = useState(baseCurrencies[0]);
 
     const [receiveAmount, setReceiveAmount] = useState(undefined);
-    const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
+    // const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
+    const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrenciesCalculate[0]);
+    const [hasResponse, setHasResponse] = useState(true);
+
+    const disableButtonsHandler = () => !(hasResponse);
+
+    const calculateCryptoHandler = async (coin) => {
+        if(!spendAmount){
+            Alert.alert(i18n.t(`${screen}.error_title`),i18n.t(`${screen}.error_message`));
+        }else{
+            const pricePerUnit = await endpointPriceData(spendCurrency.nameShort, coin.nameShort);
+            const commissionRate = parseFloat(await commissionDataRequest(accessToken));
+            const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
+            const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
+            setReceiveAmount(amountToReceive);
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -78,15 +95,11 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
             <View style={styles.separator}>
                 <Line backgroundColor={theme.sepLineColor} />
                 <TouchableOpacity
+                    disabled={disableButtonsHandler()}
                     onPress={async () => {
-                        if(!spendAmount){
-                            Alert.alert(i18n.t(`${screen}.error_title`),i18n.t(`${screen}.error_message`));
-                        }else{
-                            const response = await endpointPriceData(spendCurrency.nameShort, receiveCurrency.nameShort);
-                            const required = parseFloat(response).toFixed(4);
-                            const toSpend = parseFloat(spendAmount.replaceAll(',', ''));
-                            setReceiveAmount(`${(toSpend / required).toFixed(4)}`);
-                        }
+                        setHasResponse(false);
+                        await calculateCryptoHandler(receiveCurrency);
+                        setHasResponse(true);
                     }}>
                     <View style={[styles.separatorIcon, { backgroundColor: theme.primaryContentColor }]}>
                         <CustomIcon
@@ -116,6 +129,7 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
                 <TransactionCurrencyPicker
                     customStyle={{width: wp('25%')}}
                     currencyName={receiveCurrency.nameShort}
+                    disabled={disableButtonsHandler()}
                     currencyIcon={
                     receiveCurrency.nameLong === 'Tron' ?
                         <Tron
@@ -132,9 +146,14 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
                         />
                     }
                     // hasBorder
-                    onPressHandler={() => {
-                        setReceiveCurrency(cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length]);
+                    onPressHandler={async () => {
+                        setHasResponse(false);
+                        // setReceiveCurrency(cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length]);
+                        setReceiveCurrency(cryptoCurrenciesCalculate[(cryptoCurrenciesCalculate.indexOf(receiveCurrency) + 1) % cryptoCurrenciesCalculate.length]);
                         setReceiveAmount(null);
+                        const toBeChosenNext = cryptoCurrenciesCalculate[(cryptoCurrenciesCalculate.indexOf(receiveCurrency) + 1) % cryptoCurrenciesCalculate.length];
+                        await calculateCryptoHandler(toBeChosenNext);
+                        setHasResponse(true);
                     }}
                 />
             </View>

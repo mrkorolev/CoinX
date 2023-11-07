@@ -19,7 +19,6 @@ export const AppStack = () => {
     useEffect( () => {
         const navigationBar = async () => {
 
-            // IDEALLY DON'T DO ANYTHING ON LIGHT MODE, FOR DARK DO THE SCREEN TAB COLOR
             if(Platform.OS === 'android'){
                 console.log(await NavigationBar.getBackgroundColorAsync());
                 await NavigationBar.setBackgroundColorAsync(theme.tabBgColor);

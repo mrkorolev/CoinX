@@ -16,6 +16,29 @@ export const baseCurrencies = [
     }
 ];
 
+export const cryptoCurrenciesCalculate = [
+    {
+        nameShort: 'BTC',
+        nameLong: 'Bitcoin',
+        lastPrice:'---',
+        priceChangePercent: '---',
+        icon: faBitcoinSign
+    },
+    {
+        nameShort: 'TRX',
+        nameLong: 'Tron',
+        lastPrice:'---',
+        priceChangePercent: '---',
+    },
+    {
+        nameShort: 'USDT',
+        nameLong: 'Dollars',
+        lastPrice:'---',
+        priceChangePercent: '---',
+        icon: faDollarSign
+    }
+]
+
 export const cryptoCurrencies = [
     {
         nameShort: 'ETH',
@@ -52,11 +75,11 @@ export const availableNetworks = [
         networkName: 'Bitcoin',
         icon: faBitcoinSign
     },
-    {
-        networkCode: 'ERC20',
-        networkName: 'Ethereum',
-        icon: faEthereum
-    },
+    // {
+    //     networkCode: 'ERC20',
+    //     networkName: 'Ethereum',
+    //     icon: faEthereum
+    // },
     {
         networkCode: 'TRC20',
         networkName: 'Tron'

@@ -47,6 +47,7 @@ export const SettingsScreen = ({navigation}) => {
 
         return () => {
             setName('---');
+            setCompany('---');
             setPhone('---');
             setEmail('---');
             setAddress('---');
