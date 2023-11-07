@@ -20,8 +20,6 @@ Following features are supported:
 - [x] Device localization (tr, en, ru)
 - [x] App Responsiveness and security
 - [x] Dark mode
-- [ ] Authentication workflow
-
 
 ## Installation and testing
 
@@ -30,12 +28,13 @@ Use ```git clone``` and ```git pull``` downloading the project and latest change
 
 ```
 cd <project_folder>/ && npm install
-npx expo start
+npx expo start (--reset-cache is optional)
 ```
 
-Valid testing credentials: \
-Username: nael.alyousefi@final.edu.tr \
-Password: admin@1234
+Valid testing credentials (username --- password):
+
+nael.alyousefi@final.edu.tr --- admin@1234 \
+benoit.kekwandi@final.edu.tr --- Welcome@1234
 
 
 ## Screens

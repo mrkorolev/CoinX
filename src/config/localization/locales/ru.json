@@ -20,7 +20,9 @@
     "home": {
       "screen_name": "Основная",
       "error_title": "Ошибка ввода",
-      "error_message": "Неверный или пустой ввод! Попробуйте снова!"
+      "error_message": "Неверный или пустой ввод! Попробуйте снова!",
+      "calculator_from": "ТЛ",
+      "calculator_to": "Крипто"
     },
     "history": {
       "screen_name": "История Депозитов",

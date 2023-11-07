@@ -14,6 +14,7 @@ import { AppContext } from "../../config/context/AppContext";
 import { QrScreen } from "../../screens/transaction/QrScreen";
 
 const Stack = createNativeStackNavigator();
+// const Stack = createStackNavigator();
 
 export const HomeStack = () => {
 

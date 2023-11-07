@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Dimensions, Alert } from 'react-native';
+import {View, TouchableOpacity, StyleSheet, Dimensions, Alert, Platform} from 'react-native';
 import { faRightLeft } from '@fortawesome/free-solid-svg-icons';
 import { Line } from "./Line";
 import { CustomIcon } from "../general/components/CustomIcon";
@@ -28,8 +28,8 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
             <View style={styles.pickerLayout}>
                     <OutlinedTextField
                         inputContainerStyle={styles.operationContainer}
-                        label='from'
-                        fontSize={wp('4%')}
+                        label={i18n.t(`${screen}.calculator_from`)}
+                        fontSize={wp('3.5%')}
                         activeLineWidth={1}
                         textColor={theme.primaryContentColor}
                         tintColor={theme.primaryContentColor}
@@ -102,9 +102,9 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
 
             <View style={styles.pickerLayout}>
                 <OutlinedTextField
-                    fontSize={wp('4%')}
+                    fontSize={wp('3.5%')}
                     textColor={theme.primaryContentColor}
-                    label='to'
+                    label={i18n.t(`${screen}.calculator_to`)}
                     baseColor={theme.primaryContentColor}
                     inputContainerStyle={styles.operationContainer}
                     maxLength={10}
@@ -171,8 +171,8 @@ const styles = StyleSheet.create({
     },
     operationContainer: {
         justifyContent: 'center',
-        height: hp('6%'),
+        height: Platform.OS === 'ios' ? hp('6%') : hp('7%'),
         width: wp('27%'),
-        borderRadius: 5,
+        borderRadius: 5
     }
 });

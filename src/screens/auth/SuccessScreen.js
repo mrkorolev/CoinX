@@ -1,10 +1,10 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { i18n } from "../../config/localization/i18n";
 import { StyleSheet, Text, View } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { AppContext } from "../../config/context/AppContext";
-import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {faCircleCheck} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 export const SuccessScreen = ({ navigation }) => {
     const { theme } = useContext(AppContext);

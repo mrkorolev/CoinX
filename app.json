@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "payone-app",
-    "slug": "payone-app",
+    "name": "Payone",
+    "slug": "Payone",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/app-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -16,14 +16,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.mrkorolev.payoneapp"
+      "bundleIdentifier": "com.mrkorolev.payone"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/app-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mrkorolev.payoneapp"
+      "package": "com.mrkorolev.payone"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,7 +33,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "7399033e-11ba-4e4b-8b0c-67aeaa945d55"
+        "projectId": "615cf7ce-0262-438b-a659-57061b3dc9a1"
       }
     }
   }

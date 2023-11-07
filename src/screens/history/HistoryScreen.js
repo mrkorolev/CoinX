@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, View, Text, RefreshControl } from 'react-native';
+import {ScrollView, StyleSheet, View, Text, RefreshControl, Alert} from 'react-native';
 import { HistoryRecord } from '../../components/history/HistoryRecord';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { AppContext } from "../../config/context/AppContext";

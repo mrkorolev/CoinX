@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BackHandler, Platform, View } from 'react-native';
 import { HomeStack } from './app/HomeStack';
@@ -26,9 +26,9 @@ export const TabsNavigator = () => {
 
     useEffect(() => {
         const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true);
-        setCustomTimeout(setTimeout( () => {
-                setAccessToken(undefined);
-            }, userTimeout));
+        // setCustomTimeout(setTimeout( () => {
+        //         setAccessToken(undefined);
+        //     }, userTimeout));
         return () => {
             backHandler.remove();
             // clearInterval(customTimeout);
@@ -37,6 +37,9 @@ export const TabsNavigator = () => {
 
     return (
         <Tab.Navigator screenOptions={{
+            tabBarStyle: {
+                backgroundColor: 'black'
+            },
             headerShown: false,
             tabBarLabelStyle: {
                 fontSize: wp('2.8%'),

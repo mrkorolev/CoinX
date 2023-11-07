@@ -20,6 +20,8 @@ export const SettingsScreen = ({navigation}) => {
         accessToken } = useContext(AppContext);
 
     const [name, setName] = useState('---');
+    const [company, setCompany] = useState('---');
+
     const [phone, setPhone] = useState('---');
     const [address, setAddress] = useState('---');
     const [email, setEmail] = useState('---');
@@ -35,6 +37,7 @@ export const SettingsScreen = ({navigation}) => {
             const commissionData = await commissionDataRequest(accessToken);
 
             setName(userData.name);
+            setCompany(userData.company);
             setPhone(userData.phone);
             setEmail(userData.email);
             setAddress(userData.address);
@@ -65,7 +68,7 @@ export const SettingsScreen = ({navigation}) => {
                     title={(
                         <View style={styles.profileSetting}>
                             <Text style={[styles.profileTitle, { color: theme.inputColor }]}>{name}</Text>
-                            <Text style={[styles.settingTitle, { color: theme.inputColor }]}>Arekan Teknoloji</Text>
+                            <Text style={[styles.settingTitle, { color: theme.inputColor }]}>{company}</Text>
                         </View>
                     )}
                     component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
@@ -165,13 +168,13 @@ const styles = StyleSheet.create({
         gap: hp('1.5%')
     },
     settingTitle: {
-        fontSize: wp('4%'),
+        fontSize: wp('3.5%'),
     },
     profileSetting: {
         gap: hp('1%')
     },
     profileTitle: {
-        fontSize: wp('5.5%'),
+        fontSize: wp('5%'),
         fontWeight: 'bold'
     }
 });

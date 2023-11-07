@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import {Text, View, TouchableOpacity, StyleSheet, Alert, Platform} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../components/auth/login/CustomInput';
 import { CustomButton } from '../../components/general/components/CustomButton';
 import { authenticateUser } from "../../services/payone";
-
 import { i18n } from '../../config/localization/i18n.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { AppContext } from "../../config/context/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import * as NavigationBar from "expo-navigation-bar/src/ExpoNavigationBar";
 
 export const LoginScreen = () => {
 
@@ -80,17 +80,17 @@ export const LoginScreen = () => {
                             return;
                         }
 
-                        const response = await authenticateUser(username, password);
-                        setHasResponse(true);
-                        if(response && response.status === 200){
-                            setAccessToken(response.data.access_token);
-                            console.log('LOGIN SUCCESSFUL (token saved)! Proceed to OTP!');
-                            nav.navigate('Otp');
-                        }
+                        // const response = await authenticateUser(username, password);
+                        // setHasResponse(true);
+                        // if(response && response.status === 200){
+                        //     setAccessToken(response.data.access_token);
+                        //     console.log('LOGIN SUCCESSFUL (token saved)! Proceed to OTP!');
+                        //     nav.navigate('Otp');
+                        // }
 
                         // DEBUG
-                        // setAccessToken('123123');
-                        // nav.navigate('Otp');
+                        setAccessToken('123123');
+                        nav.navigate('Otp');
                     }}
                 />
             <View style={{ flex: 0.45 }} />

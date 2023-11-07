@@ -20,7 +20,9 @@
     "home": {
       "screen_name": "Home",
       "error_title": "Input Error",
-      "error_message": "Invalid or empty input! Try again!"
+      "error_message": "Invalid or empty input! Try again!",
+      "calculator_from": "Tl",
+      "calculator_to": "Crypto"
     },
     "history": {
       "screen_name": "Deposit History",

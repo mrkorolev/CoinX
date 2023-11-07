@@ -9,6 +9,7 @@ import { Platform } from "react-native";
 import { AppContext } from "../../config/context/AppContext";
 
 const Stack = createNativeStackNavigator();
+// const Stack = createStackNavigator();
 
 export const TransactionNavigator = () => {
 

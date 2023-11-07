@@ -20,7 +20,9 @@
     "home": {
       "screen_name": "Ana Sayfa",
       "error_title": "Giriş Hatası",
-      "error_message": "Geçersiz veya boş giriş! Tekrar deneyin!"
+      "error_message": "Geçersiz veya boş giriş! Tekrar deneyin!",
+      "calculator_from": "Tl",
+      "calculator_to": "Krypto"
     },
     "history": {
       "screen_name": "Bildirimler",
