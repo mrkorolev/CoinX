@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {View, StyleSheet, Text } from 'react-native';
+import {View, StyleSheet, Text, Alert} from 'react-native';
 import { PrimaryDetails } from '../../components/settings/PrimaryDetails';
 import { i18n } from "../../config/localization/i18n";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -7,7 +7,7 @@ import { CustomButton } from "../../components/general/components/CustomButton";
 import { AppContext } from "../../config/context/AppContext";
 
 export const ProfileScreen = ({ route, navigation }) => {
-    const { theme, setAccessToken, customTimeout } = useContext(AppContext);
+    const { theme, setAccessToken, customTimeout, setCustomTimeout } = useContext(AppContext);
     const { name, phone, email, address, commission } = route.params;
     const screen = 'screens.profile';
 
@@ -40,9 +40,25 @@ export const ProfileScreen = ({ route, navigation }) => {
                     borderColor={theme.mainBtnBorderColor}
                     text={i18n.t(`${screen}.logout_title`)}
                     onPress={() => {
-                        setAccessToken(undefined);
-                        clearTimeout(customTimeout);
-                        navigation.navigate('Login');
+                        Alert.alert(
+                            i18n.t(`${screen}.logout_operation_title`),
+                            i18n.t(`${screen}.logout_operation_message`), [
+                                {
+                                    text: i18n.t(`${screen}.logout_operation_cancel`),
+                                    style: 'default',
+                                    onPress: () => console.log('Cancelled logout!')
+                                },
+                                {
+                                    text: i18n.t(`${screen}.logout_operation_confirm`),
+                                    style: 'destructive',
+                                    onPress: () => {
+                                        navigation.navigate('Login');
+                                        setAccessToken(undefined);
+                                        clearTimeout(customTimeout);
+                                        setCustomTimeout(undefined);
+                                    }
+                                }
+                            ]);
                     }} />
             </View>
         </View>

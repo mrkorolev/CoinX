@@ -36,7 +36,7 @@ export const OtpScreen = ({ navigation }) => {
                 borderColor={theme.mainBtnBorderColor}
                 text={i18n.t(`${screen}.button_text`)}
                 isDisabled={otpDisabledHandler()}
-                onPress={async () => {
+                onPress={ async () => {
                     setHasResponse(false);
                     console.log(code);
 

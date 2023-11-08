@@ -9,7 +9,6 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { AppContext } from "../../config/context/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import * as NavigationBar from "expo-navigation-bar/src/ExpoNavigationBar";
 
 export const LoginScreen = () => {
 
@@ -87,7 +86,7 @@ export const LoginScreen = () => {
                             console.log('LOGIN SUCCESSFUL (token saved)! Proceed to OTP!');
                             nav.navigate('Otp');
                         }
-                        
+
                         // DEBUG
                         // setAccessToken('123123');
                         // nav.navigate('Otp');

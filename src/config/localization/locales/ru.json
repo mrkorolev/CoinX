@@ -70,7 +70,11 @@
       "email": "Почтовый адрес",
       "address": "Адрес",
       "commission_rate": "Коммиссия",
-      "logout_title": "Выход"
+      "logout_title": "Выход",
+      "logout_operation_title": "Пользовательский выход",
+      "logout_operation_message": "Подтверждаете выход из аккаунта?",
+      "logout_operation_cancel": "Отменить",
+      "logout_operation_confirm": "Подтвердить"
     },
     "language": {
       "screen_name": "Язык"

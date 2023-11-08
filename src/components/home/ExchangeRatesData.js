@@ -7,6 +7,7 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { AppContext } from "../../config/context/AppContext";
 import { CustomIcon } from "../general/components/CustomIcon";
 import { Tron } from "../general/icons/Tron";
+import {useIsFocused} from "@react-navigation/native";
 
 function modifyCurrentState(arr1, arr2){
     for(let key in arr1){

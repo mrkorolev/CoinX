@@ -70,7 +70,11 @@
       "email": "Email",
       "address": "Address",
       "commission_rate": "Commission rate",
-      "logout_title": "Logout"
+      "logout_title": "Logout",
+      "logout_operation_title": "User logout",
+      "logout_operation_message": "Are you sure you want to logout?",
+      "logout_operation_cancel": "Deny",
+      "logout_operation_confirm": "Confirm"
     },
     "language": {
       "screen_name": "Language"
