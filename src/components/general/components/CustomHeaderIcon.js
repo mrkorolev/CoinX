@@ -11,8 +11,9 @@ export const CustomHeaderIcon = ({ icon, onPressHandler }) => {
     return (
         <View>
             <TouchableOpacity
+                disabled={!onPressHandler}
                 onPress={onPressHandler}>
-                <FontAwesomeIcon icon={icon} color={theme.helperIconColor} size={wp('6.5%')} />
+                <FontAwesomeIcon icon={icon} color={theme.helperIconColor} size={wp('6%')} />
             </TouchableOpacity>
         </View>
     );

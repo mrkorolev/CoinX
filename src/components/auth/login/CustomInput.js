@@ -35,8 +35,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderWidth: 1,
         height: hp('7%'),
-        marginVertical: '3%',
-        paddingLeft: '3%',
+        paddingLeft: wp('2.5%'),
         borderRadius: 5,
     },
     inputValue: {

@@ -21,11 +21,11 @@
       "screen_name": "Ana Sayfa",
       "error_title": "Giriş Hatası",
       "error_message": "Geçersiz veya boş giriş! Tekrar deneyin!",
-      "calculator_from": "Tl",
-      "calculator_to": "Krypto"
+      "calculator_from": "TL",
+      "calculator_to": "Crypto"
     },
     "history": {
-      "screen_name": "Bildirimler",
+      "screen_name": "Hesap Geçmişi",
       "waiting_message": "Para yatırma geçmişini bekliyorum..."
     },
     "transaction": {
@@ -46,14 +46,18 @@
     },
     "qr_code": {
       "screen_name": "QR Kodu",
-      "warning": "Sadece BTC'yi bu yatırma adresine gönderin. Bu adres, non-fungible token yatırımını desteklememektedir. Lütfen NFT sayfasına giderek NFT yatırımı yapın.",
+      "warning": "QR kod ve Cüzdan numarası sadece bir işlem için kullanılır. Lütfen aynı bilgileri başka bir işlem için kullanmayınız.",
       "wallet_address": "Cüzdan Adresi",
       "network": "Ağ",
+      "reference_number": "Referans sayı",
+      "start_time": "İşlem başlangıç zamanı",
       "cancel_title": "işlemi iptal et",
       "warning_title": "İşlemi İptal Et",
       "warning_message": "Bu işlemi iptal etmek istediğinizden emin misiniz?",
       "deny_message": "Reddet",
-      "confirm_message": "Onayla"
+      "confirm_message": "Onayla",
+      "cancel_success_title": "İşlem iptali",
+      "cancel_success_message": "İşleminiz başarıyla iptal edildi!"
     },
     "settings": {
       "screen_name": "Ayarlar",
@@ -66,11 +70,16 @@
     },
     "profile": {
       "screen_name": "Profil",
+      "company": "Şirket",
       "phone_number": "Telefon numarası",
       "email": "E-posta",
       "address": "Adres",
       "commission_rate": "Komisyon oranı",
-      "logout_title": "Çıkış Yap"
+      "logout_title": "Çıkış Yap",
+      "logout_operation_title": "Kullanıcı oturumu kapatma",
+      "logout_operation_message": "\nOturumu kapatmak istediğinizden emin misiniz?",
+      "logout_operation_cancel": "Reddet",
+      "logout_operation_confirm": "Onayla"
     },
     "language": {
       "screen_name": "Dil"

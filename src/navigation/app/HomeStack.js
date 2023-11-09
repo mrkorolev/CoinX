@@ -31,25 +31,16 @@ export const HomeStack = () => {
                     headerTitle: () => <CustomHeader title={i18n.t('screens.home.screen_name')} />,
                     headerRight: () => (
                         <View style={styles.headerRightLayout}>
+                            {/*<CustomHeaderIcon*/}
+                            {/*    icon={faHeadset} />*/}
 
-                            <CustomHeaderIcon
-                                icon={faHeadset}
-                                onPressHandler={() => {}}
-                            />
-
-                            <View>
-                                <CustomHeaderIcon
-                                    customStyle={styles.iconContainer}
-                                    icon={faBell}
-                                    onPressHandler={() => {}}
-                                    notifiable
-                                />
-                            </View>
+                            {/*<CustomHeaderIcon*/}
+                            {/*    customStyle={styles.iconContainer}*/}
+                            {/*    icon={faBell} />*/}
 
                             <CustomHeaderIcon
                                 icon={faShuffle}
-                                onPressHandler={() => navigation.navigate('DEPOSIT_HISTORY')}
-                            />
+                                onPressHandler={() => navigation.navigate('DEPOSIT_HISTORY')} />
                         </View>
                     ),
                     headerLeft: () => {},

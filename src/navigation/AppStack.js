@@ -18,9 +18,7 @@ export const AppStack = () => {
 
     useEffect( () => {
         const navigationBar = async () => {
-
             if(Platform.OS === 'android'){
-                console.log(await NavigationBar.getBackgroundColorAsync());
                 await NavigationBar.setBackgroundColorAsync(theme.tabBgColor);
                 await NavigationBar.setButtonStyleAsync(theme.sbContent);
             }

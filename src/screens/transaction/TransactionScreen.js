@@ -30,7 +30,7 @@ export const TransactionScreen = ({ navigation }) => {
     const [hasResponse, setHasResponse] = useState(true);
     const active = useIsFocused();
 
-    const transactionDisableHandler = () => !(spendAmount && hasResponse);
+    const transactionDisableHandler = () => !(spendAmount && hasResponse && spendAmount != '0');
 
     const transactionDebug = (network, spendingAmount, spendingCurrency, receivingAmount, receivingCurrency, rate, commission) => {
         console.log('DEBUG');
@@ -56,7 +56,7 @@ export const TransactionScreen = ({ navigation }) => {
         const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, coin.nameShort)).toFixed(4);
         const commissionRate = parseFloat(await commissionDataRequest(accessToken));
         const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
-        const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
+        const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(5);
         setCommission(`${commissionRate}`);
         setReceiveAmount(amountToReceive);
         setRate(pricePerUnit);
@@ -204,66 +204,74 @@ export const TransactionScreen = ({ navigation }) => {
                     <ExchangeRate style={[styles.exchangeRateText, { color: theme.secondaryContentColor }]} from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :
                     <Text style={styles.exchangeRateText}>{' '}</Text>}
 
-                <CustomButton
-                    isDisabled={transactionDisableHandler()}
-                    textColor={theme.mainBtnTextColor}
-                    bgColor={theme.mainBtnBgColor}
-                    borderColor={theme.mainBtnBorderColor}
-                    text={readyToProceed ? i18n.t(`${screen}.generate_qr_text`) : i18n.t(`${screen}.calculate_text`)}
-                    onPress={ async () => {
-                        setHasResponse(false);
-                        // if(!spendAmount){
-                        //     Alert.alert(i18n.t(`${screen}.error_title`), i18n.t(`${screen}.error_message`));
-                        //     return;
-                        // }
+                <View style={{ paddingTop: hp('5%') }}>
+                    <CustomButton
+                        isDisabled={transactionDisableHandler()}
+                        textColor={theme.mainBtnTextColor}
+                        bgColor={theme.mainBtnBgColor}
+                        borderColor={theme.mainBtnBorderColor}
+                        text={readyToProceed ? i18n.t(`${screen}.generate_qr_text`) : i18n.t(`${screen}.calculate_text`)}
+                        onPress={ async () => {
+                            setHasResponse(false);
+                            // if(!spendAmount){
+                            //     Alert.alert(i18n.t(`${screen}.error_title`), i18n.t(`${screen}.error_message`));
+                            //     return;
+                            // }
 
-                        if(!readyToProceed){
+                            if(!readyToProceed){
 
-                            // DEBUG
-                            // navigation.navigate('QR', {
-                            //     walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfo',
-                            //     networkData: 'Tron (TRC20)'
-                            // });
+                                // DEBUG
+                                // navigation.navigate('QR', {
+                                //     walletData: 'qwejqiwejbnoiybgpqweurhqpwriugfboqifyubqwoiuerhqowiuhfboqieurfhoqiuwehfoiuqwhrefoiquwehfo',
+                                //     networkData: 'Tron (TRC20)'
+                                // });
 
-                            await calculateWithCommissionHandler(receiveCurrency);
-                        } else {
+                                await calculateWithCommissionHandler(receiveCurrency);
+                            } else {
 
-                            Alert.alert(i18n.t(`${screen}.qr_approval_title`), i18n.t(`${screen}.qr_approval_message`), [
-                                {
-                                    text: i18n.t(`${screen}.qr_approval_cancel`),
-                                    style: 'destructive',
-                                    onPress: () => {
-                                        console.log('Transaction Cancelled!');
-                                        setHasResponse(true);
-                                    }
-                                },
-                                {
-                                    text: i18n.t(`${screen}.qr_approval_proceed`),
-                                    style: 'default',
-                                    onPress: async () => {
-                                        const finalSpendAmount = parseFloat(spendAmount.replaceAll(',', ''));
-                                        transactionDebug(network, finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
+                                Alert.alert(i18n.t(`${screen}.qr_approval_title`), i18n.t(`${screen}.qr_approval_message`), [
+                                    {
+                                        text: i18n.t(`${screen}.qr_approval_cancel`),
+                                        style: 'destructive',
+                                        onPress: () => {
+                                            console.log('Transaction Cancelled!');
+                                            setHasResponse(true);
+                                        }
+                                    },
+                                    {
+                                        text: i18n.t(`${screen}.qr_approval_proceed`),
+                                        style: 'default',
+                                        onPress: async () => {
+                                            const finalSpendAmount = parseFloat(spendAmount.replaceAll(',', ''));
+                                            transactionDebug(network, finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
 
-                                        // DEBUG
-                                        // navigation.navigate('QR_DETAILS', {
-                                        //     walletData: '123123123123123123',
-                                        //     networkData: `TRC20`,
-                                        //     depositStatus: 'Pending'
-                                        // });
+                                            // DEBUG
+                                            // navigation.navigate('QR_DETAILS', {
+                                            //     walletData: '123123123123123123',
+                                            //     networkData: `TRC20`,
+                                            //     depositStatus: 'Pending'
+                                            // });
 
-                                        const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
-                                        setHasResponse(true);
-                                        navigation.navigate('QR_DETAILS', {
-                                            walletData: walletData.address,
-                                            networkData: `${network.networkCode}`,
-                                            depositStatus: 'Pending'
-                                        });
-                                    }
-                                }]);
-                        }
-                        setHasResponse(true);
-                        // setReadyToProceed(true);
-                    }} />
+                                            const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
+                                            const formatInput = (input) => input < 10 ? `0${input}` : input;
+                                            const startDate = new Date(parseInt(walletData.start_timestamp) * 1000);
+
+                                            setHasResponse(true);
+                                            navigation.navigate('QR_DETAILS', {
+                                                walletData: walletData.address,
+                                                referenceNumber: walletData.transaction_id,
+                                                startTime: `${formatInput(startDate.getHours())}:${formatInput(startDate.getMinutes())}  ${formatInput(startDate.getDate())}/${formatInput(startDate.getMonth())}/${formatInput(startDate.getFullYear())}`,
+                                                networkData: `${network.networkCode}`,
+                                                depositStatus: 'Pending'
+                                            });
+                                        }
+                                    }]);
+                            }
+                            setHasResponse(true);
+                            // setReadyToProceed(true);
+                        }} />
+                </View>
+
                 <View style={{ flex: 0.6 }}/>
             </ScrollView>
         </KeyboardAvoidingView>
@@ -272,7 +280,6 @@ export const TransactionScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     layout: {
-        // flex: 1,
         justifyContent: 'center',
         padding: wp('2%'),
         paddingVertical: hp('1%'),

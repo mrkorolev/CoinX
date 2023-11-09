@@ -29,13 +29,17 @@ export const TabsNavigator = ({ navigation }) => {
     useEffect(() => {
         const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true);
         const customTimeout = setTimeout(() => {
-            Alert.alert(i18n.t('session_expired.title'), i18n.t('session_expired.message'));
             navigation.navigate('Login');
-            setAccessToken(undefined);
+            Alert.alert(i18n.t('session_expired.title'), i18n.t('session_expired.message'));
         }, userTimeout);
         setCustomTimeout(customTimeout);
+
         return () => {
             backHandler.remove();
+            setAccessToken(undefined);
+            clearTimeout(customTimeout);
+            setCustomTimeout(undefined);
+            console.log('Cleared all timeout & token data!');
         }
     }, []);
 

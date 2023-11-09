@@ -49,11 +49,15 @@
       "warning": "Отправляйте на предоставленный адрес только BTC. Данный адрес не поддерживает NFT депозиты, в целях создания NFT депозита сделайте это на странице NFT.",
       "wallet_address": "Адрес Кошелька",
       "network": "Сеть",
+      "reference_number": "Реферальный номер",
+      "start_time": "Начало транзакции",
       "cancel_title": "отмена депозита",
       "warning_title": "Отмена Депозита",
       "warning_message": "Вы уверены в отмене выполнение данного депозита?",
       "deny_message": "Отмена",
-      "confirm_message": "Подтвердить"
+      "confirm_message": "Подтвердить",
+      "cancel_success_title": "Отмена Транзакции",
+      "cancel_success_message": "Отмена Вашей транзакции прошла успешно!"
     },
     "settings": {
       "screen_name": "Настройки",
@@ -66,6 +70,7 @@
     },
     "profile": {
       "screen_name": "Профиль",
+      "company": "Компания",
       "phone_number": "Номер телефона",
       "email": "Почтовый адрес",
       "address": "Адрес",

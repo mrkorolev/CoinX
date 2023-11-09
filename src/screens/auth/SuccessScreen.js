@@ -21,7 +21,7 @@ export const SuccessScreen = ({ navigation }) => {
                 <Text style={[styles.title, { color: theme.primaryContentColor}]}>{i18n.t(`${screen}.title`)}</Text>
                 <Text style={[styles.message, { color: theme.secondaryContentColor }]}>{i18n.t(`${screen}.secondary_text`)}</Text>
             </View>
-            <View style={{ flex: 0.3 }} />
+            <View style={{ flex: 0.4 }} />
         </View>
     );
 }

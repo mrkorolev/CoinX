@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {View, StyleSheet, Text, Alert} from 'react-native';
+import {View, StyleSheet, Text, Alert, Platform} from 'react-native';
 import { PrimaryDetails } from '../../components/settings/PrimaryDetails';
 import { i18n } from "../../config/localization/i18n";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -8,7 +8,7 @@ import { AppContext } from "../../config/context/AppContext";
 
 export const ProfileScreen = ({ route, navigation }) => {
     const { theme, setAccessToken, customTimeout, setCustomTimeout } = useContext(AppContext);
-    const { name, phone, email, address, commission } = route.params;
+    const { name, company, phone, email, address, commission } = route.params;
     const screen = 'screens.profile';
 
     return (
@@ -19,6 +19,10 @@ export const ProfileScreen = ({ route, navigation }) => {
                     <View style={styles.group}>
                         <Text style={[styles.key, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.phone_number`)}:</Text>
                         <Text style={[styles.value, { color: theme.secondaryContentColor }]}>{phone}</Text>
+                    </View>
+                    <View style={styles.group}>
+                        <Text style={[styles.key, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.company`)}:</Text>
+                        <Text style={[styles.value, { color: theme.secondaryContentColor }]}>{company}</Text>
                     </View>
                     <View style={styles.group}>
                         <Text style={[styles.key, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.email`)}:</Text>
@@ -53,9 +57,6 @@ export const ProfileScreen = ({ route, navigation }) => {
                                     style: 'destructive',
                                     onPress: () => {
                                         navigation.navigate('Login');
-                                        setAccessToken(undefined);
-                                        clearTimeout(customTimeout);
-                                        setCustomTimeout(undefined);
                                     }
                                 }
                             ]);
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: wp('7%'),
         paddingBottom: hp('2%'),
         marginBottom: hp('15%'),
-        gap: hp('12%')
+        gap: hp(Platform.OS === 'ios' ? '13%' : '9%')
     },
     group: {
         paddingBottom: hp('1.5%'),

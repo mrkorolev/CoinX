@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         justifyContent: 'center',
-        marginTop: hp('5%'),
+        // marginTop: hp('5%'),
         height: hp('7%')
     },
     appButton: {

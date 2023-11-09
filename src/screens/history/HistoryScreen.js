@@ -26,7 +26,7 @@ export const HistoryScreen = ({ navigation }) => {
     const createNotifications = (deposits) => {
         return deposits
             .sort((h1, h2) => h2.start_timestamp - h1.start_timestamp)
-            .map(element => <HistoryRecord key={element.id} notification={element} navigation={navigation}/>);
+            .map(element => <HistoryRecord key={element.id} notification={element} navigation={navigation} />);
     }
 
     const getDepositHistoryData = async () => {

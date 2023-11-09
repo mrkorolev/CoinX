@@ -24,33 +24,36 @@ export const OtpScreen = ({ navigation }) => {
             <Text style={[styles.title, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.title`)}</Text>
             <Text style={[styles.message, { color: theme.secondaryContentColor }]}>{i18n.t(`${screen}.secondary_text`)}</Text>
 
-            <OtpInputField
-                code={code}
-                setCode={setCode}
-                setPinReady={setPinReady}
-                maxLength={MAX_CODE_LENGTH} />
+            <View style={{ gap: hp('4%')}}>
+                <OtpInputField
+                    code={code}
+                    setCode={setCode}
+                    setPinReady={setPinReady}
+                    maxLength={MAX_CODE_LENGTH} />
 
-            <CustomButton
-                textColor={theme.mainBtnTextColor}
-                bgColor={theme.mainBtnBgColor}
-                borderColor={theme.mainBtnBorderColor}
-                text={i18n.t(`${screen}.button_text`)}
-                isDisabled={otpDisabledHandler()}
-                onPress={ async () => {
-                    setHasResponse(false);
-                    console.log(code);
+                <CustomButton
+                    textColor={theme.mainBtnTextColor}
+                    bgColor={theme.mainBtnBgColor}
+                    borderColor={theme.mainBtnBorderColor}
+                    text={i18n.t(`${screen}.button_text`)}
+                    isDisabled={otpDisabledHandler()}
+                    onPress={ async () => {
+                        setHasResponse(false);
+                        console.log(code);
 
-                    const response = await otpVerification(accessToken, code);
-                    setHasResponse(true);
+                        const response = await otpVerification(accessToken, code);
+                        setHasResponse(true);
 
-                    if(response && response.status === 200){
-                        console.log('Verification process passed! Proceed to main navigator!');
-                        navigation.navigate('Success');
-                    }
+                        if(response && response.status === 200){
+                            console.log('Verification process passed! Proceed to main navigator!');
+                            navigation.navigate('Success');
+                        }
 
-                    // DEBUG
-                    // navigation.navigate('Success');
-                }} />
+                        // DEBUG
+                        // navigation.navigate('Success');
+                    }} />
+            </View>
+
             <View style={{ flex: 0.35 }}/>
         </View>
     );

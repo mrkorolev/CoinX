@@ -21,7 +21,6 @@ export const SettingsScreen = ({navigation}) => {
 
     const [name, setName] = useState('---');
     const [company, setCompany] = useState('---');
-
     const [phone, setPhone] = useState('---');
     const [address, setAddress] = useState('---');
     const [email, setEmail] = useState('---');
@@ -75,6 +74,7 @@ export const SettingsScreen = ({navigation}) => {
                     component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                     onPressHandler={() => navigation.navigate('PROFILE', {
                         name: name,
+                        company: company,
                         phone: phone,
                         address: address,
                         email: email,

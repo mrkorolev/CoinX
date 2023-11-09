@@ -11,7 +11,7 @@ export const QrCode = ({ warning, wallet }) => {
     return (
         <View>
             <View style={[styles.qr, { borderColor: theme.primaryContentColor }]}>
-                <QRCode wallet={wallet} color={theme.qrInformationColor} backgroundColor={theme.screenBgColor} size={wp('60%')} />
+                <QRCode wallet={wallet} color={theme.qrInformationColor} backgroundColor={theme.screenBgColor} size={wp('50%')} />
             </View>
             <Text style={[styles.warningStyle, { color: theme.qrInformationColor }]}>
                 {warning}
@@ -22,11 +22,11 @@ export const QrCode = ({ warning, wallet }) => {
 
 const styles = StyleSheet.create({
     qr: {
-        width: wp('75%'),
-        height: wp('75%'),
+        width: wp('65%'),
+        height: wp('65%'),
         borderWidth: 5,
         borderRadius: 10,
-        marginVertical: hp('1%'),
+        // marginVertical: hp('1%'),
         justifyContent: 'center',
         alignSelf: 'center',
         alignItems: 'center'

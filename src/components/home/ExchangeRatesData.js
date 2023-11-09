@@ -35,9 +35,9 @@ export const ExchangeRatesData = () => {
             nameShort: coinObject.nameShort,
             nameLong: coinObject.nameLong,
             lastPrice:
-                coinObject.lastPrice === '---' ?
+                coinObject.lastPrice === '--- TL' ?
                     coinObject.lastPrice :
-                    `${parseFloat(coinObject.lastPrice).toFixed(3)}`,
+                    `${parseFloat(coinObject.lastPrice).toFixed((coinObject.nameShort === 'ETH') || (coinObject.nameShort === 'BTC') ? 0 : 3)} TL`,
             priceChangePercent:
                 coinObject.priceChangePercent === '---' ?
                     coinObject.priceChangePercent :

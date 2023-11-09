@@ -21,7 +21,7 @@
       "screen_name": "Home",
       "error_title": "Input Error",
       "error_message": "Invalid or empty input! Try again!",
-      "calculator_from": "Tl",
+      "calculator_from": "TL",
       "calculator_to": "Crypto"
     },
     "history": {
@@ -46,14 +46,18 @@
     },
     "qr_code": {
       "screen_name": "QR Code",
-      "warning": "Send only BTC to this deposit address. This address does not support deposit of non-fungible token, please go to NFT page to deposit NFT.",
+      "warning": "QR code and Wallet number are to be used for one transaction only. Please do not use the same wallet information for any other transaction.",
       "wallet_address": "Wallet Address",
       "network": "Network",
+      "reference_number": "Reference number",
+      "start_time": "Transaction start",
       "cancel_title": "cancel transaction",
       "warning_title": "Cancel Transaction",
       "warning_message": "Are you sure you want to cancel this transaction?",
       "deny_message": "Deny",
-      "confirm_message": "Confirm"
+      "confirm_message": "Confirm",
+      "cancel_success_title": "Transaction Cancellation",
+      "cancel_success_message": "Your transaction was cancelled successfully!"
     },
     "settings": {
       "screen_name": "Settings",
@@ -66,6 +70,7 @@
     },
     "profile": {
       "screen_name": "Profile",
+      "company": "Company",
       "phone_number": "Phone number",
       "email": "Email",
       "address": "Address",

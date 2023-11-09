@@ -28,6 +28,7 @@ export const LoginScreen = () => {
     const screen = 'screens.login';
 
     useEffect(() => {
+        // console.log('Token: ' + accessToken);
         setUsername(null);
         setPassword(null);
     }, [accessToken]);
@@ -38,30 +39,34 @@ export const LoginScreen = () => {
         <View
             style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
                 <Text style={[styles.title, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.title`)}</Text>
-                <CustomInput
-                    value={username}
-                    onSubmitHandler={() => passwordRef.current.focus()}
-                    placeholder={i18n.t(`${screen}.email_placeholder`)}
-                    onChangeText={(text) => setUsername(text)}
-                    enterKey='next' />
 
-                <CustomInput
-                    customRef={passwordRef}
-                    value={password}
-                    icon={
-                        <TouchableOpacity
-                            onPress={() => {
-                            setProtection(!protection);
-                            setIcon(!protection ?
-                                <FontAwesomeIcon icon={faEye} color={theme.passwordIconColor} size={wp('6%')}/> :
-                                <FontAwesomeIcon icon={faEyeSlash} color={theme.passwordIconColor} size={wp('6%')} />);}}>
-                            {icon}
-                        </TouchableOpacity>
-                    }
-                    secureTextEntry={protection}
-                    placeholder={i18n.t(`${screen}.password_placeholder`)}
-                    onChangeText={(text) => setPassword(text)}
-                    enterKey='done' />
+            <View style={{ gap: hp('5%') }}>
+                <View style={{ gap: hp('1.5%') }}>
+                    <CustomInput
+                            value={username}
+                            onSubmitHandler={() => passwordRef.current.focus()}
+                            placeholder={i18n.t(`${screen}.email_placeholder`)}
+                            onChangeText={(text) => setUsername(text)}
+                            enterKey='next' />
+
+                    <CustomInput
+                        customRef={passwordRef}
+                        value={password}
+                        icon={
+                            <TouchableOpacity
+                                onPress={() => {
+                                setProtection(!protection);
+                                setIcon(!protection ?
+                                    <FontAwesomeIcon icon={faEye} color={theme.passwordIconColor} size={wp('6%')}/> :
+                                    <FontAwesomeIcon icon={faEyeSlash} color={theme.passwordIconColor} size={wp('6%')} />);}}>
+                                {icon}
+                            </TouchableOpacity>
+                        }
+                        secureTextEntry={protection}
+                        placeholder={i18n.t(`${screen}.password_placeholder`)}
+                        onChangeText={(text) => setPassword(text)}
+                        enterKey='done' />
+                </View>
 
                 <CustomButton
                     text={i18n.t(`${screen}.button_text`)}
@@ -92,6 +97,7 @@ export const LoginScreen = () => {
                         // nav.navigate('Otp');
                     }}
                 />
+            </View>
             <View style={{ flex: 0.45 }} />
         </View>
     );
@@ -101,6 +107,7 @@ const styles = StyleSheet.create({
     layout: {
         flex: 1,
         justifyContent: 'center',
+        gap: hp('2%'),
         paddingHorizontal: wp('5%'),
     },
     title: {
