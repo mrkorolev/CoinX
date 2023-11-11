@@ -9,7 +9,7 @@ import { CustomButton } from "../../components/general/components/CustomButton";
 import { cancelTransactionRequest } from "../../services/payone";
 import { AppContext } from "../../config/context/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {faArrowRightArrowLeft, faHashtag} from "@fortawesome/free-solid-svg-icons";
+import {faArrowRightArrowLeft, faClipboard, faDiagramProject, faHashtag} from "@fortawesome/free-solid-svg-icons";
 import {faClock, faFileLines} from "@fortawesome/free-regular-svg-icons";
 import Plaftorm from "expo-modules-core/src/Platform";
 
@@ -45,18 +45,11 @@ export const QrScreen = ({ route, navigation }) => {
 
             <View style={{ gap: hp(Platform.OS === 'ios' ? '7%' : '2%') }}>
                 <View style={styles.detailsContainer}>
+
                     <TransactionDetail
-                        parameter={i18n.t(`${screen}.wallet_address`)}
-                        value={walletAddress}
-                        icon={
-                            <TouchableOpacity
-                                onPress={async () => {
-                                    await Clipboard.setStringAsync(walletAddress);
-                                    console.log('Clipboard set to: ' + walletAddress);
-                                }}>
-                                <FontAwesomeIcon size={wp('5.5%')} icon={faFileLines} color={theme.helperIconColor} />
-                            </TouchableOpacity>
-                        } />
+                        parameter={i18n.t(`${screen}.reference_number`)}
+                        value={`#${referenceNo}`}
+                        icon={<FontAwesomeIcon size={wp('5.5%')} icon={faHashtag} color={theme.helperIconColor} />} />
 
                     <TransactionDetail
                         parameter={i18n.t(`${screen}.start_time`)}
@@ -66,14 +59,22 @@ export const QrScreen = ({ route, navigation }) => {
                         } />
 
                     <TransactionDetail
-                        parameter={i18n.t(`${screen}.reference_number`)}
-                        value={`#${referenceNo}`}
-                        icon={<FontAwesomeIcon size={wp('5.5%')} icon={faHashtag} color={theme.helperIconColor} />} />
-
-                    <TransactionDetail
                         parameter={i18n.t(`${screen}.network`)}
                         value={network}
-                        icon={<FontAwesomeIcon size={wp('5.5%')} icon={faArrowRightArrowLeft} color={theme.helperIconColor} />} />
+                        icon={<FontAwesomeIcon size={wp('5.5%')} icon={faDiagramProject} color={theme.helperIconColor} />} />
+
+                    <TransactionDetail
+                        parameter={i18n.t(`${screen}.wallet_address`)}
+                        value={walletAddress}
+                        icon={
+                            <TouchableOpacity
+                                onPress={async () => {
+                                    await Clipboard.setStringAsync(walletAddress);
+                                    console.log('Clipboard set to: ' + walletAddress);
+                                }}>
+                                <FontAwesomeIcon size={wp('5.5%')} icon={faClipboard} color={theme.helperIconColor} />
+                            </TouchableOpacity>
+                        } />
                 </View>
 
                 <View style={styles.cancelButtonContainer}>

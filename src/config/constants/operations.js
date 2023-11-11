@@ -62,10 +62,9 @@ export const cryptoCurrencies = [
     },
     {
         nameShort: 'USDT',
-        nameLong: 'Dollars',
+        nameLong: 'Tether',
         lastPrice:'---',
         priceChangePercent: '---',
-        icon: faDollarSign
     }
 ];
 

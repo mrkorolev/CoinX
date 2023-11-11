@@ -11,7 +11,8 @@ import { OutlinedTextField } from "rn-material-ui-textfield";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { AppContext } from "../../config/context/AppContext";
 import { Tron } from "../general/icons/Tron";
-import {commissionDataRequest} from "../../services/payone";
+import { commissionDataRequest } from "../../services/payone";
+import {Tether} from "../general/icons/Tether";
 
 export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
 
@@ -40,6 +41,31 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
         }
     }
 
+    const iconDecision = () => {
+        switch(receiveCurrency.nameShort){
+            case 'TRX':
+                return <Tron
+                    color={theme.calcCurrencyIconColor}
+                    bgColor={theme.calcCurrencyIconBgColor}
+                    size={wp('4%')}
+                />
+            case 'USDT':
+                return <Tether
+                    color={theme.calcCurrencyIconColor}
+                    bgColor={theme.calcCurrencyIconBgColor}
+                    size={wp('4.5%')}
+                />
+            default:
+                return <CustomIcon
+                    icon={receiveCurrency.icon}
+                    iconSize={wp('4%')}
+                    boxSize={wp('7%')}
+                    color={theme.calcCurrencyIconColor}
+                    bgColor={theme.calcCurrencyIconBgColor}
+                />
+        }
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.pickerLayout}>
@@ -53,13 +79,13 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
                         baseColor={theme.primaryContentColor}
                         returnKeyType='done'
                         onBlur={() => modifyScrollAction(false)}
-                        onFocus={() => {
-                            setReceiveAmount(null);
-                            modifyScrollAction(true);
+                        onFocus={async () => {
+                            await setReceiveAmount(null);
+                            await modifyScrollAction(true);
                             onFocusScroll();
                         }}
                         onChangeText={(text) => {
-                            let inputValue = text;
+                            let inputValue = text === '0' ? '' : text;
                             inputValue = inputValue.replace(/[,\.]/g, '');
                             inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             setSpendAmount(inputValue);
@@ -130,21 +156,8 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
                     customStyle={{width: wp('25%')}}
                     currencyName={receiveCurrency.nameShort}
                     disabled={disableButtonsHandler()}
-                    currencyIcon={
-                    receiveCurrency.nameLong === 'Tron' ?
-                        <Tron
-                            color={theme.calcCurrencyIconColor}
-                            bgColor={theme.calcCurrencyIconBgColor}
-                            size={wp('4%')}
-                        /> :
-                        <CustomIcon
-                            icon={receiveCurrency.icon}
-                            iconSize={wp('4%')}
-                            boxSize={wp('7%')}
-                            color={theme.calcCurrencyIconColor}
-                            bgColor={theme.calcCurrencyIconBgColor}
-                        />
-                    }
+                    currencyIcon={iconDecision()}
+
                     // hasBorder
                     onPressHandler={async () => {
                         setHasResponse(false);

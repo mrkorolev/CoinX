@@ -18,9 +18,9 @@ export const LanguageScreen = ({ navigation }) => {
                 key={item.locale}
                 style={{ paddingHorizontal: wp('4%'), paddingVertical: hp('2.5%') }}
                 onPress={() => {
+                    navigation.goBack();
                     i18n.locale = item.locale;
                     setLocale(item);
-                    navigation.goBack();
                 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ fontSize: wp('4%'), fontWeight: 'bold', color: theme.primaryContentColor }}>{item.language}</Text>

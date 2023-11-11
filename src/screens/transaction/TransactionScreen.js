@@ -13,6 +13,7 @@ import { AppContext } from "../../config/context/AppContext";
 import { CustomIcon } from "../../components/general/components/CustomIcon";
 import { Tron } from "../../components/general/icons/Tron";
 import { useIsFocused } from "@react-navigation/native";
+import {Tether} from "../../components/general/icons/Tether";
 
 export const TransactionScreen = ({ navigation }) => {
     const { theme, accessToken } = useContext(AppContext);
@@ -30,7 +31,7 @@ export const TransactionScreen = ({ navigation }) => {
     const [hasResponse, setHasResponse] = useState(true);
     const active = useIsFocused();
 
-    const transactionDisableHandler = () => !(spendAmount && hasResponse && spendAmount != '0');
+    const transactionDisableHandler = () => !(spendAmount && hasResponse);
 
     const transactionDebug = (network, spendingAmount, spendingCurrency, receivingAmount, receivingCurrency, rate, commission) => {
         console.log('DEBUG');
@@ -41,6 +42,28 @@ export const TransactionScreen = ({ navigation }) => {
             Network: ${network.networkCode}
         `);
         console.log('============');
+    }
+
+    const iconDecision = () => {
+        switch(receiveCurrency.nameShort){
+            case 'TRX':
+                return <Tron
+                    color={theme.calcCurrencyIconColor}
+                    bgColor={theme.calcCurrencyIconBgColor}
+                    size={wp('4%')} />
+            case 'USDT':
+                return <Tether
+                    color={theme.calcCurrencyIconColor}
+                    bgColor={theme.calcCurrencyIconBgColor}
+                    size={wp('4.5%')} />
+            default:
+                return <CustomIcon
+                    icon={network.icon}
+                    iconSize={wp('4%')}
+                    boxSize={wp('7%')}
+                    color={theme.calcCurrencyIconColor}
+                    bgColor={theme.calcCurrencyIconBgColor} />
+        }
     }
 
     useEffect(() => {
@@ -130,7 +153,8 @@ export const TransactionScreen = ({ navigation }) => {
                     value={spendAmount}
                     placeholder={i18n.t(`${screen}.placeholder`)}
                     onChangeAmount={(amount) => {
-                        let inputValue = amount;
+                        let inputValue = amount === '0' ? '' : amount;
+
                         inputValue = inputValue.replace(/[,\.]/g, '');
                         inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
@@ -146,21 +170,7 @@ export const TransactionScreen = ({ navigation }) => {
                     pickerDisabled={transactionDisableHandler()}
                     operation={i18n.t(`${screen}.receive`)}
                     chosenCurrencyName={receiveCurrency.nameShort}
-                    chosenCurrencyIcon={
-                        receiveCurrency.nameLong === 'Tron' ?
-                            <Tron
-                                color={theme.calcCurrencyIconColor}
-                                bgColor={theme.calcCurrencyIconBgColor}
-                                size={wp('4%')}
-                            /> :
-                            <CustomIcon
-                                icon={receiveCurrency.icon}
-                                iconSize={wp('4%')}
-                                boxSize={wp('7%')}
-                                color={theme.calcCurrencyIconColor}
-                                bgColor={theme.calcCurrencyIconBgColor}
-                            />
-                    }
+                    chosenCurrencyIcon={iconDecision()}
                     onPressHandler={async () => {
                         setReceiveAmount(undefined);
                         setReadyToProceed(false);

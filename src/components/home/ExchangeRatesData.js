@@ -8,6 +8,7 @@ import { AppContext } from "../../config/context/AppContext";
 import { CustomIcon } from "../general/components/CustomIcon";
 import { Tron } from "../general/icons/Tron";
 import {useIsFocused} from "@react-navigation/native";
+import {Tether} from "../general/icons/Tether";
 
 function modifyCurrentState(arr1, arr2){
     for(let key in arr1){
@@ -35,13 +36,13 @@ export const ExchangeRatesData = () => {
             nameShort: coinObject.nameShort,
             nameLong: coinObject.nameLong,
             lastPrice:
-                coinObject.lastPrice === '--- TL' ?
+                coinObject.lastPrice === '---' ?
                     coinObject.lastPrice :
                     `${parseFloat(coinObject.lastPrice).toFixed((coinObject.nameShort === 'ETH') || (coinObject.nameShort === 'BTC') ? 0 : 3)} TL`,
             priceChangePercent:
                 coinObject.priceChangePercent === '---' ?
                     coinObject.priceChangePercent :
-                    `${parseFloat(coinObject.priceChangePercent) >= 0 ? '+' : ''}${parseFloat(coinObject.priceChangePercent).toFixed(2)}`,
+                    `${parseFloat(coinObject.priceChangePercent) >= 0 ? '+' : ''}${parseFloat(coinObject.priceChangePercent).toFixed(2)}%`,
             coinIcon: coinObject.icon
         }));
     }
@@ -127,13 +128,17 @@ export const ExchangeRatesData = () => {
                     lastPrice={coinComponents[3].lastPrice}
                     priceChangePercent={coinComponents[3].priceChangePercent}
                     coinIcon={
-                        <CustomIcon
-                        icon={coinComponents[3].coinIcon}
-                        iconSize={wp('4%')}
-                        boxSize={wp('7%')}
+                    <Tether
                         color={theme.exchangeIconColor}
                         bgColor={theme.exchangeIconBgColor}
-                        />
+                        size={wp('4.5%')} />
+                        // <CustomIcon
+                        // icon={coinComponents[3].coinIcon}
+                        // iconSize={wp('4%')}
+                        // boxSize={wp('7%')}
+                        // color={theme.exchangeIconColor}
+                        // bgColor={theme.exchangeIconBgColor}
+                        // />
                     }
                     bgColor={theme.usdBgColor}
                     primaryColor={theme.exPrimaryColor}

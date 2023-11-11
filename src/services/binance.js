@@ -40,10 +40,10 @@ export const endpoint24hrData = async (cryptoCoins) => {
         // Debug
         console.log(completeUrl);
         const date = new Date();
-        let datetime = "Last Binance API call: "
+        let time = "Latest Binance API call: "
             + date.getHours() + ":"
             + date.getMinutes() + ":" + date.getSeconds();
-        console.log(datetime);
+        console.log(time);
         responseJson.forEach(r => {
             console.log(`${r.symbol}, last price: ${parseFloat(r.lastPrice).toFixed(2)} (${parseFloat(r.priceChangePercent).toFixed(2)} %)`);
         });
