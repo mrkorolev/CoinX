@@ -14,6 +14,8 @@ import { CustomIcon } from "../../components/general/components/CustomIcon";
 import { Tron } from "../../components/general/icons/Tron";
 import { useIsFocused } from "@react-navigation/native";
 import {Tether} from "../../components/general/icons/Tether";
+import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import {faSpinner} from "@fortawesome/free-solid-svg-icons";
 
 export const TransactionScreen = ({ navigation }) => {
     const { theme, accessToken } = useContext(AppContext);
@@ -29,7 +31,10 @@ export const TransactionScreen = ({ navigation }) => {
     const [network, setNetwork] = useState(availableNetworks[0]);
     const [networkDisabled, setNetworkDisabled] = useState(true);
     const [hasResponse, setHasResponse] = useState(true);
+    const [calculationTimeout, setCalculationTimeout] = useState(null);
+    const [requestStatus, setRequestStatus] = useState('');
     const active = useIsFocused();
+    const timeout = 1000;
 
     const transactionDisableHandler = () => !(spendAmount && hasResponse);
 
@@ -48,21 +53,21 @@ export const TransactionScreen = ({ navigation }) => {
         switch(receiveCurrency.nameShort){
             case 'TRX':
                 return <Tron
-                    color={theme.calcCurrencyIconColor}
-                    bgColor={theme.calcCurrencyIconBgColor}
+                    color={theme.exchangeIconColor}
+                    bgColor={theme.exchangeIconBgColor}
                     size={wp('4%')} />
             case 'USDT':
                 return <Tether
-                    color={theme.calcCurrencyIconColor}
-                    bgColor={theme.calcCurrencyIconBgColor}
+                    color={theme.exchangeIconColor}
+                    bgColor={theme.exchangeIconBgColor}
                     size={wp('4.5%')} />
             default:
                 return <CustomIcon
                     icon={network.icon}
                     iconSize={wp('4%')}
                     boxSize={wp('7%')}
-                    color={theme.calcCurrencyIconColor}
-                    bgColor={theme.calcCurrencyIconBgColor} />
+                    color={theme.exchangeIconColor}
+                    bgColor={theme.exchangeIconBgColor} />
         }
     }
 
@@ -72,19 +77,24 @@ export const TransactionScreen = ({ navigation }) => {
             setRate(undefined);
             setSpendAmount(undefined);
             setReceiveAmount(undefined);
+            setRequestStatus('');
         }
     },[active]);
 
     const calculateWithCommissionHandler = async (coin) => {
+        setHasResponse(false);
+
         const pricePerUnit = parseFloat(await endpointPriceData(spendCurrency.nameShort, coin.nameShort)).toFixed(4);
-        const commissionRate = parseFloat(await commissionDataRequest(accessToken));
+        const optionalCommission = parseFloat(await commissionDataRequest(accessToken));
         const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
-        const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(5);
-        setCommission(`${commissionRate}`);
+        const amountToReceive = (providedAmount * (1 + optionalCommission/100) / pricePerUnit).toFixed(5);
+        setCommission(`${optionalCommission}`);
         setReceiveAmount(amountToReceive);
         setRate(pricePerUnit);
         setReadyToProceed(true);
         console.log(network.networkCode);
+
+        setHasResponse(true);
     }
 
     return (
@@ -104,16 +114,16 @@ export const TransactionScreen = ({ navigation }) => {
                     chosenCurrencyIcon={
                         network.networkName === 'Tron' ?
                             <Tron
-                                color={theme.calcCurrencyIconColor}
-                                bgColor={theme.calcCurrencyIconBgColor}
+                                color={theme.exchangeIconColor}
+                                bgColor={theme.exchangeIconBgColor}
                                 size={wp('4%')}
                             /> :
                             <CustomIcon
                                 icon={network.icon}
                                 iconSize={wp('4%')}
                                 boxSize={wp('7%')}
-                                color={theme.calcCurrencyIconColor}
-                                bgColor={theme.calcCurrencyIconBgColor}
+                                color={theme.exchangeIconColor}
+                                bgColor={theme.exchangeIconBgColor}
                             />
                     }
                     onPressHandler={ () => {
@@ -141,8 +151,8 @@ export const TransactionScreen = ({ navigation }) => {
                             icon={spendCurrency.icon}
                             iconSize={wp('4%')}
                             boxSize={wp('7%')}
-                            color={theme.calcCurrencyIconColor}
-                            bgColor={theme.calcCurrencyIconBgColor}
+                            color={theme.exchangeIconColor}
+                            bgColor={theme.exchangeIconBgColor}
                         />
                     }
                     // onPressHandler={() => {
@@ -167,14 +177,18 @@ export const TransactionScreen = ({ navigation }) => {
                     pickerDisabled={true} />
 
                 <ExchangeAmountInput
+                    placeholder={requestStatus}
                     pickerDisabled={transactionDisableHandler()}
                     operation={i18n.t(`${screen}.receive`)}
                     chosenCurrencyName={receiveCurrency.nameShort}
                     chosenCurrencyIcon={iconDecision()}
                     onPressHandler={async () => {
+                        setRequestStatus('');
+                        clearTimeout(calculationTimeout);
                         setReceiveAmount(undefined);
                         setReadyToProceed(false);
-                        setHasResponse(false);
+
+                        // setHasResponse(false);
                         // const toBeChosenNext = cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length];
                         const toBeChosenNext = cryptoCurrenciesCalculate[(cryptoCurrenciesCalculate.indexOf(receiveCurrency) + 1) % cryptoCurrenciesCalculate.length];
                         switch(toBeChosenNext.nameShort){
@@ -201,16 +215,18 @@ export const TransactionScreen = ({ navigation }) => {
                         }
                         setReceiveCurrency(toBeChosenNext);
 
-                        // TEST
-                        await calculateWithCommissionHandler(toBeChosenNext);
-                        setReadyToProceed(true);
-                        setHasResponse(true);
+                        setCalculationTimeout(
+                            setTimeout(async () => {
+                                setRequestStatus('Processing...')
+                                await calculateWithCommissionHandler(toBeChosenNext);
+                                setReadyToProceed(true);
+                            }, timeout));
                     }}
                     value={receiveAmount}
                     textColor={theme.primaryContentColor}
                     isEditable={false} />
 
-                { rate ?
+                { (rate && requestStatus && hasResponse) ?
                     <ExchangeRate style={[styles.exchangeRateText, { color: theme.secondaryContentColor }]} from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :
                     <Text style={styles.exchangeRateText}>{' '}</Text>}
 
@@ -222,6 +238,7 @@ export const TransactionScreen = ({ navigation }) => {
                         borderColor={theme.mainBtnBorderColor}
                         text={readyToProceed ? i18n.t(`${screen}.generate_qr_text`) : i18n.t(`${screen}.calculate_text`)}
                         onPress={ async () => {
+                            setRequestStatus('Processing...');
                             setHasResponse(false);
                             // if(!spendAmount){
                             //     Alert.alert(i18n.t(`${screen}.error_title`), i18n.t(`${screen}.error_message`));

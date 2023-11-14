@@ -26,33 +26,31 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
     // const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
     const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrenciesCalculate[0]);
     const [hasResponse, setHasResponse] = useState(true);
+    const [calculationTimeout, setCalculationTimeout] = useState(null);
+    const timeout = 1000;
 
-    const disableButtonsHandler = () => !(hasResponse);
+    const disableButtonsHandler = () => !(hasResponse && spendAmount);
 
     const calculateCryptoHandler = async (coin) => {
-        if(!spendAmount){
-            Alert.alert(i18n.t(`${screen}.error_title`),i18n.t(`${screen}.error_message`));
-        }else{
-            const pricePerUnit = await endpointPriceData(spendCurrency.nameShort, coin.nameShort);
-            const commissionRate = parseFloat(await commissionDataRequest(accessToken));
-            const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
-            const amountToReceive = (providedAmount * (1 + commissionRate/100) / pricePerUnit).toFixed(4);
-            setReceiveAmount(amountToReceive);
-        }
+        const pricePerUnit = await endpointPriceData(spendCurrency.nameShort, coin.nameShort);
+        const optionalCommission = parseFloat(await commissionDataRequest(accessToken));
+        const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
+        const amountToReceive = (providedAmount * (1 + optionalCommission/100) / pricePerUnit).toFixed(5);
+        setReceiveAmount(amountToReceive);
     }
 
     const iconDecision = () => {
         switch(receiveCurrency.nameShort){
             case 'TRX':
                 return <Tron
-                    color={theme.calcCurrencyIconColor}
-                    bgColor={theme.calcCurrencyIconBgColor}
+                    color={theme.exchangeIconColor}
+                    bgColor={theme.exchangeIconBgColor}
                     size={wp('4%')}
                 />
             case 'USDT':
                 return <Tether
-                    color={theme.calcCurrencyIconColor}
-                    bgColor={theme.calcCurrencyIconBgColor}
+                    color={theme.exchangeIconColor}
+                    bgColor={theme.exchangeIconBgColor}
                     size={wp('4.5%')}
                 />
             default:
@@ -60,8 +58,8 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
                     icon={receiveCurrency.icon}
                     iconSize={wp('4%')}
                     boxSize={wp('7%')}
-                    color={theme.calcCurrencyIconColor}
-                    bgColor={theme.calcCurrencyIconBgColor}
+                    color={theme.exchangeIconColor}
+                    bgColor={theme.exchangeIconBgColor}
                 />
         }
     }
@@ -104,8 +102,8 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
                             icon={ spendCurrency.icon}
                             iconSize={wp('4%')}
                             boxSize={wp('7%')}
-                            color={theme.calcCurrencyIconColor}
-                            bgColor={theme.calcCurrencyIconBgColor}
+                            color={theme.exchangeIconColor}
+                            bgColor={theme.exchangeIconBgColor}
                             />
                         }
                         customStyle={{width: wp('25%')}}
@@ -160,12 +158,16 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
 
                     // hasBorder
                     onPressHandler={async () => {
+                        clearTimeout(calculationTimeout);
                         setHasResponse(false);
                         // setReceiveCurrency(cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length]);
                         setReceiveCurrency(cryptoCurrenciesCalculate[(cryptoCurrenciesCalculate.indexOf(receiveCurrency) + 1) % cryptoCurrenciesCalculate.length]);
                         setReceiveAmount(null);
                         const toBeChosenNext = cryptoCurrenciesCalculate[(cryptoCurrenciesCalculate.indexOf(receiveCurrency) + 1) % cryptoCurrenciesCalculate.length];
-                        await calculateCryptoHandler(toBeChosenNext);
+                        setCalculationTimeout(
+                            setTimeout(async () => {
+                                await calculateCryptoHandler(toBeChosenNext);
+                            }, timeout));
                         setHasResponse(true);
                     }}
                 />

@@ -15,8 +15,8 @@ const cancelTransactionEndpoint = 'capital/transac/cancel/wallet';
 const commissionEndpoint = 'user/info/user-commission';
 const userProfileEndpoint = 'user/info/user-profile';
 
-const requestTimeout = 15000;
 const responsePath = 'response_errors.response_timeout';
+const requestTimeout = 15000;
 
 // DEBUG FUNCTION
 const invalidRequestDescription = (reason, message, error) => {
@@ -170,9 +170,9 @@ export const commissionDataRequest = async (accessToken) => {
             },
             timeout: requestTimeout
         });
-        console.log(commissionResponse);
+        // console.log(commissionResponse);
         console.log(JSON.stringify(commissionResponse.data, undefined, 4));
-        return commissionResponse.data.commission;
+        return commissionResponse.data.commission_type === 'included' ? commissionResponse.data.commission : 0;
     }catch(error){
         invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }
