@@ -29,6 +29,7 @@ export const ExchangeRatesData = () => {
     const { theme } = useContext(AppContext);
     const [apiData, setApiData] = useState(cryptoCurrencies);
     const [coinComponents, setCoinComponents] = useState(generateExchangeRates(apiData));
+    const active = useIsFocused();
 
     function generateExchangeRates(data){
         return data.map(coinObject => ({
@@ -50,16 +51,19 @@ export const ExchangeRatesData = () => {
     // Modification of the observed object and it's conversion to Exchange Rates
     useEffect(() => {
         console.log("Rerender initiated...");
-        const interval = setInterval(async () => {
-            const jsonResponse = await endpoint24hrData(cryptoCurrencies);
-            modifyCurrentState(cryptoCurrencies, jsonResponse);
-            setApiData(cryptoCurrencies);
-            setCoinComponents(generateExchangeRates(apiData));
-        }, apiCallInterval);
+        let interval = undefined
+        if(active){
+            interval = setInterval(async () => {
+                const jsonResponse = await endpoint24hrData(cryptoCurrencies);
+                modifyCurrentState(cryptoCurrencies, jsonResponse);
+                setApiData(cryptoCurrencies);
+                setCoinComponents(generateExchangeRates(apiData));
+            }, apiCallInterval);
+        }
         return () => {
             clearInterval(interval);
         };
-    }, []);
+    }, [active]);
 
     return (
         <View>
