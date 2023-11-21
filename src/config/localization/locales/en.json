@@ -34,6 +34,7 @@
       "network": "Network",
       "receive": "Cryptocurrency",
       "placeholder": "Enter the amount",
+      "calculation_status": "Processing...",
       "exchange_rate": "Exchange rate",
       "calculate_text": "Calculate",
       "generate_qr_text": "Generate QR Code",

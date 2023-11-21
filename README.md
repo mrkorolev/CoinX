@@ -80,8 +80,6 @@ benoit.kekwandi@final.edu.tr --- Welcome@1234
 |-------------------------------------|-----------------------------------|------------------------------------|----------------------------------|
 | ![](assets/light/settings_light.png) | ![](assets/dark/settings_dark.png) | ![](assets/light/profile_light.png) | ![](assets/dark/profile_dark.png) |
 
-
-
 ## Application support and further enquiries
 
 Supporting developer: Nikita Korolev 

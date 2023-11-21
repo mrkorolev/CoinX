@@ -217,7 +217,7 @@ export const TransactionScreen = ({ navigation }) => {
 
                         setCalculationTimeout(
                             setTimeout(async () => {
-                                setRequestStatus('Processing...')
+                                setRequestStatus(i18n.t(`${screen}.calculation_status`))
                                 await calculateWithCommissionHandler(toBeChosenNext);
                                 setReadyToProceed(true);
                             }, timeout));
@@ -226,11 +226,12 @@ export const TransactionScreen = ({ navigation }) => {
                     textColor={theme.primaryContentColor}
                     isEditable={false} />
 
-                { (rate && requestStatus && hasResponse) ?
-                    <ExchangeRate style={[styles.exchangeRateText, { color: theme.secondaryContentColor }]} from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :
-                    <Text style={styles.exchangeRateText}>{' '}</Text>}
+                {/*ADD THIS LATER*/}
+                {/*{ (rate && requestStatus && hasResponse) ?*/}
+                {/*    <ExchangeRate style={[styles.exchangeRateText, { color: theme.secondaryContentColor }]} from={spendCurrency.nameShort} to={receiveCurrency.nameShort} rate={readyToProceed ? parseFloat(rate).toFixed(2) : '...'} /> :*/}
+                {/*    <Text style={styles.exchangeRateText}>{' '}</Text>}*/}
 
-                <View style={{ paddingTop: hp('5%') }}>
+                <View style={{ paddingTop: hp('10%') }}>
                     <CustomButton
                         isDisabled={transactionDisableHandler()}
                         textColor={theme.mainBtnTextColor}
@@ -238,7 +239,7 @@ export const TransactionScreen = ({ navigation }) => {
                         borderColor={theme.mainBtnBorderColor}
                         text={readyToProceed ? i18n.t(`${screen}.generate_qr_text`) : i18n.t(`${screen}.calculate_text`)}
                         onPress={ async () => {
-                            setRequestStatus('Processing...');
+                            setRequestStatus(i18n.t(`${screen}.calculation_status`));
                             setHasResponse(false);
                             // if(!spendAmount){
                             //     Alert.alert(i18n.t(`${screen}.error_title`), i18n.t(`${screen}.error_message`));

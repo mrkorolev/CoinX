@@ -17,7 +17,6 @@ const Tab = createBottomTabNavigator();
 
 export const TabsNavigator = ({ navigation }) => {
 
-    // const userTimeout = 1000 * 15;
     const userTimeout = 60000 * 60;
 
     const { theme, setAccessToken, setCustomTimeout } = useContext(AppContext);

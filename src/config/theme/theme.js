@@ -149,9 +149,9 @@ export const appTheme = {
         userIconColor: '#FFFFFF',
         userIconBgColor: '#slategray',
 
-        depositBgSuccess: '#22303C',
-        depositBgPending: '#3D3D3D',
-        depositBgCancel: '#212124',
+        depositBgSuccess: '#1A2F4B',
+        depositBgPending: '#303841',
+        depositBgCancel: '#1F252D',
 
         historyLoadBorderColor: '#FFFFFF',
     }

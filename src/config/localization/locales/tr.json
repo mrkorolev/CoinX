@@ -34,6 +34,7 @@
       "network": "Ağ",
       "receive": "Kripto Para Birimi",
       "placeholder": "Miktarı girin",
+      "calculation_status": "Hesaplama...",
       "exchange_rate": "Döviz Kuru",
       "calculate_text": "Hesapla",
       "generate_qr_text": "QR Kod Oluştur",

@@ -34,6 +34,7 @@
       "network": "Сеть",
       "receive": "Крипто Валюта",
       "placeholder": "Введите сумму для оплаты",
+      "calculation_status": "Обработка...",
       "exchange_rate": "Курс Обмена",
       "calculate_text": "Вычислить",
       "generate_qr_text": "Сгенерировать QR Код",
