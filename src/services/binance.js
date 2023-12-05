@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { apiKey, baseCurrencies } from "../config/constants/operations";
+import { baseCurrencies } from "../config/constants/operations";
 
-const baseUrl = 'https://api.binance.com/';
-const apiVersion = 'api/v3/';
-const ticker = 'ticker/';
+const base = process.env.EXPO_PUBLIC_BINANCE_BASE
+const apiVersion = process.env.EXPO_PUBLIC_BINANCE_API_V
+const ticker = process.env.EXPO_PUBLIC_BINANCE_TICKER
 
 export const formattedUrlParams = (symbol, base, str) => {
     return (str + symbol + base + str);
@@ -20,14 +20,14 @@ export const prepareParamsForUrl = (cryptoSymbols, baseSymbol) => {
 
 export const endpoint24hrData = async (cryptoCoins) => {
     const symbols = cryptoCoins.map(coin => coin.nameShort);
-    const completeUrl = `${baseUrl}${apiVersion}${ticker}24hr?symbols=[${prepareParamsForUrl(symbols, baseCurrencies[0].nameShort)}]`;
+    const completeUrl = `${base}${apiVersion}${ticker}24hr?symbols=[${prepareParamsForUrl(symbols, baseCurrencies[0].nameShort)}]`;
 
     try{
         const response = await axios({
             method: 'get',
             url: completeUrl,
             headers: {
-                apiKey: apiKey,
+                apiKey: undefined,
                 'Content-Type': 'application/json'
             }
         });
@@ -59,17 +59,18 @@ export const endpointPriceData = async (baseCurrency, cryptoCurrency) => {
     const finalBaseCurrency = baseCurrency === 'USD' ? 'USDT' : baseCurrency;
     const finalCryptoCurrency = (baseCurrency === 'USD' && cryptoCurrency === 'USDT') ? 'USDC' : cryptoCurrency;
 
-    const completeUrl = `${baseUrl}${apiVersion}${ticker}price?symbol=${finalCryptoCurrency + finalBaseCurrency}`;
+    const completeUrl = `${base}${apiVersion}${ticker}price?symbol=${finalCryptoCurrency + finalBaseCurrency}`;
     console.log(completeUrl);
     try{
         const response = await axios({
             method: 'get',
             url: completeUrl,
             headers: {
-                apiKey: apiKey,
+                apiKey: undefined,
                 'Content-Type': 'application/json'
             }
         });
+
         const data = await response.data;
         return parseFloat(data.price).toFixed(4);
     }catch(error){

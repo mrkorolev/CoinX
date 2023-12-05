@@ -3,29 +3,27 @@ import axios from "axios";
 import { Alert } from 'react-native';
 import { i18n } from "../config/localization/i18n";
 
-const baseUrl = 'https://payone.com.tr/';
-// const baseUrl = 'http://192.168.5.5:7075/';
-
-const apiVersion = 'api/v1/';
-const payone = 'auth/check/';
-
-const depositHistoryEndpoint = 'user/info/user-transactions';
-const walletEndpoint = 'capital/transac/deposit/wallet';
-const cancelTransactionEndpoint = 'capital/transac/cancel/wallet';
-const commissionEndpoint = 'user/info/user-commission';
-const userProfileEndpoint = 'user/info/user-profile';
-
 const responsePath = 'response_errors.response_timeout';
 const requestTimeout = 15000;
 
+const base = process.env.EXPO_PUBLIC_PAYONE_BASE;
+const apiVersion = process.env.EXPO_PUBLIC_PAYONE_API_V;
+const auth = process.env.EXPO_PUBLIC_PAYONE_AUTH;
+const depositHistory = process.env.EXPO_PUBLIC_DEPOSIT_HISTORY;
+const wallet = process.env.EXPO_PUBLIC_WALLET;
+const commission = process.env.EXPO_PUBLIC_COMMISSION;
+const cancelTransaction = process.env.EXPO_PUBLIC_CANCEL_TRANSACTION;
+const userProfile = process.env.EXPO_PUBLIC_USER_PROFILE;
+
+
 // DEBUG FUNCTION
 const invalidRequestDescription = (reason, message, error) => {
-    console.log("Error info: " + JSON.stringify(error.toJSON(), undefined, 4));
+    // console.log("Error info: " + JSON.stringify(error.toJSON(), undefined, 4));
     Alert.alert(reason, ` ${message} (${error.response.status})`);
 }
 
 const invalidResponseDescription = (title, message) => {
-    console.log('Request timeout error!');
+    // console.log('Request timeout error!');
     Alert.alert(title, message);
 }
 
@@ -34,7 +32,7 @@ export const authenticateUser = async (username, password) => {
     try{
         const authenticationResponse = await axios({
             method: 'post',
-            url: `${baseUrl}${apiVersion}${payone}user`,
+            url: `${process.env.EXPO_PUBLIC_PAYONE_BASE}${process.env.EXPO_PUBLIC_PAYONE_API_V}${process.env.EXPO_PUBLIC_PAYONE_AUTH}user`,
             data: {
                 username: username,
                 password: password
@@ -45,7 +43,7 @@ export const authenticateUser = async (username, password) => {
             timeout: requestTimeout
         });
 
-        console.log(JSON.stringify(authenticationResponse.data, undefined, 4));
+        // console.log(JSON.stringify(authenticationResponse.data, undefined, 4));
         return authenticationResponse;
     }catch(error){
         if(error.code === 'ECONNABORTED'){
@@ -62,7 +60,7 @@ export const otpVerification = async (accessToken, providedCode) => {
     try{
         const otpResponse = await axios({
             method: 'post',
-            url: `${baseUrl}${apiVersion}${payone}2fa-otp`,
+            url: `${base}${apiVersion}${auth}2fa-otp`,
             data: {
                 otp: providedCode
             },
@@ -73,7 +71,7 @@ export const otpVerification = async (accessToken, providedCode) => {
             timeout: requestTimeout
         });
 
-        console.log(JSON.stringify(otpResponse.data, undefined, 4));
+        // console.log(JSON.stringify(otpResponse.data, undefined, 4));
         return otpResponse;
     }catch(error){
         invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
@@ -86,7 +84,7 @@ export const depositHistoryRequest = async (accessToken) => {
     try{
         const historyResponse = await axios({
             method: 'get',
-            url: `${baseUrl}${apiVersion}${depositHistoryEndpoint}`,
+            url: `${base}${apiVersion}${depositHistory}`,
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 'Content-type': 'application/json'
@@ -94,7 +92,7 @@ export const depositHistoryRequest = async (accessToken) => {
             timeout: requestTimeout
         });
 
-        console.log(JSON.stringify(historyResponse.data, undefined, 4));
+        // console.log(JSON.stringify(historyResponse.data, undefined, 4));
         return historyResponse;
     }catch(error){
         invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
@@ -108,7 +106,7 @@ export const walletDataRequest = async (accessToken, spendAmount, spendCurrency,
         // Wallet request for QR generation:
         const walletResponse = await axios({
             method: 'post',
-            url: `${baseUrl}${apiVersion}${walletEndpoint}`,
+            url: `${base}${apiVersion}${wallet}`,
             data: {
                 expected_amount: spendAmount,
                 expected_crypto: receiveAmount,
@@ -124,7 +122,7 @@ export const walletDataRequest = async (accessToken, spendAmount, spendCurrency,
             },
             timeout: requestTimeout
         });
-        console.log(JSON.stringify(walletResponse.data, undefined, 4));
+        // console.log(JSON.stringify(walletResponse.data, undefined, 4));
 
         return walletResponse.data;
     }catch(error){
@@ -139,7 +137,7 @@ export const cancelTransactionRequest = async (accessToken, walletAddress) => {
         // Wallet request for QR generation:
         const transactionCancelResponse = await axios({
             method: 'post',
-            url: `${baseUrl}${apiVersion}${cancelTransactionEndpoint}`,
+            url: `${base}${apiVersion}${cancelTransaction}`,
             data: {
                 wallet: walletAddress
             },
@@ -149,7 +147,7 @@ export const cancelTransactionRequest = async (accessToken, walletAddress) => {
             },
             timeout: requestTimeout
         });
-        console.log(JSON.stringify(transactionCancelResponse.data, undefined, 4));
+        // console.log(JSON.stringify(transactionCancelResponse.data, undefined, 4));
 
         return transactionCancelResponse.data;
     }catch(error){
@@ -163,7 +161,7 @@ export const commissionDataRequest = async (accessToken) => {
     try{
         const commissionResponse = await axios({
             method: 'get',
-            url: `${baseUrl}${apiVersion}${commissionEndpoint}`,
+            url: `${base}${apiVersion}${commission}`,
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${accessToken}`
@@ -171,7 +169,7 @@ export const commissionDataRequest = async (accessToken) => {
             timeout: requestTimeout
         });
         // console.log(commissionResponse);
-        console.log(JSON.stringify(commissionResponse.data, undefined, 4));
+        // console.log(JSON.stringify(commissionResponse.data, undefined, 4));
         return commissionResponse.data.commission_type === 'included' ? commissionResponse.data.commission : 0;
     }catch(error){
         invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
@@ -184,14 +182,15 @@ export const userProfileVerification = async (accessToken) => {
     try{
         const userProfileResponse = await axios({
             method: 'get',
-            url: `${baseUrl}${apiVersion}${userProfileEndpoint}`,
+            url: `${base}${apiVersion}${userProfile}`,
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${accessToken}`
             },
             timeout: requestTimeout
         });
-        console.log(JSON.stringify(userProfileResponse.data, undefined, 4));
+
+        // console.log(JSON.stringify(userProfileResponse.data, undefined, 4));
         return userProfileResponse.data;
     }catch(error){
         invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);

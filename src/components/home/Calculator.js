@@ -32,11 +32,13 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
     const disableButtonsHandler = () => !(hasResponse && spendAmount);
 
     const calculateCryptoHandler = async (coin) => {
+        setHasResponse(false);
         const pricePerUnit = await endpointPriceData(spendCurrency.nameShort, coin.nameShort);
         const optionalCommission = parseFloat(await commissionDataRequest(accessToken));
         const providedAmount = parseFloat(`${spendAmount.replaceAll(',', '')}`);
         const amountToReceive = (providedAmount * (1 + optionalCommission/100) / pricePerUnit).toFixed(5);
         setReceiveAmount(amountToReceive);
+        setHasResponse(true)
     }
 
     const iconDecision = () => {
@@ -159,7 +161,6 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
                     // hasBorder
                     onPressHandler={async () => {
                         clearTimeout(calculationTimeout);
-                        setHasResponse(false);
                         // setReceiveCurrency(cryptoCurrencies[(cryptoCurrencies.indexOf(receiveCurrency) + 1) % cryptoCurrencies.length]);
                         setReceiveCurrency(cryptoCurrenciesCalculate[(cryptoCurrenciesCalculate.indexOf(receiveCurrency) + 1) % cryptoCurrenciesCalculate.length]);
                         setReceiveAmount(null);
@@ -168,11 +169,9 @@ export const Calculator = ({ modifyScrollAction, onFocusScroll }) => {
                             setTimeout(async () => {
                                 await calculateCryptoHandler(toBeChosenNext);
                             }, timeout));
-                        setHasResponse(true);
                     }}
                 />
             </View>
-
         </View>
     );
 }

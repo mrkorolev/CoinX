@@ -1,26 +1,71 @@
 {
   "cli": {
-    "version": ">= 5.6.0"
+    "version": ">= 5.9.1"
   },
   "build": {
     "development": {
-      "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "gradleCommand": ":app:assembleDebug"
+      },
+      "ios": {
+        "buildConfiguration": "Debug"
+      }
     },
     "preview": {
       "distribution": "internal"
     },
     "ios-simulator": {
       "ios": {
-        "simulator": true
+        "simulator": true,
+        "env": {
+          "EXPO_PUBLIC_BINANCE_BASE": "https://api.binance.com/",
+          "EXPO_PUBLIC_BINANCE_TICKER": "ticker/",
+          "EXPO_PUBLIC_BINANCE_API_V": "api/v3/",
+          "EXPO_PUBLIC_PAYONE_BASE": "https://payone.com.tr/",
+          "EXPO_PUBLIC_PAYONE_API_V": "api/v1/",
+          "EXPO_PUBLIC_PAYONE_AUTH": "auth/check/",
+          "EXPO_PUBLIC_DEPOSIT_HISTORY": "user/info/user-transactions",
+          "EXPO_PUBLIC_WALLET": "capital/transac/deposit/wallet",
+          "EXPO_PUBLIC_COMMISSION": "user/info/user-commission",
+          "EXPO_PUBLIC_CANCEL_TRANSACTION": "capital/transac/cancel/wallet",
+          "EXPO_PUBLIC_USER_PROFILE": "user/info/user-profile"
+        }
       }
     },
     "android-apk": {
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "env": {
+          "EXPO_PUBLIC_BINANCE_BASE": "https://api.binance.com/",
+          "EXPO_PUBLIC_BINANCE_TICKER": "ticker/",
+          "EXPO_PUBLIC_BINANCE_API_V": "api/v3/",
+          "EXPO_PUBLIC_PAYONE_BASE": "https://payone.com.tr/",
+          "EXPO_PUBLIC_PAYONE_API_V": "api/v1/",
+          "EXPO_PUBLIC_PAYONE_AUTH": "auth/check/",
+          "EXPO_PUBLIC_DEPOSIT_HISTORY": "user/info/user-transactions",
+          "EXPO_PUBLIC_WALLET": "capital/transac/deposit/wallet",
+          "EXPO_PUBLIC_COMMISSION": "user/info/user-commission",
+          "EXPO_PUBLIC_CANCEL_TRANSACTION": "capital/transac/cancel/wallet",
+          "EXPO_PUBLIC_USER_PROFILE": "user/info/user-profile"
+        }
       }
     },
-    "production": {}
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_BINANCE_BASE": "https://api.binance.com/",
+        "EXPO_PUBLIC_BINANCE_TICKER": "ticker/",
+        "EXPO_PUBLIC_BINANCE_API_V": "api/v3/",
+        "EXPO_PUBLIC_PAYONE_BASE": "https://payone.com.tr/",
+        "EXPO_PUBLIC_PAYONE_API_V": "api/v1/",
+        "EXPO_PUBLIC_PAYONE_AUTH": "auth/check/",
+        "EXPO_PUBLIC_DEPOSIT_HISTORY": "user/info/user-transactions",
+        "EXPO_PUBLIC_WALLET": "capital/transac/deposit/wallet",
+        "EXPO_PUBLIC_COMMISSION": "user/info/user-commission",
+        "EXPO_PUBLIC_CANCEL_TRANSACTION": "capital/transac/cancel/wallet",
+        "EXPO_PUBLIC_USER_PROFILE": "user/info/user-profile"
+      }
+    }
   },
   "submit": {
     "production": {}

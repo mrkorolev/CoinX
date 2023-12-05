@@ -25,7 +25,7 @@ export const SettingsScreen = ({navigation}) => {
     const [address, setAddress] = useState('---');
     const [email, setEmail] = useState('---');
     const [commission, setCommission] = useState('---');
-    const [enablePush, setEnablePush] = useState(false);
+    const [enablePush] = useState(false);
     const screen = 'screens.settings';
 
     useLayoutEffect(() => {

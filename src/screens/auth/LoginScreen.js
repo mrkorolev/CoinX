@@ -76,9 +76,6 @@ export const LoginScreen = () => {
                     isDisabled={loginDisabledHandler()}
                     onPress={async () => {
                         setHasResponse(false);
-                        console.log(`Username: ${username}`);
-                        console.log(`Password: ${password}`);
-
                         if(!validateInput(username, password)){
                             Alert.alert(i18n.t(`${screen}.invalid_credentials_title`), i18n.t(`${screen}.invalid_credentials_message`));
                             return;
@@ -86,9 +83,9 @@ export const LoginScreen = () => {
 
                         const response = await authenticateUser(username, password);
                         setHasResponse(true);
+
                         if(response && response.status === 200){
                             setAccessToken(response.data.access_token);
-                            console.log('LOGIN SUCCESSFUL (token saved)! Proceed to OTP!');
                             nav.navigate('Otp');
                         }
 
@@ -98,7 +95,7 @@ export const LoginScreen = () => {
                     }}
                 />
             </View>
-            <View style={{ flex: 0.45 }} />
+            <View style={{ flex: 0.35 }} />
         </View>
     );
 }
@@ -113,6 +110,7 @@ const styles = StyleSheet.create({
     title: {
         fontWeight: 'bold',
         marginVertical: hp('3%'),
-        fontSize: wp('8%')
+        fontSize: wp('6.5%'),
+        textAlign: 'left'
     }
 });

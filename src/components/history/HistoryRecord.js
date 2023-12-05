@@ -35,7 +35,7 @@ export const HistoryRecord = ({ notification, navigation }) => {
                 disabled={notification.transaction_status !== 0}
                 style={[styles.container, {backgroundColor: `${backgroundStatus}`}]}
                 onPress={() => navigation.navigate('QR_HISTORY', {
-                    walletData: notification.address,
+                    walletData: undefined,
                     referenceNumber: notification.id,
                     startTime: `${formatInput(date.getHours())}:${formatInput(date.getMinutes())}  ${formatInput(date.getDate())}/${formatInput(date.getMonth())}/${formatInput(date.getFullYear())}`,
                     networkData: `${notification.network}`,

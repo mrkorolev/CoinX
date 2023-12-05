@@ -39,13 +39,10 @@ export const OtpScreen = ({ navigation }) => {
                     isDisabled={otpDisabledHandler()}
                     onPress={ async () => {
                         setHasResponse(false);
-                        console.log(code);
-
                         const response = await otpVerification(accessToken, code);
                         setHasResponse(true);
 
                         if(response && response.status === 200){
-                            console.log('Verification process passed! Proceed to main navigator!');
                             navigation.navigate('Success');
                         }
 

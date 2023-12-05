@@ -63,18 +63,22 @@ export const QrScreen = ({ route, navigation }) => {
                         value={network}
                         icon={<FontAwesomeIcon size={wp('5.5%')} icon={faDiagramProject} color={theme.helperIconColor} />} />
 
-                    <TransactionDetail
-                        parameter={i18n.t(`${screen}.wallet_address`)}
-                        value={walletAddress}
-                        icon={
-                            <TouchableOpacity
-                                onPress={async () => {
-                                    await Clipboard.setStringAsync(walletAddress);
-                                    console.log('Clipboard set to: ' + walletAddress);
-                                }}>
-                                <FontAwesomeIcon size={wp('5.5%')} icon={faClipboard} color={theme.helperIconColor} />
-                            </TouchableOpacity>
-                        } />
+                    {
+                        walletAddress ?
+                            <TransactionDetail
+                                parameter={i18n.t(`${screen}.wallet_address`)}
+                                value={walletAddress}
+                                icon={
+                                    <TouchableOpacity
+                                        onPress={async () => {
+                                            await Clipboard.setStringAsync(walletAddress);
+                                            console.log('Clipboard set to: ' + walletAddress);
+                                        }}>
+                                        <FontAwesomeIcon size={wp('5.5%')} icon={faClipboard} color={theme.helperIconColor} />
+                                    </TouchableOpacity>
+                                } /> :
+                            <TransactionDetail parameter={undefined} value={undefined} icon={undefined} />
+                    }
                 </View>
 
                 <View style={styles.cancelButtonContainer}>

@@ -38,7 +38,7 @@ export const TabsNavigator = ({ navigation }) => {
             setAccessToken(undefined);
             clearTimeout(customTimeout);
             setCustomTimeout(undefined);
-            console.log('Cleared all timeout & token data!');
+            // console.log('Cleared all timeout & token data!');
         }
     }, []);
 

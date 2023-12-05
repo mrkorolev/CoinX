@@ -7,7 +7,7 @@ import { CustomButton } from "../../components/general/components/CustomButton";
 import { AppContext } from "../../config/context/AppContext";
 
 export const ProfileScreen = ({ route, navigation }) => {
-    const { theme, setAccessToken, customTimeout, setCustomTimeout } = useContext(AppContext);
+    const { theme } = useContext(AppContext);
     const { name, company, phone, email, address, commission } = route.params;
     const screen = 'screens.profile';
 

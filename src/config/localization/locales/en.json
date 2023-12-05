@@ -1,7 +1,7 @@
 {
   "screens": {
     "login": {
-      "title": "Welcome! Ready for your next adventure?",
+      "title": "Welcome to Payone Financial Technologies!",
       "email_placeholder": "Enter your email",
       "password_placeholder": "Enter your password",
       "button_text": "Login",

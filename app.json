@@ -15,25 +15,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.ediz.payone"
+      "supportsTablet": false,
+      "bundleIdentifier": "com.muntek.payone"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/app-icon.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mrkorolev.payone"
+      "package": "com.muntek.payone"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-localization"
-    ],
+    "plugins": [],
     "extra": {
       "eas": {
-        "projectId": "615cf7ce-0262-438b-a659-57061b3dc9a1"
+        "projectId": "173ca505-fb50-4830-a4d3-dbd986261cf7"
       }
     }
   }

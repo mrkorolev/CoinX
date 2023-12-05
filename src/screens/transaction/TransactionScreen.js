@@ -13,9 +13,7 @@ import { AppContext } from "../../config/context/AppContext";
 import { CustomIcon } from "../../components/general/components/CustomIcon";
 import { Tron } from "../../components/general/icons/Tron";
 import { useIsFocused } from "@react-navigation/native";
-import {Tether} from "../../components/general/icons/Tether";
-import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {faSpinner} from "@fortawesome/free-solid-svg-icons";
+import { Tether } from "../../components/general/icons/Tether";
 
 export const TransactionScreen = ({ navigation }) => {
     const { theme, accessToken } = useContext(AppContext);
@@ -219,6 +217,7 @@ export const TransactionScreen = ({ navigation }) => {
                             setTimeout(async () => {
                                 setRequestStatus(i18n.t(`${screen}.calculation_status`))
                                 await calculateWithCommissionHandler(toBeChosenNext);
+                                setRequestStatus('');
                                 setReadyToProceed(true);
                             }, timeout));
                     }}
