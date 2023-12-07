@@ -9,6 +9,7 @@ const requestTimeout = 15000;
 const base = process.env.EXPO_PUBLIC_PAYONE_BASE;
 const apiVersion = process.env.EXPO_PUBLIC_PAYONE_API_V;
 const auth = process.env.EXPO_PUBLIC_PAYONE_AUTH;
+const resetPassword = process.env.EXPO_PUBLIC_RESET_PASSWORD;
 const depositHistory = process.env.EXPO_PUBLIC_DEPOSIT_HISTORY;
 const wallet = process.env.EXPO_PUBLIC_WALLET;
 const commission = process.env.EXPO_PUBLIC_COMMISSION;
@@ -32,7 +33,7 @@ export const authenticateUser = async (username, password) => {
     try{
         const authenticationResponse = await axios({
             method: 'post',
-            url: `${process.env.EXPO_PUBLIC_PAYONE_BASE}${process.env.EXPO_PUBLIC_PAYONE_API_V}${process.env.EXPO_PUBLIC_PAYONE_AUTH}user`,
+            url: `${base}${apiVersion}${auth}user`,
             data: {
                 username: username,
                 password: password
@@ -192,6 +193,29 @@ export const userProfileVerification = async (accessToken) => {
 
         // console.log(JSON.stringify(userProfileResponse.data, undefined, 4));
         return userProfileResponse.data;
+    }catch(error){
+        invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
+    }
+    return null;
+}
+
+export const changePassword = async (email) => {
+    const request_error = 'request_errors.password_reset';
+    try{
+        const userProfileResponse = await axios({
+            method: 'post',
+            url: `${base}${apiVersion}${auth}${resetPassword}`,
+            data: {
+                email: email
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            timeout: requestTimeout
+        });
+
+        // console.log(JSON.stringify(userProfileResponse.data, undefined, 4));
+        return userProfileResponse;
     }catch(error){
         invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
     }

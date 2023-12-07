@@ -35,23 +35,23 @@ export const endpoint24hrData = async (cryptoCoins) => {
         const responseJson = await response.data;
 
         // Logging functionality in here:
-        const str = `${responseJson[0].symbol}, last price: ${parseFloat(responseJson[0].lastPrice).toFixed(2)} (${parseFloat(responseJson[0].priceChangePercent).toFixed(2)} %)`;
-
-        // Debug
-        console.log(completeUrl);
-        const date = new Date();
-        let time = "Latest Binance API call: "
-            + date.getHours() + ":"
-            + date.getMinutes() + ":" + date.getSeconds();
-        console.log(time);
-        responseJson.forEach(r => {
-            console.log(`${r.symbol}, last price: ${parseFloat(r.lastPrice).toFixed(2)} (${parseFloat(r.priceChangePercent).toFixed(2)} %)`);
-        });
-        console.log('---');
+        // const str = `${responseJson[0].symbol}, last price: ${parseFloat(responseJson[0].lastPrice).toFixed(2)} (${parseFloat(responseJson[0].priceChangePercent).toFixed(2)} %)`;
+        //
+        // // Debug
+        // console.log(completeUrl);
+        // const date = new Date();
+        // let time = "Latest Binance API call: "
+        //     + date.getHours() + ":"
+        //     + date.getMinutes() + ":" + date.getSeconds();
+        // console.log(time);
+        // responseJson.forEach(r => {
+        //     console.log(`${r.symbol}, last price: ${parseFloat(r.lastPrice).toFixed(2)} (${parseFloat(r.priceChangePercent).toFixed(2)} %)`);
+        // });
+        // console.log('---');
 
         return responseJson;
     }catch(error){
-        console.log(error);
+        // console.log(error);
     }
 };
 
@@ -60,7 +60,7 @@ export const endpointPriceData = async (baseCurrency, cryptoCurrency) => {
     const finalCryptoCurrency = (baseCurrency === 'USD' && cryptoCurrency === 'USDT') ? 'USDC' : cryptoCurrency;
 
     const completeUrl = `${base}${apiVersion}${ticker}price?symbol=${finalCryptoCurrency + finalBaseCurrency}`;
-    console.log(completeUrl);
+    // console.log(completeUrl);
     try{
         const response = await axios({
             method: 'get',
@@ -75,6 +75,6 @@ export const endpointPriceData = async (baseCurrency, cryptoCurrency) => {
         return parseFloat(data.price).toFixed(4);
     }catch(error){
         alert(`Something wrong with the request:\n${error}`);
-        console.log(error);
+        // console.log(error);
     }
 }

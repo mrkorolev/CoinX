@@ -68,32 +68,40 @@ export const LoginScreen = () => {
                         enterKey='done' />
                 </View>
 
-                <CustomButton
-                    text={i18n.t(`${screen}.button_text`)}
-                    textColor={theme.mainBtnTextColor}
-                    bgColor={theme.mainBtnBgColor}
-                    borderColor={theme.mainBtnBorderColor}
-                    isDisabled={loginDisabledHandler()}
-                    onPress={async () => {
-                        setHasResponse(false);
-                        if(!validateInput(username, password)){
-                            Alert.alert(i18n.t(`${screen}.invalid_credentials_title`), i18n.t(`${screen}.invalid_credentials_message`));
-                            return;
-                        }
+                <View style={{ gap: hp('2%') }}>
+                    <CustomButton
+                        text={i18n.t(`${screen}.login_text`)}
+                        textColor={theme.mainBtnTextColor}
+                        bgColor={theme.mainBtnBgColor}
+                        borderColor={theme.mainBtnBorderColor}
+                        isDisabled={loginDisabledHandler()}
+                        onPress={async () => {
+                            setHasResponse(false);
+                            if(!validateInput(username, password)){
+                                Alert.alert(i18n.t(`${screen}.invalid_credentials_title`), i18n.t(`${screen}.invalid_credentials_message`));
+                                return;
+                            }
 
-                        const response = await authenticateUser(username, password);
-                        setHasResponse(true);
+                            const response = await authenticateUser(username, password);
+                            setHasResponse(true);
 
-                        if(response && response.status === 200){
-                            setAccessToken(response.data.access_token);
-                            nav.navigate('Otp');
-                        }
-
-                        // DEBUG
-                        // setAccessToken('123123');
-                        // nav.navigate('Otp');
-                    }}
-                />
+                            if(response && response.status === 200){
+                                setAccessToken(response.data.access_token);
+                                nav.navigate('Otp');
+                            }
+                        }}
+                    />
+                    <CustomButton
+                        text={i18n.t(`${screen}.reset_password_text`)}
+                        textColor={theme.mainBtnTextColor}
+                        bgColor={theme.mainBtnBgColor}
+                        borderColor={theme.mainBtnBorderColor}
+                        isDisabled={false}
+                        onPress={() => {
+                            nav.navigate('Reset')
+                        }}
+                    />
+                </View>
             </View>
             <View style={{ flex: 0.35 }} />
         </View>

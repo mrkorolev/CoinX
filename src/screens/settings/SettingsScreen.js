@@ -26,11 +26,15 @@ export const SettingsScreen = ({navigation}) => {
     const [email, setEmail] = useState('---');
     const [commission, setCommission] = useState('---');
     const [enablePush] = useState(false);
+    const [hasResponse, setHasResponse] = useState(false);
     const screen = 'screens.settings';
+
+    const settingDisabledHandler = () => !(hasResponse)
 
     useLayoutEffect(() => {
         let requestUserData = async () => {
-            console.log('Re-render initiated!');
+            setHasResponse(true);
+            // console.log('Re-render initiated!');
             const userData = await userProfileVerification(accessToken);
             if(!userData) return;
             const commissionData = await commissionDataRequest(accessToken);
@@ -88,7 +92,7 @@ export const SettingsScreen = ({navigation}) => {
                                 borderRadius: wp('20%') * 50
                             }}
                     />}
-                    pressable />
+                    isDisabled={settingDisabledHandler()} />
             </View>
 
             <View style={{ gap: hp('2%') }}>
@@ -100,13 +104,16 @@ export const SettingsScreen = ({navigation}) => {
                             onValueToggle={() => {
                                 setTheme(() => themeName === 'light' ? appTheme.dark : appTheme.light);
                                 setThemeName((prev) => prev === 'light' ? 'dark' : 'light');
-                                console.log("Dark mode just turned on!!!");
+                                console.log("Dark mode just toggled!");
 
                         }}
                         />}
                         icon={<FontAwesomeIcon icon={funcSettings[0].icon} color={"white"} size={wp('4%')} />}
-                        bgColor={funcSettings[0].bgColor} />
+                        bgColor={funcSettings[0].bgColor}
+                        isDisabled={true}
+                        />
                     <Setting
+                        customStyle={{ opacity: 0.6 }}
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.notifications`)}</Text>}
                         component={<CustomToggle
                             value={enablePush}
@@ -119,12 +126,13 @@ export const SettingsScreen = ({navigation}) => {
                         onPressHandler={() => navigation.navigate('LANGUAGE')}
                         icon={<FontAwesomeIcon icon={funcSettings[2].icon} color={"white"} size={wp('4%')} />}
                         bgColor={funcSettings[2].bgColor}
-                        pressable
+                        isDisabled={settingDisabledHandler()}
                     />
                 </View>
 
-                <View style={[styles.settingsContainer, { backgroundColor: theme.settingGroupBgColor} ]}>
+                <View style={[styles.settingsContainer, { backgroundColor: theme.settingGroupBgColor }]}>
                     <Setting
+                        customStyle={{ opacity: 0.6 }}
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.terms_and_conditions`)}</Text>}
                         component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                         onPressHandler={() => navigation.navigate('TERMS_OF_USE')}
@@ -133,6 +141,7 @@ export const SettingsScreen = ({navigation}) => {
                         // pressable
                     />
                     <Setting
+                        customStyle={{ opacity: 0.6 }}
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.privacy_policy`)}</Text>}
                         component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                         onPressHandler={() => navigation.navigate('PRIVACY')}
@@ -141,6 +150,7 @@ export const SettingsScreen = ({navigation}) => {
                         // pressable
                     />
                     <Setting
+                        customStyle={{ opacity: 0.6 }}
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.about`)}</Text>}
                         component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                         onPressHandler={() => navigation.navigate('ABOUT')}

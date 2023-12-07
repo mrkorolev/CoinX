@@ -1,5 +1,6 @@
 {
   "expo": {
+    "owner": "muntek",
     "name": "Payone",
     "slug": "Payone",
     "version": "1.0.0",
@@ -31,7 +32,7 @@
     "plugins": [],
     "extra": {
       "eas": {
-        "projectId": "173ca505-fb50-4830-a4d3-dbd986261cf7"
+        "projectId": "74b7fbfe-4af0-4c32-b5d9-bc7db36ce5c8"
       }
     }
   }

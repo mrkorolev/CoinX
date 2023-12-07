@@ -7,7 +7,7 @@ export const CustomToggle = ({ value, onValueToggle }) => {
     const { theme } = useContext(AppContext);
 
     return (
-        <Switch style={ !onValueToggle && { opacity: 0.8 }}
+        <Switch style={ !onValueToggle }
             trackColor={{false: theme.toggleOffColor, true: theme.toggleOnColor}}
             thumbColor={theme.toggleThumbColor}
             disabled={!onValueToggle}

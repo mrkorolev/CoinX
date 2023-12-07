@@ -10,7 +10,6 @@ import { supportedLanguages } from "../../config/constants/languages";
 export const LanguageScreen = ({ navigation }) => {
 
     const { theme } = useContext(AppContext);
-    const [locale, setLocale] = useState(supportedLanguages[0]);
 
     const languageOptions = (languages) => {
         return languages.map(item => (
@@ -20,7 +19,6 @@ export const LanguageScreen = ({ navigation }) => {
                 onPress={() => {
                     navigation.goBack();
                     i18n.locale = item.locale;
-                    setLocale(item);
                 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ fontSize: wp('4%'), fontWeight: 'bold', color: theme.primaryContentColor }}>{item.language}</Text>

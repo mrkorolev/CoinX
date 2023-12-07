@@ -4,9 +4,18 @@
       "title": "Payone Finans Teknolojilerine Hoş Geldiniz!",
       "email_placeholder": "E-postanızı girin",
       "password_placeholder": "Şifrenizi girin",
-      "button_text": "Giriş Yap",
+      "login_text": "Giriş",
+      "reset_password_text": "Şifremi unuttum",
       "invalid_credentials_title": "Giriş Hatası",
       "invalid_credentials_message": "Geçersiz kimlik bilgileri! Tekrar deneyin!"
+    },
+    "reset_password": {
+      "title": "Şifremi unuttum",
+      "email_placeholder": "E-postanızı girin",
+      "description": "Şifreyi sıfırlamak için e-posta adresinizi girin",
+      "success_text": "E-posta gelen kutunuzu kontrol edin ve şifreyi sıfırlamak için talimatları izleyin",
+      "failure_text": "Üzgünüz şifreniz yenilenemedi",
+      "reset_text": "Gönder"
     },
     "otp": {
       "title": "OTP Doğrulama",
@@ -26,7 +35,8 @@
     },
     "history": {
       "screen_name": "Hesap Geçmişi",
-      "waiting_message": "Para yatırma geçmişini bekliyorum..."
+      "waiting_message": "Para yatırma geçmişini bekliyorum...",
+      "no_deposits_message": "Henüz para yatırmadınız"
     },
     "transaction": {
       "screen_name": "Yeni İşlem",
@@ -98,11 +108,15 @@
   "request_errors": {
     "login_request": {
       "reason": "Giriş İsteği",
-      "message": "Giriş işlemi gerçekleştirilirken bir hata oluştu! Uygulamayı kullanmak için kayıtlı bir kullanıcı olduğunuzdan emin olun."
+      "message": "\nGiriş işlemi gerçekleştirilirken bir hata oluştu! Uygulamayı kullanmak için kayıtlı bir kullanıcı olduğunuzdan emin olun."
+    },
+    "reset_password": {
+      "reason": "Şifremi unuttum",
+      "message": "\nE-postanıza şifre sıfırlama bağlantısı gönderilmeye çalışılırken bir hata oluştu. Yazılan e-postayı kontrol edin ve sorun devam ederse daha fazla rehberlik için destek ekibiyle iletişime geçin "
     },
     "otp_request": {
       "reason": "OTP Doğrulama İsteği",
-      "message": "OTP doğrulama işleminizi gerçekleştirirken bir hata oluştu! OTP'nizin geçerliliğini kontrol edin ve tekrar deneyin."
+      "message": "\nOTP doğrulama işleminizi gerçekleştirirken bir hata oluştu! OTP'nizin geçerliliğini kontrol edin ve tekrar deneyin."
     },
     "history_request": {
       "reason": "Mevduat Geçmişi",
@@ -110,7 +124,7 @@
     },
     "wallet_request": {
       "reason": "Cüzdan Bilgisi İsteği",
-      "message": "İşlem bilgisi istenirken bir hata oluştu! Çıkış yapmayı deneyin ve tekrar giriş yapmayı deneyin."
+      "message": "\nİşlem bilgisi istenirken bir hata oluştu! Çıkış yapmayı deneyin ve tekrar giriş yapmayı deneyin."
     },
     "commission_request": {
       "reason": "Komisyon Bilgileri",
@@ -136,3 +150,4 @@
     "message": "\nUygulamaya erişiminizin süresi doldu!"
   }
 }
+

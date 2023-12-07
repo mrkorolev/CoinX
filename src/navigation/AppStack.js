@@ -1,6 +1,7 @@
-import React, {useContext, useEffect} from 'react';
+import React, { useContext, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { LoginScreen } from '../screens/auth/LoginScreen';
+import { ResetScreen } from "../screens/auth/ResetScreen";
 import { OtpScreen } from '../screens/auth/OtpScreen';
 import { TabsNavigator } from './TabsNavigator';
 import { SuccessScreen } from "../screens/auth/SuccessScreen";
@@ -38,10 +39,19 @@ export const AppStack = () => {
                         headerTransparent: true
                     })}/>
                 <Stack.Screen
+                    name={'Reset'}
+                    component={ResetScreen}
+                    options={({navigation}) => ({
+                        headerTitle: '',
+                        headerTintColor: theme.primaryContentColor,
+                        headerTransparent: true,
+                        headerLeft: () => Platform.OS === 'ios' ?
+                            <CustomBackButton onPressHandler={() => navigation.goBack()}/> : undefined,
+                    })}/>
+                <Stack.Screen
                     name={'Otp'}
                     component={OtpScreen}
                     options={({navigation}) => ({
-                        gestureEnabled: false,
                         headerTitle: '',
                         headerTintColor: theme.primaryContentColor,
                         headerTransparent: true,

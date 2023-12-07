@@ -25,6 +25,7 @@
           "EXPO_PUBLIC_PAYONE_BASE": "https://payone.com.tr/",
           "EXPO_PUBLIC_PAYONE_API_V": "api/v1/",
           "EXPO_PUBLIC_PAYONE_AUTH": "auth/check/",
+          "EXPO_PUBLIC_RESET_PASSWORD": "email",
           "EXPO_PUBLIC_DEPOSIT_HISTORY": "user/info/user-transactions",
           "EXPO_PUBLIC_WALLET": "capital/transac/deposit/wallet",
           "EXPO_PUBLIC_COMMISSION": "user/info/user-commission",
@@ -43,6 +44,7 @@
           "EXPO_PUBLIC_PAYONE_BASE": "https://payone.com.tr/",
           "EXPO_PUBLIC_PAYONE_API_V": "api/v1/",
           "EXPO_PUBLIC_PAYONE_AUTH": "auth/check/",
+          "EXPO_PUBLIC_RESET_PASSWORD": "email",
           "EXPO_PUBLIC_DEPOSIT_HISTORY": "user/info/user-transactions",
           "EXPO_PUBLIC_WALLET": "capital/transac/deposit/wallet",
           "EXPO_PUBLIC_COMMISSION": "user/info/user-commission",
@@ -59,6 +61,7 @@
         "EXPO_PUBLIC_PAYONE_BASE": "https://payone.com.tr/",
         "EXPO_PUBLIC_PAYONE_API_V": "api/v1/",
         "EXPO_PUBLIC_PAYONE_AUTH": "auth/check/",
+        "EXPO_PUBLIC_RESET_PASSWORD": "email",
         "EXPO_PUBLIC_DEPOSIT_HISTORY": "user/info/user-transactions",
         "EXPO_PUBLIC_WALLET": "capital/transac/deposit/wallet",
         "EXPO_PUBLIC_COMMISSION": "user/info/user-commission",
@@ -68,6 +71,12 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "",
+        "ascAppId": "",
+        "appleTeamId": ""
+      }
+    }
   }
 }

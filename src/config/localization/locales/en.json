@@ -4,9 +4,18 @@
       "title": "Welcome to Payone Financial Technologies!",
       "email_placeholder": "Enter your email",
       "password_placeholder": "Enter your password",
-      "button_text": "Login",
+      "login_text": "Login",
+      "reset_password_text": "Forgot password?",
       "invalid_credentials_title": "Login Error",
       "invalid_credentials_message": "Invalid credentials format! Try again!"
+    },
+    "reset_password": {
+      "title": "Password Reset",
+      "email_placeholder": "Enter your email",
+      "description": "Provide your email for which you want to reset the password",
+      "success_text": "Check your inbox and follow instructions to reset the password",
+      "failure_text": "Unable to reset password at that time",
+      "reset_text": "Submit"
     },
     "otp": {
       "title": "OTP Verification",
@@ -26,7 +35,8 @@
     },
     "history": {
       "screen_name": "Deposit History",
-      "waiting_message": "Waiting for deposit history..."
+      "waiting_message": "Waiting for deposit history...",
+      "no_deposits_message": "You haven't made any deposits yet"
     },
     "transaction": {
       "screen_name": "New Transaction",
@@ -99,6 +109,10 @@
     "login_request": {
       "reason": "Login",
       "message": "\nAn error occurred while trying to execute login operation! Make sure you are a registered user in order to use the application "
+    },
+    "password_reset": {
+      "reason": "Password Reset",
+      "message": "\nAn error occurred while trying to send a password reset link to your email. Check the typed email and if the issue persists contact support for further guidance "
     },
     "otp_request": {
       "reason": "OTP Verification",

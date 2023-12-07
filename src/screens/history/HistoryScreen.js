@@ -12,6 +12,7 @@ export const HistoryScreen = ({ navigation }) => {
     const [history, setHistory] = useState();
     const [refreshing, setRefreshing] = useState(false);
     const screen = 'screens.history';
+    const [statusText, setStatusText] = useState(i18n.t(`${screen}.waiting_message`));
 
     useEffect(() => {
         navigation.addListener('focus', () => {
@@ -31,10 +32,13 @@ export const HistoryScreen = ({ navigation }) => {
 
     const getDepositHistoryData = async () => {
         const historyResponse = await depositHistoryRequest(accessToken);
-        console.log(historyResponse.data);
-        if(historyResponse && historyResponse.status === 200){
+        // console.log(historyResponse.data);
+        if(historyResponse && historyResponse.data.size > 0 && historyResponse.status === 200){
             setHistory(historyResponse.data);
+        } else {
+            setStatusText(i18n.t(`${screen}.no_deposits_message`));
         }
+
         return historyResponse.status;
     }
 
@@ -63,7 +67,7 @@ export const HistoryScreen = ({ navigation }) => {
                     }>
                     {createNotifications(history)}
                 </ScrollView> :
-                <Text style={{color: theme.primaryContentColor, fontSize: wp('3.5%')}}>{i18n.t(`${screen}.waiting_message`)}</Text>
+                <Text style={{color: theme.primaryContentColor, fontSize: wp('4.5%')}}>{statusText}</Text>
             }
         </View>
     );

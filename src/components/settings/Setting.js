@@ -2,9 +2,9 @@ import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
-export const Setting = ({customStyle, icon, bgColor, title, component, pressable, onPressHandler }) => {
+export const Setting = ({customStyle, icon, bgColor, title, component, isDisabled, onPressHandler }) => {
     return (
-        <TouchableOpacity style={styles.layout} disabled={!pressable} onPress={onPressHandler}>
+        <TouchableOpacity style={styles.layout} disabled={isDisabled} onPress={onPressHandler}>
             <View style={[styles.iconTitleContainer, customStyle]}>
                 <View style={[styles.iconContainer, { backgroundColor: bgColor }]}>
                     {icon}

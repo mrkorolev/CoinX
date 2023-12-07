@@ -50,7 +50,7 @@ export const ExchangeRatesData = () => {
 
     // Modification of the observed object and it's conversion to Exchange Rates
     useEffect(() => {
-        console.log("Rerender initiated...");
+        // console.log("Rerender initiated...");
         let interval = undefined
         if(active){
             interval = setInterval(async () => {
