@@ -112,7 +112,7 @@
     },
     "reset_password": {
       "reason": "Şifremi unuttum",
-      "message": "\nE-postanıza şifre sıfırlama bağlantısı gönderilmeye çalışılırken bir hata oluştu. Yazılan e-postayı kontrol edin ve sorun devam ederse daha fazla rehberlik için destek ekibiyle iletişime geçin "
+      "message": "\nE-postanıza şifre sıfırlama bağlantısı gönderilmeye çalışılırken bir hata oluştu. Yazılan e-postayı kontrol edin ve sorun devam ederse daha fazla bilgi için destek ekibiyle iletişime geçin "
     },
     "otp_request": {
       "reason": "OTP Doğrulama İsteği",

@@ -39,15 +39,15 @@ export const OtpScreen = ({ navigation }) => {
                     isDisabled={otpDisabledHandler()}
                     onPress={ async () => {
                         setHasResponse(false);
-                        // const response = await otpVerification(accessToken, code);
+                        const response = await otpVerification(accessToken, code);
                         setHasResponse(true);
 
-                        // if(response && response.status === 200){
-                        //     navigation.navigate('Success');
-                        // }
+                        if(response && response.status === 200){
+                            navigation.navigate('Success');
+                        }
 
                         // DEBUG
-                        navigation.navigate('Success');
+                        // navigation.navigate('Success');
                     }} />
             </View>
 

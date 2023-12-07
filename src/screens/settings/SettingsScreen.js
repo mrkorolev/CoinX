@@ -33,11 +33,12 @@ export const SettingsScreen = ({navigation}) => {
 
     useLayoutEffect(() => {
         let requestUserData = async () => {
-            setHasResponse(true);
+
             // console.log('Re-render initiated!');
             const userData = await userProfileVerification(accessToken);
             if(!userData) return;
             const commissionData = await commissionDataRequest(accessToken);
+            setHasResponse(true);
 
             setName(userData.name);
             setCompany(userData.company);
@@ -104,8 +105,7 @@ export const SettingsScreen = ({navigation}) => {
                             onValueToggle={() => {
                                 setTheme(() => themeName === 'light' ? appTheme.dark : appTheme.light);
                                 setThemeName((prev) => prev === 'light' ? 'dark' : 'light');
-                                console.log("Dark mode just toggled!");
-
+                                // console.log("Dark mode just toggled!");
                         }}
                         />}
                         icon={<FontAwesomeIcon icon={funcSettings[0].icon} color={"white"} size={wp('4%')} />}
@@ -119,7 +119,9 @@ export const SettingsScreen = ({navigation}) => {
                             value={enablePush}
                         />}
                         icon={<FontAwesomeIcon icon={funcSettings[1].icon} color={"white"} size={wp('4%')} />}
-                        bgColor={funcSettings[1].bgColor} />
+                        bgColor={funcSettings[1].bgColor}
+                        isDisabled={true}
+                    />
                     <Setting
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.language`)}</Text>}
                         component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
@@ -138,7 +140,7 @@ export const SettingsScreen = ({navigation}) => {
                         onPressHandler={() => navigation.navigate('TERMS_OF_USE')}
                         icon={<FontAwesomeIcon icon={descSettings[0].icon} color={"white"} size={wp('4%')} />}
                         bgColor={descSettings[0].bgColor}
-                        // pressable
+                        isDisabled={true}
                     />
                     <Setting
                         customStyle={{ opacity: 0.6 }}
@@ -147,7 +149,7 @@ export const SettingsScreen = ({navigation}) => {
                         onPressHandler={() => navigation.navigate('PRIVACY')}
                         icon={<FontAwesomeIcon icon={descSettings[1].icon} color={"white"} size={wp('4%')} />}
                         bgColor={descSettings[1].bgColor}
-                        // pressable
+                        isDisabled={true}
                     />
                     <Setting
                         customStyle={{ opacity: 0.6 }}
@@ -156,7 +158,7 @@ export const SettingsScreen = ({navigation}) => {
                         onPressHandler={() => navigation.navigate('ABOUT')}
                         icon={<FontAwesomeIcon icon={descSettings[2].icon} color={"white"} size={wp('4%')} />}
                         bgColor={descSettings[2].bgColor}
-                        // pressable
+                        isDisabled={true}
                     />
                 </View>
             </View>
