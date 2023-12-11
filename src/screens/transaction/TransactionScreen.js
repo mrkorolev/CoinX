@@ -90,7 +90,7 @@ export const TransactionScreen = ({ navigation }) => {
         setReceiveAmount(amountToReceive);
         setRate(pricePerUnit);
         setReadyToProceed(true);
-        console.log(network.networkCode);
+        // console.log(network.networkCode);
 
         setHasResponse(true);
     }
@@ -270,7 +270,7 @@ export const TransactionScreen = ({ navigation }) => {
                                         style: 'default',
                                         onPress: async () => {
                                             const finalSpendAmount = parseFloat(spendAmount.replaceAll(',', ''));
-                                            transactionDebug(network, finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
+                                            // transactionDebug(network, finalSpendAmount * (1 + commission/100), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission);
 
                                             // DEBUG
                                             // navigation.navigate('QR_DETAILS', {

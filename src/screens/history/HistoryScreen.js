@@ -32,8 +32,8 @@ export const HistoryScreen = ({ navigation }) => {
 
     const getDepositHistoryData = async () => {
         const historyResponse = await depositHistoryRequest(accessToken);
-        // console.log(historyResponse.data);
-        if(historyResponse && historyResponse.data.size > 0 && historyResponse.status === 200){
+
+        if(historyResponse && historyResponse.status === 200){
             setHistory(historyResponse.data);
         } else {
             setStatusText(i18n.t(`${screen}.no_deposits_message`));
@@ -44,7 +44,7 @@ export const HistoryScreen = ({ navigation }) => {
 
     return (
         <View style={[styles.container, { backgroundColor: theme.screenBgColor }]}>
-            {history ?
+            { history ?
                 <ScrollView
                     indicatorStyle={themeName === 'light' ? 'black' : 'white'}
                     showsVerticalScrollIndicator
@@ -65,7 +65,7 @@ export const HistoryScreen = ({ navigation }) => {
                             }
                         }} />
                     }>
-                    {createNotifications(history)}
+                    { createNotifications(history) }
                 </ScrollView> :
                 <Text style={{color: theme.primaryContentColor, fontSize: wp('4.5%')}}>{statusText}</Text>
             }

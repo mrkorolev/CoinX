@@ -69,6 +69,7 @@ export const SettingsScreen = ({navigation}) => {
                 backgroundColor: theme.settingGroupBgColor,
             }]}>
                 <Setting
+                    isDisabled={settingDisabledHandler()}
                     customStyle={{ paddingLeft: wp('5%'), gap: wp('9%'), marginVertical: hp('1.0%') }}
                     title={(
                         <View style={styles.profileSetting}>
@@ -93,12 +94,13 @@ export const SettingsScreen = ({navigation}) => {
                                 borderRadius: wp('20%') * 50
                             }}
                     />}
-                    isDisabled={settingDisabledHandler()} />
+                     />
             </View>
 
             <View style={{ gap: hp('2%') }}>
                 <View style={[styles.settingsContainer, { backgroundColor: theme.settingGroupBgColor}]}>
                     <Setting
+                        isDisabled={true}
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.dark_mode`)}</Text>}
                         component={<CustomToggle
                             value={themeName === 'dark'}
@@ -110,55 +112,54 @@ export const SettingsScreen = ({navigation}) => {
                         />}
                         icon={<FontAwesomeIcon icon={funcSettings[0].icon} color={"white"} size={wp('4%')} />}
                         bgColor={funcSettings[0].bgColor}
-                        isDisabled={true}
                         />
                     <Setting
                         customStyle={{ opacity: 0.6 }}
+                        isDisabled={true}
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.notifications`)}</Text>}
-                        component={<CustomToggle
-                            value={enablePush}
-                        />}
+                        component={<CustomToggle value={enablePush} />}
                         icon={<FontAwesomeIcon icon={funcSettings[1].icon} color={"white"} size={wp('4%')} />}
                         bgColor={funcSettings[1].bgColor}
-                        isDisabled={true}
+
                     />
                     <Setting
+                        isDisabled={settingDisabledHandler()}
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.language`)}</Text>}
                         component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                         onPressHandler={() => navigation.navigate('LANGUAGE')}
                         icon={<FontAwesomeIcon icon={funcSettings[2].icon} color={"white"} size={wp('4%')} />}
                         bgColor={funcSettings[2].bgColor}
-                        isDisabled={settingDisabledHandler()}
                     />
                 </View>
 
                 <View style={[styles.settingsContainer, { backgroundColor: theme.settingGroupBgColor }]}>
                     <Setting
                         customStyle={{ opacity: 0.6 }}
+                        isDisabled={true}
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.terms_and_conditions`)}</Text>}
                         component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                         onPressHandler={() => navigation.navigate('TERMS_OF_USE')}
                         icon={<FontAwesomeIcon icon={descSettings[0].icon} color={"white"} size={wp('4%')} />}
                         bgColor={descSettings[0].bgColor}
-                        isDisabled={true}
                     />
                     <Setting
-                        customStyle={{ opacity: 0.6 }}
+                        // customStyle={{ opacity: 0.6 }}
+                        // isDisabled={true}
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.privacy_policy`)}</Text>}
                         component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                         onPressHandler={() => navigation.navigate('PRIVACY')}
                         icon={<FontAwesomeIcon icon={descSettings[1].icon} color={"white"} size={wp('4%')} />}
                         bgColor={descSettings[1].bgColor}
-                        isDisabled={true}
+
                     />
                     <Setting
                         customStyle={{ opacity: 0.6 }}
+                        isDisabled={true}
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.about`)}</Text>}
                         component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                         onPressHandler={() => navigation.navigate('ABOUT')}
                         icon={<FontAwesomeIcon icon={descSettings[2].icon} color={"white"} size={wp('4%')} />}
                         bgColor={descSettings[2].bgColor}
-                        isDisabled={true}
                     />
                 </View>
             </View>

@@ -99,7 +99,10 @@
       "screen_name": "Terms and Conditions"
     },
     "privacy_policy": {
-      "screen_name": "Privacy Policy"
+      "screen_name": "Privacy Policy",
+      "message1": "At Muntek, we understand the importance of privacy in today's digital landscape. Your data is valuable, and we take its protection seriously.",
+      "message2": "When it comes to our privacy practices they're about robust measures and constant vigilance. We strive to be as transparent as possible about how we handle your information, ensuring you have the facts you need.",
+      "message3": "All the necessary information can be found at the following link:"
     },
     "about": {
       "screen_name": "About"

@@ -99,7 +99,10 @@
       "screen_name": "Kullanım Koşulları"
     },
     "privacy_policy": {
-      "screen_name": "Gizlilik Politikası"
+      "screen_name": "Gizlilik Politikası",
+      "message1": "Muntek olarak, günümüzün dijital ortamında gizliliğin önemini anlıyoruz. Verileriniz değerlidir ve korunmasını ciddiye alıyoruz.",
+      "message2": "Gizlilik uygulamalarımız söz konusu olduğunda, sağlam önlemler ve sürekli tetikte olma söz konusudur. Bilgilerinizi nasıl işlediğimiz konusunda mümkün olduğunca şeffaf olmaya ve ihtiyacınız olan gerçeklere sahip olmanızı sağlamaya çalışıyoruz.",
+      "message3": "Gerekli tüm bilgileri aşağıdaki bağlantıda bulabilirsiniz:"
     },
     "about": {
       "screen_name": "Hakkında"
