@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { AppContext } from "../../../config/context/AppContext";
 
-export const TransactionDetail = ({ parameter, value, icon }) => {
+export const TransactionDetail = ({ parameter, value, icon, selectable }) => {
 
     const { theme } = useContext(AppContext);
 
@@ -11,7 +11,7 @@ export const TransactionDetail = ({ parameter, value, icon }) => {
         <View style={{ flexDirection: 'row' }}>
             <View style={styles.detailsLayout}>
                 <Text style={[styles.detailsTitle, { color: theme.primaryContentColor }]}>{parameter}</Text>
-                <Text style={[styles.detailsData, { color: theme.qrInformationColor }]}>{value}</Text>
+                <Text style={[styles.detailsData, { color: theme.qrInformationColor }]} selectable={selectable}>{value}</Text>
             </View>
             <View style={{ flex: 0.15 }} />
             {icon}

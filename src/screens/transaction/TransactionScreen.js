@@ -180,7 +180,7 @@ export const TransactionScreen = ({ navigation }) => {
                     operation={i18n.t(`${screen}.receive`)}
                     chosenCurrencyName={receiveCurrency.nameShort}
                     chosenCurrencyIcon={iconDecision()}
-                    onPressHandler={async () => {
+                    onPressHandler={ async () => {
                         setRequestStatus('');
                         clearTimeout(calculationTimeout);
                         setReceiveAmount(undefined);
@@ -255,7 +255,6 @@ export const TransactionScreen = ({ navigation }) => {
 
                                 await calculateWithCommissionHandler(receiveCurrency);
                             } else {
-
                                 Alert.alert(i18n.t(`${screen}.qr_approval_title`), i18n.t(`${screen}.qr_approval_message`), [
                                     {
                                         text: i18n.t(`${screen}.qr_approval_cancel`),
@@ -282,14 +281,14 @@ export const TransactionScreen = ({ navigation }) => {
                                             const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
                                             const formatInput = (input) => input < 10 ? `0${input}` : input;
                                             const startDate = new Date(parseInt(walletData.start_timestamp) * 1000);
-
+                                            console.log(walletData.address);
                                             setHasResponse(true);
                                             navigation.navigate('QR_DETAILS', {
                                                 walletData: walletData.address,
                                                 referenceNumber: walletData.transaction_id,
                                                 startTime: `${formatInput(startDate.getHours())}:${formatInput(startDate.getMinutes())}  ${formatInput(startDate.getDate())}/${formatInput(startDate.getMonth())}/${formatInput(startDate.getFullYear())}`,
                                                 networkData: `${network.networkCode}`,
-                                                depositStatus: 'Pending'
+                                                walletVisible: true
                                             });
                                         }
                                     }]);

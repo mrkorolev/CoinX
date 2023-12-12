@@ -7,12 +7,12 @@ import { depositHistoryRequest } from "../../services/payone";
 import { i18n } from "../../config/localization/i18n";
 
 export const HistoryScreen = ({ navigation }) => {
-
+    const screen = 'screens.history';
     const { theme, themeName, accessToken } = useContext(AppContext);
     const [history, setHistory] = useState();
     const [refreshing, setRefreshing] = useState(false);
-    const screen = 'screens.history';
     const [statusText, setStatusText] = useState(i18n.t(`${screen}.waiting_message`));
+
 
     useEffect(() => {
         navigation.addListener('focus', () => {

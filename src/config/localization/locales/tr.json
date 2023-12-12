@@ -62,6 +62,7 @@
       "network": "Ağ",
       "reference_number": "Referans sayı",
       "start_time": "İşlem başlangıç zamanı",
+      "clipboard_message": "Kopyalandı!",
       "cancel_title": "işlemi iptal et",
       "warning_title": "İşlemi İptal Et",
       "warning_message": "Bu işlemi iptal etmek istediğinizden emin misiniz?",

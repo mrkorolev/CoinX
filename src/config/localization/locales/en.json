@@ -62,6 +62,7 @@
       "network": "Network",
       "reference_number": "Reference number",
       "start_time": "Transaction start",
+      "clipboard_message": "Copied!",
       "cancel_title": "cancel transaction",
       "warning_title": "Cancel Transaction",
       "warning_message": "Are you sure you want to cancel this transaction?",

@@ -72,6 +72,11 @@
   },
   "submit": {
     "production": {
+      "ios": {
+        "appleId": "alpertunasatis@icloud.com",
+        "ascAppId": "6473802534",
+        "appleTeamId": "5BRXG8X4SH"
+      }
     }
   }
 }

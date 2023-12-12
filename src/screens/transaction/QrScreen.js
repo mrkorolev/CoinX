@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, StyleSheet, TouchableOpacity, Dimensions, Alert, Platform } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Alert, Platform } from 'react-native';
 import * as Clipboard from 'expo-clipboard';
-import { QrCode } from '../../components/transaction/qr/QrCode';
+import { QrCodeData } from '../../components/transaction/qr/QrCodeData';
 import { TransactionDetail } from '../../components/transaction/qr/TransactionDetail';
 import { i18n } from "../../config/localization/i18n";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -9,41 +9,36 @@ import { CustomButton } from "../../components/general/components/CustomButton";
 import { cancelTransactionRequest } from "../../services/payone";
 import { AppContext } from "../../config/context/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {faArrowRightArrowLeft, faClipboard, faDiagramProject, faHashtag} from "@fortawesome/free-solid-svg-icons";
-import {faClock, faFileLines} from "@fortawesome/free-regular-svg-icons";
-import Plaftorm from "expo-modules-core/src/Platform";
+import { faClipboard, faDiagramProject, faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
 
 export const QrScreen = ({ route, navigation }) => {
     const { theme, accessToken } = useContext(AppContext);
-    const screen = 'screens.qr_code';
-
-    const [walletAddress, setWalletAddress] = useState('');
     const [network, setNetwork] = useState('');
     const [referenceNo, setReferenceNo] = useState('');
     const [startDate, setStartDate] = useState('');
-    // const [status, setStatus] = useState();
     const [hasResponse, setHasResponse] = useState(true);
-    const { walletData, networkData, startTime, referenceNumber, depositStatus } = route.params;
+    const [clipboardText, setClipboardText] = useState('');
+    const { walletData, networkData, startTime, referenceNumber, walletVisible } = route.params;
+    const screen = 'screens.qr_code';
 
     const qrDisabledHandler = () => !(hasResponse);
 
     useEffect(() => {
-        setWalletAddress(walletData);
         setNetwork(networkData);
         setStartDate(startTime);
         setReferenceNo(referenceNumber);
-        // setStatus(depositStatus);
     }, []);
 
     return (
         <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
-            <QrCode
-                wallet={walletAddress}
+            <QrCodeData
+                wallet={walletData}
                 warning={i18n.t(`${screen}.warning`)} />
 
             <View style={styles.separator} />
 
-            <View style={{ gap: hp(Platform.OS === 'ios' ? '7%' : '2%') }}>
+            <View style={{ gap: hp(Platform.OS === 'ios' ? '2.5%' : '2%') }}>
                 <View style={styles.detailsContainer}>
 
                     <TransactionDetail
@@ -64,15 +59,21 @@ export const QrScreen = ({ route, navigation }) => {
                         icon={<FontAwesomeIcon size={wp('5.5%')} icon={faDiagramProject} color={theme.helperIconColor} />} />
 
                     {
-                        walletAddress ?
-                            <TransactionDetail
+                        walletVisible ?
+                            <TransactionDetail selectable
                                 parameter={i18n.t(`${screen}.wallet_address`)}
-                                value={walletAddress}
+                                value={walletData}
                                 icon={
                                     <TouchableOpacity
                                         onPress={async () => {
-                                            await Clipboard.setStringAsync(walletAddress);
-                                            console.log('Clipboard set to: ' + walletAddress);
+                                            await Clipboard.setStringAsync(walletData);
+                                            // Should make the text visible here!
+                                            setClipboardText(i18n.t(`${screen}.clipboard_message`))
+                                            setTimeout(() => {
+                                                setClipboardText('');
+                                            }, 2000)
+
+                                            // console.log('Clipboard set to: ' + walletData);
                                         }}>
                                         <FontAwesomeIcon size={wp('5.5%')} icon={faClipboard} color={theme.helperIconColor} />
                                     </TouchableOpacity>
@@ -80,6 +81,8 @@ export const QrScreen = ({ route, navigation }) => {
                             <TransactionDetail parameter={undefined} value={undefined} icon={undefined} />
                     }
                 </View>
+
+                <Text style={[styles.clipboard, { color: theme.primaryContentColor }]}>{clipboardText}</Text>
 
                 <View style={styles.cancelButtonContainer}>
                     <CustomButton
@@ -133,6 +136,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightgray',
         alignItems: 'center',
         marginVertical: hp('1%')
+    },
+    clipboard: {
+        height: hp('2.5%'),
+        alignSelf: 'center',
+        fontSize: wp('3.5%'),
+        paddingRight: wp('2%')
     },
     cancelButtonContainer: {
         paddingHorizontal: wp('5%'),

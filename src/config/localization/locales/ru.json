@@ -62,6 +62,7 @@
       "network": "Сеть",
       "reference_number": "Реферальный номер",
       "start_time": "Начало транзакции",
+      "clipboard_message": "Скопировано!",
       "cancel_title": "отмена депозита",
       "warning_title": "Отмена Депозита",
       "warning_message": "Вы уверены в отмене выполнение данного депозита?",

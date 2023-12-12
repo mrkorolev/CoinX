@@ -32,15 +32,14 @@ export const HistoryRecord = ({ notification, navigation }) => {
     return (
         <View>
             <TouchableOpacity
-                disabled={notification.transaction_status !== 0}
+                disabled={ notification.transaction_status !== 0 }
                 style={[styles.container, {backgroundColor: `${backgroundStatus}`}]}
                 onPress={() => navigation.navigate('QR_HISTORY', {
-                    walletData: undefined,
+                    walletData: notification.address,
                     referenceNumber: notification.id,
                     startTime: `${formatInput(date.getHours())}:${formatInput(date.getMinutes())}  ${formatInput(date.getDate())}/${formatInput(date.getMonth())}/${formatInput(date.getFullYear())}`,
                     networkData: `${notification.network}`,
-                    depositStatus: notification.transaction_status,
-
+                    walletVisible: false
                 })}>
                 <FontAwesomeIcon size={wp('6%')} icon={icon} color={theme.primaryContentColor}  />
                 <View style={styles.statusMessageContainer}>
