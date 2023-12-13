@@ -106,7 +106,9 @@
       "message3": "All the necessary information can be found at the following link:"
     },
     "about": {
-      "screen_name": "About"
+      "screen_name": "About Us",
+      "message1": "Payone v. 1.0.0",
+      "message2": "Powered by MUNTEK"
     }
   },
   "request_errors": {

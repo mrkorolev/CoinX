@@ -153,8 +153,8 @@ export const SettingsScreen = ({navigation}) => {
 
                     />
                     <Setting
-                        customStyle={{ opacity: 0.6 }}
-                        isDisabled={true}
+                        // customStyle={{ opacity: 0.6 }}
+                        // isDisabled={true}
                         title={<Text style={[styles.settingTitle, { color: theme.settingTitleColor }]}>{i18n.t(`${screen}.about`)}</Text>}
                         component={<FontAwesomeIcon icon={faChevronRight} color={theme.settingNavIconColor} />}
                         onPressHandler={() => navigation.navigate('ABOUT')}

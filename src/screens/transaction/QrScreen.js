@@ -97,7 +97,7 @@ export const QrScreen = ({ route, navigation }) => {
                                 text: i18n.t(`${screen}.deny_message`),
                                 style: 'default',
                                 onPress: () => {
-                                    console.log('Not cancelling current transaction!');
+                                    // console.log('Not cancelling current transaction!');
                                     setHasResponse(true);
                                 }
                             },
@@ -106,7 +106,7 @@ export const QrScreen = ({ route, navigation }) => {
                                     style: 'destructive',
                                     onPress: async () => {
 
-                                        const cancelStatus = await cancelTransactionRequest(accessToken, walletAddress);
+                                        const cancelStatus = await cancelTransactionRequest(accessToken, walletData);
                                         if(cancelStatus){
                                             Alert.alert(i18n.t(`${screen}.cancel_success_title`), i18n.t(`${screen}.cancel_success_message`));
                                             navigation.goBack();

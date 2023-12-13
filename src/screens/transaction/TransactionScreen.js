@@ -281,7 +281,7 @@ export const TransactionScreen = ({ navigation }) => {
                                             const walletData = await walletDataRequest(accessToken, spendAmount.replaceAll(',', ''), spendCurrency.nameShort, receiveAmount, receiveCurrency.nameShort, rate, commission, network.networkCode);
                                             const formatInput = (input) => input < 10 ? `0${input}` : input;
                                             const startDate = new Date(parseInt(walletData.start_timestamp) * 1000);
-                                            console.log(walletData.address);
+                                            // console.log(walletData.address);
                                             setHasResponse(true);
                                             navigation.navigate('QR_DETAILS', {
                                                 walletData: walletData.address,
