@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     warningStyle: {
         textAlign: 'center',
         padding: wp('5%'),
-        fontSize: wp('3.5%')
+        fontSize: wp('3.5%'),
+        fontWeight: 'bold'
     },
 });

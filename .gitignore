@@ -7,7 +7,7 @@ bare-apps
 # Environment (root)
 .env
 
-/ios
+#/ios
 #/android
 # macOS
 .DS_Store

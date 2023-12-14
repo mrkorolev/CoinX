@@ -95,6 +95,7 @@ export const depositHistoryRequest = async (accessToken) => {
 
         // console.log(JSON.stringify(historyResponse.data, undefined, 4));
 
+
         return historyResponse;
     }catch(error){
         invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);

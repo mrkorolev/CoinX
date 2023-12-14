@@ -58,6 +58,7 @@
     "qr_code": {
       "screen_name": "QR Code",
       "warning": "QR code and Wallet number are to be used for one transaction only. Please do not use the same wallet information for any other transaction.",
+      "transaction_amount": "Transaction amount",
       "wallet_address": "Wallet Address",
       "network": "Network",
       "reference_number": "Reference number",

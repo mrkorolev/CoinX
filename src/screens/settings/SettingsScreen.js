@@ -35,10 +35,15 @@ export const SettingsScreen = ({navigation}) => {
         let requestUserData = async () => {
 
             // console.log('Re-render initiated!');
+            // const userData = await userProfileVerification(accessToken);
             const userData = await userProfileVerification(accessToken);
-            if(!userData) return;
             const commissionData = await commissionDataRequest(accessToken);
-            setHasResponse(true);
+            if(!userData){
+                return;
+            }
+            if(!commissionData){
+                return;
+            }
 
             setName(userData.name);
             setCompany(userData.company);
@@ -48,6 +53,7 @@ export const SettingsScreen = ({navigation}) => {
             setCommission(commissionData !== null ? commissionData : '---');
         }
         requestUserData();
+        setHasResponse(true);
 
         return () => {
             setName('---');
@@ -59,11 +65,8 @@ export const SettingsScreen = ({navigation}) => {
         }
     }, []);
 
-
-
     return (
         <View style={[styles.container, { backgroundColor: theme.screenBgColor }]}>
-
             <View style={[styles.settingsContainer, {
                 paddingLeft: wp('2%'),
                 backgroundColor: theme.settingGroupBgColor,
@@ -93,8 +96,7 @@ export const SettingsScreen = ({navigation}) => {
                                 height: wp('20%'),
                                 borderRadius: wp('20%') * 50
                             }}
-                    />}
-                     />
+                    />} />
             </View>
 
             <View style={{ gap: hp('2%') }}>

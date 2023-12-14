@@ -9,7 +9,7 @@ import { CustomButton } from "../../components/general/components/CustomButton";
 import { cancelTransactionRequest } from "../../services/payone";
 import { AppContext } from "../../config/context/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faClipboard, faDiagramProject, faHashtag } from "@fortawesome/free-solid-svg-icons";
+import {faClipboard, faCoins, faDiagramProject, faHashtag} from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 
 export const QrScreen = ({ route, navigation }) => {
@@ -19,7 +19,7 @@ export const QrScreen = ({ route, navigation }) => {
     const [startDate, setStartDate] = useState('');
     const [hasResponse, setHasResponse] = useState(true);
     const [clipboardText, setClipboardText] = useState('');
-    const { walletData, networkData, startTime, referenceNumber, walletVisible } = route.params;
+    const { cryptoAmount, cryptoCurrency, walletData, networkData, startTime, referenceNumber, walletVisible } = route.params;
     const screen = 'screens.qr_code';
 
     const qrDisabledHandler = () => !(hasResponse);
@@ -38,8 +38,13 @@ export const QrScreen = ({ route, navigation }) => {
 
             <View style={styles.separator} />
 
-            <View style={{ gap: hp(Platform.OS === 'ios' ? '2.5%' : '2%') }}>
+            <View style={{ gap: hp(Platform.OS === 'ios' ? '1.5%' : '2%') }}>
                 <View style={styles.detailsContainer}>
+
+                    <TransactionDetail
+                        parameter={i18n.t(`${screen}.transaction_amount`)}
+                        value={`${cryptoAmount} ${cryptoCurrency}`}
+                        icon={<FontAwesomeIcon size={wp('5.5%')} icon={faCoins} color={theme.helperIconColor} />} />
 
                     <TransactionDetail
                         parameter={i18n.t(`${screen}.reference_number`)}
@@ -49,9 +54,7 @@ export const QrScreen = ({ route, navigation }) => {
                     <TransactionDetail
                         parameter={i18n.t(`${screen}.start_time`)}
                         value={startDate}
-                        icon={
-                            <FontAwesomeIcon size={wp('5.5%')} icon={faClock} color={theme.helperIconColor} />
-                        } />
+                        icon={<FontAwesomeIcon size={wp('5.5%')} icon={faClock} color={theme.helperIconColor} />} />
 
                     <TransactionDetail
                         parameter={i18n.t(`${screen}.network`)}
@@ -145,6 +148,7 @@ const styles = StyleSheet.create({
     },
     cancelButtonContainer: {
         paddingHorizontal: wp('5%'),
+        paddingBottom: hp('1%')
     },
     detailsContainer: {
         gap: hp('1.5%'),

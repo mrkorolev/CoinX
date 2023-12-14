@@ -284,6 +284,8 @@ export const TransactionScreen = ({ navigation }) => {
                                             // console.log(walletData.address);
                                             setHasResponse(true);
                                             navigation.navigate('QR_DETAILS', {
+                                                cryptoAmount: receiveAmount,
+                                                cryptoCurrency: receiveCurrency.nameShort,
                                                 walletData: walletData.address,
                                                 referenceNumber: walletData.transaction_id,
                                                 startTime: `${formatInput(startDate.getHours())}:${formatInput(startDate.getMinutes())}  ${formatInput(startDate.getDate())}/${formatInput(startDate.getMonth())}/${formatInput(startDate.getFullYear())}`,

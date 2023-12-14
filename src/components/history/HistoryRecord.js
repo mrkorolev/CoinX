@@ -35,6 +35,8 @@ export const HistoryRecord = ({ notification, navigation }) => {
                 disabled={ notification.transaction_status !== 0 }
                 style={[styles.container, {backgroundColor: `${backgroundStatus}`}]}
                 onPress={() => navigation.navigate('QR_HISTORY', {
+                    cryptoAmount: notification.expected_crypto,
+                    cryptoCurrency: notification.coin,
                     walletData: notification.address,
                     referenceNumber: notification.id,
                     startTime: `${formatInput(date.getHours())}:${formatInput(date.getMinutes())}  ${formatInput(date.getDate())}/${formatInput(date.getMonth())}/${formatInput(date.getFullYear())}`,

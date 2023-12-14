@@ -58,6 +58,7 @@
     "qr_code": {
       "screen_name": "QR Kodu",
       "warning": "QR kod ve Cüzdan numarası sadece bir işlem için kullanılır. Lütfen aynı bilgileri başka bir işlem için kullanmayınız.",
+      "transaction_amount": "İşlem tutar",
       "wallet_address": "Cüzdan Adresi",
       "network": "Ağ",
       "reference_number": "Referans sayı",
