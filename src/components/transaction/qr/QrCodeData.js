@@ -14,7 +14,11 @@ export const QrCodeData = ({ warning, wallet }) => {
                 <QRCode value={wallet} color={theme.qrInformationColor} backgroundColor={theme.screenBgColor} size={wp('50%')} />
             </View>
 
-            <Text style={[styles.warningStyle, { color: theme.qrInformationColor }]}>
+            {/*<Text style={[styles.warningStyle, { color: theme.qrInformationColor }]}>*/}
+            {/*    {warning}*/}
+            {/*</Text>*/}
+
+            <Text style={[styles.warningStyle, { color: theme.primaryContentColor }]}>
                 {warning}
             </Text>
         </View>
