@@ -41,7 +41,6 @@ export const appTheme = {
         toggleOffColor: '#D2D2D2',
         toggleThumbColor: '#FFFFFF',
 
-
         qrInformationColor: '#A7A7A7',
         helperIconColor: '#293462',
 

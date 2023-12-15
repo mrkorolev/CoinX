@@ -38,7 +38,7 @@ export const QrScreen = ({ route, navigation }) => {
 
             <View style={styles.separator} />
 
-            <View style={{ gap: hp(Platform.OS === 'ios' ? '1.5%' : '2%') }}>
+            <View style={{ gap: hp(Platform.OS === 'ios' ? '1.5%' : '1%') }}>
                 <View style={styles.detailsContainer}>
 
                     <TransactionDetail
@@ -148,11 +148,11 @@ const styles = StyleSheet.create({
     },
     cancelButtonContainer: {
         paddingHorizontal: wp('5%'),
-        paddingBottom: hp('1%')
+        paddingBottom: hp('2%')
     },
     detailsContainer: {
         gap: hp('1.5%'),
-        paddingVertical: hp('2%'),
+        paddingVertical: hp('0.5%'),
         paddingHorizontal: wp('5%')
     }
 });

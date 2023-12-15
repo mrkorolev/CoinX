@@ -9,9 +9,9 @@ export const QrCodeData = ({ warning, wallet }) => {
     const { theme } = useContext(AppContext);
 
     return (
-        <View>
+        <View style={{ paddingTop: hp('2%') }}>
             <View style={[styles.qr, { borderColor: theme.primaryContentColor }]}>
-                <QRCode value={wallet} color={theme.qrInformationColor} backgroundColor={theme.screenBgColor} size={wp('50%')} />
+                <QRCode value={wallet} color={theme.qrInformationColor} backgroundColor={theme.screenBgColor} size={hp('25%')} />
             </View>
 
             {/*<Text style={[styles.warningStyle, { color: theme.qrInformationColor }]}>*/}
@@ -27,8 +27,8 @@ export const QrCodeData = ({ warning, wallet }) => {
 
 const styles = StyleSheet.create({
     qr: {
-        width: wp('65%'),
-        height: wp('65%'),
+        width: hp('32%'),
+        height: hp('32%'),
         borderWidth: 5,
         borderRadius: 10,
         // marginVertical: hp('1%'),
@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     },
     warningStyle: {
         textAlign: 'center',
-        padding: wp('5%'),
+        paddingVertical: hp('3%'),
+        paddingHorizontal: wp('5%'),
         fontSize: wp('3.5%'),
         fontWeight: 'bold'
     },
