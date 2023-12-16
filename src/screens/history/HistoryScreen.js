@@ -13,7 +13,6 @@ export const HistoryScreen = ({ navigation }) => {
     const [refreshing, setRefreshing] = useState(false);
     const [statusText, setStatusText] = useState(i18n.t(`${screen}.waiting_message`));
 
-
     useEffect(() => {
         navigation.addListener('focus', () => {
             getDepositHistoryData();
@@ -33,7 +32,7 @@ export const HistoryScreen = ({ navigation }) => {
     const getDepositHistoryData = async () => {
         const historyResponse = await depositHistoryRequest(accessToken);
 
-        if(historyResponse && historyResponse.status === 200){
+        if(historyResponse && historyResponse.status === 200 && Object.keys(historyResponse.data).length !== 0){
             setHistory(historyResponse.data);
         } else {
             setStatusText(i18n.t(`${screen}.no_deposits_message`));

@@ -23,7 +23,7 @@ export const LoginScreen = () => {
 
     const loginDisabledHandler = () => !(username && password && hasResponse);
     const passwordRef = useRef(null);
-    const [languageIcon, setLanguageIcon] = useState(<TurLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />);
+    const [languageIcon, setLanguageIcon] = useState(<TurLang color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [hasResponse, setHasResponse] = useState(true);
@@ -36,9 +36,24 @@ export const LoginScreen = () => {
         // console.log('Token: ' + accessToken);
         setUsername(null);
         setPassword(null);
+        selectIconHandler(i18n.locale);
     }, [accessToken]);
 
     const validateInput = (username, password) => (!username || !password) ? false : true;
+
+    const selectIconHandler = (localeStr) => {
+        switch(localeStr) {
+            case 'en':
+                setLanguageIcon(<EngLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />);
+                break;
+            case 'ru':
+                setLanguageIcon(<RusLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />);
+                break;
+            case 'tr':
+                setLanguageIcon(<TurLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />);
+                break;
+        }
+    }
 
     return (
         <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
@@ -46,25 +61,12 @@ export const LoginScreen = () => {
 
                 const localeIndex = supportedLanguages.findIndex(language => language.locale === i18n.locale);
                 const nextLocale = supportedLanguages[(localeIndex + 1) % supportedLanguages.length].locale;
+                selectIconHandler(nextLocale)
 
-                switch(nextLocale) {
-                    case 'en':
-                        setLanguageIcon(<EngLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />);
-                        break;
-                    case 'ru':
-                        setLanguageIcon(<RusLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />);
-                        break;
-                    case 'tr':
-                        setLanguageIcon(<TurLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />);
-                        break;
-                }
                 i18n.locale = nextLocale
             }}>
                 {languageIcon}
             </TouchableOpacity>
-
-            {/*<RusLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />*/}
-            {/*<TurLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />*/}
 
             <Text style={[styles.title, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.title`)}</Text>
 
