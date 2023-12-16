@@ -117,7 +117,7 @@
       "reason": "Giriş İsteği",
       "message": "\nGiriş işlemi gerçekleştirilirken bir hata oluştu! Uygulamayı kullanmak için kayıtlı bir kullanıcı olduğunuzdan emin olun."
     },
-    "reset_password": {
+    "password_reset": {
       "reason": "Şifremi unuttum",
       "message": "\nE-postanıza şifre sıfırlama bağlantısı gönderilmeye çalışılırken bir hata oluştu. Yazılan e-postayı kontrol edin ve sorun devam ederse daha fazla bilgi için destek ekibiyle iletişime geçin "
     },

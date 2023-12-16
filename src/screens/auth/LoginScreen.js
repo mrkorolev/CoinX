@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import {Text, View, TouchableOpacity, StyleSheet, Alert, Platform} from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../components/auth/login/CustomInput';
 import { CustomButton } from '../../components/general/components/CustomButton';
@@ -9,6 +9,10 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { AppContext } from "../../config/context/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { RusLang } from "../../components/general/icons/RusLang";
+import { TurLang } from "../../components/general/icons/TurLang";
+import {EngLang} from "../../components/general/icons/EngLang";
+import { supportedLanguages } from "../../config/constants/languages";
 
 export const LoginScreen = () => {
 
@@ -19,6 +23,7 @@ export const LoginScreen = () => {
 
     const loginDisabledHandler = () => !(username && password && hasResponse);
     const passwordRef = useRef(null);
+    const [languageIcon, setLanguageIcon] = useState(<TurLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [hasResponse, setHasResponse] = useState(true);
@@ -36,9 +41,32 @@ export const LoginScreen = () => {
     const validateInput = (username, password) => (!username || !password) ? false : true;
 
     return (
-        <View
-            style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
-                <Text style={[styles.title, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.title`)}</Text>
+        <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
+            <TouchableOpacity onPress={() => {
+
+                const localeIndex = supportedLanguages.findIndex(language => language.locale === i18n.locale);
+                const nextLocale = supportedLanguages[(localeIndex + 1) % supportedLanguages.length].locale;
+
+                switch(nextLocale) {
+                    case 'en':
+                        setLanguageIcon(<EngLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />);
+                        break;
+                    case 'ru':
+                        setLanguageIcon(<RusLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />);
+                        break;
+                    case 'tr':
+                        setLanguageIcon(<TurLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />);
+                        break;
+                }
+                i18n.locale = nextLocale
+            }}>
+                {languageIcon}
+            </TouchableOpacity>
+
+            {/*<RusLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />*/}
+            {/*<TurLang  color={theme.screenBgColor} bgColor={theme.primaryContentColor} size={ wp('10%') } />*/}
+
+            <Text style={[styles.title, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.title`)}</Text>
 
             <View style={{ gap: hp('5%') }}>
                 <View style={{ gap: hp('1.5%') }}>
@@ -112,7 +140,7 @@ const styles = StyleSheet.create({
     layout: {
         flex: 1,
         justifyContent: 'center',
-        gap: hp('2%'),
+        gap: hp('1%'),
         paddingHorizontal: wp('5%'),
     },
     title: {
