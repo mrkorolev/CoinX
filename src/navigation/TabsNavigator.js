@@ -17,7 +17,7 @@ const Tab = createBottomTabNavigator();
 
 export const TabsNavigator = ({ navigation }) => {
 
-    const userTimeout = 60000 * 60;
+    const userTimeout = 1000 * 60 * 60 * 2;
 
     const { theme, setAccessToken, setCustomTimeout } = useContext(AppContext);
     const hideTabBar = (route, tabHiddenScreens, fallbackScreen) => {
