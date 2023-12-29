@@ -117,7 +117,9 @@ export const LoginScreen = () => {
 
                             if(response && response.status === 200){
                                 setAccessToken(response.data.access_token);
-                                nav.navigate('Otp');
+                                nav.navigate('Otp', {
+                                    username: username
+                                })
                             }
                         }}
                     />
