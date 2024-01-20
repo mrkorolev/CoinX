@@ -103,8 +103,8 @@ export const ExchangeRatesData = () => {
                         />
                     }
                     bgColor={theme.btcBgColor}
-                    primaryColor={theme.btcPrimaryColor}
-                    secondaryColor={theme.btcSecondaryColor}
+                    primaryColor={theme.exPrimaryColor}
+                    secondaryColor={theme.exSecondaryColor}
                 />
 
             </View>

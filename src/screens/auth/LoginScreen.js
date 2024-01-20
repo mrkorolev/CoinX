@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../components/auth/login/CustomInput';
 import { CustomButton } from '../../components/general/components/CustomButton';
@@ -13,6 +13,7 @@ import { RusLang } from "../../components/general/icons/RusLang";
 import { TurLang } from "../../components/general/icons/TurLang";
 import {EngLang} from "../../components/general/icons/EngLang";
 import { supportedLanguages } from "../../config/constants/languages";
+import {Payone} from "../../components/general/icons/Payone";
 
 export const LoginScreen = () => {
 
@@ -57,19 +58,22 @@ export const LoginScreen = () => {
 
     return (
         <View style={[styles.layout, { backgroundColor: theme.screenBgColor }]}>
-            <TouchableOpacity onPress={() => {
 
-                const localeIndex = supportedLanguages.findIndex(language => language.locale === i18n.locale);
-                const nextLocale = supportedLanguages[(localeIndex + 1) % supportedLanguages.length].locale;
-                selectIconHandler(nextLocale)
+            {/*<TouchableOpacity onPress={() => {*/}
+            {/*    const localeIndex = supportedLanguages.findIndex(language => language.locale === i18n.locale);*/}
+            {/*    const nextLocale = supportedLanguages[(localeIndex + 1) % supportedLanguages.length].locale;*/}
+            {/*    selectIconHandler(nextLocale)*/}
 
-                i18n.locale = nextLocale
-            }}>
-                {languageIcon}
-            </TouchableOpacity>
+            {/*    i18n.locale = nextLocale*/}
+            {/*}}>*/}
+            {/*    {languageIcon}*/}
+            {/*</TouchableOpacity>*/}
+
+            <View style={{ alignSelf: 'center', marginBottom: hp('1%') }}>
+                <Payone color={theme.primaryContentColor} width={wp('50%')} height={hp('10%')} />
+            </View>
 
             <Text style={[styles.title, { color: theme.primaryContentColor }]}>{i18n.t(`${screen}.title`)}</Text>
-
             <View style={{ gap: hp('5%') }}>
                 <View style={{ gap: hp('1.5%') }}>
                     <CustomInput
@@ -98,7 +102,7 @@ export const LoginScreen = () => {
                         enterKey='done' />
                 </View>
 
-                <View style={{ gap: hp('2%') }}>
+                <View style={{ gap: hp('1.5%') }}>
                     <CustomButton
                         text={i18n.t(`${screen}.login_text`)}
                         textColor={theme.mainBtnTextColor}
@@ -144,7 +148,7 @@ const styles = StyleSheet.create({
     layout: {
         flex: 1,
         justifyContent: 'center',
-        gap: hp('1%'),
+        gap: hp('2%'),
         paddingHorizontal: wp('5%'),
     },
     title: {

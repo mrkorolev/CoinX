@@ -8,7 +8,7 @@ export const CoinExchangeRate = ({ nameShort, nameLong, lastPrice, priceChangePe
     const { theme } = useContext(AppContext);
 
     return (
-        <View style={[styles.coinLayout, { backgroundColor: bgColor }, nameShort === 'USDT' && { borderColor: theme.usdBorderColor, borderWidth: 2, borderStyle: 'dashed' }]}>
+        <View style={[styles.coinLayout, { backgroundColor: bgColor }]}>
             <View style={styles.topLevel}>
                 <View style={{ gap: hp('0.25%') }}>
                     <Text style={[styles.coinInsides, { color: primaryColor }]}>{nameShort}</Text>
