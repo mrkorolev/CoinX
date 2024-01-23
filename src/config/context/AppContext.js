@@ -4,8 +4,8 @@ import { appTheme } from "../theme/theme";
 export const AppContext = React.createContext(undefined);
 
 export const AppContextProvider = ({ children }) => {
-    const [themeName, setThemeName] = useState('light');
-    const [theme, setTheme] = useState(appTheme.light);
+    const [themeName, setThemeName] = useState('dark');
+    const [theme, setTheme] = useState(appTheme.dark);
     const [pushEnabled, setPushEnabled] = useState(false);
     const [accessToken, setAccessToken] = useState(undefined);
     const [customTimeout, setCustomTimeout] = useState(null);

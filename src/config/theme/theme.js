@@ -77,13 +77,18 @@ export const appTheme = {
         sbContent: 'light',
         primaryContentColor: '#FFFFFF',
         secondaryContentColor: '#DADADA',
-        screenBgColor: '#1F252D',
+        // screenBgColor: '#1F252D',
+        screenBgColor: '#293462',
 
         inputColor: '#FFFFFF',
-        inputBorderColor: '#292F38',
-        placeholderTextColor: '#8391A1',
-        placeholderBgColor: '#292F38',
-        passwordIconColor: '#6A707C',
+        // inputBorderColor: '#292F38',
+        // placeholderTextColor: '#8391A1',
+        // placeholderBgColor: '#292F38',
+        // passwordIconColor: '#6A707C',
+        inputBorderColor: '#222A4F',
+        placeholderTextColor: '#FFFFFF',
+        placeholderBgColor: '#222A4F',
+        passwordIconColor: '#FFFFFF',
 
         otpIptFcsBorderColor: '#E8ECF4',
         otpIptNoFcsBgColor: '#292F38',
@@ -91,8 +96,10 @@ export const appTheme = {
         otpIptHasValueBorderColor: '#35C2C1',
 
         mainBtnTextColor: '#FFFFFF',
-        mainBtnBgColor: '#292F38',
-        mainBtnBorderColor: '#292F38',
+        // mainBtnBgColor: '#292F38',
+        // mainBtnBorderColor: '#292F38',
+        mainBtnBgColor: '#222A4F',
+        mainBtnBorderColor: '#222A4F',
 
         supportIconColor: '#FFFFFF',
 
@@ -101,7 +108,8 @@ export const appTheme = {
         cancelBtnBorderColor: '#FF2D55',
 
         // Bottom tabs
-        tabBgColor: '#292F38',
+        // tabBgColor: '#292F38',
+        tabBgColor: '#222A4F',
         activeTintColor: '#FFFFFF',
         inactiveTintColor: '#676D75',
         qrBgColor: '#0057FF',
@@ -109,7 +117,8 @@ export const appTheme = {
 
         // SettingsTab colors:
         settingTitleColor: '#FFFFFF',
-        settingGroupBgColor: '#292F38',
+        // settingGroupBgColor: '#292F38',
+        settingGroupBgColor: '#222A4F',
         settingNavIconColor: '#E5E5E5',
         toggleOnColor: 'lightgreen',
         toggleOffColor: '#FFFFFF33',
@@ -140,9 +149,9 @@ export const appTheme = {
         userIconColor: '#FFFFFF',
         userIconBgColor: '#slategray',
 
-        depositBgSuccess: '#1A2F4B',
-        depositBgPending: '#303841',
-        depositBgCancel: '#1F252D',
+        depositBgSuccess: '#293462',
+        depositBgPending: '#293462',
+        depositBgCancel: '#293462',
 
         historyLoadBorderColor: '#FFFFFF',
     }

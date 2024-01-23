@@ -125,8 +125,8 @@ export const walletDataRequest = async (accessToken, spendAmount, spendCurrency,
             },
             timeout: requestTimeout
         });
-        // console.log(JSON.stringify(walletResponse.data, undefined, 4));
 
+        console.log(JSON.stringify(walletResponse.data, undefined, 4));
         return walletResponse.data;
     }catch(error){
         invalidRequestDescription(i18n.t(`${request_error}.reason`), i18n.t(`${request_error}.message`), error);
