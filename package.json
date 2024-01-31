@@ -34,7 +34,8 @@
     "react-native-svg": "13.9.0",
     "react-native-svg-transformer": "^1.1.0",
     "rn-material-ui-textfield": "^1.0.9",
-    "expo-splash-screen": "~0.20.5"
+    "expo-splash-screen": "~0.20.5",
+    "expo-updates": "~0.18.19"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

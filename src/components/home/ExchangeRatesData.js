@@ -31,6 +31,11 @@ export const ExchangeRatesData = () => {
     const [coinComponents, setCoinComponents] = useState(generateExchangeRates(apiData));
     const active = useIsFocused();
 
+    function formatPrice(inputValue) {
+        let formattedPrice = inputValue;
+        return formattedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     function generateExchangeRates(data){
         return data.map(coinObject => ({
             key: coinObject.nameShort,
@@ -39,7 +44,7 @@ export const ExchangeRatesData = () => {
             lastPrice:
                 coinObject.lastPrice === '---' ?
                     coinObject.lastPrice :
-                    `${parseFloat(coinObject.lastPrice).toFixed((coinObject.nameShort === 'ETH') || (coinObject.nameShort === 'BTC') ? 0 : 3)} TL`,
+                    `${formatPrice(parseFloat(coinObject.lastPrice).toFixed((coinObject.nameShort === 'ETH') || (coinObject.nameShort === 'BTC') ? 0 : 3))} TL`,
             priceChangePercent:
                 coinObject.priceChangePercent === '---' ?
                     coinObject.priceChangePercent :

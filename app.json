@@ -18,14 +18,14 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.muntek.payone",
-      "buildNumber": "13"
+      "buildNumber": "14"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "versionCode": 10,
+      "versionCode": 11,
       "package": "com.muntek.payone"
     },
     "web": {
@@ -36,6 +36,10 @@
       "eas": {
         "projectId": "74b7fbfe-4af0-4c32-b5d9-bc7db36ce5c8"
       }
+    },
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/74b7fbfe-4af0-4c32-b5d9-bc7db36ce5c8"
     }
   }
 }
