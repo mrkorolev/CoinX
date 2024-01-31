@@ -33,7 +33,7 @@ export const ExchangeRatesData = () => {
 
     function formatPrice(inputValue) {
         let formattedPrice = inputValue;
-        return formattedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return formattedPrice > 1000 ? formattedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : formattedPrice;
     }
 
     function generateExchangeRates(data){
@@ -44,7 +44,7 @@ export const ExchangeRatesData = () => {
             lastPrice:
                 coinObject.lastPrice === '---' ?
                     coinObject.lastPrice :
-                    `${formatPrice(parseFloat(coinObject.lastPrice).toFixed((coinObject.nameShort === 'ETH') || (coinObject.nameShort === 'BTC') ? 0 : 3))} TL`,
+                    `${formatPrice(parseFloat(coinObject.lastPrice).toFixed((coinObject.nameShort === 'ETH') || (coinObject.nameShort === 'BTC') ? 0 : 4))} TL`,
             priceChangePercent:
                 coinObject.priceChangePercent === '---' ?
                     coinObject.priceChangePercent :
