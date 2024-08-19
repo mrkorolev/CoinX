@@ -39,13 +39,6 @@ eas login
 eas build --platform android/ios --profile android-apk/ios-simulator
 ```
 
-
-Valid testing credentials (username --- password):
-
-nael.alyousefi@final.edu.tr --- admin@1234 \
-benoit.kekwandi@final.edu.tr --- Welcome@1234
-
-
 ## Screens
 
 - Screen 1 - Login
@@ -79,13 +72,3 @@ benoit.kekwandi@final.edu.tr --- Welcome@1234
 | Screen 7                            | Screen 7                          | Screen 8                           | Screen 8                         |
 |-------------------------------------|-----------------------------------|------------------------------------|----------------------------------|
 | ![](assets/light/settings_light.png) | ![](assets/dark/settings_dark.png) | ![](assets/light/profile_light.png) | ![](assets/dark/profile_dark.png) |
-
-## Application support and further enquiries
-
-Supporting developer: Nikita Korolev 
-
-Telegram (preferred): @nk25dev  
-
-WhatsApp: +90 548 855 70 74 
-
-Email: nk25.dev@gmail.com
