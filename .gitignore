@@ -3,6 +3,8 @@
 __generated__
 web-build
 bare-apps
+eas.json
+payonemobile-833c5a62db29.json
 
 # Environment (root)
 .env
