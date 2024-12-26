@@ -1,5 +1,5 @@
 
-## Payone mobile
+## CoinX
 ![license](https://img.shields.io/github/license/N-way1/Payone_mobile)
 ![version](https://img.shields.io/github/v/release/N-way1/Payone_mobile?display_name=tag)
 
@@ -7,7 +7,7 @@
 ![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Expo](https://img.shields.io/badge/expo-1C1E24?style=for-the-badge&logo=expo&logoColor=#D04A37)
 
-A repository for the Payone mobile crypto application, built with React Native and Expo.
+A repository for the CoinX mobile crypto application, built with React Native and Expo.
 <br>
 
 ## Current work stages
